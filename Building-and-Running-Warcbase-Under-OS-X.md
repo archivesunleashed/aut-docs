@@ -1,6 +1,3 @@
-# Building and Running Warcbase under OS X
-## Written by Jeremy Wiebe (University of Waterloo)
-
 In order to build a functional Warcbase setup under OS X, a number of minor changes to the [official project instructions](https://github.com/lintool/warcbase) are required.
 
 ### Prerequisites
