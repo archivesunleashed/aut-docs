@@ -38,4 +38,4 @@ You'll now notice that you have the option to enable a dynamic timeslider at the
 
 While a full tutorial in Gephi visualization is outside the scope of this document, you may want to use the following to expand the link nodes. Select the 'overview' tab to see a preview of the node structure. Under layout, use the 'Force Atlas' visualization to move the nodes. 
 
-<a href="https://ianmilli.files.wordpress.com/2015/06/screen-shot-2015-06-05-at-11-49-02-am.png"><img src="https://ianmilli.files.wordpress.com/2015/06/screen-shot-2015-06-05-at-11-49-02-am.png?w=660" alt="Screen Shot 2015-06-05 at 11.49.02 AM" width="660" height="433" class="aligncenter size-large wp-image-2666" /></a>
+![](https://ianmilli.files.wordpress.com/2015/06/screen-shot-2015-06-05-at-11-51-29-am.png)
