@@ -2,7 +2,7 @@ One popular digital humanities tool is [Gephi](http://gephi.github.io/). You can
 
 <h3>Step One: Convert Site Link Structure into GDF Format</h3>
 
-Use the included `pig2gdf.py` program. Usage is as follows:
+Use `pig2gdf.py`. You can download it from <https://github.com/ianmilligan1/WAHR/tree/master/code>. Copy it into the directory that you want to use it in, or call it remotely. Usage is as follows:
 
 ```
 pig2gdf.py usage:
