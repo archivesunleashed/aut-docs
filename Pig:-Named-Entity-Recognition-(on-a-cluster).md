@@ -88,7 +88,7 @@ We have a few sample scripts and commands to analyze this data.
 combine-entity-results.py entities.gz/
 ```
 
-Creates files `pers.txt`, `org.txt`, and `loc.txt` in the given directory (e.g. directory entities.gz), listing occurrences of PERSON, ORGANIZATION, and LOCATION entities. Output files will be in same directory as original results unless you specify an output directory as a second parameter.
+[This script](https://github.com/lintool/warcbase/blob/master/src/main/python/combine-entity-results.py) creates files `pers.txt`, `org.txt`, and `loc.txt` in the given directory (e.g. directory entities.gz), listing occurrences of PERSON, ORGANIZATION, and LOCATION entities. Output files will be in same directory as original results unless you specify an output directory as a second parameter.
 
 To get a sorted frequency list:
 
@@ -121,7 +121,7 @@ The results, as you can see below, can be very useful - especially when compared
 combine-entity-results-split-by-date.py.py entities.gz/ [output-dir]
 ```
 
-Creates a set of PERSON, ORGANIZATION, and LOCATION files for every scrape date listed in the data. 
+[This script](https://github.com/lintool/warcbase/blob/master/src/main/python/combine-entity-results-split-by-date.py) creates a set of PERSON, ORGANIZATION, and LOCATION files for every scrape date listed in the data. 
 
 To generate frequency lists for these files:
 ```
