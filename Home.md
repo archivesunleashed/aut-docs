@@ -1,5 +1,7 @@
 Welcome to the warcbase wiki! Here, you'll find various pig scripts and instructions to unlock your rich web archive collections.
 
+**These pages are under active development, as of June 2015.**
+
 If you are using warcbase, we would love to hear from you. Please let us know.
 
 ***
