@@ -1,4 +1,4 @@
-The following pig script generates plain text files, based on the spring fed to it in variable `c`.
+The following pig script generates plain text files, based on the string fed to the filter statement assigned to variable `c`.
 
 ```
 register 'target/warcbase-0.1.0-SNAPSHOT-fatjar.jar';
