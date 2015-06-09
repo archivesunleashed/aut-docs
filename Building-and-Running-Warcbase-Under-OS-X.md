@@ -1,4 +1,11 @@
-In order to build a functional Warcbase setup under OS X, a number of minor changes to the [official project instructions](https://github.com/lintool/warcbase) are required.
+Warcbase is a web archive _platform_, and not a single program. Its capabilities can be understood to comprise two main categories:
+
+1. Analysis of web archives using the [Pig](http://pig.apache.org/) programming language, and assorted helper scripts and utilities
+2. Web archive database management, with support for the [HBase](http://hbase.apache.org/) distributed data store, and [OpenWayback](https://github.com/iipc/openwayback/wiki) integration providing a friendly web interface to view stored websites
+
+One can take advantage of the analysis tools (1) without bothering with the database management aspect of Warcbase -- in fact, most digital humanities researchers will probably find the former more useful. Users who are only interested in the analysis tools need only be concerned with the first two sections of this document (Prerequisites and Building Warcbase).
+
+(This document was written because installing Warcbase under OS X requires a number of minor changes to the [official project instructions](https://github.com/lintool/warcbase).)
 
 ### Prerequisites
 * [OS X Developer Tools](http://www.cnet.com/how-to/install-command-line-developer-tools-in-os-x/)
@@ -43,7 +50,7 @@ In order to build a functional Warcbase setup under OS X, a number of minor chan
         
         hbase(main):002:0> exit
     
-* Tomcat (`brew install tomcat`)
+* Tomcat (`brew install tomcat`) _(Only necessary for OpenWayback integration; skip otherwise)_ 
 
 * Pig (`brew install pig`)
 
