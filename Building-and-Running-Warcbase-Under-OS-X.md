@@ -1,4 +1,4 @@
-Warcbase is a web archive _platform_, and not a single program. Its capabilities can be understood to comprise two main categories:
+Warcbase is a web archive _platform_, not a single program. Its capabilities comprise two main categories:
 
 1. Analysis of web archives using the [Pig](http://pig.apache.org/) programming language, and assorted helper scripts and utilities
 2. Web archive database management, with support for the [HBase](http://hbase.apache.org/) distributed data store, and [OpenWayback](https://github.com/iipc/openwayback/wiki) integration providing a friendly web interface to view stored websites
