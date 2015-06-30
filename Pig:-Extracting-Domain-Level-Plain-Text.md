@@ -1,4 +1,6 @@
-The following Pig script generates plain text renderings for all the web pages in a collection with a URL matching a filter string. (The URL filter statement is assigned to variable `c`.) See below for more advanced filtering by text language.
+The following Pig script generates plain text renderings for all the web pages in a collection with a URL matching a filter string. (The URL filter statement is assigned to variable `c`.) 
+
+_See below for more advanced filtering by text language._
 
 ```
 register 'target/warcbase-0.1.0-SNAPSHOT-fatjar.jar';
@@ -118,4 +120,25 @@ Sample output:
 (sk,54)
 (sl,1)
 (lt,124120)
+```
+
+## Removing "Boilerplate" Text
+The following script employs the _Boilerpipe_ library to detect and remove "boilerplate" text (navigation elements, standard headers and footers, etc.) from web pages. The library provides a number of _extractors_ designed to recognize the main text content of different categories of websites. Warcbase currently employs the generic _DefaultExtractor_, but in many cases _ArticleExtractor_, tuned to find news articles, might be more suitable. Note that this script filters out documents for which Boilerpipe produces empty text strings (i.e., determines the entire web page to consist of irrelevant text). 
+
+```
+register 'target/warcbase-0.1.0-SNAPSHOT-fatjar.jar';
+
+DEFINE ArcLoader org.warcbase.pig.ArcLoader();
+DEFINE ExtractBoilerpipeText org.warcbase.pig.piggybank.ExtractBoilerpipeText();
+DEFINE ExtractTopLevelDomain org.warcbase.pig.piggybank.ExtractTopLevelDomain();
+
+raw = load '/collections/webarchives/CanadianPoliticalParties/arc/' using ArcLoader as (url: chararray, date: chararray, mime: chararray, content: bytearray);
+
+a = filter raw by mime == 'text/html' and date is not null;
+b = foreach a generate SUBSTRING(date, 0, 6) as date, REPLACE(ExtractTopLevelDomain(url), '^\\s*www\\.', '') as url, content;
+c = filter b by url == 'greenparty.ca';
+d = foreach c generate date, url, ExtractBoilerpipeText((chararray) content) as text;
+e = filter d by text is not null;   /* Boilerpipe may produce empty strings */
+
+store e into 'cpp.text-greenparty-boilerpiped';
 ```
