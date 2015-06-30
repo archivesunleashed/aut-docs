@@ -123,7 +123,7 @@ Sample output:
 ```
 
 ## Removing "Boilerplate" Text
-The following script employs the _Boilerpipe_ library to detect and remove "boilerplate" text (navigation elements, standard headers and footers, etc.) from web pages. The library provides a number of _extractors_ designed to recognize the main text content of different categories of websites. Warcbase currently employs the generic _DefaultExtractor_, but in many cases _ArticleExtractor_, tuned to find news articles, might be more suitable. Note that this script filters out documents for which Boilerpipe produces empty text strings (i.e., determines the entire web page to consist of irrelevant text). 
+The following script employs the _Boilerpipe_ library to detect and remove "boilerplate" text (navigation elements, standard headers and footers, etc.) from web pages. The library provides a number of [_extractors_](https://boilerpipe.googlecode.com/svn/trunk/boilerpipe-core/javadoc/1.0/de/l3s/boilerpipe/extractors/package-summary.html) designed to recognize the main text content of different categories of websites. Warcbase currently employs the generic _DefaultExtractor_, but in many cases _ArticleExtractor_, tuned to find news articles, might be more suitable. Note that this script filters out documents for which Boilerpipe produces empty text strings (i.e., determines the entire web page to consist of irrelevant text). 
 
 ```
 register 'target/warcbase-0.1.0-SNAPSHOT-fatjar.jar';
