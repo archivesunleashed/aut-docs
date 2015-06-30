@@ -21,6 +21,11 @@ To get started, may we suggest the following tutorials:
 
 The first tutorial teaches you how to install Warcbase, the second how to run the basic pig scripts, and the latter one generates basic crawl statistics. These are essential if you want to make sense of the collection that you are working with.
 
+<h2>Want an Overall Look at Your Collections?</h2>
+
+We are currently working on integration with the Shine front-end, which lets you see trends and explore a collection with faceted search. We currently have one tutorial:
+* [Installing the Shine frontend on OS X](https://github.com/lintool/warcbase/wiki/Shine:-Installing-Shine-Frontend-on-OS-X)
+
 <h2>Want a Link Visualization?</h2>
 
 If you want to work with links, we have a few tutorials for you!
@@ -28,7 +33,7 @@ If you want to work with links, we have a few tutorials for you!
 * [Using Gephi to Create a Dynamic Link Visualization](https://github.com/lintool/warcbase/wiki/Gephi:-Converting-Site-Link-Structure-into-Dynamic-Visualization)
 * [Analysis of Specific Links](https://github.com/lintool/warcbase/wiki/Pig:-Analysis-of-Links-to-Social-Media)
 
-<h2>Want to work with Text?</h2>
+<h2>Want to Work With Text?</h2>
 
 If you want to work with text, you've found the right suite.
 * [Extracting Domain-Level Plain Text](https://github.com/lintool/warcbase/wiki/Pig:-Extracting-Domain-Level-Plain-Text)
