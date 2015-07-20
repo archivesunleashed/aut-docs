@@ -16,6 +16,7 @@ This is still actively under development, with several features in the pipeline 
 
 To get started, may we suggest the following tutorials:
 * [Building and Running Warcbase under OS X](https://github.com/lintool/warcbase/wiki/Building-and-Running-Warcbase-Under-OS-X)
+* [Ingesting Content](https://github.com/lintool/warcbase/wiki/Getting-Started:-Ingesting-Content)
 * [Running Pig Scripts](https://github.com/lintool/warcbase/wiki/Pig:-Running-Pig-Scripts)
 * [Gathering Basic Crawl Statistics](https://github.com/lintool/warcbase/wiki/Pig:-Gathering-Basic-Crawl-Statistics)
 
