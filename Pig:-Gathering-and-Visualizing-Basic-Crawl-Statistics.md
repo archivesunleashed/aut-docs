@@ -84,6 +84,6 @@ And then
 python -m SimpleHTTPServer 1234
 ```
 
-Navigate to <http://localhost:1234> in your web browser and you will see the following interactive diagram.
+Navigate to <http://localhost:1234> in your web browser and you will see the [following interactive diagram (click to work with it)](http://lintool.github.io/warcbase/vis/crawl-sites/).
 
 ![](https://github.com/ianmilligan1/WAHR/blob/master/walkthroughs/images/crawl-viz.png)
