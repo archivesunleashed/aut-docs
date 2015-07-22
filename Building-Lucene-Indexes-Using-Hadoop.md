@@ -26,8 +26,8 @@ java -cp lucene-core-4.7.2.jar:lucene-misc-4.7.2.jar org.apache.lucene.misc.Inde
 ```
 
 You can get the above jars from Maven central:
-`[lucene-core-4.7.2.jar](http://search.maven.org/remotecontent?filepath=org/apache/lucene/lucene-core/4.7.2/lucene-core-4.7.2.jar)` and
-`[lucene-misc-4.7.2.jar](http://search.maven.org/remotecontent?filepath=org/apache/lucene/lucene-misc/4.7.2/lucene-misc-4.7.2.jar)`
+[`lucene-core-4.7.2.jar`](http://search.maven.org/remotecontent?filepath=org/apache/lucene/lucene-core/4.7.2/lucene-core-4.7.2.jar) and
+[`lucene-misc-4.7.2.jar`](http://search.maven.org/remotecontent?filepath=org/apache/lucene/lucene-misc/4.7.2/lucene-misc-4.7.2.jar)
 
 You might want to write a simple script to generate the right command. In the case of the index above, the complete merging command is:
 
