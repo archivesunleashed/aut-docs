@@ -21,8 +21,8 @@ After the job completes, in `cpp-all-index/' on HDFS, you'll see 200 sub-directo
 To merge the shards, you'll need to copy the shards out of HDFS, and then use the following Lucene tool:
 
 ```
-java -cp lucene-core-4.7.2.jar:lucene-misc-4.7.2.jar org.apache.lucene.misc.IndexMergeTool [merged-index] \
-  [shard1] [shard2] ...
+java -cp lucene-core-4.7.2.jar:lucene-misc-4.7.2.jar \
+  org.apache.lucene.misc.IndexMergeTool [merged-index] [shard1] [shard2] ...
 ```
 
 You can get the above jars from Maven central:
