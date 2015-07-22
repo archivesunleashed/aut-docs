@@ -37,6 +37,7 @@ If you want to work with links, we have a few tutorials for you!
 <h2>Want to Work With Text?</h2>
 
 If you want to work with text, you've found the right suite.
+* [Building Lucene Indexes Using Hadoop](https://github.com/lintool/warcbase/wiki/Building-Lucene-Indexes-Using-Hadoop)
 * [Extracting Domain-Level Plain Text](https://github.com/lintool/warcbase/wiki/Pig:-Extracting-Domain-Level-Plain-Text)
 * [Named Entity Recognition on a Cluster](https://github.com/lintool/warcbase/wiki/Pig:-Named-Entity-Recognition-(on-a-cluster))
 
