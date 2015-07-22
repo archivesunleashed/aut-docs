@@ -14,9 +14,11 @@ The file specified by `-input` is a file on local disk that lists the WARC and A
 ...
 ```
 
-The option `-index` specifies the location on HDFS where the index will be build. The option `-numShards` specifies the number of shards. Indexing speed is affected by the number of shards: the more shards, the more parallelization, hence faster. But the downside is that you'll have to do shard merging later (more below). Another issue to consider is memory usage: to few shards, the shards get too big, and you'll run out of memory in your reducers.
+The option `-index` specifies the location on HDFS where the index will be built. The option `-numShards` specifies the number of shards. Indexing speed is affected by the number of shards: the more shards, the more parallelization, hence faster. But the downside is that you'll have to do shard merging later (more below). Another issue to consider is memory usage: too few shards, the shards get too big, and you'll run out of memory in your reducers.
 
-After the job completes, in `cpp-all-index/' on HDFS, you'll see 200 sub-directories, one for each shard. If you want to use Shine to search these indexes, the next thing we have to do is to merge all the shards into one unified index. This can be accomplished with built-in Lucene tools:
+After the job completes, in `cpp-all-index/' on HDFS, you'll see 200 sub-directories, one for each shard. If you want to use Shine to search these indexes, the next thing we have to do is to merge all the shards into one unified index.
+
+To merge the shards, you'll need to copy the shards out of HDFS, and then use the following Lucene tool:
 
 ```
 java -cp lucene-core-4.7.2.jar:lucene-misc-4.7.2.jar org.apache.lucene.misc.IndexMergeTool [merged-index] \
