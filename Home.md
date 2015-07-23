@@ -18,7 +18,7 @@ To get started, may we suggest the following tutorials:
 * [Building and Running Warcbase under OS X](https://github.com/lintool/warcbase/wiki/Building-and-Running-Warcbase-Under-OS-X)
 * [Ingesting Content](https://github.com/lintool/warcbase/wiki/Getting-Started:-Ingesting-Content)
 * [Running Pig Scripts](https://github.com/lintool/warcbase/wiki/Pig:-Running-Pig-Scripts)
-* [Gathering Basic Crawl Statistics](https://github.com/lintool/warcbase/wiki/Pig:-Gathering-Basic-Crawl-Statistics)
+* [Gathering Basic Crawl Statistics](https://github.com/lintool/warcbase/wiki/Pig:-Gathering-and-Visualizing-Basic-Crawl-Statistics)
 
 The first tutorial teaches you how to install Warcbase, the second how to run the basic pig scripts, and the latter one generates basic crawl statistics. These are essential if you want to make sense of the collection that you are working with.
 
