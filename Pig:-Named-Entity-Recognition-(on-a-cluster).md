@@ -118,7 +118,7 @@ The results, as you can see below, can be very useful - especially when compared
 ### Counting Entity Frequencies by Date
 
 ```
-combine-entity-results-split-by-date.py.py entities.gz/ [output-dir]
+combine-entity-results-split-by-date.py entities.gz/ [output-dir]
 ```
 
 [This script](https://github.com/lintool/warcbase/blob/master/src/main/python/combine-entity-results-split-by-date.py) creates a set of PERSON, ORGANIZATION, and LOCATION files for every scrape date listed in the data. 
