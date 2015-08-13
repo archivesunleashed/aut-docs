@@ -29,7 +29,7 @@ One can take advantage of the analysis tools (1) without bothering with the data
   
     Where `yourname` is your username. Feel free to choose other directories to store these files, used by HBase and its ZooKeeper instance, if you like. *HBase will create these directories. If they already exist, they will cause problems later on.*
     
-    * `conf/hbase-env.html`: Look for the following line,
+    * `conf/hbase-env.sh`: Look for the following line,
           export HBASE_OPTS="-XX:+UseConcMarkSweepGC"
         
     and change it to:
