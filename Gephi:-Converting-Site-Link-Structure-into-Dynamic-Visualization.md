@@ -11,7 +11,7 @@ $ ./pig2gdf.py <file> > <OUTPUT>
 
 Example usage:
 ```
-./pig2gdf.py part-m-00000 > political-links.csv
+./pig2gdf.py part-m-00000 > political-links.gdf
 ```
 
 <h3>Step Two: Import into Gephi</h3>
