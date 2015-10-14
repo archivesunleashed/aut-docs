@@ -13,7 +13,11 @@ One can take advantage of the analysis tools (1) without bothering with the data
 * Maven (`brew install maven`)
 * Hadoop (`brew install hadoop`)
 * HBase (`brew install hbase`)
-    
+
+#### For Analysis with Spark
+* Scala (`brew install scala`)
+* Spark (`brew install apache-spark`)
+
     Configure HBase by making the changes to the following files located in the HBase installation directory, which will be something like `/usr/local/Cellar/hbase/0.98.6.1/libexec/` (depending on the version number).
     
     * `conf/hbase-site.xml`:
@@ -231,3 +235,29 @@ b = foreach a generate url, FLATTEN(ExtractLinks((chararray) content));
 store b into '/output/path/';
 ````
 In the output directory you should find data output files with source URL, target URL, and anchor text.
+
+### Spark integration
+Warcbase comes with Spark integration for manipulating web archive data. 
+
+To run the spark shell, cd into the warcbase directory and run: 
+`spark-shell --jars target/warcbase-0.1.0-SNAPSHOT-fatjar.jar`
+
+The following script counts web pages by time:
+````
+import org.apache.hadoop.io._
+import org.warcbase.mapreduce._
+import org.warcbase.io._
+
+val records =
+  sc.newAPIHadoopFile("/shared/collections/CanadianPoliticalParties/arc/",
+    classOf[WacArcInputFormat], classOf[LongWritable], classOf[ArcRecordWritable])
+
+val counts = records.map(t => {
+  val meta = t._2.getRecord().getMetaData()
+  (meta.getDate().substring(0, 6), meta.getMimetype())
+}).filter(t => { t._2 == "text/html"
+}).map(t => { (t._1, 1) }).reduceByKey(_ + _).sortByKey().collect()
+
+sc.parallelize(counts).writeAsTextFile("/path/to/output")
+````
+In the output directory you should find data output files with date and count.
