@@ -14,10 +14,6 @@ One can take advantage of the analysis tools (1) without bothering with the data
 * Hadoop (`brew install hadoop`)
 * HBase (`brew install hbase`)
 
-#### For Analysis with Spark
-* Scala (`brew install scala`)
-* Spark (`brew install apache-spark`)
-
     Configure HBase by making the changes to the following files located in the HBase installation directory, which will be something like `/usr/local/Cellar/hbase/0.98.6.1/libexec/` (depending on the version number).
     
     * `conf/hbase-site.xml`:
@@ -237,6 +233,11 @@ store b into '/output/path/';
 In the output directory you should find data output files with source URL, target URL, and anchor text.
 
 ### Spark integration
+
+#### Prerequisites
+* Scala (`brew install scala`)
+* Spark (`brew install apache-spark`)
+
 Warcbase comes with Spark integration for manipulating web archive data. 
 
 To run the spark shell, cd into the warcbase directory and run: 
