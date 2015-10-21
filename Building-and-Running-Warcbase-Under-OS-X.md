@@ -238,27 +238,38 @@ In the output directory you should find data output files with source URL, targe
 * Scala (`brew install scala`)
 * Spark (`brew install apache-spark`)
 
+#### Fluent API
+A fluent API is being developed for RDDs, and the current API can be accessed from the warcbase/matchbox branch.
+To get it, cd into the warcbase directory and run:
+`git checkout matchbox`
+Then package the project:
+`mvn package -DskipTests`
+
+To use the API, two imports are required (run within Spark shell):
+```
+import org.warcbase.spark.matchbox.ArcRecords
+import org.warcbase.spark.matchbox.ArcRecords._
+```
+
 Warcbase comes with Spark integration for manipulating web archive data. 
 
 To run the spark shell, cd into the warcbase directory and run: 
 `spark-shell --jars target/warcbase-0.1.0-SNAPSHOT-fatjar.jar`
 
-The following script counts web pages by time:
+The following script* counts web pages by time:
 ````
-import org.apache.hadoop.io._
-import org.warcbase.mapreduce._
-import org.warcbase.io._
+import org.warcbase.spark.matchbox.ArcRecords
+import org.warcbase.spark.matchbox.ArcRecords._
 
-val records =
-  sc.newAPIHadoopFile("/shared/collections/CanadianPoliticalParties/arc/",
-    classOf[WacArcInputFormat], classOf[LongWritable], classOf[ArcRecordWritable])
-
-val counts = records.map(t => {
-  val meta = t._2.getRecord().getMetaData()
-  (meta.getDate().substring(0, 6), meta.getMimetype())
-}).filter(t => { t._2 == "text/html"
-}).map(t => { (t._1, 1) }).reduceByKey(_ + _).sortByKey().collect()
+val counts = ArcRecords.load("/shared/collections/CanadianPoliticalParties/arc/")
+  .keepMimeTypes(Set("text/html"))
+  .map(r => (r.getMetaData.getDate.substring(0,6), 1))
+  .reduceByKey(_ + _)
+  .sortByKey()
+  .collect()
 
 sc.parallelize(counts).writeAsTextFile("/path/to/output")
 ````
 In the output directory you should find data output files with date and count.
+
+* To deal with new lines in spark-shell, run `:paste` and then paste the script, then type Ctrl-D to finish pasting
