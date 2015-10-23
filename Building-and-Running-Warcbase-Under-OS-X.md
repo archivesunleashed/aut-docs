@@ -244,7 +244,7 @@ To get it, cd into the warcbase directory and run:
 `git checkout matchbox`  
 
 Then package the project:  
-`export _JAVA_OPTIONS="-Xms1024m -Xmx8G -Xss256m -XX:MaxPermSize=4G"` (to allow build heap space)  
+`export _JAVA_OPTIONS="-Xms1024m -Xmx8G -Xss256m -XX:MaxPermSize=4G"` (to allow memory for the build)  
 `mvn package -DskipTests`
 
 To use the API, two imports are required (run within Spark shell):    
