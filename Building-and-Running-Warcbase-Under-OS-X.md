@@ -243,6 +243,7 @@ A fluent API is being developed for RDDs, and the current API can be accessed fr
 To get it, cd into the warcbase directory and run:
 `git checkout matchbox`
 Then package the project:
+`export _JAVA_OPTIONS="-Xms1024m -Xmx8G -Xss256m -XX:MaxPermSize=4G"` (to allow build heap space)
 `mvn package -DskipTests`
 
 To use the API, two imports are required (run within Spark shell):
@@ -272,4 +273,4 @@ sc.parallelize(counts).writeAsTextFile("/path/to/output")
 ````
 In the output directory you should find data output files with date and count.
 
-* To deal with new lines in spark-shell, run `:paste` and then paste the script, then type Ctrl-D to finish pasting
+* Run `:paste` in Spark shell to start a multi-line command, and Ctrl-D to finish the command.
