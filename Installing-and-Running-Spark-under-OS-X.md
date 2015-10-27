@@ -1,5 +1,7 @@
 ### Spark integration
 
+Warcbase comes with Spark integration for manipulating web archive data. 
+
 #### Prerequisites
 * Scala (`brew install scala`)
 * Spark (`brew install apache-spark`)
@@ -18,8 +20,6 @@ To use the API, two imports are required (run within Spark shell):
 import org.warcbase.spark.matchbox.ArcRecords
 import org.warcbase.spark.matchbox.ArcRecords._
 ```
-
-Warcbase comes with Spark integration for manipulating web archive data. 
 
 To run the spark shell, cd into the warcbase directory and run:   
 `spark-shell --jars target/warcbase-0.1.0-SNAPSHOT-fatjar.jar`
