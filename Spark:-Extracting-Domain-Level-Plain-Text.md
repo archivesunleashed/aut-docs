@@ -10,6 +10,6 @@ val r = ArcRecords.load("/path/to/input", sc)
   .keepMimeTypes(Set("text/html"))
   .discardDate(null)
   .keepDomains(Set("greenparty.ca"))
-  .extractUrlAndBody()
+  .extractDomainUrlBody()
 r.saveAsTextFile("/path/to/output/")
 ```
