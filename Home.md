@@ -1,6 +1,4 @@
-Welcome to the warcbase wiki! Here, you'll find various pig scripts and instructions to unlock your rich web archive collections.
-
-**These pages are under active development, as of June 2015.**
+Welcome to the warcbase wiki! Here, you'll find instructions to unlock your web collections. These pages continue to be under active development as of November 2015.
 
 If you are using warcbase, we would love to hear from you. [Please let us know](mailto:i2millig@uwaterloo.ca).
 
@@ -16,11 +14,10 @@ This is still actively under development, with several features in the pipeline 
 
 To get started, may we suggest the following tutorials:
 * [Building and Running Warcbase under OS X](https://github.com/lintool/warcbase/wiki/Building-and-Running-Warcbase-Under-OS-X)
+* [Building and Running Spark under OS X](https://github.com/lintool/warcbase/wiki/Installing-and-Running-Spark-under-OS-X)
 * [Ingesting Content](https://github.com/lintool/warcbase/wiki/Getting-Started:-Ingesting-Content)
 * [Running Pig Scripts](https://github.com/lintool/warcbase/wiki/Pig:-Running-Pig-Scripts)
 * [Gathering Basic Crawl Statistics](https://github.com/lintool/warcbase/wiki/Pig:-Gathering-and-Visualizing-Basic-Crawl-Statistics)
-
-The first tutorial teaches you how to install Warcbase, the second how to run the basic pig scripts, and the latter one generates basic crawl statistics. These are essential if you want to make sense of the collection that you are working with.
 
 <h2>Want an Overall Look at Your Collections?</h2>
 
