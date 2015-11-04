@@ -10,33 +10,11 @@ Note: many of these tutorials currently assume a working knowledge of a Unix com
 
 <h2>Getting Started?</h2>
 
-This is still actively under development, with several features in the pipeline (notably topic modelling and text visualization support).
+To use Spark to analyze your collections, please [visit this landing page](https://github.com/lintool/warcbase/wiki/Analyzing-Web-Archives-with-Spark). Here you will find scripts for **textual analysis**, **network analysis**, and **overall collection statistics**. (still under development)
 
-To get started, may we suggest the following tutorials:
-* [Building and Running Warcbase under OS X](https://github.com/lintool/warcbase/wiki/Building-and-Running-Warcbase-Under-OS-X)
-* [Building and Running Spark under OS X](https://github.com/lintool/warcbase/wiki/Installing-and-Running-Spark-under-OS-X)
-* [Ingesting Content](https://github.com/lintool/warcbase/wiki/Getting-Started:-Ingesting-Content)
-* [Running Pig Scripts](https://github.com/lintool/warcbase/wiki/Pig:-Running-Pig-Scripts)
-* [Gathering Basic Crawl Statistics](https://github.com/lintool/warcbase/wiki/Pig:-Gathering-and-Visualizing-Basic-Crawl-Statistics)
+To use Pig to analyze your collections, please visit the scripts that you can find in the right hand column under "Pig." We are currently moving from Pig to Spark and development will be accordingly focused on Spark.
 
-<h2>Want an Overall Look at Your Collections?</h2>
-
-We are currently working on integration with the Shine front-end, which lets you see trends and explore a collection with faceted search. We currently have one tutorial:
-* [Installing the Shine frontend on OS X](https://github.com/lintool/warcbase/wiki/Shine:-Installing-Shine-Frontend-on-OS-X)
-
-<h2>Want a Link Visualization?</h2>
-
-If you want to work with links, we have a few tutorials for you!
-* [Analysis of Site Link Structure](https://github.com/lintool/warcbase/wiki/Pig:-Analysis-of-Site-Link-Structure): This is a critical tutorial that generates the link graph.
-* [Using Gephi to Create a Dynamic Link Visualization](https://github.com/lintool/warcbase/wiki/Gephi:-Converting-Site-Link-Structure-into-Dynamic-Visualization)
-* [Analysis of Specific Links](https://github.com/lintool/warcbase/wiki/Pig:-Analysis-of-Links-to-Social-Media)
-
-<h2>Want to Work With Text?</h2>
-
-If you want to work with text, you've found the right suite.
-* [Building Lucene Indexes Using Hadoop](https://github.com/lintool/warcbase/wiki/Building-Lucene-Indexes-Using-Hadoop)
-* [Extracting Domain-Level Plain Text](https://github.com/lintool/warcbase/wiki/Pig:-Extracting-Domain-Level-Plain-Text)
-* [Named Entity Recognition on a Cluster](https://github.com/lintool/warcbase/wiki/Pig:-Named-Entity-Recognition-(on-a-cluster))
+If you want to explore other front ends, we have walkthroughs to use the SHINE front end on solr indexes generated using warcbase. See [this SHINE walkthrough](https://github.com/lintool/warcbase/wiki/Shine:-Installing-Shine-Frontend-on-OS-X) and this [building Lucene indexes](https://github.com/lintool/warcbase/wiki/Building-Lucene-Indexes-Using-Hadoop) walkthrough.
 
 <h2>More?</h2>
 
