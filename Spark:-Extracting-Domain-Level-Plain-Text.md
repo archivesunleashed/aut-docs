@@ -3,15 +3,13 @@
 This script extracts the crawl date, domain, URL, and plain text from HTML files in the sample ARC data (and saves the output to out/):
 
 ```
-import org.warcbase.spark.matchbox.ArcRecords
-import org.warcbase.spark.matchbox.ArcRecords._
+import org.warcbase.spark.matchbox.RecordLoader
+import org.warcbase.spark.matchbox.RecordRDD._
 
-val r = ArcRecords.load("src/test/resources/arc/example.arc.gz", sc)
-  .keepMimeTypes(Set("text/html"))
-  .discardDate(null)
-  .extractCrawldateDomainUrlBody()
-
-r.saveAsTextFile("out/")
+RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
+  .keepValidPages()
+  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, r.getRawBodyContent))
+  .saveAsTextFile("out/")
 ```
 
 If you wanted to use it on your own collection, you would change "src/test/resources/arc/example.arc.gz" to the directory with your own ARC or WARC files, and change "out/" on the last line to where you want to save your output data.
@@ -23,13 +21,12 @@ Note that this will create a new directory to store the output, which cannot alr
 The following Spark script generates plain text renderings for all the web pages in a collection with a URL matching a filter string. In the example case, it will go through the collection and find all of the URLs within the "greenparty.ca" domain.
 
 ```
-import org.warcbase.spark.matchbox.ArcRecords
-import org.warcbase.spark.matchbox.ArcRecords._
+import org.warcbase.spark.matchbox.RecordLoader
+import org.warcbase.spark.matchbox.RecordRDD._
 
-val r = ArcRecords.load("/path/to/input", sc)
-  .keepMimeTypes(Set("text/html"))
-  .discardDate(null)
+RecordLoader.loadArc("/path/to/input", sc)
+  .keepValidPages()
   .keepDomains(Set("greenparty.ca"))
-  .extractDomainUrlBody()
-r.saveAsTextFile("/path/to/output/")
+  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, r.getRawBodyContent))
+  .saveAsTextFile("/path/to/output")
 ```
