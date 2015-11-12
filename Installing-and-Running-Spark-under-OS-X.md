@@ -15,6 +15,7 @@ import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.RecordLoader
 ```
 
+### Running in the Spark Shell
 To run the spark shell, cd into the warcbase directory and run:   
 `spark-shell --jars target/warcbase-0.1.0-SNAPSHOT-fatjar.jar`
 
@@ -23,16 +24,31 @@ To run multi-line commands, type `:paste` in Spark shell to start a multi-line c
 
 The following script counts web pages by time:  
 ````
-import org.warcbase.spark.matchbox.ArcRecords
-import org.warcbase.spark.matchbox.ArcRecords._
+import org.warcbase.spark.rdd.RecordRDD._
+import org.warcbase.spark.matchbox.RecordLoader
 
-val counts = ArcRecords.load("/shared/collections/CanadianPoliticalParties/arc/")
-  .keepMimeTypes(Set("text/html"))
-  .map(r => (r.getMetaData.getDate.substring(0,6), 1))
-  .reduceByKey(_ + _)
-  .sortByKey()
-  .collect()
-
-sc.parallelize(counts).writeAsTextFile("/path/to/output")
+val counts = RecordLoader.loadArc("/shared/collections/CanadianPoliticalParties/arc/")
+  .keepValidPages
+  .map(r => r.getDate)
+  .countItems()
+  .saveAsTextFile("path/to/output")
 ````
 In the output directory you should find data output files with date and count.
+
+### Running with Spark Notebook
+
+Spark Notebook is an interactive web-based editor that can run Scala and Spark. 
+
+To use Spark Notebook with Warcbase, download the [notebook](http://spark-notebook.io/) with Scala 2.10, Spark 1.3.0, and Hadoop 2.6.0-cdh5.4.2. 
+Also [build](https://github.com/lintool/warcbase/wiki/Building-and-Running-Warcbase-Under-OS-X#building-warcbase) Warcbase if you have not already done so.
+
+Then unzip the downloaded Spark Notebook file, cd into the directory, and run `./bin/spark-notebook`.
+
+The terminal should say start and say: `Listening for HTTP on /0:0:0:0:0:0:0:0:9000`
+
+Then go to your browser and navigate to `http://localhost:9000/`
+
+To make a new notebook, click the '+' button on the top right-hand corner and make a new notebook.
+
+In that notebook, enter `:cp /path/to/warcbase/jar` as the first command to load Warcbase. Now you have an interactive Spark shell running Warcbase!
+
