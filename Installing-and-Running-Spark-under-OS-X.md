@@ -17,8 +17,8 @@ Then package the project:
 
 To use the API, two imports are required (run within Spark shell):    
 ```
-import org.warcbase.spark.matchbox.ArcRecords
-import org.warcbase.spark.matchbox.ArcRecords._
+import org.warcbase.spark.rdd.RecordRDD._
+import org.warcbase.spark.matchbox.RecordLoader
 ```
 
 To run the spark shell, cd into the warcbase directory and run:   
