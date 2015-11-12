@@ -44,11 +44,11 @@ Also [build](https://github.com/lintool/warcbase/wiki/Building-and-Running-Warcb
 
 Then unzip the downloaded Spark Notebook file, cd into the directory, and run `./bin/spark-notebook`.
 
-The terminal should say start and say: `Listening for HTTP on /0:0:0:0:0:0:0:0:9000`
+The terminal should say: `Listening for HTTP on /0:0:0:0:0:0:0:0:9000`
 
-Then go to your browser and navigate to `http://localhost:9000/`
+Then navigate to `http://localhost:9000/` in your browser.
 
-To make a new notebook, click the '+' button on the top right-hand corner and make a new notebook.
+To make a new notebook, click the '+' button on the top right-hand corner.
 
 In that notebook, enter `:cp /path/to/warcbase/jar` as the first command to load Warcbase. Now you have an interactive Spark shell running Warcbase!
 
