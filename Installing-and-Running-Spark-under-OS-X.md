@@ -7,13 +7,7 @@ Warcbase comes with Spark integration for manipulating web archive data.
 * Spark (`brew install apache-spark`)
 
 #### Fluent API
-A fluent API is being developed for RDDs, and the current API can be accessed from the warcbase/matchbox branch.  
-To get it, cd into the warcbase directory and run:  
-`git checkout matchbox`  
-
-Then package the project:  
-`export _JAVA_OPTIONS="-Xms1024m -Xmx8G -Xss256m -XX:MaxPermSize=4G"` (to allow memory for the build)  
-`mvn package -DskipTests`
+A fluent API is being developed for RDDs, and is now available on master.
 
 To use the API, two imports are required (run within Spark shell):    
 ```
