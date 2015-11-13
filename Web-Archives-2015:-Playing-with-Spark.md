@@ -1,3 +1,5 @@
+[Sample data available here](https://github.com/ianmilligan1/WAHR/tree/master/sample-data/arc-warc)
+
 Initial command:
 
 ```
