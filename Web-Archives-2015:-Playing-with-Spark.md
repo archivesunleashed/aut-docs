@@ -1,3 +1,9 @@
+Initial command:
+
+```
+:cp /Users/ianmilligan1/dropbox/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar
+```
+
 Command one:
 
 ```
