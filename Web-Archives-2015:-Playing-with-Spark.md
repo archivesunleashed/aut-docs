@@ -1,5 +1,7 @@
 [Sample data available here](https://github.com/ianmilligan1/WAHR/tree/master/sample-data/arc-warc)
 
+See also this walkthrough for [extracting plain text](https://github.com/lintool/warcbase/wiki/Spark:-Extracting-Domain-Level-Plain-Text) - written for the Spark shell.
+
 Initial command:
 
 ```
