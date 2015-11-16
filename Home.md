@@ -10,7 +10,9 @@ Note: many of these tutorials currently assume a working knowledge of a Unix com
 
 <h2>Getting Started?</h2>
 
-To use Spark to analyze your collections, please [visit this landing page](https://github.com/lintool/warcbase/wiki/Analyzing-Web-Archives-with-Spark). Here you will find scripts for **textual analysis**, **network analysis**, and **overall collection statistics**. (still under development)
+#### To use Spark to analyze your collections, please [visit this landing page](https://github.com/lintool/warcbase/wiki/Analyzing-Web-Archives-with-Spark). 
+
+Here you will find scripts for **textual analysis**, **network analysis**, and **overall collection statistics**. 
 
 To use Pig to analyze your collections, please visit the scripts that you can find in the right hand column under "Pig." We are currently moving from Pig to Spark and development will be accordingly focused on Spark.
 
