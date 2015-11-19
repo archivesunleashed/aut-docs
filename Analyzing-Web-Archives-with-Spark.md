@@ -6,7 +6,7 @@ If you need assistance with setting up Spark, please visit [this walkthrough](ht
 
 ### Collection Level Analytics
 
-[Collection Level Analytics]
+[Collection Level Analytics](https://github.com/lintool/warcbase/wiki/Spark:-Collection-Analytics): Use Spark Notebook to generate an interactive visualization of what's in your collections.
 
 ### Textual Analysis
 
