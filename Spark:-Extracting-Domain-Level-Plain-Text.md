@@ -4,7 +4,7 @@ This script extracts the crawl date, domain, URL, and plain text from HTML files
 
 ```
 import org.warcbase.spark.matchbox.RecordLoader
-import org.warcbase.spark.matchbox.RecordRDD._
+import org.warcbase.spark.rdd.RecordRDD._
 
 RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()
@@ -38,7 +38,7 @@ The following Spark script generates plain text renderings for all the web pages
 
 ```
 import org.warcbase.spark.matchbox.RecordLoader
-import org.warcbase.spark.matchbox.RecordRDD._
+import org.warcbase.spark.rdd.RecordRDD._
 
 RecordLoader.loadArc("/path/to/input", sc)
   .keepValidPages()
