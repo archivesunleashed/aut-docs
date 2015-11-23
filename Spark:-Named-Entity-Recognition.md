@@ -13,6 +13,11 @@ ExtractEntities.extractFromRecords("english.all.3class.distsim.crf.ser.gz", "/pa
 
 Note the call to `addFile()`. This is necessary if you are running this script on a cluster; it puts a copy of the classifier on each worker node. The classifier and input file paths may be local or on the cluster (e.g., `hdfs:///user/joe/collection/`).
 
+The output of this script and the one below will consist of lines that look like this:
+```
+(20090204,http://greenparty.ca/fr/node/6852?size=display,{"PERSON":["Parti Vert","Paul Maillet","Adam Saab Billy Patterson James Falcon Joe Foster John Fryer John Shavluk Larissa Shasko Marnie Hamagami Matt Smith Pauline Richards Peter A. Johnston Richard Tyssen Robert Brooks Roger Benham Tom Ryan"],"ORGANIZATION":["GPC Candidate Ottawa Orleans","Contact Cabinet","Accueil Paul Maillet GPC Candidate Ottawa Orleans Original","Circonscriptions Nouvelles Événements Blogues Politiques Contact Mon Compte"],"LOCATION":["Canada","Canada","Canada","Canada"]})
+```
+
 ## Extract entities from extracted text
 Run this script on texts [already extracted](https://github.com/lintool/warcbase/wiki/Spark:-Extracting-Domain-Level-Plain-Text) from an ARC/WARC collection.
 ```
