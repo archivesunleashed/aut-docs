@@ -15,7 +15,9 @@ Note the call to `addFile()`. This is necessary if you are running this script o
 
 The output of this script and the one below will consist of lines that look like this:
 ```
-(20090204,http://greenparty.ca/fr/node/6852?size=display,{"PERSON":["Parti Vert","Paul Maillet","Adam Saab Billy Patterson James Falcon Joe Foster John Fryer John Shavluk Larissa Shasko Marnie Hamagami Matt Smith Pauline Richards Peter A. Johnston Richard Tyssen Robert Brooks Roger Benham Tom Ryan"],"ORGANIZATION":["GPC Candidate Ottawa Orleans","Contact Cabinet","Accueil Paul Maillet GPC Candidate Ottawa Orleans Original","Circonscriptions Nouvelles Événements Blogues Politiques Contact Mon Compte"],"LOCATION":["Canada","Canada","Canada","Canada"]})
+(20090204,http://greenparty.ca/fr/node/6852?size=display,{"PERSON":["Parti Vert","Paul Maillet","Adam Saab"],
+"ORGANIZATION":["GPC Candidate Ottawa Orleans","Contact Cabinet","Accueil Paul Maillet GPC Candidate Ottawa Orleans Original","Circonscriptions Nouvelles Événements Blogues Politiques Contact Mon Compte"],
+"LOCATION":["Canada","Canada","Canada","Canada"]})
 ```
 
 ## Extract entities from extracted text
