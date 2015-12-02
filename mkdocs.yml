@@ -7,7 +7,11 @@ theme: mkdocs
 pages:
   - About:
     - 'Summary': 'index.md'
-  - Apache Spark:
+  - Installation and Setup:
+    - 'Building and Running Warcbase Under OS X': 'Building-and-Running-Warcbase-Under-OS-X.md'
+    - 'Ingesting Content into HBase': 'Ingesting-Content-into-HBase.md'
+    - 'Installing and Running Spark under OS X': 'Installing-and-Running-Spark-under-OS-X.md'
+  - Web Archive Analysis:
     - 'Analysis of Site Link Structure': 'Spark-Analysis-of-Site-Link-Structure.md'
     - 'Collection Analytics': 'Spark-Collection-Analytics.md'
     - 'Extracting Domain Level Plain Text': 'Spark-Extracting-Domain-Level-Plain-Text.md'
@@ -15,10 +19,7 @@ pages:
     - 'Installing Spark Notebook on a Cloud Computer': 'Spark:-Installing-Spark-Notebook-on-a-Cloud-Computer.md'
     - 'NER Visualization': 'Spark:-NER-Visualization.md'
     - 'Web Archives 2015: Playing with Spark': 'Web-Archives-2015:-Playing-with-Spark.md'
-  - Installation and Setup:
-    - 'Building and Running Warcbase Under OS X': 'Building-and-Running-Warcbase-Under-OS-X.md'
-    - 'Ingesting Content into HBase': 'Ingesting-Content-into-HBase.md'
-    - 'Installing and Running Spark under OS X': 'Installing-and-Running-Spark-under-OS-X.md'
+    - 'Gephi: Converting Site Link Structure into Dynamic Visualization': 'Gephi:-Converting-Site-Link-Structure-into-Dynamic-Visualization.md'
   - Warcbase:
     - 'Warcbase Wayback Integration': 'Warcbase-Wayback-Integration.md'
     - 'Warcbase Java Tools': 'Warcbase-Java-Tools.md'
@@ -26,4 +27,3 @@ pages:
     - 'Shine: Installing Shine Frontend on OS X': 'Shine:-Installing-Shine-Frontend-on-OS-X.md'
     - 'Building Lucene Indexes Using Hadoop': 'Building-Lucene-Indexes-Using-Hadoop.md'
     - 'Building and Running Warcbase Under OS X': 'Building-and-Running-Warcbase-Under-OS-X.md'
-    - 'Gephi: Converting Site Link Structure into Dynamic Visualization': 'Gephi:-Converting-Site-Link-Structure-into-Dynamic-Visualization.md'
