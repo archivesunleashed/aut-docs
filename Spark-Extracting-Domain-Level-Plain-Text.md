@@ -8,7 +8,7 @@ import org.warcbase.spark.rdd.RecordRDD._
 
 RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()
-  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, r.getRawBodyContent))
+  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, r.getContentString))
   .saveAsTextFile("out/")
 ```
 
@@ -25,7 +25,7 @@ sc)
 .keepMimeTypes(Set("text/html")) 
 .discardDate(null) 
 .map(r => { 
-val t = ExtractRawText(r.getBodyContent) 
+val t = ExtractRawText(r.getContentString) 
 val len = 1000 
 (r.getCrawldate, r.getUrl, if ( t.length > len ) t.substring(0, 
 len) else t)}) 
@@ -43,6 +43,6 @@ import org.warcbase.spark.rdd.RecordRDD._
 RecordLoader.loadArc("/path/to/input", sc)
   .keepValidPages()
   .keepDomains(Set("greenparty.ca"))
-  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, r.getRawBodyContent))
+  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, r.getContentString))
   .saveAsTextFile("/path/to/output")
 ```
