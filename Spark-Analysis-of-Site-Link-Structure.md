@@ -6,7 +6,7 @@ import org.warcbase.spark.rdd.RecordRDD._
 
 RecordLoader.loadArc("/path/to/arc", sc)
   .keepValidPages()
-  .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getBodyContent)))
+  .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1, f._1.replaceAll("^.*www\\.", ""), f._2.replaceAll("^.*www\\.", ""))))
   .filter(r => r._2 != null && r._3 != null)
   .countItems()
