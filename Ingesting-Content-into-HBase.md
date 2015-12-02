@@ -1,3 +1,5 @@
+To use some of the other functions of warcbase, such as quickly serving pages from a Wayback Instance, you can load your data into HBase. You do not need to do this to run analytics on collections, however – in those cases you can just have a directory of ARC or WARC files.
+
 You can find some sample data [here](https://archive.org/details/ExampleArcAndWarcFiles). Ingesting data into Warcbase is fairly straightforward:
 
 ```
