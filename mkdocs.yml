@@ -3,7 +3,7 @@ docs_dir: .
 dev_addr: 'localhost:8111'
 repo_url: https://github.com/lintool/warcbase-docs
 
-theme: mkdocs
+theme: readthedocs
 pages:
   - About:
     - 'Summary': 'index.md'
@@ -11,14 +11,13 @@ pages:
     - 'Building and Running Warcbase Under OS X': 'Building-and-Running-Warcbase-Under-OS-X.md'
     - 'Ingesting Content into HBase': 'Ingesting-Content-into-HBase.md'
     - 'Installing and Running Spark under OS X': 'Installing-and-Running-Spark-under-OS-X.md'
+    - 'Installing Spark Notebook on a Cloud Computer': 'Spark:-Installing-Spark-Notebook-on-a-Cloud-Computer.md'
   - Web Archive Analysis:
     - 'Analysis of Site Link Structure': 'Spark-Analysis-of-Site-Link-Structure.md'
     - 'Collection Analytics': 'Spark-Collection-Analytics.md'
     - 'Extracting Domain Level Plain Text': 'Spark-Extracting-Domain-Level-Plain-Text.md'
     - 'Named Entity Recognition': 'Spark-Named-Entity-Recognition.md'
-    - 'Installing Spark Notebook on a Cloud Computer': 'Spark:-Installing-Spark-Notebook-on-a-Cloud-Computer.md'
     - 'NER Visualization': 'Spark:-NER-Visualization.md'
-    - 'Web Archives 2015: Playing with Spark': 'Web-Archives-2015:-Playing-with-Spark.md'
     - 'Gephi: Converting Site Link Structure into Dynamic Visualization': 'Gephi:-Converting-Site-Link-Structure-into-Dynamic-Visualization.md'
   - Warcbase:
     - 'Warcbase Wayback Integration': 'Warcbase-Wayback-Integration.md'
