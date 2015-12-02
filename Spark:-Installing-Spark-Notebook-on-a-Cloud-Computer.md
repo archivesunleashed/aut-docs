@@ -1,3 +1,5 @@
+You might want a bit more power than you can get on your local computer. If so, read on to learn how to deploy warcbase on a cloud machine. If you want to begin on a local computer, [skip this section and come back to it](http://lintool.github.io/warcbase-docs/Analyzing-Web-Archives-with-Spark/).
+
 This is a walkthrough for installing Warcbase and Spark on a Ubuntu_14.04_Trusty x86_64 (QCOW2) image provided for Compute Canada. Presumably Amazon EC2 would provide a similar sort of experience. For more information on Warcbase, [check out the repository here](https://github.com/lintool/warcbase).
 
 It is a bit bare boned as it assumes some knowledge of a command line environment.

@@ -13,3 +13,5 @@ Note: many of these tutorials currently assume a working knowledge of a Unix com
 If you've just arrived, you're probably interested in using [**Spark to analyze your web archive collections**](http://lintool.github.io/warcbase-docs/Analyzing-Web-Archives-with-Spark/): gathering collection statistics, textual analysis, network analysis, etc.
 
 If you want to explore web archives using other means, we have walkthroughs to use the SHINE front end on Solr indexes generated using Warcbase. See [this SHINE walkthrough](http://lintool.github.io/warcbase-docs/Shine:-Installing-Shine-Frontend-on-OS-X/) and this [building Lucene indexes](http://lintool.github.io/warcbase-docs/Building-Lucene-Indexes-Using-Hadoop/) walkthrough.
+
+**To keep going, click the NEXT button below.**

@@ -13,8 +13,8 @@ pages:
     - 'Installing Spark Notebook on a Cloud Computer': 'Spark:-Installing-Spark-Notebook-on-a-Cloud-Computer.md'
   - Web Archive Analysis:
     - 'Analyzing Web Archives with Spark': 'Analyzing-Web-Archives-with-Spark.md'
-    - 'Analysis of Site Link Structure': 'Spark-Analysis-of-Site-Link-Structure.md'
     - 'Collection Analytics': 'Spark-Collection-Analytics.md'
+    - 'Analysis of Site Link Structure': 'Spark-Analysis-of-Site-Link-Structure.md'
     - 'Extracting Domain Level Plain Text': 'Spark-Extracting-Domain-Level-Plain-Text.md'
     - 'Named Entity Recognition': 'Spark-Named-Entity-Recognition.md'
     - 'NER Visualization': 'Spark:-NER-Visualization.md'
