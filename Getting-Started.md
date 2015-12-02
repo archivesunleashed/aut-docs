@@ -1,5 +1,9 @@
 Getting warcbase started is pretty easy! You have two dependencies: you need to have `git` installed, and you need to have Maven installed. On OS X, we recommend [installing homebrew](http://brew.sh/). 
 
+Note: many of these tutorials currently assume a working knowledge of a Unix command line environment. For a conceptual and practical introduction, please see Ian Milligan and James Baker's "Introduction to the Bash Command Line" at the [*Programming Historian*](http://programminghistorian.org/lessons/intro-to-bash).
+
+Once you get to the Spark Notebook stage, you can work in your web browser.
+
 Install dependencies:
 
 ```

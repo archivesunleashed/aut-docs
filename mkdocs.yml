@@ -8,10 +8,11 @@ pages:
   - About:
     - 'Summary': 'index.md'
   - Installation and Setup:
-    - 'Building and Running Warcbase Under OS X': 'Building-and-Running-Warcbase-Under-OS-X.md'
+    - 'Getting Started with Warcbase!': 'Getting-Started.md'
     - 'Installing and Running Spark under OS X': 'Installing-and-Running-Spark-under-OS-X.md'
     - 'Installing Spark Notebook on a Cloud Computer': 'Spark:-Installing-Spark-Notebook-on-a-Cloud-Computer.md'
   - Web Archive Analysis:
+    - 'Analyzing Web Archives with Spark': 'Analyzing-Web-Archives-with-Spark.md'
     - 'Analysis of Site Link Structure': 'Spark-Analysis-of-Site-Link-Structure.md'
     - 'Collection Analytics': 'Spark-Collection-Analytics.md'
     - 'Extracting Domain Level Plain Text': 'Spark-Extracting-Domain-Level-Plain-Text.md'
