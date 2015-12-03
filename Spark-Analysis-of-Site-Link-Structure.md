@@ -1,7 +1,7 @@
 The following Spark script generates the aggregated site-level link structure, grouped by crawl date (YYYYMMDD):
 
 ```
-import org.warcbase.spark.matchbox.RecordTransformers.WARecord
+import org.warcbase.spark.matchbox.RecordTransformers._
 import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
