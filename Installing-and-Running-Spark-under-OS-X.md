@@ -22,7 +22,7 @@ To run the spark shell, cd into the warcbase directory and run:
 By default, command in spark-shell must be one-line.  
 To run multi-line commands, type `:paste` in Spark shell to start a multi-line command, and Ctrl-D to finish the command.
 
-The following script counts web pages by time:  
+For example, the following script counts web pages by time:  
 ````
 import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.RecordLoader
@@ -50,7 +50,7 @@ Then navigate to `http://localhost:9000/` in your browser.
 
 To make a new notebook, click the '+' button on the top right-hand corner.
 
-In that notebook, enter `:cp /path/to/warcbase/jar` as the first command to load Warcbase. Now you have an interactive Spark shell running Warcbase!
+In that notebook, enter `:cp /path/to/warcbase/jar` as the first command to load Warcbase. Now you have an interactive Spark shell running Warcbase! A good starting script [can be found here](http://lintool.github.io/warcbase-docs/Spark-Collection-Analytics/).
 
 ### Ready to go!
 
