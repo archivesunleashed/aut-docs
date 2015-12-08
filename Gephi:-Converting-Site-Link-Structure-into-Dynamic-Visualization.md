@@ -1,22 +1,33 @@
 One popular digital humanities tool is [Gephi](http://gephi.github.io/). You can quickly use it to convert output into a dynamic, date-ordered visualization to see how link structures have changed over time.
 
-<h3>Step One: Convert Site Link Structure into GDF Format</h3>
+<h3>Step One: Generate GDF Format Output</h3>
 
-Use `pig2gdf.py`. You can download it from <https://github.com/ianmilligan1/WAHR/tree/master/code>. Copy it into the directory that you want to use it in, or call it remotely. Usage is as follows:
+You can write directly to a Gephi-readable format by using our `WriteGDF` function. Here is an example script:
 
 ```
-pig2gdf.py usage:
-$ ./pig2gdf.py <file> > <OUTPUT>
+import org.warcbase.spark.matchbox.RecordTransformers._
+import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader, WriteGDF}
+import org.warcbase.spark.rdd.RecordRDD._
+
+val links = RecordLoader.loadArc("/collections/webarchives/CanadianPoliticalParties/arc/", sc)
+  .discardDate(null)
+  .keepMimeTypes(Set("text/html"))
+  .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
+  .flatMap(r => r._2.map(f => (r._1, ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))
+  .filter(r => r._2 != "" && r._3 != "")
+  .countItems()
+  .filter(r => r._2 > 5)
+
+WriteGDF(links, "all-links.gdf")
 ```
 
-Example usage:
-```
-./pig2gdf.py part-m-00000 > political-links.gdf
-```
+The ensuing `all-links.gdf` can be natively imported into Gephi.
 
 <h3>Step Two: Import into Gephi</h3>
 
-You now want to take it into Gephi. Start Gephi (<a href="http://ianmilligan.ca/2014/07/15/getting-gephi-running-on-os-x-mavericks/">if you have trouble running it, this tutorial might help</a>). Open the GDF file that you just generated. Click OK.
+You now want to take it into Gephi. Start Gephi (<a href="http://ianmilligan.ca/2014/07/15/getting-gephi-running-on-os-x-mavericks/">if you have trouble running it, this tutorial might help</a>). 
+
+Open the GDF file that you just generated (in our example, `all-links.gdf`. Click OK.
 
 Now visit the 'Data Laboratory' panel and do the following. Select the 'edges' table so it looks like this.
 
