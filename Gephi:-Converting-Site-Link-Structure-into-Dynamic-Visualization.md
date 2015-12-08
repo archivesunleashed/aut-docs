@@ -10,8 +10,7 @@ import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordL
 import org.warcbase.spark.rdd.RecordRDD._
 
 val links = RecordLoader.loadArc("/collections/webarchives/CanadianPoliticalParties/arc/", sc)
-  .discardDate(null)
-  .keepMimeTypes(Set("text/html"))
+  .keepValidPages()
   .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1, ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")

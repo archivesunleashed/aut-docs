@@ -33,8 +33,7 @@ Command three:
 val r = 
 RecordLoader.loadArc("/Users/ianmilligan1/Dropbox/warcs-workshop/227-20051007202637-00000-crawling018.arc.gz",
 sc) 
-.keepMimeTypes(Set("text/html")) 
-.discardDate(null) 
+.keepValidPages()
 .map(r => { 
 val t = ExtractRawText(r.getBodyContent) 
 val len = 1000 

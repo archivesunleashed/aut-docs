@@ -14,8 +14,7 @@ import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordL
 import org.warcbase.spark.rdd.RecordRDD._
 
 RecordLoader.loadArc("/path/to/arc", sc)
-  .discardDate(null)
-  .keepMimeTypes(Set("text/html"))
+  .keepValidPages()
   .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1, ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
@@ -54,8 +53,7 @@ import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordL
 import org.warcbase.spark.rdd.RecordRDD._
 
 RecordLoader.loadArc("/mnt/vol1/data_sets/cpp_arcs/", sc)
-  .discardDate(null)
-  .keepMimeTypes(Set("text/html"))
+  .keepValidPages()
   .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1.substring(0,6), ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != null && r._3 != null)

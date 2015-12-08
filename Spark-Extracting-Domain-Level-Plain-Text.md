@@ -22,8 +22,7 @@ If you want to run it in your Spark Notebook, the following script will show in-
 val r = 
 RecordLoader.loadWarc("/path/to/warcs",
 sc) 
-.keepMimeTypes(Set("text/html")) 
-.discardDate(null) 
+.keepValidPages()
 .map(r => { 
 val t = ExtractRawText(r.getContentString) 
 val len = 1000 
