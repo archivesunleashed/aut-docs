@@ -5,10 +5,11 @@ This script extracts the crawl date, domain, URL, and plain text from HTML files
 ```
 import org.warcbase.spark.matchbox.RecordLoader
 import org.warcbase.spark.rdd.RecordRDD._
+import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
 
 RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()
-  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, r.getContentString))
+  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
   .saveAsTextFile("out/")
 ```
 
@@ -24,7 +25,7 @@ RecordLoader.loadWarc("/path/to/warcs",
 sc) 
 .keepValidPages()
 .map(r => { 
-val t = ExtractRawText(r.getContentString) 
+val t = RemoveHTML(r.getContentString) 
 val len = 1000 
 (r.getCrawldate, r.getUrl, if ( t.length > len ) t.substring(0, 
 len) else t)}) 
@@ -36,12 +37,12 @@ len) else t)})
 The following Spark script generates plain text renderings for all the web pages in a collection with a URL matching a filter string. In the example case, it will go through the collection and find all of the URLs within the "greenparty.ca" domain.
 
 ```
-import org.warcbase.spark.matchbox.RecordLoader
+import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
-RecordLoader.loadArc("/path/to/input", sc)
+RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()
   .keepDomains(Set("greenparty.ca"))
-  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, r.getContentString))
-  .saveAsTextFile("/path/to/output")
+  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+  .saveAsTextFile("out/")
 ```
