@@ -1,5 +1,7 @@
 One popular digital humanities tool is [Gephi](http://gephi.github.io/). You can quickly use it to convert output into a dynamic, date-ordered visualization to see how link structures have changed over time.
 
+[We have an in-depth walkthrough, complete with video, here](http://ianmilligan.ca/2015/12/11/from-dataverse-to-gephi-network-analysis-on-our-data/). If you want to experiment with already generated data, [you can find it here](http://dataverse.scholarsportal.info/dvn/faces/study/StudyPage.xhtml?globalId=hdl:10864/11301).
+
 <h3>Step One: Generate GDF Format Output</h3>
 
 You can write directly to a Gephi-readable format by using our `WriteGDF` function. Here is an example script:
