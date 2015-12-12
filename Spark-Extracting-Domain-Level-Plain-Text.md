@@ -46,3 +46,18 @@ RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
   .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
   .saveAsTextFile("out/")
 ```
+
+### Plain text minus boilerplate
+
+The following Spark script generates plain text renderings for all the web pages in a collection, minus "boilerplate" content: advertisements, navigational elements, and elements of the website template. For more on the boilerplate removal library we are using, [please see this website and paper](http://www.l3s.de/~kohlschuetter/boilerplate/).
+
+```
+import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader, ExtractBoilerpipeText}
+import org.warcbase.spark.rdd.RecordRDD._
+
+RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
+  .keepValidPages()
+  .keepDomains(Set("greenparty.ca"))
+  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, ExtractBoilerpipeText(r.getContentString)))
+  .saveAsTextFile("out/")
+```
