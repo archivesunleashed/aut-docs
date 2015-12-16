@@ -90,4 +90,24 @@ It generates results like:
 
 # Exporting to Gephi Directly
 
-You may want to export your data directly to the [Gephi software suite](http://gephi.github.io/), an open-soure network analysis project. We have a separate lesson on this: [Gephi: Converting the Site Link Structure into a Dynamic Visualization](http://lintool.github.io/warcbase-docs/Gephi:-Converting-Site-Link-Structure-into-Dynamic-Visualization/).
+You may want to export your data directly to the [Gephi software suite](http://gephi.github.io/), an open-soure network analysis project. The following code writes to a GDF format:
+
+```
+import org.warcbase.spark.matchbox.RecordTransformers._
+import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader, WriteGDF}
+import org.warcbase.spark.rdd.RecordRDD._
+
+val links = RecordLoader.loadArc("/collections/webarchives/CanadianPoliticalParties/arc/", sc)
+  .keepValidPages()
+  .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
+  .flatMap(r => r._2.map(f => (r._1, ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))
+  .filter(r => r._2 != "" && r._3 != "")
+  .countItems()
+  .filter(r => r._2 > 5)
+
+WriteGDF(links, "all-links.gdf")
+```
+
+This file can then be directly opened by Gephi.
+
+We have a separate lesson on this: [Gephi: Converting the Site Link Structure into a Dynamic Visualization](http://lintool.github.io/warcbase-docs/Gephi:-Converting-Site-Link-Structure-into-Dynamic-Visualization/).
