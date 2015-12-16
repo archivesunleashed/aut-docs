@@ -1,4 +1,4 @@
-The Warcbase Spark _matchbox_ functions in [ExtractEntities](https://github.com/lintool/warcbase/wiki/Spark:-Named-Entity-Recognition) list the named entities contained in each page in an archive, but we are often interested in getting a sense of what is contained in a collection as a whole. Visualization can help. We have provided a Javascript visualizer using [D3.js](http://d3js.org/) that produces views of NER data. You can try the visualizer [here](http://jrwiebe.github.io/WAHR/nervis/).
+The Warcbase Spark _matchbox_ functions in [ExtractEntities](https://github.com/lintool/warcbase/wiki/Spark-Named-Entity-Recognition) list the named entities contained in each page in an archive, but we are often interested in getting a sense of what is contained in a collection as a whole. Visualization can help. We have provided a Javascript visualizer using [D3.js](http://d3js.org/) that produces views of NER data. You can try the visualizer [here](http://jrwiebe.github.io/WAHR/nervis/).
 
 The visualizer can currently produce the following:
 * a list view, with frequency of the selected entity type represented by font size (inspired by the [Trading Consequences Location Cloud](http://tcqdev.edina.ac.uk/vis/locationCloud/index.php?com=Sugar) 
@@ -7,7 +7,7 @@ The visualizer can currently produce the following:
 * a bubble chart, representing all entity types at once.![Bubble view](http://jrwiebe.github.io/WAHR/nervis/screenshots/bubbleview.png)
 
 ## Generating NER Data
-The _matchbox_ contains a function in [NERCombinedJson](https://github.com/lintool/warcbase/blob/master/src/main/scala/org/warcbase/spark/matchbox/NERCombinedJson.scala) that will extract NER entities from [plain text records](https://github.com/lintool/warcbase/wiki/Spark:-Extracting-Domain-Level-Plain-Text), summarize them by crawl date, and save the results as a single JSON file. The following script calls the function. Modify the file names in (1) and (2) as appropriate.
+The _matchbox_ contains a function in [NERCombinedJson](https://github.com/lintool/warcbase/blob/master/src/main/scala/org/warcbase/spark/matchbox/NERCombinedJson.scala) that will extract NER entities from [plain text records](https://github.com/lintool/warcbase/wiki/Spark-Extracting-Domain-Level-Plain-Text), summarize them by crawl date, and save the results as a single JSON file. The following script calls the function. Modify the file names in (1) and (2) as appropriate.
 ```
 import org.warcbase.spark.matchbox.NERCombinedJson
 

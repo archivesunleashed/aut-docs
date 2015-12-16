@@ -110,4 +110,4 @@ WriteGDF(links, "all-links.gdf")
 
 This file can then be directly opened by Gephi.
 
-We have a separate lesson on this: [Gephi: Converting the Site Link Structure into a Dynamic Visualization](http://lintool.github.io/warcbase-docs/Gephi:-Converting-Site-Link-Structure-into-Dynamic-Visualization/).
+We have a separate lesson on this: [Gephi: Converting the Site Link Structure into a Dynamic Visualization](http://lintool.github.io/warcbase-docs/Gephi-Converting-Site-Link-Structure-into-Dynamic-Visualization/).

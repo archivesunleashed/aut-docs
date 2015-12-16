@@ -21,7 +21,7 @@ The output of this script and the one below will consist of lines that look like
 ```
 
 ## Extract entities from extracted text
-Run this script on texts [already extracted](https://github.com/lintool/warcbase/wiki/Spark:-Extracting-Domain-Level-Plain-Text) from an ARC/WARC collection.
+Run this script on texts [already extracted](https://github.com/lintool/warcbase/wiki/Spark-Extracting-Domain-Level-Plain-Text) from an ARC/WARC collection.
 ```
 import org.warcbase.spark.matchbox.ExtractEntities
 
