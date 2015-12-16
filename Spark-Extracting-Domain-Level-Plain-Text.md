@@ -61,3 +61,19 @@ RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
   .map(r => (r.getCrawldate, r.getDomain, r.getUrl, ExtractBoilerpipeText(r.getContentString)))
   .saveAsTextFile("out/")
 ```
+
+### Plain text on a specific date
+
+The following Spark script extracts plain text for a given collection by date (in this case, 4 October 2005). 
+
+```
+import org.warcbase.spark.matchbox.RecordLoader
+import org.warcbase.spark.rdd.RecordRDD._
+import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
+
+RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
+  .keepValidPages()
+  .keepDate("20051004")
+  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+  .saveAsTextFile("out/")
+```
