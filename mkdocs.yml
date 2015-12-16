@@ -10,18 +10,18 @@ pages:
   - Installation and Setup:
     - 'Getting Started with Warcbase!': 'Getting-Started.md'
     - 'Installing and Running Spark under OS X': 'Installing-and-Running-Spark-under-OS-X.md'
-    - 'Installing Spark Notebook on a Cloud Computer': 'Spark:-Installing-Spark-Notebook-on-a-Cloud-Computer.md'
+    - 'Installing Spark Notebook on a Cloud Computer': 'Spark-Installing-Spark-Notebook-on-a-Cloud-Computer.md'
   - Web Archive Analysis:
     - 'Analyzing Web Archives with Spark': 'Analyzing-Web-Archives-with-Spark.md'
-    - 'Several Basic Spark Commands': 'Spark:-Several-Basic-Commands.md'
+    - 'Several Basic Spark Commands': 'Spark-Several-Basic-Commands.md'
     - 'Collection Analytics': 'Spark-Collection-Analytics.md'
     - 'Analysis of Site Link Structure': 'Spark-Analysis-of-Site-Link-Structure.md'
     - 'Extracting Domain Level Plain Text': 'Spark-Extracting-Domain-Level-Plain-Text.md'
     - 'Named Entity Recognition': 'Spark-Named-Entity-Recognition.md'
-    - 'NER Visualization': 'Spark:-NER-Visualization.md'
-    - 'Gephi: Converting Site Link Structure into Dynamic Visualization': 'Gephi:-Converting-Site-Link-Structure-into-Dynamic-Visualization.md'
+    - 'NER Visualization': 'Spark-NER-Visualization.md'
+    - 'Gephi: Converting Site Link Structure into Dynamic Visualization': 'Gephi-Converting-Site-Link-Structure-into-Dynamic-Visualization.md'
   - Shine Integration:
-    - 'Shine: Installing Shine Frontend on OS X': 'Shine:-Installing-Shine-Frontend-on-OS-X.md'
+    - 'Shine: Installing Shine Frontend on OS X': 'Shine-Installing-Shine-Frontend-on-OS-X.md'
     - 'Building Lucene Indexes Using Hadoop': 'Building-Lucene-Indexes-Using-Hadoop.md'
   - Warcbase:
     - 'Building and Running Warcbase Under OS X': 'Building-and-Running-Warcbase-Under-OS-X.md'
