@@ -2,7 +2,7 @@ You may want to learn what top-level domains you have in a given ARC, WARC, or d
 
 ```
 val r = 
-RecordLoader.loadArc(arcdir, 
+RecordLoader.loadArc("/directory/to/arc/file.arc.gz", 
 sc) 
 .keepValidPages() 
 .map(r => ExtractTopLevelDomain(r.getUrl)) 
