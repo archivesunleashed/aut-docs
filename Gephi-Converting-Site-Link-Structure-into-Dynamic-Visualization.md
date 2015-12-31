@@ -30,9 +30,9 @@ The ensuing `all-links.gdf` can be natively imported into Gephi.
 
 <h3>Step Two: Import into Gephi</h3>
 
-You now want to take it into Gephi. Start Gephi (<a href="http://ianmilligan.ca/2014/07/15/getting-gephi-running-on-os-x-mavericks/">if you have trouble running it, this tutorial might help</a>). 
+You now want to take it into Gephi. [Install Gephi](http://gephi.github.io/) – make sure you're running Gephi 0.9, as it offers widest compatabilities with systems.
 
-Open the GDF file that you just generated (in our example, `all-links.gdf`. Click OK.
+Open the GDF file that you just generated when prompted by the new project window (in our example, `all-links.gdf`). Click OK.
 
 Now visit the 'Data Laboratory' panel and do the following. Select the 'edges' table so it looks like this.
 
