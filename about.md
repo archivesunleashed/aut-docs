@@ -15,7 +15,7 @@ Warcbase is built against CDH 5.4.1:
 
 The Hadoop ecosystem is evolving rapidly, so there may be incompatibilities with other versions.
 
-Detailed documentation is available [here](http://lintool.github.io/warcbase-docs/).
+You are currently in our documentation.
 
 Supporting files can be found in the [warcbase-resources repository](https://github.com/lintool/warcbase-resources).
 
