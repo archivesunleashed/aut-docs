@@ -5,7 +5,7 @@ repo_url: https://github.com/lintool/warcbase-docs
 
 theme: readthedocs
 pages:
-  - About:
+  - Introduction:
     - 'Summary': 'index.md'
     - 'About': 'about.md'
   - Installation and Setup:
