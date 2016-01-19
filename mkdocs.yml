@@ -7,6 +7,7 @@ theme: readthedocs
 pages:
   - About:
     - 'Summary': 'index.md'
+    - 'About': 'about.md'
   - Installation and Setup:
     - 'Getting Started with Warcbase!': 'Getting-Started.md'
     - 'Installing and Running Spark under OS X': 'Installing-and-Running-Spark-under-OS-X.md'
