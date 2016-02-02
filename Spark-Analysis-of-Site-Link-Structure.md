@@ -1,8 +1,9 @@
 Site link structures can be very useful, allowing you to learn such things as:
-- what websites were the most linked to;
-- what websites had the most outbound links;
-- what paths could be taken through the network to connect pages;
-- what communities existed within the link structure?
+
+- what websites were the most linked to;  
+- what websites had the most outbound links;  
+- what paths could be taken through the network to connect pages;  
+- what communities existed within the link structure?  
 
 # Grouping by Crawl Date
 
