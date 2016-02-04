@@ -11,3 +11,5 @@ We have several basic commands that you will see again and again in these script
 `.keepDomains()`: This command allows you to specify a specific domain that you are interested in keeping. If you were dealing with a large number of WARCs and only wanted to keep domains from the Green Party of Canada, you would pass `.keepDomains(Set("greenparty.ca"))`. The opposite command is `.keepDomains()`.
 
 `.keepUrls()`: This is a similar command to above but on URLs not just domains. The opposite command is `.discardUrls()`.
+
+`.keepLanguages()`: This allows you to keep only pages that are written in a specified language. It uses the [ISO 639.2 language codes](https://www.loc.gov/standards/iso639-2/php/code_list.php). For example, if you wanted to keep only pages in French and German, you would do `.keepLanguages(Set("fr", "de"))`. Language detection is somewhat resource-intensive on a large collection, so run your other filters first.
