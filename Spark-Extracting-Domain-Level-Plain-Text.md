@@ -77,3 +77,19 @@ RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
   .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
   .saveAsTextFile("out/")
 ```
+
+### Plain text filtered by language
+
+The following Spark script keeps only French language pages from a certain top-level domain. It uses the [ISO 639.2 language codes](https://www.loc.gov/standards/iso639-2/php/code_list.php).
+
+```
+import org.warcbase.spark.matchbox.{RecordLoader, RemoveHTML}
+import org.warcbase.spark.rdd.RecordRDD._
+
+RecordLoader.loadWarc("/path/to/warc", sc)
+.keepValidPages()
+.keepDomains(Set("greenparty.ca"))
+.keepLanguages(Set("fr"))
+.map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+.saveAsTextFile("out-fr/")
+```
