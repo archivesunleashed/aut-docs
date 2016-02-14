@@ -62,20 +62,40 @@ RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
   .saveAsTextFile("out/")
 ```
 
-### Plain text on a specific date
+### Plain text filtered by date
 
-The following Spark script extracts plain text for a given collection by date (in this case, 4 October 2005). 
+Warcbase permits you to filter records by a full or partial date string. It conceives
+of the date string as a `DateComponent`. You can specify the year (`YYYY`), month (`MM`),
+day (`DD`), year and month (`YYYYMM`), or a particular year-month-day (`YYYYMMDD`).
+
+The following Spark script extracts plain text for a given collection by date (in this case, 4 October 2008). 
 
 ```
 import org.warcbase.spark.matchbox.RecordLoader
 import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
+import org.warcbase.spark.matchbox.ExtractDate.DateComponent._
 
-RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
+RecordLoader.loadArc("path/to/xample.arc.gz", sc)
   .keepValidPages()
-  .keepDate("20051004")
+  .keepDate("20081004", YYYYMM)
   .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
   .saveAsTextFile("out/")
+```
+
+The following script extracts plain text for a given collection by year (in this case, 2016).
+
+```
+import org.warcbase.spark.matchbox.RecordLoader
+import org.warcbase.spark.rdd.RecordRDD._
+import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
+import org.warcbase.spark.matchbox.ExtractDate.DateComponent._
+
+RecordLoader.loadWarc("path/to/example.warc.gz", sc)
+  .keepValidPages()
+  .keepDate("2015", YYYY)
+  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+  .saveAsTextFile("out2/")
 ```
 
 ### Plain text filtered by language
