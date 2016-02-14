@@ -84,7 +84,40 @@ It generates results like:
 ((200701,greenparty.ca,partivert.ca),50176)
 ((200701,greenparty.ca,validator.w3.org),50171)
 ((200701,davidsuzuki.org,davidsuzuki.org),40867)
-[etc.]
+```
+
+# Exporting as TSV
+Archive records are represented in Spark as [tuples](https://en.wikipedia.org/wiki/Tuple), 
+and this is the standard format of results produced by most of the scripts presented here
+(e.g., see above). It may be useful, however, to have this data in TSV (tab-separated value)
+format, for further processing outside Warcbase. The following script uses `tabDelimit` (from
+`TupleFormatter`) to transform tuples to tab-delimited strings; it also flattens any 
+nested tuples. (This is the same script as at the top of the page, with the addition of the 
+third and the second-last lines.)
+
+```
+import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader}
+import org.warcbase.spark.rdd.RecordRDD._
+import org.warcbase.spark.matchbox.TupleFormatter._
+
+RecordLoader.loadArc("/path/to/arc", sc)
+  .keepValidPages()
+  .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
+  .flatMap(r => r._2.map(f => (r._1, ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))
+  .filter(r => r._2 != "" && r._3 != "")
+  .countItems()
+  .filter(r => r._2 > 5)
+  .map(tabDelimit(_))
+  .saveAsTextFile("cpp.sitelinks2")
+```
+
+Its output looks like:
+```
+20151107        liberal.ca      youtube.com     16334
+20151108        socialist.ca    youtube.com     11690
+20151108        socialist.ca    ustream.tv      11584
+20151107        canadians.org   canadians.org   11426
+20151108        canadians.org   canadians.org   11403
 ```
 
 # Exporting to Gephi Directly
