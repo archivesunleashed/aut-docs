@@ -10,7 +10,6 @@ Site link structures can be very useful, allowing you to learn such things as:
 The following Spark script generates the aggregated site-level link structure, grouped by crawl date (YYYYMMDD):
 
 ```
-import org.warcbase.spark.matchbox.RecordTransformers._
 import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
@@ -49,7 +48,6 @@ In your analysis, you may want to group the link structures by month rather than
 The following script will do so:
 
 ```
-import org.warcbase.spark.matchbox.RecordTransformers._
 import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
@@ -94,7 +92,6 @@ It generates results like:
 You may want to export your data directly to the [Gephi software suite](http://gephi.github.io/), an open-soure network analysis project. The following code writes to a GDF format:
 
 ```
-import org.warcbase.spark.matchbox.RecordTransformers._
 import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader, WriteGDF}
 import org.warcbase.spark.rdd.RecordRDD._
 
