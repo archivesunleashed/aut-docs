@@ -65,7 +65,7 @@ RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
 ### Plain text filtered by date
 
 Warcbase permits you to filter records by a full or partial date string. It conceives
-of the date string as a `DateComponent`. You can specify the year (`YYYY`), month (`MM`),
+of the date string as a `DateComponent`. Use `keepDate` to specify the year (`YYYY`), month (`MM`),
 day (`DD`), year and month (`YYYYMM`), or a particular year-month-day (`YYYYMMDD`).
 
 The following Spark script extracts plain text for a given collection by date (in this case, 4 October 2008). 
