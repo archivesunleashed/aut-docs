@@ -32,7 +32,7 @@ len) else t)})
 .collect() 
 ```
 
-### Plain text by URL Pattern
+### Plain text by domain
 
 The following Spark script generates plain text renderings for all the web pages in a collection with a URL matching a filter string. In the example case, it will go through the collection and find all of the URLs within the "greenparty.ca" domain.
 
@@ -46,6 +46,20 @@ RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
   .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
   .saveAsTextFile("out/")
 ```
+
+### Plain text by URL pattern
+
+The following Spark script generates plain text renderings for all the web pages in a collection with a URL matching a regular expression pattern. In the example case, it will go through the collection and find all of the URLs beginning with `http://geocities.com/EnchantedForest/`.
+
+import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
+import org.warcbase.spark.rdd.RecordRDD._
+
+RecordLoader.loadWarc("geocitities-example.warc.gz", sc)
+  .keepValidPages()
+  .keepUrlPatterns(Set("http://geocities.com/EnchantedForest/.*".r))
+  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+  .saveAsTextFile("EnchantedForest/")
+
 
 ### Plain text minus boilerplate
 
@@ -76,7 +90,7 @@ import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
 import org.warcbase.spark.matchbox.ExtractDate.DateComponent._
 
-RecordLoader.loadArc("path/to/xample.arc.gz", sc)
+RecordLoader.loadArc("path/to/example.arc.gz", sc)
   .keepValidPages()
   .keepDate("20081004", YYYYMM)
   .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
