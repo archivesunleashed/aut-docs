@@ -51,6 +51,7 @@ RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
 
 The following Spark script generates plain text renderings for all the web pages in a collection with a URL matching a regular expression pattern. In the example case, it will go through the collection and find all of the URLs beginning with `http://geocities.com/EnchantedForest/`.
 
+```
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
@@ -59,7 +60,7 @@ RecordLoader.loadWarc("geocitities-example.warc.gz", sc)
   .keepUrlPatterns(Set("http://geocities.com/EnchantedForest/.*".r))
   .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
   .saveAsTextFile("EnchantedForest/")
-
+```
 
 ### Plain text minus boilerplate
 
