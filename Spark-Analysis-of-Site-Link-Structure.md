@@ -120,6 +120,25 @@ Its output looks like:
 20151108        canadians.org   canadians.org   11403
 ```
 
+# Filtering by URL
+You may also wish to only extract links from a subset of pages, in which case you can also add in the [filters found here](http://lintool.github.io/warcbase-docs/Spark-Several-Basic-Commands/). In this case, you would only receive links coming from websites in matching the URL pattern listed under `keepUrlPatterns`.
+
+```
+import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader, WriteGDF}
+import org.warcbase.spark.rdd.RecordRDD._
+
+val links = RecordLoader.loadWarc("/collections/webarchives/CanadianPoliticalParties/arc/", sc)
+  .keepValidPages()
+  .keepUrlPatterns(Set("http://liberal.ca/Canada/.*".r))
+  .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
+  .flatMap(r => r._2.map(f => (r._1, ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))
+  .filter(r => r._2 != "" && r._3 != "")
+  .countItems()
+  .filter(r => r._2 > 5)
+
+WriteGDF(links, "all-links-EnchantedForest.gdf")
+```
+
 # Exporting to Gephi Directly
 
 You may want to export your data directly to the [Gephi software suite](http://gephi.github.io/), an open-soure network analysis project. The following code writes to a GDF format:
