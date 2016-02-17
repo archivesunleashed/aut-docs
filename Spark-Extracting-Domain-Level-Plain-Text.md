@@ -3,7 +3,6 @@
 This script extracts the crawl date, domain, URL, and plain text from HTML files in the sample ARC data (and saves the output to out/). If you are using WARC files, change `loadArc` to `loadWarc`.
 
 ```
-import org.warcbase.spark.matchbox.RecordLoader
 import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
 
@@ -20,9 +19,7 @@ Note that this will create a new directory to store the output, which cannot alr
 If you want to run it in your Spark Notebook, the following script will show in-notebook plain text:
 
 ```
-val r = 
-RecordLoader.loadWarc("/path/to/warcs",
-sc) 
+val r = RecordLoader.loadWarc("/path/to/warcs", sc) 
 .keepValidPages()
 .map(r => { 
 val t = RemoveHTML(r.getContentString) 
