@@ -1,4 +1,4 @@
-### All Plain text
+### All plain text
 
 This script extracts the crawl date, domain, URL, and plain text from HTML files in the sample ARC data (and saves the output to out/). If you are using WARC files, change `loadArc` to `loadWarc`.
 
