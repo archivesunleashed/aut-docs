@@ -7,7 +7,8 @@ Site link structures can be very useful, allowing you to learn such things as:
 
 # Grouping by Crawl Date
 
-The following Spark script generates the aggregated site-level link structure, grouped by crawl date (YYYYMMDD):
+The following Spark script generates the aggregated site-level link structure, grouped by crawl date (YYYYMMDD). It
+makes use of the `ExtractLinks` and `ExtractToLevelDomain` functions.
 
 ```
 import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader}
@@ -23,14 +24,11 @@ RecordLoader.loadArc("/path/to/arc", sc)
   .saveAsTextFile("cpp.sitelinks")
 ```
 
-The ensuing format will look like this. 
-
-The format of this visualization is:
-
-Column one: Crawldate, yyyyMMdd
-Column two: Source domain (i.e. liberal.ca)
-Column three: Target domain of link (i.e. ndp.ca)
-Column four: number of links.
+The format of this output is:
+- Field one: Crawldate, yyyyMMdd
+- Field two: Source domain (i.e. liberal.ca)
+- Field three: Target domain of link (i.e. ndp.ca)
+- Field four: number of links.
 
 ```
 ((20080612,liberal.ca,liberal.ca),1832983)
@@ -39,7 +37,16 @@ Column four: number of links.
 ((20060325,policyalternatives.ca,policyalternatives.ca),1735154)
 ```
 
-In the above example, you are seeing INTERNAL links - those within domains.
+In the above example, you are seeing links within the same domain.
+
+Note also that `ExtractLinks` takes an optional third parameter of a base URL. If you set this – typically to the source URL –
+ExtractLinks will resolve a relative path to its absolute location. For example, if
+`val url = "http://mysite.com/some/dirs/here/index.html"` and `val html = "... <a href='../contact/'>
+Contact</a> ..."`, and we call `ExtractLinks(url, html, url)`, the list it returns will include the 
+item `(http://mysite.com/a/b/c/index.html, http://mysite.com/a/b/contact/, Contact)`. It may
+be useful to have this absolute URL if you intend to call `ExtractTopLevelDomain` on the link
+and wish it to be counted.
+
 
 # Aggregating by Month
 
