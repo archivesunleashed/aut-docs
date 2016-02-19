@@ -41,8 +41,7 @@ In the above example, you are seeing links within the same domain.
 
 Note also that `ExtractLinks` takes an optional third parameter of a base URL. If you set this – typically to the source URL –
 ExtractLinks will resolve a relative path to its absolute location. For example, if
-`val url = "http://mysite.com/some/dirs/here/index.html"` and `val html = "... <a href='../contact/'>
-Contact</a> ..."`, and we call `ExtractLinks(url, html, url)`, the list it returns will include the 
+`val url = "http://mysite.com/some/dirs/here/index.html"` and `val html = "... <a href='../contact/'>Contact</a> ..."`, and we call `ExtractLinks(url, html, url)`, the list it returns will include the 
 item `(http://mysite.com/a/b/c/index.html, http://mysite.com/a/b/contact/, Contact)`. It may
 be useful to have this absolute URL if you intend to call `ExtractTopLevelDomain` on the link
 and wish it to be counted.
