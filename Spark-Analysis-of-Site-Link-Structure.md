@@ -5,6 +5,47 @@ Site link structures can be very useful, allowing you to learn such things as:
 - what paths could be taken through the network to connect pages;  
 - what communities existed within the link structure?  
 
+# Extraction of Simple Site Link Structure
+
+If your web archive does not have a temporal component, the following Spark script will generate the site-level link structure. In this case, it is loading all WARCs stored in an example collection of GeoCities files.
+
+```
+import org.warcbase.spark.matchbox._
+import org.warcbase.spark.rdd.RecordRDD._
+import StringUtils._
+
+val links = RecordLoader.loadWarc("/collections/webarchives/geocities/warcs/", sc)
+  .keepValidPages()
+  .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
+  .map(r => (ExtractTopLevelDomain(r._1).removePrefixWWW(), ExtractTopLevelDomain(r._2).removePrefixWWW()))
+  .filter(r => r._1 != "" && r._2 != "")
+  .countItems()
+  .filter(r => r._2 > 5)
+
+links.saveAsTextFile("geocities-links-all/")
+```
+
+# Extraction of a Site Link Structure, organized by URL pattern
+
+In this following example, we run the same script but only extract links coming from URLs matching the pattern `http://geocities.com/EnchantedForest/.*`. We do so by using the `keepUrlPatterns` command.
+
+```
+import org.warcbase.spark.matchbox._
+import org.warcbase.spark.rdd.RecordRDD._
+import StringUtils._
+
+val links = RecordLoader.loadWarc("/collections/webarchives/geocities/warcs/", sc)
+  .keepValidPages()
+  .keepUrlPatterns(Set("http://geocities.com/EnchantedForest/.*".r))
+  .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
+  .map(r => (ExtractTopLevelDomain(r._1).removePrefixWWW(), ExtractTopLevelDomain(r._2).removePrefixWWW()))
+  .filter(r => r._1 != "" && r._2 != "")
+  .countItems()
+  .filter(r => r._2 > 5)
+
+links.saveAsTextFile("geocities-links-all/")
+```
+
 # Grouping by Crawl Date
 
 The following Spark script generates the aggregated site-level link structure, grouped by crawl date (YYYYMMDD). It
