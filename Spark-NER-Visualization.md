@@ -7,7 +7,7 @@ The visualizer can currently produce the following:
 * a bubble chart, representing all entity types at once.![Bubble view](http://jrwiebe.github.io/WAHR/nervis/screenshots/bubbleview.png)
 
 ## Generating NER Data
-The _matchbox_ contains a function in [NERCombinedJson](https://github.com/lintool/warcbase/blob/master/src/main/scala/org/warcbase/spark/matchbox/NERCombinedJson.scala) that will extract NER entities from [plain text records](https://github.com/lintool/warcbase/wiki/Spark-Extracting-Domain-Level-Plain-Text), summarize them by crawl date, and save the results as a single JSON file. The following script calls the function. Modify the file names in (1) and (2) as appropriate.
+The _matchbox_ contains a function in [NERCombinedJson](https://github.com/lintool/warcbase/blob/master/src/main/scala/org/warcbase/spark/matchbox/NERCombinedJson.scala) that will extract NER entities from [plain text records](./Spark-Extracting-Domain-Level-Plain-Text/), summarize them by crawl date, and save the results as a single JSON file. The following script calls the function. Modify the file names in (1) and (2) as appropriate.
 ```
 import org.warcbase.spark.matchbox.NERCombinedJson
 
