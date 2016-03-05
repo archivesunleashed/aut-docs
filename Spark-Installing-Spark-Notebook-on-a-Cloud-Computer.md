@@ -41,6 +41,9 @@ It is a bit bare boned as it assumes some knowledge of a command line environmen
 - Try this following script. In order to paste code, type `paste` and then Ctrl+D when you finish it up.
 
 ```
+import org.warcbase.spark.matchbox._ 
+import org.warcbase.spark.rdd.RecordRDD._ 
+
 val r = RecordLoader.loadArc("/home/ubuntu/warcbase/src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()
   .map(r => ExtractTopLevelDomain(r.getUrl))
