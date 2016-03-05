@@ -11,7 +11,7 @@ pages:
   - Installation and Setup:
     - 'Getting Started with Warcbase!': 'Getting-Started.md'
     - 'Installing and Running Spark under OS X': 'Installing-and-Running-Spark-under-OS-X.md'
-    - 'Installing Spark Notebook on a Cloud Computer': 'Spark-Installing-Spark-Notebook-on-a-Cloud-Computer.md'
+    - 'Installing Spark Notebook on a Linux or Cloud Computer': 'Spark-Installing-Spark-Notebook-on-a-Cloud-Computer.md'
   - Web Archive Analysis:
     - 'Analyzing Web Archives with Spark': 'Analyzing-Web-Archives-with-Spark.md'
     - 'Several Basic Spark Commands': 'Spark-Several-Basic-Commands.md'

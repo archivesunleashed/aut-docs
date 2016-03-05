@@ -1,13 +1,14 @@
-You might want a bit more power than you can get on your local computer. If so, read on to learn how to deploy warcbase on a cloud machine. If you want to begin on a local computer, [skip this section and come back to it](http://lintool.github.io/warcbase-docs/Analyzing-Web-Archives-with-Spark/).
+You might want a bit more power than you can get on your local computer. If so, read on to learn how to deploy warcbase on a Linux or cloud machine. For a linux machine, you may want to skip to Step Four below. 
 
 This is a walkthrough for installing Warcbase and Spark on a Ubuntu_14.04_Trusty x86_64 (QCOW2) image provided for Compute Canada. Presumably Amazon EC2 would provide a similar sort of experience. For more information on Warcbase, [check out the repository here](https://github.com/lintool/warcbase).
 
 It is a bit bare boned as it assumes some knowledge of a command line environment.
 
-### Step One: SSH to the server 
+### Step One: SSH to the server (if applicable)
 - For me on a Compute Canada instance, it's `ssh -i macpro.key ubuntu@IPADDRESS`.
+- If you're running locally on linux, skip to the next step.
 
-### Step Two: Install dependencies
+### Step Two: Install dependencies (if applicable)
 - `sudo apt-get update`
 - `sudo apt-get install htop`
 - `sudo apt-get install git`
@@ -16,7 +17,7 @@ It is a bit bare boned as it assumes some knowledge of a command line environmen
 - `export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64`
 - `sudo apt-get install openjdk-7-jdk`
 
-### Step Three: Set up the server properly
+### Step Three: Set up the server properly (if on a cloud machine)
 - type `echo $HOSTNAME`
 - try `ping $HOSTNAME`: if it responds with something like `ping: unknown host milligan-wahr-05` you need to add an entry to your `/etc/hosts` file
 - `sudo vim /etc/hosts`
@@ -38,7 +39,7 @@ It is a bit bare boned as it assumes some knowledge of a command line environmen
 ### Step Six: Test that Warcbase and Spark are working
 - verify that the shell works by navigating to your spark-shell directory and running: `./bin/spark-shell`
 - if you don't get a bunch of errors, try: `./bin/spark-shell --jars /home/ubuntu/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar` to initalize warcbase
-- Try this following script. In order to paste code, type `paste` and then Ctrl+D when you finish it up.
+- Try this following script. In order to paste code, type `paste` and then Ctrl+D when you finish it up. Depending on your directory, you might need to change `/home/ubuntu/warcbase/src/test/resources/arc/example.arc.gz` to the path where warcbase is.
 
 ```
 import org.warcbase.spark.matchbox._ 
