@@ -29,7 +29,7 @@ import org.warcbase.spark.matchbox.RecordLoader
 
 val counts = RecordLoader.loadArc("/shared/collections/CanadianPoliticalParties/arc/")
   .keepValidPages
-  .map(r => r.getDate)
+  .map(r => r.getCrawldate)
   .countItems()
   .saveAsTextFile("path/to/output")
 ````
