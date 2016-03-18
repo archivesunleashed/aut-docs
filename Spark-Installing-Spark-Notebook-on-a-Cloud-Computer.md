@@ -34,7 +34,7 @@ It is a bit bare boned as it assumes some knowledge of a command line environmen
 - bring yourself back to your home directory: `cd --`
 - download warcbase: `git clone https://github.com/lintool/warcbase.git`
 - change to the warcbase directory: `cd warcbase`
-- build warcbase: `mvn clean package appassembler:assemble -DskipTests`
+- build warcbase: `sudo mvn clean package appassembler:assemble -DskipTests`
 
 ### Step Six: Test that Warcbase and Spark are working
 - verify that the shell works by navigating to your spark-shell directory and running: `./bin/spark-shell`
