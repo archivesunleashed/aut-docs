@@ -45,7 +45,7 @@ It is a bit bare boned as it assumes some knowledge of a command line environmen
 import org.warcbase.spark.matchbox._ 
 import org.warcbase.spark.rdd.RecordRDD._ 
 
-val r = RecordLoader.loadArc("/home/ubuntu/warcbase/src/test/resources/arc/example.arc.gz", sc)
+val r = RecordLoader.loadArchives("/home/ubuntu/warcbase/src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()
   .map(r => ExtractTopLevelDomain(r.getUrl))
   .countItems()

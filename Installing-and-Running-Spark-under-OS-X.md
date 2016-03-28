@@ -27,7 +27,7 @@ For example, the following script counts web pages by time:
 import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.RecordLoader
 
-val counts = RecordLoader.loadArc("/shared/collections/CanadianPoliticalParties/arc/")
+val counts = RecordLoader.loadArchives("/shared/collections/CanadianPoliticalParties/arc/")
   .keepValidPages
   .map(r => r.getCrawldate)
   .countItems()

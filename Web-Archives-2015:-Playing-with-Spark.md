@@ -19,7 +19,7 @@ Command two:
 
 ```
 val r = 
-RecordLoader.loadArc("/Users/ianmilligan1/Dropbox/warcs-workshop/227-20051004191331-00000-crawling015.archive.org.arc.gz", 
+RecordLoader.loadArchives("/Users/ianmilligan1/Dropbox/warcs-workshop/227-20051004191331-00000-crawling015.archive.org.arc.gz", 
 sc) 
 .keepValidPages() 
 .map(r => ExtractTopLevelDomain(r.getUrl)) 
@@ -31,7 +31,7 @@ Command three:
 
 ```
 val r = 
-RecordLoader.loadArc("/Users/ianmilligan1/Dropbox/warcs-workshop/227-20051007202637-00000-crawling018.arc.gz",
+RecordLoader.loadArchives("/Users/ianmilligan1/Dropbox/warcs-workshop/227-20051007202637-00000-crawling018.arc.gz",
 sc) 
 .keepValidPages()
 .map(r => { 
@@ -48,7 +48,7 @@ Command four:
 import org.warcbase.spark.matchbox.{ExtractLinks, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
-RecordLoader.loadArc("/path/to/arc", sc)
+RecordLoader.loadArchives("/path/to/arc", sc)
   .keepValidPages()
   .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getBodyContent)))
   .flatMap(r => r._2.map(f => (r._1, f._1.replaceAll("^.*www\\.", ""), f._2.replaceAll("^.*www\\.", ""))))

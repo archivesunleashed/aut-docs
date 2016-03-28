@@ -14,7 +14,7 @@ import org.warcbase.spark.matchbox._
 import org.warcbase.spark.rdd.RecordRDD._
 import StringUtils._
 
-val links = RecordLoader.loadWarc("/collections/webarchives/geocities/warcs/", sc)
+val links = RecordLoader.loadArchives("/collections/webarchives/geocities/warcs/", sc)
   .keepValidPages()
   .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
   .map(r => (ExtractTopLevelDomain(r._1).removePrefixWWW(), ExtractTopLevelDomain(r._2).removePrefixWWW()))
@@ -34,7 +34,7 @@ import org.warcbase.spark.matchbox._
 import org.warcbase.spark.rdd.RecordRDD._
 import StringUtils._
 
-val links = RecordLoader.loadWarc("/collections/webarchives/geocities/warcs/", sc)
+val links = RecordLoader.loadArchives("/collections/webarchives/geocities/warcs/", sc)
   .keepValidPages()
   .keepUrlPatterns(Set("http://geocities.com/EnchantedForest/.*".r))
   .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
@@ -55,7 +55,7 @@ makes use of the `ExtractLinks` and `ExtractToLevelDomain` functions.
 import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
-RecordLoader.loadArc("/path/to/arc", sc)
+RecordLoader.loadArchives("/path/to/arc", sc)
   .keepValidPages()
   .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1, ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))
@@ -98,7 +98,7 @@ The following script will do so:
 import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
-RecordLoader.loadArc("/mnt/vol1/data_sets/cpp_arcs/", sc)
+RecordLoader.loadArchives("/mnt/vol1/data_sets/cpp_arcs/", sc)
   .keepValidPages()
   .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1.substring(0,6), ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))
@@ -147,7 +147,7 @@ import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordL
 import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.TupleFormatter._
 
-RecordLoader.loadArc("/path/to/arc", sc)
+RecordLoader.loadArchives("/path/to/arc", sc)
   .keepValidPages()
   .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1, ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))
@@ -174,7 +174,7 @@ You may also wish to only extract links from a subset of pages, in which case yo
 import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader, WriteGDF}
 import org.warcbase.spark.rdd.RecordRDD._
 
-val links = RecordLoader.loadWarc("/collections/webarchives/CanadianPoliticalParties/arc/", sc)
+val links = RecordLoader.loadArchives("/collections/webarchives/CanadianPoliticalParties/arc/", sc)
   .keepValidPages()
   .keepUrlPatterns(Set("http://liberal.ca/Canada/.*".r))
   .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
@@ -194,7 +194,7 @@ You may want to export your data directly to the [Gephi software suite](http://g
 import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader, WriteGDF}
 import org.warcbase.spark.rdd.RecordRDD._
 
-val links = RecordLoader.loadArc("/collections/webarchives/CanadianPoliticalParties/arc/", sc)
+val links = RecordLoader.loadArchives("/collections/webarchives/CanadianPoliticalParties/arc/", sc)
   .keepValidPages()
   .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1, ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))

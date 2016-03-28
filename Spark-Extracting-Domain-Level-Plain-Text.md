@@ -1,12 +1,12 @@
 ### All plain text
 
-This script extracts the crawl date, domain, URL, and plain text from HTML files in the sample ARC data (and saves the output to out/). If you are using WARC files, change `loadArc` to `loadWarc`.
+This script extracts the crawl date, domain, URL, and plain text from HTML files in the sample ARC data (and saves the output to out/). 
 
 ```
 import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
 
-RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
+RecordLoader.loadArchives("src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()
   .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
   .saveAsTextFile("out/")
@@ -19,7 +19,7 @@ Note that this will create a new directory to store the output, which cannot alr
 If you want to run it in your Spark Notebook, the following script will show in-notebook plain text:
 
 ```
-val r = RecordLoader.loadWarc("/path/to/warcs", sc) 
+val r = RecordLoader.loadArchives("/path/to/warcs", sc) 
 .keepValidPages()
 .map(r => { 
 val t = RemoveHTML(r.getContentString) 
@@ -37,7 +37,7 @@ The following Spark script generates plain text renderings for all the web pages
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
-RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
+RecordLoader.loadArchives("src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()
   .keepDomains(Set("greenparty.ca"))
   .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
@@ -52,7 +52,7 @@ The following Spark script generates plain text renderings for all the web pages
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
-RecordLoader.loadWarc("geocitities-example.warc.gz", sc)
+RecordLoader.loadArchives("geocitities-example.warc.gz", sc)
   .keepValidPages()
   .keepUrlPatterns(Set("http://geocities.com/EnchantedForest/.*".r))
   .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
@@ -67,7 +67,7 @@ The following Spark script generates plain text renderings for all the web pages
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader, ExtractBoilerpipeText}
 import org.warcbase.spark.rdd.RecordRDD._
 
-RecordLoader.loadArc("src/test/resources/arc/example.arc.gz", sc)
+RecordLoader.loadArchives("src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()
   .keepDomains(Set("greenparty.ca"))
   .map(r => (r.getCrawldate, r.getDomain, r.getUrl, ExtractBoilerpipeText(r.getContentString)))
@@ -88,7 +88,7 @@ import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
 import org.warcbase.spark.matchbox.ExtractDate.DateComponent._
 
-RecordLoader.loadArc("path/to/example.arc.gz", sc)
+RecordLoader.loadArchives("path/to/example.arc.gz", sc)
   .keepValidPages()
   .keepDate("20081004", YYYYMM)
   .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
@@ -103,7 +103,7 @@ import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
 import org.warcbase.spark.matchbox.ExtractDate.DateComponent._
 
-RecordLoader.loadWarc("path/to/example.warc.gz", sc)
+RecordLoader.loadArchives("path/to/example.warc.gz", sc)
   .keepValidPages()
   .keepDate("2015", YYYY)
   .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
@@ -118,7 +118,7 @@ The following Spark script keeps only French language pages from a certain top-l
 import org.warcbase.spark.matchbox.{RecordLoader, RemoveHTML}
 import org.warcbase.spark.rdd.RecordRDD._
 
-RecordLoader.loadWarc("/path/to/warc", sc)
+RecordLoader.loadArchives("/path/to/warc", sc)
 .keepValidPages()
 .keepDomains(Set("greenparty.ca"))
 .keepLanguages(Set("fr"))

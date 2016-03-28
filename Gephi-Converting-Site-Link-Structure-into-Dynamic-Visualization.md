@@ -14,7 +14,7 @@ You can write directly to a Gephi-readable format by using our `WriteGDF` functi
 import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader, WriteGDF}
 import org.warcbase.spark.rdd.RecordRDD._
 
-val links = RecordLoader.loadArc("/collections/webarchives/CanadianPoliticalParties/arc/", sc)
+val links = RecordLoader.loadArchives("/collections/webarchives/CanadianPoliticalParties/arc/", sc)
   .keepValidPages()
   .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1, ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))

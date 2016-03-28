@@ -11,14 +11,14 @@ import org.warcbase.spark.matchbox._
 import org.warcbase.spark.rdd.RecordRDD._ 
 
 val r = 
-RecordLoader.loadArc("/directory/to/arc/file.arc.gz", sc) 
+RecordLoader.loadArchives("/directory/to/arc/file.arc.gz", sc) 
 .keepValidPages() 
 .map(r => ExtractTopLevelDomain(r.getUrl)) 
 .countItems() 
 .take(10) 
 ```
 
-If you are using WARC files, change `loadArc` to `loadWarc`. If you want to see more than ten results, change the variable in the last line. 
+If you want to see more than ten results, change the variable in the last line. 
 
 Here is a sample output from a 5GB collection of Canadian political party ARCs:
 
@@ -30,7 +30,7 @@ If you just want a list of URLs, you can run this:
 import org.warcbase.spark.matchbox._ 
 import org.warcbase.spark.rdd.RecordRDD._ 
 
-val r = RecordLoader.loadArc("/directory/to/arc/file.arc.gz", sc) 
+val r = RecordLoader.loadArchives("/directory/to/arc/file.arc.gz", sc) 
 .keepValidPages()
 .map(r => r.getUrl)
 .take(10)
@@ -42,7 +42,7 @@ This will give you a list of the top ten URLs. If you want all the URLs, exporte
 import org.warcbase.spark.matchbox._
 import org.warcbase.spark.rdd.RecordRDD._
 
-val r = RecordLoader.loadArc("/directory/to/arc/file.arc.gz", sc) 
+val r = RecordLoader.loadArchives("/directory/to/arc/file.arc.gz", sc) 
 .keepValidPages()
 .map(r => r.getUrl)
 .saveAsTextFile("/path/to/export/directory/")
