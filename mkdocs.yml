@@ -3,11 +3,10 @@ docs_dir: .
 dev_addr: 'localhost:8111'
 repo_url: https://github.com/lintool/warcbase-docs
 
-theme: bootstrap
+theme: cosmo
 pages:
-  - Introducion:
-    - 'Summary': 'index.md'
-    - 'About': 'about.md'
+- Home: 'index.md'
+- User Guide:
   - Installation and Setup:
     - 'Getting Started with Warcbase!': 'Getting-Started.md'
     - 'Installing and Running Spark under OS X': 'Installing-and-Running-Spark-under-OS-X.md'
@@ -33,3 +32,5 @@ pages:
     - 'Ingesting Content into HBase': 'Ingesting-Content-into-HBase.md'
     - 'Warcbase Wayback Integration': 'Warcbase-Wayback-Integration.md'
     - 'Warcbase Java Tools': 'Warcbase-Java-Tools.md'
+- About: 'about.md'
+
