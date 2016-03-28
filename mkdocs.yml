@@ -3,10 +3,9 @@ docs_dir: .
 dev_addr: 'localhost:8111'
 repo_url: https://github.com/lintool/warcbase-docs
 
-theme: readthedocs
+theme: bootstrap
 pages:
-  - Introduction:
-    - 'Summary': 'index.md'
+  - Introducion:
     - 'About': 'about.md'
   - Installation and Setup:
     - 'Getting Started with Warcbase!': 'Getting-Started.md'
