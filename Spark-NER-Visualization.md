@@ -1,3 +1,5 @@
+# NER Visualization
+
 The Warcbase Spark _matchbox_ functions in [ExtractEntities](https://github.com/lintool/warcbase/wiki/Spark-Named-Entity-Recognition) list the named entities contained in each page in an archive, but we are often interested in getting a sense of what is contained in a collection as a whole. Visualization can help. We have provided a Javascript visualizer using [D3.js](http://d3js.org/) that produces views of NER data. You can try the visualizer [here](http://jrwiebe.github.io/WAHR/nervis/).
 
 The visualizer can currently produce the following:

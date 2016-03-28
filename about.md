@@ -1,3 +1,4 @@
+# About Warcbase
 Warcbase is an open-source platform for managing web archives built on Hadoop and HBase. The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via Spark.
 
 There are two main ways of using Warcbase:

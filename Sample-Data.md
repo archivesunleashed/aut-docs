@@ -1,3 +1,5 @@
+# Sample Data
+
 You might tire of just using the sample data provided with warcbase. We've accordingly provided two real-world files, one ARC and one WARC, in the [warcbase-resources](https://github.com/lintool/warcbase-resources) repository.
 
 [This directory](https://github.com/lintool/warcbase-resources/tree/master/Sample-Data) contains sample data that you might want to use with warcbase. The ARC and WARC file are drawn from the [Canadian Political Parties & Political Interest Groups](https://archive-it.org/collections/227). Archive-It Collection, collected by the University of Toronto. We are grateful that they've provided this material to us.

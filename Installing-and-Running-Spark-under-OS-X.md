@@ -1,3 +1,5 @@
+# Installing and Running Spark under OS X
+
 ### Spark integration
 
 Warcbase comes with Spark integration for manipulating web archive data. 
@@ -50,8 +52,8 @@ Then navigate to `http://localhost:9000/` in your browser.
 
 To make a new notebook, click the '+' button on the top right-hand corner.
 
-In that notebook, enter `:cp /path/to/warcbase/jar` as the first command to load Warcbase. Now you have an interactive Spark shell running Warcbase! A good starting script [can be found here](http://lintool.github.io/warcbase-docs/Spark-Collection-Analytics/).
+In that notebook, enter `:cp /path/to/warcbase/jar` as the first command to load Warcbase. Now you have an interactive Spark shell running Warcbase! A good starting script [can be found here](./Spark-Collection-Analytics/).
 
 ### Ready to go!
 
-Now you can run some analytics. Feel free to skip ahead to the [Analyzing Web Archives with Spark Landing Page](http://lintool.github.io/warcbase-docs/Analyzing-Web-Archives-with-Spark/). We recommend beginning with running [analytics on your collections](http://lintool.github.io/warcbase-docs/Spark-Collection-Analytics/).
+Now you can run some analytics. Feel free to skip ahead to the [Analyzing Web Archives with Spark Landing Page](./Analyzing-Web-Archives-with-Spark/). We recommend beginning with running [analytics on your collections](./Spark-Collection-Analytics/).

@@ -1,3 +1,5 @@
+# Extracting Domain Level Plain Text
+
 ### All plain text
 
 This script extracts the crawl date, domain, URL, and plain text from HTML files in the sample ARC data (and saves the output to out/). 

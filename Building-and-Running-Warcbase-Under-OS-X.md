@@ -1,3 +1,5 @@
+# Building and Running Warcbase Under OS X
+
 Warcbase is a web archive _platform_, not a single program. Its capabilities comprise two main categories:
 
 1. Analysis of web archives using the [Pig](http://pig.apache.org/) programming language, and assorted helper scripts and utilities

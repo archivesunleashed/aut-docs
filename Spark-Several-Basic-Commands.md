@@ -1,3 +1,5 @@
+# Several Basic Spark Commands
+
 We have several basic commands that you will see again and again in these scripts.
 
 # Filtering

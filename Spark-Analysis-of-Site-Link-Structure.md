@@ -1,3 +1,5 @@
+# Analysis of Site Link Structure
+
 Site link structures can be very useful, allowing you to learn such things as:
 
 - what websites were the most linked to;  
@@ -5,7 +7,7 @@ Site link structures can be very useful, allowing you to learn such things as:
 - what paths could be taken through the network to connect pages;  
 - what communities existed within the link structure?  
 
-# Extraction of Simple Site Link Structure
+## Extraction of Simple Site Link Structure
 
 If your web archive does not have a temporal component, the following Spark script will generate the site-level link structure. In this case, it is loading all WARCs stored in an example collection of GeoCities files.
 
@@ -25,7 +27,7 @@ val links = RecordLoader.loadArchives("/collections/webarchives/geocities/warcs/
 links.saveAsTextFile("geocities-links-all/")
 ```
 
-# Extraction of a Site Link Structure, organized by URL pattern
+## Extraction of a Site Link Structure, organized by URL pattern
 
 In this following example, we run the same script but only extract links coming from URLs matching the pattern `http://geocities.com/EnchantedForest/.*`. We do so by using the `keepUrlPatterns` command.
 
@@ -46,7 +48,7 @@ val links = RecordLoader.loadArchives("/collections/webarchives/geocities/warcs/
 links.saveAsTextFile("geocities-links-all/")
 ```
 
-# Grouping by Crawl Date
+## Grouping by Crawl Date
 
 The following Spark script generates the aggregated site-level link structure, grouped by crawl date (YYYYMMDD). It
 makes use of the `ExtractLinks` and `ExtractToLevelDomain` functions.
@@ -88,7 +90,7 @@ be useful to have this absolute URL if you intend to call `ExtractTopLevelDomain
 and wish it to be counted.
 
 
-# Aggregating by Month
+## Aggregating by Month
 
 In your analysis, you may want to group the link structures by month rather than by day (if a crawl is carried out over several days, this may help smooth out inconsistencies). 
 
@@ -133,7 +135,7 @@ It generates results like:
 ((200701,davidsuzuki.org,davidsuzuki.org),40867)
 ```
 
-# Exporting as TSV
+## Exporting as TSV
 Archive records are represented in Spark as [tuples](https://en.wikipedia.org/wiki/Tuple), 
 and this is the standard format of results produced by most of the scripts presented here
 (e.g., see above). It may be useful, however, to have this data in TSV (tab-separated value)
@@ -167,8 +169,8 @@ Its output looks like:
 20151108        canadians.org   canadians.org   11403
 ```
 
-# Filtering by URL
-You may also wish to only extract links from a subset of pages, in which case you can also add in the [filters found here](http://lintool.github.io/warcbase-docs/Spark-Several-Basic-Commands/). In this case, you would only receive links coming from websites in matching the URL pattern listed under `keepUrlPatterns`.
+## Filtering by URL
+You may also wish to only extract links from a subset of pages, in which case you can also add in the [filters found here](./Spark-Several-Basic-Commands/). In this case, you would only receive links coming from websites in matching the URL pattern listed under `keepUrlPatterns`.
 
 ```
 import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader, WriteGDF}
@@ -186,7 +188,7 @@ val links = RecordLoader.loadArchives("/collections/webarchives/CanadianPolitica
 WriteGDF(links, "all-links-EnchantedForest.gdf")
 ```
 
-# Exporting to Gephi Directly
+## Exporting to Gephi Directly
 
 You may want to export your data directly to the [Gephi software suite](http://gephi.github.io/), an open-soure network analysis project. The following code writes to a GDF format:
 
@@ -207,4 +209,4 @@ WriteGDF(links, "all-links.gdf")
 
 This file can then be directly opened by Gephi.
 
-We have a separate lesson on this: [Gephi: Converting the Site Link Structure into a Dynamic Visualization](http://lintool.github.io/warcbase-docs/Gephi-Converting-Site-Link-Structure-into-Dynamic-Visualization/).
+We have a separate lesson on this: [Gephi: Converting the Site Link Structure into a Dynamic Visualization](./Gephi-Converting-Site-Link-Structure-into-Dynamic-Visualization/).

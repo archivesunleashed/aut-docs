@@ -1,3 +1,5 @@
+# Building Lucene Indexes Using Hadoop
+
 Warcbase integrates with the UK web archive's [WARC indexer](https://github.com/ukwa/webarchive-discovery) and Hadoop-related tools to build Lucene indexes using Hadoop. The command-line invocation is as follows:
 
 ```

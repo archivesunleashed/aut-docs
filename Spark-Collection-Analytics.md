@@ -1,3 +1,4 @@
+# Collection Analytics
 You may want to learn what top-level domains you have in a given ARC, WARC, or directory of them. In the Spark Notebook, the following command will generate an interactive visualization. Remember that your first command in any Spark Notebook needs to point to warcbase like so:
 
 ```

@@ -1,3 +1,5 @@
+# Wayback Integration
+
 Warcbase comes with a browser exposed as a REST API that conforms to Wayback's schema of `collection/YYYYMMDDHHMMSS/targetURL`. Here's how you start the browser:
 
 ```
