@@ -6,6 +6,7 @@ repo_url: https://github.com/lintool/warcbase-docs
 theme: bootstrap
 pages:
   - Introducion:
+    - 'Summary': 'index.md'
     - 'About': 'about.md'
   - Installation and Setup:
     - 'Getting Started with Warcbase!': 'Getting-Started.md'
