@@ -1,3 +1,5 @@
+# Network Analysis in Spark using GraphX
+
 We use the Apache Spark [GraphX API](http://spark.apache.org/graphx/) to calculate graph information within warcbase. This can complement analysis done in Gephi.
 
 Here is one script that calculates dynamic PageRank on a WARC file:
