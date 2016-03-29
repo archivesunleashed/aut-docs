@@ -19,7 +19,7 @@ import StringUtils._
 val links = RecordLoader.loadArchives("/collections/webarchives/geocities/warcs/", sc)
   .keepValidPages()
   .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
-  .map(r => (ExtractTopLevelDomain(r._1).removePrefixWWW(), ExtractTopLevelDomain(r._2).removePrefixWWW()))
+  .map(r => (ExtractDomain(r._1).removePrefixWWW(), ExtractDomain(r._2).removePrefixWWW()))
   .filter(r => r._1 != "" && r._2 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -40,7 +40,7 @@ val links = RecordLoader.loadArchives("/collections/webarchives/geocities/warcs/
   .keepValidPages()
   .keepUrlPatterns(Set("http://geocities.com/EnchantedForest/.*".r))
   .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
-  .map(r => (ExtractTopLevelDomain(r._1).removePrefixWWW(), ExtractTopLevelDomain(r._2).removePrefixWWW()))
+  .map(r => (ExtractDomain(r._1).removePrefixWWW(), ExtractDomain(r._2).removePrefixWWW()))
   .filter(r => r._1 != "" && r._2 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -54,13 +54,13 @@ The following Spark script generates the aggregated site-level link structure, g
 makes use of the `ExtractLinks` and `ExtractToLevelDomain` functions.
 
 ```
-import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader}
+import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
 RecordLoader.loadArchives("/path/to/arc", sc)
   .keepValidPages()
   .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))
+  .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -86,7 +86,7 @@ Note also that `ExtractLinks` takes an optional third parameter of a base URL. I
 ExtractLinks will resolve a relative path to its absolute location. For example, if
 `val url = "http://mysite.com/some/dirs/here/index.html"` and `val html = "... <a href='../contact/'>Contact</a> ..."`, and we call `ExtractLinks(url, html, url)`, the list it returns will include the 
 item `(http://mysite.com/a/b/c/index.html, http://mysite.com/a/b/contact/, Contact)`. It may
-be useful to have this absolute URL if you intend to call `ExtractTopLevelDomain` on the link
+be useful to have this absolute URL if you intend to call `ExtractDomain` on the link
 and wish it to be counted.
 
 
@@ -97,13 +97,13 @@ In your analysis, you may want to group the link structures by month rather than
 The following script will do so:
 
 ```
-import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader}
+import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
 RecordLoader.loadArchives("/mnt/vol1/data_sets/cpp_arcs/", sc)
   .keepValidPages()
   .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1.substring(0,6), ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))
+  .flatMap(r => r._2.map(f => (r._1.substring(0,6), ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != null && r._3 != null)
   .countItems()
   .filter(r => r._2 > 5)
@@ -145,14 +145,14 @@ nested tuples. (This is the same script as at the top of the page, with the addi
 third and the second-last lines.)
 
 ```
-import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader}
+import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.TupleFormatter._
 
 RecordLoader.loadArchives("/path/to/arc", sc)
   .keepValidPages()
   .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))
+  .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -173,14 +173,14 @@ Its output looks like:
 You may also wish to only extract links from a subset of pages, in which case you can also add in the [filters found here](./Spark-Several-Basic-Commands/). In this case, you would only receive links coming from websites in matching the URL pattern listed under `keepUrlPatterns`.
 
 ```
-import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader, WriteGDF}
+import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader, WriteGDF}
 import org.warcbase.spark.rdd.RecordRDD._
 
 val links = RecordLoader.loadArchives("/collections/webarchives/CanadianPoliticalParties/arc/", sc)
   .keepValidPages()
   .keepUrlPatterns(Set("http://liberal.ca/Canada/.*".r))
   .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))
+  .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -193,13 +193,13 @@ WriteGDF(links, "all-links-EnchantedForest.gdf")
 You may want to export your data directly to the [Gephi software suite](http://gephi.github.io/), an open-soure network analysis project. The following code writes to a GDF format:
 
 ```
-import org.warcbase.spark.matchbox.{ExtractTopLevelDomain, ExtractLinks, RecordLoader, WriteGDF}
+import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader, WriteGDF}
 import org.warcbase.spark.rdd.RecordRDD._
 
 val links = RecordLoader.loadArchives("/collections/webarchives/CanadianPoliticalParties/arc/", sc)
   .keepValidPages()
   .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractTopLevelDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractTopLevelDomain(f._2).replaceAll("^\\s*www\\.", ""))))
+  .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)

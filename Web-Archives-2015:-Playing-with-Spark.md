@@ -22,7 +22,7 @@ val r =
 RecordLoader.loadArchives("/Users/ianmilligan1/Dropbox/warcs-workshop/227-20051004191331-00000-crawling015.archive.org.arc.gz", 
 sc) 
 .keepValidPages() 
-.map(r => ExtractTopLevelDomain(r.getUrl)) 
+.map(r => ExtractDomain(r.getUrl)) 
 .countItems() 
 .take(10) 
 ```
