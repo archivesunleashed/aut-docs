@@ -32,5 +32,5 @@ import org.warcbase.spark.matchbox.ExtractEntities
 
 sc.addFile("/path/to/classifier")
 
-ExtractEntities.extractFromScrapeText("english.all.3class.distsim.crf.ser.gz", "/path/to/extracted/text", "output/")
+ExtractEntities.extractFromScrapeText("english.all.3class.distsim.crf.ser.gz", "/path/to/extracted/text", "output/", sc)
 ```
