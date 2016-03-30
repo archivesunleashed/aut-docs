@@ -23,3 +23,15 @@ ner.classify("english.all.3class.distsim.crf.ser.gz", "hdfs:///path/to/plaintext
 
 ## Setting Up the Visualizer
 To use the visualizer with your own data you must place the files from `warcbase/vis/ner` into a folder on a web server. If you wish to serve files locally the Python SimpleHTTPServer is [easy to use](http://www.pythonforbeginners.com/modules-in-python/how-to-use-simplehttpserver/). Because of cross-domain restrictions your web browser will only allow the visualizer to load JSON files from the same server, so place the data file somewhere accessible (local) to the web server.
+
+For example, navigate to `warcbase/vis/ner` and place your `results.json` file into that directory. 
+
+Then run:
+
+```
+python -m SimpleHTTPServer 4321
+```
+
+Navigate to [localhost:4321](http://localhost:4321). You then need to pass the URL to bring up your results. For example the following URL will display the visualization:
+
+<http://localhost:4321/index.html?json=results.json>
