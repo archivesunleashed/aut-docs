@@ -2,6 +2,8 @@
 
 We use the Apache Spark [GraphX API](http://spark.apache.org/graphx/) to calculate graph information within warcbase. This can complement analysis done in Gephi.
 
+### Calculating Dynamic PageRank
+
 Here is a script that calculates dynamic PageRank on a WARC file:
 
 ```
@@ -15,6 +17,8 @@ val graph = ExtractGraph(recs, dynamic=true)
 graph.writeAsJson("/path/to/home/nodes-test", "/path/to/home/links-test")
 ```
 
+### ExtractGraph Explained
+
 `ExtractGraph` implements two versions of the PageRank version: 
 a dynamic version, which iterates over the graph until scores converge
 within a specified convergence value, and a static version which runs
@@ -27,6 +31,8 @@ Dynamic PageRank example:
 
 Static:
 ``val graph = ExtractGraph(recs, dynamic = false, numIter = 4)``
+
+### Understanding Results
 
 Results take the form as following:
 

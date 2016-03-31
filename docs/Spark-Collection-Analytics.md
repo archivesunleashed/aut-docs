@@ -1,4 +1,7 @@
 # Collection Analytics
+
+### Using Spark Notebook to See Top-Level Domains
+
 You may want to learn what top-level domains you have in a given ARC, WARC, or directory of them. In the Spark Notebook, the following command will generate an interactive visualization. Remember that your first command in any Spark Notebook needs to point to warcbase like so:
 
 ```
@@ -24,6 +27,8 @@ If you want to see more than ten results, change the variable in the last line.
 Here is a sample output from a 5GB collection of Canadian political party ARCs:
 
 ![Spark notebook showing pie chart output](https://raw.githubusercontent.com/ianmilligan1/WAHR/master/images/Spark-Notebook.png)
+
+### List of URLs in Spark Shell (or Notebook)
 
 If you just want a list of URLs, you can run this:
 

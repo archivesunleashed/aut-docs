@@ -15,8 +15,8 @@ pages:
     - 'Analyzing Web Archives with Spark': 'Analyzing-Web-Archives-with-Spark.md'
     - 'Several Basic Spark Commands': 'Spark-Several-Basic-Commands.md'
     - 'Collection Analytics': 'Spark-Collection-Analytics.md'
-    - 'Network Analysis with Spark': 'Spark-Network-Analysis.md'
     - 'Analysis of Site Link Structure': 'Spark-Analysis-of-Site-Link-Structure.md'
+    - 'Network Analysis with GraphX': 'Spark-Network-Analysis.md'
     - 'Extracting Domain Level Plain Text': 'Spark-Extracting-Domain-Level-Plain-Text.md'
     - 'Named Entity Recognition': 'Spark-Named-Entity-Recognition.md'
     - 'NER Visualization': 'Spark-NER-Visualization.md'
@@ -25,7 +25,7 @@ pages:
     - 'Warcbase Java Tools': 'Warcbase-Java-Tools.md'
 - Tweets:
     - 'Spark: Gathering Twitter JSON & Basic Analysis': 'Spark-Twitter-Analysis.md'
-- Other:
+- Temporal Browsing:
     - 'Shine: Installing Shine Frontend on OS X': 'Shine-Installing-Shine-Frontend-on-OS-X.md'
     - 'Building Lucene Indexes Using Hadoop': 'Building-Lucene-Indexes-Using-Hadoop.md'
     - 'Building and Running Warcbase Under OS X': 'Building-and-Running-Warcbase-Under-OS-X.md'
