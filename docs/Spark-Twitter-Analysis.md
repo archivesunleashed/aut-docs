@@ -34,8 +34,7 @@ import org.warcbase.spark.rdd.RecordRDD._
 val tweets =
 RecordLoader.loadTweets("path/to/elxn42-search.json",
 sc)
-val r = tweets.flatMap(tweet => {"""http://[^
-]+""".r.findAllIn(tweet.text).toList})
+val r = tweets.flatMap(tweet => {"""http://[^ ]+""".r.findAllIn(tweet.text).toList})
           .countItems()
           .take(10)
 ```
