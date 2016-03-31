@@ -3,7 +3,7 @@ docs_dir: docs
 dev_addr: 'localhost:8111'
 repo_url: https://github.com/lintool/warcbase-docs
 
-theme: simplex 
+theme: yeti 
 pages:
 - Home: 'index.md'
 - Setup:
