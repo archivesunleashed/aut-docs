@@ -54,7 +54,6 @@ sc)
 val lang =
   tweets.map(tweet => tweet.lang)
     .countItems()
-    .collect()
     .take(10)
 ```
 
@@ -73,5 +72,21 @@ val r = tweets.flatMap(tweet => {"""#[^
           .countItems()
           .take(10)
 ```
+
+If you want the top 10 tweeted images:
+```
+import org.warcbase.spark.matchbox._
+import org.warcbase.spark.matchbox.TweetUtils._
+import org.warcbase.spark.rdd.RecordRDD._
+import org.json4s._
+import org.json4s.jackson.JsonMethods._
+
+val tweets = RecordLoader.loadTweets("/mnt/vol1/data_sets/elxn42/ruest-white/elxn42-tweets-combined-deduplicated.json", sc)
+
+val counts = tweets.flatMap(tweet => tweet \\ "media_url_https" \ classOf[JString] )
+    .countItems()
+    .take(10)
+```
+    
 
 Stay tuned for more functionality, including in-browser Spark Notebook Twitter visualization.
