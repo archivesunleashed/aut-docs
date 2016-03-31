@@ -1,18 +1,17 @@
-site_name: Warcbase Documentation
+site_name: Warcbase
 docs_dir: docs
 dev_addr: 'localhost:8111'
 repo_url: https://github.com/lintool/warcbase-docs
 
-theme: mkdocs 
+theme: flatly 
 pages:
 - Home: 'index.md'
-- User Guide:
-  - Installation and Setup:
+- Setup:
     - 'Getting Started with Warcbase!': 'Getting-Started.md'
     - 'Installing and Running Spark under OS X': 'Installing-and-Running-Spark-under-OS-X.md'
     - 'Installing Spark Notebook on a Linux or Cloud Computer': 'Spark-Installing-Spark-Notebook-on-a-Cloud-Computer.md'
     - 'Sample Data': 'Sample-Data.md'
-  - Web Archive Analysis:
+- Web Archives:
     - 'Analyzing Web Archives with Spark': 'Analyzing-Web-Archives-with-Spark.md'
     - 'Several Basic Spark Commands': 'Spark-Several-Basic-Commands.md'
     - 'Collection Analytics': 'Spark-Collection-Analytics.md'
@@ -24,14 +23,11 @@ pages:
     - 'Gephi: Converting Site Link Structure into Dynamic Visualization': 'Gephi-Converting-Site-Link-Structure-into-Dynamic-Visualization.md'
     - 'Images: Extracting Image Links': 'Spark-Image-Analysis.md'
     - 'Warcbase Java Tools': 'Warcbase-Java-Tools.md'
-  - Twitter Analysis:
+- Tweets:
     - 'Spark: Gathering Twitter JSON & Basic Analysis': 'Spark-Twitter-Analysis.md'
-  - Shine Integration:
+- Other:
     - 'Shine: Installing Shine Frontend on OS X': 'Shine-Installing-Shine-Frontend-on-OS-X.md'
     - 'Building Lucene Indexes Using Hadoop': 'Building-Lucene-Indexes-Using-Hadoop.md'
-  - Temporal Browsing:
     - 'Building and Running Warcbase Under OS X': 'Building-and-Running-Warcbase-Under-OS-X.md'
     - 'Ingesting Content into HBase': 'Ingesting-Content-into-HBase.md'
     - 'Warcbase Wayback Integration': 'Warcbase-Wayback-Integration.md'
-- About: 'about.md'
-
