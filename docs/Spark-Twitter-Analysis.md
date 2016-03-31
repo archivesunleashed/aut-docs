@@ -67,8 +67,7 @@ import org.warcbase.spark.rdd.RecordRDD._
 val tweets = 
 RecordLoader.loadTweets("/mnt/vol1/data_sets/elxn42/ruest-white/elxn42-tweets-combined-deduplicated.json", 
 sc)
-val r = tweets.flatMap(tweet => {"""#[^ 
-]+""".r.findAllIn(tweet.text).toList})
+val r = tweets.flatMap(tweet => {"""#[^ ]+""".r.findAllIn(tweet.text).toList})
           .countItems()
           .take(10)
 ```
