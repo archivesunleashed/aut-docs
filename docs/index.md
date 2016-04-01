@@ -1,5 +1,7 @@
 # Warcbase
 
+![network of the Canadian Political Parties collection](https://raw.githubusercontent.com/web-archive-group/WAHR/master/images/cpppig-visualization-small.png)
+
 Warcbase is an open-source platform for managing web archives built on [Hadoop](https://hadoop.apache.org/) and [HBase](https://hbase.apache.org/). The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via [Spark](http://spark.apache.org/). For more information on the project and the team behind it, visit our [about page](./about/).
 
 Our documentation can be accessed by clicking the drop-down menu above labelled User Guide.
