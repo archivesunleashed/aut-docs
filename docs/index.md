@@ -53,4 +53,4 @@ Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/
 
 ## Acknowlegments
 
-This work is supported in part by the National Science Foundation and by the Mellon Foundation (via Columbia University). Any opinions, findings, and conclusions or recommendations expressed are those of the researchers and do not necessarily reflect the views of the sponsors.
+This work is supported in part by the National Science Foundation and by the Mellon Foundation (via Columbia University). Additional support has been forthcoming from the Social Sciences and Humanities Research Council of Canada and the Ontario Ministry of Research and Innovation's Early Researcher Award program.  Any opinions, findings, and conclusions or recommendations expressed are those of the researchers and do not necessarily reflect the views of the sponsors.
