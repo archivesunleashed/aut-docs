@@ -4,7 +4,7 @@
 
 Warcbase is an open-source platform for managing web archives built on [Hadoop](https://hadoop.apache.org/) and [HBase](https://hbase.apache.org/). The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via [Spark](http://spark.apache.org/). For more information on the project and the team behind it, visit our [about page](./about/).
 
-Our documentation can be accessed by clicking the drop-down menu above labelled User Guide.
+Our documentation can be accessed by using the drop-down menus above.
 
 ## Getting Started
 You can [download Warcbase here](https://github.com/lintool/warcbase). The easiest way would be to follow our [Getting Started tutorial](./Getting-Started/). For a conceptual and practical introduction to the command line, please see Ian Milligan and James Baker's "Introduction to the Bash Command Line" at the [*Programming Historian*](http://programminghistorian.org/lessons/intro-to-bash).
