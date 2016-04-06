@@ -1,6 +1,6 @@
 # Twitter Analysis
 
-Warcbase also supports parsing and analysis of large volumes of Twitter JSON. This allows you to work with social media and web archiving together on one platform. 
+Warcbase also supports parsing and analysis of large volumes of Twitter JSON. This allows you to work with social media and web archiving together on one platform. We are currently in active development. If you have any suggestions or want more features, feel free to pitch in on [our warcbase repository](https://github.com/lintool/warcbase) or comment on [this 'twarcbase' issue](https://github.com/lintool/warcbase/issues/217).
 
 ## Gathering Twitter JSON
 
