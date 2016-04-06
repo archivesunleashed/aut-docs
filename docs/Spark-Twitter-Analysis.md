@@ -41,6 +41,21 @@ val r = tweets.flatMap(tweet => {"""http://[^ ]+""".r.findAllIn(tweet.text).toLi
           .take(10)
 ```
 
+If you want to instead save all the URLs to a text file, the following script would work:
+
+```
+import org.warcbase.spark.matchbox._
+import org.warcbase.spark.matchbox.TweetUtils._
+import org.warcbase.spark.rdd.RecordRDD._
+
+val tweets =
+RecordLoader.loadTweets("path/to/elxn42-search.json",
+sc)
+val r = tweets.flatMap(tweet => {"""http://[^ ]+""".r.findAllIn(tweet.text).toList})
+          .countItems()
+          .saveAsTextFile("/path/to/output/tweet-urls.txt")
+```
+
 ### Top Ten Languages
 
 If you want the top 10 languages:
