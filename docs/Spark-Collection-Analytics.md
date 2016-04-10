@@ -10,7 +10,7 @@ You may want to learn what top-level domains you have in a given ARC, WARC, or d
 
 You'll be ready to run this then.
 
-```
+```scala
 import org.warcbase.spark.matchbox._ 
 import org.warcbase.spark.rdd.RecordRDD._ 
 
@@ -32,7 +32,7 @@ Here is a sample output from a 5GB collection of Canadian political party ARCs:
 
 If you just want a list of URLs, you can run this:
 
-```
+```scala
 import org.warcbase.spark.matchbox._ 
 import org.warcbase.spark.rdd.RecordRDD._ 
 
@@ -44,7 +44,7 @@ val r = RecordLoader.loadArchives("/directory/to/arc/file.arc.gz", sc)
 
 This will give you a list of the top ten URLs. If you want all the URLs, exported to a file, you could run this instead. Note that your export directory cannot already exist.
 
-```
+```scala
 import org.warcbase.spark.matchbox._
 import org.warcbase.spark.rdd.RecordRDD._
 
@@ -53,3 +53,18 @@ val r = RecordLoader.loadArchives("/directory/to/arc/file.arc.gz", sc)
 .map(r => r.getUrl)
 .saveAsTextFile("/path/to/export/directory/")
 ```
+
+### List of Different Subdomains
+
+Finally, you can use regular expressions to extract more fine-tuned information. For example, if you wanted to know all sitenames - i.e. the first-level directories of a given collection.
+
+```scala
+import org.warcbase.spark.matchbox._
+import org.warcbase.spark.rdd.RecordRDD._
+
+val r = RecordLoader.loadArchives("/path/to/warcs", sc)
+ .keepValidPages()
+ .flatMap(r => """http://[^/]+/[^/]+/""".r.findAllIn(r.getUrl).toList)
+```
+
+In the above example, `"""...."""` declares that we are working with a regular expression, `.r` says turn it into a regular expression, `.findAllIn` says look for all matches in the URL. This will only return the first but that is generally good for our use cases. Finally, `.toList` turns it into a list so you can `flatMap`.
