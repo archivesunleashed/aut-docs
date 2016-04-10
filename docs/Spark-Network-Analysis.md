@@ -6,7 +6,7 @@ We use the Apache Spark [GraphX API](http://spark.apache.org/graphx/) to calcula
 
 Here is a script that calculates dynamic PageRank on a WARC file:
 
-```
+```scala
 import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.RecordLoader
 import org.warcbase.spark.matchbox.ExtractGraph

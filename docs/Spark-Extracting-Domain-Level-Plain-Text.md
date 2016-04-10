@@ -4,7 +4,7 @@
 
 This script extracts the crawl date, domain, URL, and plain text from HTML files in the sample ARC data (and saves the output to out/). 
 
-```
+```scala
 import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
 
@@ -20,7 +20,7 @@ Note that this will create a new directory to store the output, which cannot alr
 
 If you want to run it in your Spark Notebook, the following script will show in-notebook plain text:
 
-```
+```scala
 val r = RecordLoader.loadArchives("/path/to/warcs", sc) 
 .keepValidPages()
 .map(r => { 
@@ -35,7 +35,7 @@ len) else t)})
 
 The following Spark script generates plain text renderings for all the web pages in a collection with a URL matching a filter string. In the example case, it will go through the collection and find all of the URLs within the "greenparty.ca" domain.
 
-```
+```scala
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
@@ -50,7 +50,7 @@ RecordLoader.loadArchives("src/test/resources/arc/example.arc.gz", sc)
 
 The following Spark script generates plain text renderings for all the web pages in a collection with a URL matching a regular expression pattern. In the example case, it will go through the collection and find all of the URLs beginning with `http://geocities.com/EnchantedForest/`. The `(?i)` makes this query case insensitive.
 
-```
+```scala
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
@@ -65,7 +65,7 @@ RecordLoader.loadArchives("geocitities-example.warc.gz", sc)
 
 The following Spark script generates plain text renderings for all the web pages in a collection, minus "boilerplate" content: advertisements, navigational elements, and elements of the website template. For more on the boilerplate removal library we are using, [please see this website and paper](http://www.l3s.de/~kohlschuetter/boilerplate/).
 
-```
+```scala
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader, ExtractBoilerpipeText}
 import org.warcbase.spark.rdd.RecordRDD._
 
@@ -84,7 +84,7 @@ day (`DD`), year and month (`YYYYMM`), or a particular year-month-day (`YYYYMMDD
 
 The following Spark script extracts plain text for a given collection by date (in this case, 4 October 2008). 
 
-```
+```scala
 import org.warcbase.spark.matchbox.RecordLoader
 import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
@@ -99,7 +99,7 @@ RecordLoader.loadArchives("path/to/example.arc.gz", sc)
 
 The following script extracts plain text for a given collection by year (in this case, 2016).
 
-```
+```scala
 import org.warcbase.spark.matchbox.RecordLoader
 import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
@@ -116,7 +116,7 @@ RecordLoader.loadArchives("path/to/example.warc.gz", sc)
 
 The following Spark script keeps only French language pages from a certain top-level domain. It uses the [ISO 639.2 language codes](https://www.loc.gov/standards/iso639-2/php/code_list.php).
 
-```
+```scala
 import org.warcbase.spark.matchbox.{RecordLoader, RemoveHTML}
 import org.warcbase.spark.rdd.RecordRDD._
 

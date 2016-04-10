@@ -43,7 +43,7 @@ It is a bit bare boned as it assumes some knowledge of a command line environmen
 - if you don't get a bunch of errors, try: `./bin/spark-shell --jars /home/ubuntu/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar` to initalize warcbase
 - Try this following script. In order to paste code, type `paste` and then Ctrl+D when you finish it up. Depending on your directory, you might need to change `/home/ubuntu/warcbase/src/test/resources/arc/example.arc.gz` to the path where warcbase is.
 
-```
+```scala
 import org.warcbase.spark.matchbox._ 
 import org.warcbase.spark.rdd.RecordRDD._ 
 

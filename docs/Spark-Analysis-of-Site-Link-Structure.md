@@ -11,7 +11,7 @@ Site link structures can be very useful, allowing you to learn such things as:
 
 If your web archive does not have a temporal component, the following Spark script will generate the site-level link structure. In this case, it is loading all WARCs stored in an example collection of GeoCities files.
 
-```
+```scala
 import org.warcbase.spark.matchbox._
 import org.warcbase.spark.rdd.RecordRDD._
 import StringUtils._
@@ -31,7 +31,7 @@ links.saveAsTextFile("geocities-links-all/")
 
 In this following example, we run the same script but only extract links coming from URLs matching the pattern `http://geocities.com/EnchantedForest/.*`. We do so by using the `keepUrlPatterns` command.
 
-```
+```scala
 import org.warcbase.spark.matchbox._
 import org.warcbase.spark.rdd.RecordRDD._
 import StringUtils._
@@ -53,7 +53,7 @@ links.saveAsTextFile("geocities-links-all/")
 The following Spark script generates the aggregated site-level link structure, grouped by crawl date (YYYYMMDD). It
 makes use of the `ExtractLinks` and `ExtractToLevelDomain` functions.
 
-```
+```scala
 import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
@@ -96,7 +96,7 @@ In your analysis, you may want to group the link structures by month rather than
 
 The following script will do so:
 
-```
+```scala
 import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
@@ -144,7 +144,7 @@ format, for further processing outside Warcbase. The following script uses `tabD
 nested tuples. (This is the same script as at the top of the page, with the addition of the 
 third and the second-last lines.)
 
-```
+```scala
 import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.TupleFormatter._
@@ -172,7 +172,7 @@ Its output looks like:
 ## Filtering by URL
 You may also wish to only extract links from a subset of pages, in which case you can also add in the [filters found here](./Spark-Several-Basic-Commands/). In this case, you would only receive links coming from websites in matching the URL pattern listed under `keepUrlPatterns`.
 
-```
+```scala
 import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader, WriteGDF}
 import org.warcbase.spark.rdd.RecordRDD._
 
@@ -192,7 +192,7 @@ WriteGDF(links, "all-links-EnchantedForest.gdf")
 
 You may want to export your data directly to the [Gephi software suite](http://gephi.github.io/), an open-soure network analysis project. The following code writes to a GDF format:
 
-```
+```scala
 import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader, WriteGDF}
 import org.warcbase.spark.rdd.RecordRDD._
 

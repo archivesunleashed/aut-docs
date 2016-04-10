@@ -12,7 +12,8 @@ Warcbase comes with Spark integration for manipulating web archive data.
 A fluent API is being developed for RDDs, and is now available on master.
 
 To use the API, two imports are required (run within Spark shell):    
-```
+
+```scala
 import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.RecordLoader
 ```
@@ -25,7 +26,8 @@ By default, command in spark-shell must be one-line.
 To run multi-line commands, type `:paste` in Spark shell to start a multi-line command, and Ctrl-D to finish the command.
 
 For example, the following script counts web pages by time:  
-````
+
+````scala
 import org.warcbase.spark.rdd.RecordRDD._
 import org.warcbase.spark.matchbox.RecordLoader
 

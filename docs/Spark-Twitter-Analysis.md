@@ -28,7 +28,7 @@ With the ensuing JSON file, you can use the following scripts. Here we're using 
 
 If you want the top 10 tweeted (shortened) URLs:
 
-```
+```scala
 import org.warcbase.spark.matchbox._
 import org.warcbase.spark.matchbox.TweetUtils._
 import org.warcbase.spark.rdd.RecordRDD._
@@ -43,7 +43,7 @@ val r = tweets.flatMap(tweet => {"""http://[^ ]+""".r.findAllIn(tweet.text).toLi
 
 If you want to instead save all the URLs to a text file, the following script would work:
 
-```
+```scala
 import org.warcbase.spark.matchbox._
 import org.warcbase.spark.matchbox.TweetUtils._
 import org.warcbase.spark.rdd.RecordRDD._
@@ -60,7 +60,7 @@ val r = tweets.flatMap(tweet => {"""http://[^ ]+""".r.findAllIn(tweet.text).toLi
 
 If you want the top 10 languages:
 
-```
+```scala
 import org.warcbase.spark.matchbox._
 import org.warcbase.spark.matchbox.TweetUtils._
 import org.warcbase.spark.rdd.RecordRDD._
@@ -79,7 +79,7 @@ val lang =
 
 If you want the top 10 hashtags:
 
-```
+```scala
 import org.warcbase.spark.matchbox._
 import org.warcbase.spark.matchbox.TweetUtils._
 import org.warcbase.spark.rdd.RecordRDD._
@@ -95,7 +95,8 @@ val r = tweets.flatMap(tweet => {"""#[^ ]+""".r.findAllIn(tweet.text).toList})
 ### Top Ten Images
 
 If you want the top 10 tweeted images:
-```
+
+```scala
 import org.warcbase.spark.matchbox._
 import org.warcbase.spark.matchbox.TweetUtils._
 import org.warcbase.spark.rdd.RecordRDD._
