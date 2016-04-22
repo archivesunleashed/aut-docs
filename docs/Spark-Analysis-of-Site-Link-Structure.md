@@ -53,13 +53,15 @@ links.saveAsTextFile("geocities-links-all/")
 The following Spark script generates the aggregated site-level link structure, grouped by crawl date (YYYYMMDD). It
 makes use of the `ExtractLinks` and `ExtractToLevelDomain` functions.
 
+If you prefer to group by crawl month (YYYMM), replace `getCrawlDate` with `getCrawlMonth` below.
+
 ```scala
 import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader}
 import org.warcbase.spark.rdd.RecordRDD._
 
 RecordLoader.loadArchives("/path/to/arc", sc)
   .keepValidPages()
-  .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
+  .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
@@ -89,51 +91,6 @@ item `(http://mysite.com/a/b/c/index.html, http://mysite.com/a/b/contact/, Conta
 be useful to have this absolute URL if you intend to call `ExtractDomain` on the link
 and wish it to be counted.
 
-
-## Aggregating by Month
-
-In your analysis, you may want to group the link structures by month rather than by day (if a crawl is carried out over several days, this may help smooth out inconsistencies). 
-
-The following script will do so:
-
-```scala
-import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader}
-import org.warcbase.spark.rdd.RecordRDD._
-
-RecordLoader.loadArchives("/mnt/vol1/data_sets/cpp_arcs/", sc)
-  .keepValidPages()
-  .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1.substring(0,6), ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
-  .filter(r => r._2 != null && r._3 != null)
-  .countItems()
-  .filter(r => r._2 > 5)
-  .groupBy(_._1._1)
-  .flatMap(r => r._2)
-  .saveAsTextFile("cpp.sitelinks-groupedByMonth")
-```
-
-It generates results like:
-
-```
-((200701,policyalternatives.ca,policyalternatives.ca),6234276)
-((200701,fairvotecanada.org,fairvotecanada.org),908615)
-((200701,greenparty.ca,contact.greenparty.ca),150519)
-((200701,conservative.ca,conservative.ca),119375)
-((200701,greenparty.ca,secure.greenparty.ca),100371)
-((200701,greenparty.ca,ridings.greenparty.ca),100360)
-((200701,policyalternatives.ca,),97147)
-((200701,policyalternatives.ca,pencilneck.net),96190)
-((200701,policyalternatives.ca,raisedeyebrow.com),96190)
-((200701,ndp.ca,ndp.ca),89337)
-((200701,egale.ca,egale.ca),74661)
-((200701,policyalternatives.ca,adobe.com),55703)
-((200701,greenparty.ca,community.greenparty.ca),50308)
-((200701,greenparty.ca,greenparty.ca),50238)
-((200701,greenparty.ca,web.greenparty.ca),50212)
-((200701,greenparty.ca,partivert.ca),50176)
-((200701,greenparty.ca,validator.w3.org),50171)
-((200701,davidsuzuki.org,davidsuzuki.org),40867)
-```
 
 ## Exporting as TSV
 Archive records are represented in Spark as [tuples](https://en.wikipedia.org/wiki/Tuple), 

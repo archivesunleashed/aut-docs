@@ -10,7 +10,7 @@ import org.warcbase.spark.matchbox.{RemoveHTML, RecordLoader}
 
 RecordLoader.loadArchives("src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()
-  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
   .saveAsTextFile("out/")
 ```
 
@@ -26,7 +26,7 @@ val r = RecordLoader.loadArchives("/path/to/warcs", sc)
 .map(r => { 
 val t = RemoveHTML(r.getContentString) 
 val len = 1000 
-(r.getCrawldate, r.getUrl, if ( t.length > len ) t.substring(0, 
+(r.getCrawlDate, r.getUrl, if ( t.length > len ) t.substring(0, 
 len) else t)}) 
 .collect() 
 ```
@@ -42,7 +42,7 @@ import org.warcbase.spark.rdd.RecordRDD._
 RecordLoader.loadArchives("src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()
   .keepDomains(Set("greenparty.ca"))
-  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
   .saveAsTextFile("out/")
 ```
 
@@ -57,7 +57,7 @@ import org.warcbase.spark.rdd.RecordRDD._
 RecordLoader.loadArchives("geocitities-example.warc.gz", sc)
   .keepValidPages()
   .keepUrlPatterns(Set("(?i)http://geocities.com/EnchantedForest/.*".r))
-  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
   .saveAsTextFile("EnchantedForest/")
 ```
 
@@ -72,7 +72,7 @@ import org.warcbase.spark.rdd.RecordRDD._
 RecordLoader.loadArchives("src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()
   .keepDomains(Set("greenparty.ca"))
-  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, ExtractBoilerpipeText(r.getContentString)))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, ExtractBoilerpipeText(r.getContentString)))
   .saveAsTextFile("out/")
 ```
 
@@ -93,7 +93,7 @@ import org.warcbase.spark.matchbox.ExtractDate.DateComponent._
 RecordLoader.loadArchives("path/to/example.arc.gz", sc)
   .keepValidPages()
   .keepDate("20081004", YYYYMM)
-  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
   .saveAsTextFile("out/")
 ```
 
@@ -108,7 +108,7 @@ import org.warcbase.spark.matchbox.ExtractDate.DateComponent._
 RecordLoader.loadArchives("path/to/example.warc.gz", sc)
   .keepValidPages()
   .keepDate("2015", YYYY)
-  .map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
   .saveAsTextFile("out2/")
 ```
 
@@ -124,6 +124,6 @@ RecordLoader.loadArchives("/path/to/warc", sc)
 .keepValidPages()
 .keepDomains(Set("greenparty.ca"))
 .keepLanguages(Set("fr"))
-.map(r => (r.getCrawldate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+.map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
 .saveAsTextFile("out-fr/")
 ```

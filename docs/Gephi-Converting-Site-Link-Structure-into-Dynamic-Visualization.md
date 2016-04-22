@@ -18,7 +18,7 @@ import org.warcbase.spark.rdd.RecordRDD._
 
 val links = RecordLoader.loadArchives("/collections/webarchives/CanadianPoliticalParties/arc/", sc)
   .keepValidPages()
-  .map(r => (r.getCrawldate, ExtractLinks(r.getUrl, r.getContentString)))
+  .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
@@ -27,7 +27,7 @@ val links = RecordLoader.loadArchives("/collections/webarchives/CanadianPolitica
 WriteGDF(links, "all-links.gdf")
 ```
 
-The ensuing `all-links.gdf` can be natively imported into Gephi.
+The ensuing `all-links.gdf` can be natively imported into Gephi. You may want to use `getCrawlMonth` instead.
 
 ### Step Two: Import into Gephi
 
