@@ -16,7 +16,7 @@ pages:
     - 'Several Basic Spark Commands': 'Spark-Several-Basic-Commands.md'
     - 'Collection Analytics': 'Spark-Collection-Analytics.md'
     - 'Analysis of Site Link Structure': 'Spark-Analysis-of-Site-Link-Structure.md'
-    - 'Network Analysis with GraphX': 'Spark-Network-Analysis.md'
+    - 'Network Analysis and Visualization in Spark using GraphX': 'Spark-Network-Analysis.md'
     - 'Extracting Domain Level Plain Text': 'Spark-Extracting-Domain-Level-Plain-Text.md'
     - 'Named Entity Recognition': 'Spark-Named-Entity-Recognition.md'
     - 'NER Visualization': 'Spark-NER-Visualization.md'

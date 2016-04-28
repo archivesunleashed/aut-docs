@@ -1,4 +1,4 @@
-# Network Analysis in Spark using GraphX
+# Network Analysis and Visualization in Spark using GraphX
 
 We use the Apache Spark [GraphX API](http://spark.apache.org/graphx/) to calculate graph information within warcbase. This can complement analysis done in Gephi.
 
@@ -47,4 +47,31 @@ LINKS:
 {"date":"20060622","src":"conservative.ca","dst":"conservative.ca","count":267}
 {"date":"20060622","src":"greenparty.ca","dst":"main.greenparty.ca","count":220}
 
+### Visualizing Results in a Browser with D3.js
 
+We have a built in link visualizer, built in D3.js. It looks like this:
+
+![Example of the D3.js visualizer](https://raw.githubusercontent.com/web-archive-group/WAHR/master/images/d3js-example.png)
+
+You can find it in `warcbase/vis/link-vis`. This page shows you two things: how you can load in sample data and visualize it, and then how you can replace the sample data with your own.
+
+#### Using Sample Data
+
+To test it out, navigate to the `warcbase/vis/link-vis` directory on your command line. You can then complete the following steps:
+
+1. Create a new directory labelled `data`, which will have the full path of ``warcbase/vis/link-vis/data`. 
+2. Copy the `graph.json` file from the [warcbase-resources](https://github.com/lintool/warcbase-resources) directory into `data`.
+3. Run `python -m SimpleHTTPServer 4321` from your `warcbase/vis/link-vis` directory.
+
+You can then navigate to [localhost:4321](http://localhost:4321) in your browser.
+
+#### Generating Your Own Data
+
+The visualizer requires your data to be in a particular format. To do so, we use `jq` to combine the NODES and LINKS data as above. [You can download jq here](https://stedolan.github.io/jq/). 
+
+```
+$ jq -c -n --slurpfile nodes <(cat nodes/part-*) --slurpfile links \
+  <(cat links/part-*) '{nodes: $nodes, links: $links}' > graph.json
+```
+
+Replace your old `graph.json` with this new one and you can explore your data in a browser!
