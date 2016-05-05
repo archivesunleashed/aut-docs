@@ -20,7 +20,9 @@ import org.warcbase.spark.matchbox.RecordLoader
 
 ### Running in the Spark Shell
 To run the spark shell, cd into the warcbase directory and run:   
-`spark-shell --jars target/warcbase-0.1.0-SNAPSHOT-fatjar.jar`
+`spark-shell --jars ~/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar`. You'll need to change the path to the `jar` accordingly.
+
+You might want to pass it additional commands. For example, if you want to add more memory, you could pass it as `spark-shell --driver-memory 8G --jars ~/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar` This would give it 8GB of RAM.
 
 By default, command in spark-shell must be one-line.  
 To run multi-line commands, type `:paste` in Spark shell to start a multi-line command, and Ctrl-D to finish the command.
