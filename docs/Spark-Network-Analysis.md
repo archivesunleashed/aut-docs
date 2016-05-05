@@ -49,7 +49,9 @@ LINKS:
 
 ### Visualizing Results in a Browser with D3.js
 
-We have a built in link visualizer, built in D3.js. It looks like this:
+We have a built in link visualizer, built in D3.js. This was developed by the amazing team of Alice Ran Zhou (University of Waterloo), Jeremy Wiebe (University of Waterloo), Shane Martin (York University), and Eric Oosenbrug (York University), in part during the [Archives Unleashed hackathon](http://archivesunleashed.ca/). You can see their commit history in [this repository](https://github.com/shamrt/link-structure). 
+
+The D3.js visualizer looks like this:
 
 ![Example of the D3.js visualizer](https://raw.githubusercontent.com/web-archive-group/WAHR/master/images/d3js-example.png)
 
