@@ -1,8 +1,35 @@
 # Collection Analytics
 
+You may want to get a birds-eye view of your ARCs or WARCs: what top-level domains are included, and at what times were they crawled? You can do this in Shell or generate beautiful in-browser visualizations in the Notebook interface.
+
+### List of URLs 
+
+If you just want a list of URLs, you can run this in Spark shell:
+
+```scala
+import org.warcbase.spark.matchbox._ 
+import org.warcbase.spark.rdd.RecordRDD._ 
+
+val r = RecordLoader.loadArchives("/directory/to/arc/file.arc.gz", sc) 
+.keepValidPages()
+.map(r => r.getUrl)
+.take(10)
+```
+
+This will give you a list of the top ten URLs. If you want all the URLs, exported to a file, you could run this instead. Note that your export directory cannot already exist.
+
+```scala
+import org.warcbase.spark.matchbox._
+import org.warcbase.spark.rdd.RecordRDD._
+
+val r = RecordLoader.loadArchives("/directory/to/arc/file.arc.gz", sc) 
+.keepValidPages()
+.map(r => r.getUrl)
+.saveAsTextFile("/path/to/export/directory/")
+```
 ### Using Spark Notebook to See Top-Level Domains
 
-You may want to learn what top-level domains you have in a given ARC, WARC, or directory of them. In the Spark Notebook, the following command will generate an interactive visualization. Remember that your first command in any Spark Notebook needs to point to warcbase like so:
+In the Spark Notebook, the following command will generate an interactive visualization. Remember that your first command in any Spark Notebook needs to point to warcbase like so:
 
 ```
 :cp /Users/ianmilligan1/dropbox/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar
@@ -27,32 +54,6 @@ If you want to see more than ten results, change the variable in the last line.
 Here is a sample output from a 5GB collection of Canadian political party ARCs:
 
 ![Spark notebook showing pie chart output](https://raw.githubusercontent.com/ianmilligan1/WAHR/master/images/Spark-Notebook.png)
-
-### List of URLs in Spark Shell (or Notebook)
-
-If you just want a list of URLs, you can run this:
-
-```scala
-import org.warcbase.spark.matchbox._ 
-import org.warcbase.spark.rdd.RecordRDD._ 
-
-val r = RecordLoader.loadArchives("/directory/to/arc/file.arc.gz", sc) 
-.keepValidPages()
-.map(r => r.getUrl)
-.take(10)
-```
-
-This will give you a list of the top ten URLs. If you want all the URLs, exported to a file, you could run this instead. Note that your export directory cannot already exist.
-
-```scala
-import org.warcbase.spark.matchbox._
-import org.warcbase.spark.rdd.RecordRDD._
-
-val r = RecordLoader.loadArchives("/directory/to/arc/file.arc.gz", sc) 
-.keepValidPages()
-.map(r => r.getUrl)
-.saveAsTextFile("/path/to/export/directory/")
-```
 
 ### List of Different Subdomains
 
