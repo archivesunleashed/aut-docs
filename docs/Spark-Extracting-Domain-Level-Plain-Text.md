@@ -127,3 +127,20 @@ RecordLoader.loadArchives("/path/to/warc", sc)
 .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
 .saveAsTextFile("out-fr/")
 ```
+
+### Plain text filtered by keyword
+
+The following Spark script keeps only pages containing a certain keyword, which also stacks on the other scripts. 
+
+For example, the following script takes all pages containing the keyword "guestbooks" in a collection.
+
+```scala
+import org.warcbase.spark.matchbox._ 
+import org.warcbase.spark.rdd.RecordRDD._ 
+
+val r = RecordLoader.loadArchives("/path/to/warc",sc)
+.keepValidPages()
+.keepContent(Set("guestbooks".r))
+.map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+.saveAsTextFile("out-guestbooks/")
+```
