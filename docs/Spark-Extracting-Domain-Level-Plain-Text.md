@@ -144,3 +144,5 @@ val r = RecordLoader.loadArchives("/path/to/warc",sc)
 .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
 .saveAsTextFile("out-guestbooks/")
 ```
+
+There is also `discardContent` which does the opposite, if you have a frequent keyword you are not interested in.
