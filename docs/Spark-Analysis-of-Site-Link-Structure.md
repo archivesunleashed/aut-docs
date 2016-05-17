@@ -7,6 +7,8 @@ Site link structures can be very useful, allowing you to learn such things as:
 - what paths could be taken through the network to connect pages;  
 - what communities existed within the link structure?  
 
+Many of the [filtering commands listed here](http://lintool.github.io/warcbase-docs/Spark-Several-Basic-Commands/) will work as well.
+
 ## Extraction of Simple Site Link Structure
 
 If your web archive does not have a temporal component, the following Spark script will generate the site-level link structure. In this case, it is loading all WARCs stored in an example collection of GeoCities files.
@@ -18,6 +20,25 @@ import StringUtils._
 
 val links = RecordLoader.loadArchives("/collections/webarchives/geocities/warcs/", sc)
   .keepValidPages()
+  .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
+  .map(r => (ExtractDomain(r._1).removePrefixWWW(), ExtractDomain(r._2).removePrefixWWW()))
+  .filter(r => r._1 != "" && r._2 != "")
+  .countItems()
+  .filter(r => r._2 > 5)
+
+links.saveAsTextFile("geocities-links-all/")
+```
+
+Note how you can add filters. In this case, we add a filter so you are looking at a network graph of pages containing the phrase "apple." Filters can go immediately after `.keepValidPages()`.
+
+```scala
+import org.warcbase.spark.matchbox._
+import org.warcbase.spark.rdd.RecordRDD._
+import StringUtils._
+
+val links = RecordLoader.loadArchives("/collections/webarchives/geocities/warcs/", sc)
+  .keepValidPages()
+  .keepContent(Set("apple".r))
   .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
   .map(r => (ExtractDomain(r._1).removePrefixWWW(), ExtractDomain(r._2).removePrefixWWW()))
   .filter(r => r._1 != "" && r._2 != "")
