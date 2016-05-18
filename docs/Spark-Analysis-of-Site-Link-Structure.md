@@ -195,4 +195,4 @@ Interested in playing with your link structures in browser like so?
 
 ![Example of the D3.js visualizer](https://raw.githubusercontent.com/web-archive-group/WAHR/master/images/d3js-example.png)
 
-Then read on to [Visualizing Site-Link Structure with D3.js](http://lintool.github.io/warcbase-docs/Visualizing-Site-Link-Structure/)
+Then read on to [Visualizing Site-Link Structure with D3.js](http://lintool.github.io/warcbase-docs/Spark-Network-Analysis/)
