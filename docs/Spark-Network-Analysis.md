@@ -63,7 +63,7 @@ To test it out, navigate to the `warcbase/vis/link-vis` directory on your comman
 
 1. Create a new directory labelled `data`, which will have the full path of ``warcbase/vis/link-vis/data`. 
 2. Copy the `graph.json` file from the [warcbase-resources](https://github.com/lintool/warcbase-resources) directory into `data`.
-3. Run `python -m SimpleHTTPServer 4321` from your `warcbase/vis/link-vis` directory.
+3. Run `python -m SimpleHTTPServer 4321` from your `warcbase/vis/link-vis` directory. If you are using Python3, you may need to run `python -m http.server 4321` instead.
 
 You can then navigate to [localhost:4321](http://localhost:4321) in your browser.
 
