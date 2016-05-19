@@ -2,7 +2,7 @@
 
 Warcbase is a web archive _platform_, not a single program. Its capabilities comprise two main categories:
 
-1. Analysis of web archives using the [Pig](http://pig.apache.org/) programming language, and assorted helper scripts and utilities
+1. Analysis of web archives using the [Spark](http://spark.apache.org/) programming language, and assorted helper scripts and utilities
 2. Web archive database management, with support for the [HBase](http://hbase.apache.org/) distributed data store, and [OpenWayback](https://github.com/iipc/openwayback/wiki) integration providing a friendly web interface to view stored websites
 
 One can take advantage of the analysis tools (1) without bothering with the database management aspect of Warcbase -- in fact, most digital humanities researchers will probably find the former more useful. Users who are only interested in the analysis tools need only be concerned with the first two sections of this document (Prerequisites and Building Warcbase).
@@ -10,6 +10,7 @@ One can take advantage of the analysis tools (1) without bothering with the data
 (This document was written because installing Warcbase under OS X requires a number of minor changes to the [official project instructions](https://github.com/lintool/warcbase).)
 
 ### Prerequisites
+
 * [OS X Developer Tools](http://www.cnet.com/how-to/install-command-line-developer-tools-in-os-x/)
 * [Homebrew](http://brew.sh)
 * Maven (`brew install maven`)
@@ -54,7 +55,7 @@ One can take advantage of the analysis tools (1) without bothering with the data
     
 * Tomcat (`brew install tomcat`) _(Only necessary for OpenWayback integration; skip otherwise)_ 
 
-* Pig (`brew install pig`)
+* Pig (`brew install spark`)
 
 
 > **_N.B._** If you run an automatic Homebrew system update (`brew update && brew upgrade`) it is possible a new version of Hadoop, HBase, or Tomcat will be installed. The previous version will remain on your system, but the symbolic links in `/ur/local/bin/` will point to the new version; i.e., it is the new version that will be executed when you run any of the software's components, unless you specify the full pathname. There are two solutions:

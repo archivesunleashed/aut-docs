@@ -6,7 +6,9 @@ Note: many of these tutorials currently assume a working knowledge of a Unix com
 
 Once you get to the Spark Notebook stage, you can work in your web browser.
 
-Install dependencies:
+Install dependencies, using brew. [You can learn how to install Brew here](http://brew.sh/). If you are on linux, install dependencies using your package manager of choice.
+
+In your terminal, type:
 
 ```
 brew install git
@@ -21,7 +23,7 @@ First, clone the repo:
 $ git clone http://github.com/lintool/warcbase.git
 ```
 
-Second, you can now build Warcbase:
+Second, you can now build Warcbase by typing:
 
 ```
 $ mvn clean package appassembler:assemble
@@ -42,4 +44,4 @@ $ mvn eclipse:eclipse
 
 You can then import the project into Eclipse.
 
-What's next? We recommend [connecting your installation to a Spark Notebook](./Spark:-Installing-Spark-Notebook-on-a-Cloud-Computer/). Read on!
+What's next? We recommend [continuing with this more advanced OS X lesson](http://lintool.github.io/warcbase-docs/Installing-and-Running-Spark-under-OS-X/). Good luck!
