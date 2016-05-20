@@ -7,7 +7,7 @@ theme: yeti
 pages:
 - Home: 'index.md'
 - Setup:
-    - 'Installing Warcbase!': 'Getting-Started.md'
+    - 'Installing Warcbase': 'Getting-Started.md'
     - 'Installing Spark Notebook on a Linux or Cloud Computer': 'Spark-Installing-Spark-Notebook-on-a-Cloud-Computer.md'
     - 'Sample Data': 'Sample-Data.md'
 - Web Archives:
