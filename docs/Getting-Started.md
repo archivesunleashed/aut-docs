@@ -82,7 +82,7 @@ val r = RecordLoader.loadArchives("src/test/resources/arc/example.arc.gz", sc)
   .map(r => ExtractDomain(r.getUrl))
   .countItems()
   .take(10)
-  ```
+```
 
 If you see results, you're up and running!
 
