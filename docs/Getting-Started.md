@@ -23,7 +23,7 @@ brew install maven
 
 ### Windows
 
-Using Git Bash, you will need to install git. It is [a straightforward installation](https://git-scm.com/). For Maven, [download a copy here](https://maven.apache.org/download.cgi) (we recommend the binary zip archive for Windows users). Then following the instructions for "Windows Tips" [here](https://maven.apache.org/install.html). 
+Using [Git Bash](https://git-for-windows.github.io/), you will need to install git. It is [a straightforward installation](https://git-scm.com/). For Maven, [download a copy here](https://maven.apache.org/download.cgi) (we recommend the binary zip archive for Windows users). Then following the instructions for "Windows Tips" [here](https://maven.apache.org/install.html). 
 
 ### Linux
 
