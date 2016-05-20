@@ -2,7 +2,7 @@
 
 You might want a bit more power than you can get on your local computer. If so, read on to learn how to deploy warcbase on a Linux or cloud machine. For a linux machine, you may want to skip to Step Four below. 
 
-This is a walkthrough for installing Warcbase and Spark on a Ubuntu_14.04_Trusty x86_64 (QCOW2) image provided for Compute Canada. Presumably Amazon EC2 would provide a similar sort of experience. For more information on Warcbase, [check out the repository here](https://github.com/lintool/warcbase).
+This is a walkthrough for installing Warcbase and Spark on a Ubuntu_14.04_Trusty x86_64 (QCOW2) image provided for Compute Canada. Amazon EC2 provides a similar images. For more information on Warcbase, [check out the repository here](https://github.com/lintool/warcbase).
 
 It is a bit bare boned as it assumes some knowledge of a command line environment.
 
