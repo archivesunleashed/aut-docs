@@ -1,5 +1,7 @@
 # Installing and Running Spark under OS X
 
+*This is currently being migrated over to a [master 'Getting-Started' guide.](http://lintool.github.io/warcbase-docs/Getting-Started/)*
+
 ### Spark integration
 
 Warcbase comes with Spark integration for manipulating web archive data. 
@@ -31,7 +33,7 @@ For example, on one system we have:
 
 You might want to pass it additional commands. For example, if you want to add more memory, you could pass it as `spark-shell --driver-memory 8G --jars ~/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar` This would give it 8GB of RAM. So in the example, it would be:
 
-`/home/i2millig/spark-1.5.1/bin/spark-shell --drivermemory 8G --jars ~/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar`
+`/home/i2millig/spark-1.5.1/bin/spark-shell --driver-memory 8G --jars ~/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar`
 
 ### Pasting Commands
 

@@ -71,6 +71,12 @@ spark-shell --jars target/warcbase-0.1.0-SNAPSHOT-fatjar.jar
 
 You may have to provide full paths. For example, `/users/spark-1.5.1/bin/spark-shell --jars target/warcbase-0.1.0-SNAPSHOT-fatjar.jar`.
 
+This command accepts flags. As you get more advanced, you might want to pass it more memory, using the `--driver-memory` flag. For example, this following command will let your Spark Shell use up to 8GB of memory.
+
+```
+users/spark-1.5.1/bin/spark-shell --driver-memory 8G --jars --jars target/warcbase-0.1.0-SNAPSHOT-fatjar.jar
+```
+
 Now run the following sample script to see if it works. To enter code blocks you will need to type `:paste` first. Paste the command, and then press `Ctrl+D`.
 
 ```scala
