@@ -63,13 +63,15 @@ $ mvn clean package appassembler:assemble -DskipTests
 
 ## Step Three: Testing with Spark Shell
 
-Now to test, load up the Spark shell. The command looks like:
+You will now need to install Spark Shell. You can [download it from here](http://spark.apache.org/downloads.html). [This pre-built version is ideal for all systems](http://www.apache.org/dyn/closer.lua/spark/spark-1.6.1/spark-1.6.1-bin-hadoop2.6.tgz).
+
+Now to test, load up the Spark shell. To do so, you will need to run the following from the `spark-1.6.1-bin-hadoop2.6` directory (or whatever version you ended up downloading). The command looks like:
 
 ```
-spark-shell --jars target/warcbase-0.1.0-SNAPSHOT-fatjar.jar
+./bin/spark-shell --jars ~/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar
 ```
 
-You may have to provide full paths. For example, `/users/spark-1.5.1/bin/spark-shell --jars target/warcbase-0.1.0-SNAPSHOT-fatjar.jar`.
+After `--jars` you need to provide the path to where that file in the warcbase directory is. For example, `/users/spark-1.6.1-bin-hadoop2.6/bin/spark-shell --jars target/warcbase-0.1.0-SNAPSHOT-fatjar.jar`.
 
 This command accepts flags. As you get more advanced, you might want to pass it more memory, using the `--driver-memory` flag. For example, this following command will let your Spark Shell use up to 8GB of memory.
 
@@ -102,12 +104,12 @@ You might find the Spark Shell ungainly when prototyping. Luckily, Spark Noteboo
 
 Spark Notebook is an interactive web-based editor that can run Scala and Spark. 
 
-To use Spark Notebook with Warcbase, download the [notebook](http://spark-notebook.io/) with the following options Scala 2.10, Spark 1.3.0, and Hadoop 2.6.0-cdh5.4.2. 
+To use Spark Notebook with Warcbase, download the [notebook](http://spark-notebook.io/) with the following options: Notebook 0.6.3, Scala 2.11, Spark 1.6.1, Hadoop 2.7.2 (no hive, no parquet).
 
 Unzip the downloaded zip file, `cd` into the directory in your terminal, and run the following command:
 
-```
-./bin/spark-notebook`
+```bash
+./bin/spark-notebook
 ```
 
 The terminal should read `Listening for HTTP on /0:0:0:0:0:0:0:0:9000`
