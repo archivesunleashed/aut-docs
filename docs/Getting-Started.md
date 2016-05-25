@@ -45,30 +45,40 @@ Then, in the directory where you want to install warcbase, run the following ter
 
 First, clone the repo:
 
-```
-$ git clone http://github.com/lintool/warcbase.git
+```bash
+git clone http://github.com/lintool/warcbase.git
 ```
 
-Second, you can now build Warcbase by typing:
+This will download the files that are necessary to build warcbase.
 
-```
-$ mvn clean package appassembler:assemble
+Second, you can now build Warcbase by typing the following command in the newly downloaded warcbase directory (navigate to it by typing `cd warcbase`):
+
+```bash
+mvn clean package appassembler:assemble
 ```
 
 For the impatient, to skip tests:
 
+```bash
+mvn clean package appassembler:assemble -DskipTests
 ```
-$ mvn clean package appassembler:assemble -DskipTests
-```
+
+You only need to build warcbase once to use it.
 
 ## Step Three: Testing with Spark Shell
 
 You will now need to install Spark Shell. You can [download it from here](http://spark.apache.org/downloads.html). [This pre-built version is ideal for all systems](http://www.apache.org/dyn/closer.lua/spark/spark-1.6.1/spark-1.6.1-bin-hadoop2.6.tgz).
 
-Now to test, load up the Spark shell. To do so, you will need to run the following from the `spark-1.6.1-bin-hadoop2.6` directory (or whatever version you ended up downloading). The command looks like:
+Now to test, load up the Spark shell. To do so, you will need to run the following from the `spark-1.6.1-bin-hadoop2.6` directory (or whatever version you ended up downloading). The command looks like this on OS X and Linux:
 
-```
+```bash
 ./bin/spark-shell --jars ~/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar
+```
+
+On Windows, it is slightly different as you need to call `spark-shell.cmd` as per:
+
+```bash
+./bin/spark-shell.cmd --jars ~/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar
 ```
 
 After `--jars` you need to provide the path to where that file in the warcbase directory is. For example, `/users/spark-1.6.1-bin-hadoop2.6/bin/spark-shell --jars target/warcbase-0.1.0-SNAPSHOT-fatjar.jar`.
@@ -76,7 +86,7 @@ After `--jars` you need to provide the path to where that file in the warcbase d
 This command accepts flags. As you get more advanced, you might want to pass it more memory, using the `--driver-memory` flag. For example, this following command will let your Spark Shell use up to 8GB of memory.
 
 ```bash
-spark-shell --driver-memory 8G --jars target/warcbase-0.1.0-SNAPSHOT-fatjar.jar
+./bin/spark-shell --driver-memory 8G --jars target/warcbase-0.1.0-SNAPSHOT-fatjar.jar
 ```
 
 Now run the following sample script to see if it works. To enter code blocks you will need to type `:paste` first. Paste the command, and then press `Ctrl+D`.
