@@ -23,7 +23,9 @@ brew install maven
 
 ### Windows
 
-Using [Git Bash](https://git-for-windows.github.io/), you will need to install git. It is [a straightforward installation](https://git-scm.com/). For Maven, [download a copy here](https://maven.apache.org/download.cgi) (we recommend the binary zip archive for Windows users). Then following the instructions for "Windows Tips" [here](https://maven.apache.org/install.html). 
+Using [Git Bash](https://git-for-windows.github.io/), you will need to install git. It is [a (relatively) straightforward installation](https://git-scm.com/). For Maven, [download a copy here](https://maven.apache.org/download.cgi) (we recommend the binary zip archive for Windows users). Then following the instructions for "Windows Tips" [here](https://maven.apache.org/install.html). 
+
+When running `spark-shell` in subsequent instructions, you will need to instead call `spark-shell.cmd`.
 
 ### Linux
 
@@ -51,7 +53,7 @@ git clone http://github.com/lintool/warcbase.git
 
 This will download the files that are necessary to build warcbase.
 
-Second, you can now build Warcbase by typing the following command in the newly downloaded warcbase directory (navigate to it by typing `cd warcbase`):
+Second, you can now build Warcbase by typing the following command in the newly downloaded warcbase directory (navigate to it by typing `cd warcbase`). Building entails downloading lots of files and assembling them – it will take awhile!
 
 ```bash
 mvn clean package appassembler:assemble
@@ -63,7 +65,7 @@ For the impatient, to skip tests:
 mvn clean package appassembler:assemble -DskipTests
 ```
 
-You only need to build warcbase once to use it.
+If you see `BUILD SUCCESS`, then... success! You only need to build warcbase once to use it.
 
 ## Step Three: Testing with Spark Shell
 
@@ -102,7 +104,13 @@ val r = RecordLoader.loadArchives("src/test/resources/arc/example.arc.gz", sc)
   .take(10)
 ```
 
-If you see results, you're up and running!
+If you see these results:
+
+```
+r: Array[(String, Int)] = Array((www.archive.org,132), (deadlists.com,2), (www.hideout.com.br,1))
+```
+
+That means you're up and running!
 
 Above, you can see that if you find other scripts here, you could just change the line with `RecordLoader` to point it at your data, and the lines after `.keepValidPages()` to the analyses you want to run!
 
