@@ -1,7 +1,7 @@
 site_name: Warcbase
 docs_dir: docs
 dev_addr: 'localhost:8111'
-repo_url: https://github.com/lintool/warcbase-docs
+repo_url: https://github.com/lintool/warcbase
 
 theme: yeti 
 pages:
