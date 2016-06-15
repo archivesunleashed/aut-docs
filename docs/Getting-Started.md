@@ -12,7 +12,7 @@ There are two main dependencies to install, [git](https://git-scm.com/) and [Apa
 
 ### OS X
 
-In OS X, we recommend just using [homebrew](http://brew.sh/). This is a package manager that can simplify everything.
+In OS X, we recommend just using [homebrew](http://brew.sh/). This is a package manager that can simplify everything. You will also need to download an updated JDK 8, which [you can find here](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
 
 In your terminal, type:
 

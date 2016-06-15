@@ -2,7 +2,7 @@
 
 ### Setup
 
-If you need assistance with setting up Spark, please visit [this walkthrough](./Installing-and-Running-Spark-under-OS-X/).
+If you need assistance with setting up Spark, please visit [this walkthrough](http://lintool.github.io/warcbase-docs/Getting-Started/).
 
 Scripts are written in Scala. For a quick introduction to the language, [Programming in Scala](http://www.artima.com/pins1ed/index.html) by Martin Odersky, Lex Spoon, and Bill Venners is a good introduction. However, for the most part you should be able to adapt and extend the scripts that we provide in this guide.
 
