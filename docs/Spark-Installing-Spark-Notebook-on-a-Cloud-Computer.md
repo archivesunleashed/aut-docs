@@ -27,27 +27,27 @@ It is a bit bare boned as it assumes some knowledge of a command line environmen
 - now try to `ping $HOSTNAME`: if you begin to see packet transmission/receipt information, you're golden.
 
 ### Step Four: Install Spark
-- download spark 1.5.1 from [here](http://spark.apache.org/downloads.html). I used [this version for direct download](http://d3kbcqa49mib13.cloudfront.net/spark-1.5.1-bin-hadoop2.6.tgz).
-	- for the lazier among us: `wget http://d3kbcqa49mib13.cloudfront.net/spark-1.5.1-bin-hadoop2.6.tgz`
-	- `tar -xvf spark-1.5.1-bin-hadoop2.6.tgz`
-	- remove the tar file: `rm spark-1.5.1-bin-hadoop2.6.tgz`
+- You can [download it from here](http://spark.apache.org/downloads.html). [This pre-built version is ideal for all systems](http://www.apache.org/dyn/closer.lua/spark/spark-1.6.1/spark-1.6.1-bin-hadoop2.6.tgz).
+	- for the lazier among us: `wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1-bin-hadoop2.6.tgz`
+	- `tar -xvf spark-1.6.1-bin-hadoop2.6.tgz`
+	- remove the tar file: `rm spark-1.6.1-bin-hadoop2.6.tgz`
 
 ### Step Five: Install Warcbase
 - bring yourself back to your home directory: `cd --`
 - download warcbase: `git clone https://github.com/lintool/warcbase.git`
 - change to the warcbase directory: `cd warcbase`
-- build warcbase: `sudo mvn clean package appassembler:assemble -DskipTests`
+- build warcbase-core: `sudo mvn clean package -pl warcbase-core -DskipTests`
 
 ### Step Six: Test that Warcbase and Spark are working
 - verify that the shell works by navigating to your spark-shell directory and running: `./bin/spark-shell`
-- if you don't get a bunch of errors, try: `./bin/spark-shell --jars /home/ubuntu/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar` to initalize warcbase
-- Try this following script. In order to paste code, type `paste` and then Ctrl+D when you finish it up. Depending on your directory, you might need to change `/home/ubuntu/warcbase/src/test/resources/arc/example.arc.gz` to the path where warcbase is.
+- if you don't get a bunch of errors, try: `./bin/spark-shell --jars /home/ubuntu/warcbase/warcbase-core/target/warcbase-core-0.1.0-SNAPSHOT-fatjar.jar` to initalize warcbase
+- Try this following script. In order to paste code, type `paste` and then Ctrl+D when you finish it up. Depending on your directory, you might need to change `/home/ubuntu/warcbase/warcbase-core/src/test/resources/arc/example.arc.gz` to the path where warcbase is.
 
 ```scala
 import org.warcbase.spark.matchbox._ 
 import org.warcbase.spark.rdd.RecordRDD._ 
 
-val r = RecordLoader.loadArchives("/home/ubuntu/warcbase/src/test/resources/arc/example.arc.gz", sc)
+val r = RecordLoader.loadArchives("/home/ubuntu/warcbase/warcbase-core/src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()
   .map(r => ExtractDomain(r.getUrl))
   .countItems()

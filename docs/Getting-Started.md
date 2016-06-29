@@ -55,14 +55,22 @@ This will download the files that are necessary to build warcbase.
 
 Second, you can now build Warcbase by typing the following command in the newly downloaded warcbase directory (navigate to it by typing `cd warcbase`). Building entails downloading lots of files and assembling them – it will take awhile!
 
-```bash
-mvn clean package appassembler:assemble
+If you are just interested in the analytics function, you can run the following:
+
+```
+$ mvn clean package -pl warcbase-core
 ```
 
 For the impatient, to skip tests:
 
-```bash
-mvn clean package appassembler:assemble -DskipTests
+```
+$ mvn clean package -pl warcbase-core -DskipTests
+```
+
+If you are interested in the HBase functionality as well, you can build everything using:
+
+```
+mvn clean package
 ```
 
 If you see `BUILD SUCCESS`, then... success! You only need to build warcbase once to use it.
@@ -74,16 +82,16 @@ You will now need to install Spark Shell. You can [download it from here](http:/
 Now to test, load up the Spark shell. To do so, you will need to run the following from the `spark-1.6.1-bin-hadoop2.6` directory (or whatever version you ended up downloading). The command looks like this on OS X and Linux:
 
 ```bash
-./bin/spark-shell --jars ~/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar
+./bin/spark-shell --jars ~/warcbase/warcbase-core/target/warcbase-core-0.1.0-SNAPSHOT-fatjar.jar
 ```
 
 On Windows, it is slightly different as you need to call `spark-shell.cmd` as per:
 
 ```bash
-./bin/spark-shell.cmd --jars ~/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar
+./bin/spark-shell.cmd --jars ~/warcbase/warcbase-core/target/warcbase-core-0.1.0-SNAPSHOT-fatjar.jar
 ```
 
-After `--jars` you need to provide the path to where that file in the warcbase directory is. For example, `/users/spark-1.6.1-bin-hadoop2.6/bin/spark-shell --jars target/warcbase-0.1.0-SNAPSHOT-fatjar.jar`.
+After `--jars` you need to provide the path to where that file in the warcbase directory is. For example, `/users/spark-1.6.1-bin-hadoop2.6/bin/spark-shell --jars ~/warcbase/warcbase-core/target/warcbase-core-0.1.0-SNAPSHOT-fatjar.jar`.
 
 This command accepts flags. As you get more advanced, you might want to pass it more memory, using the `--driver-memory` flag. For example, this following command will let your Spark Shell use up to 8GB of memory.
 
@@ -97,7 +105,7 @@ Now run the following sample script to see if it works. To enter code blocks you
 import org.warcbase.spark.matchbox._
 import org.warcbase.spark.rdd.RecordRDD._
 
-val r = RecordLoader.loadArchives("src/test/resources/arc/example.arc.gz", sc)
+val r = RecordLoader.loadArchives("warcbase-core/src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()
   .map(r => ExtractDomain(r.getUrl))
   .countItems()
@@ -139,7 +147,7 @@ To make a new notebook, click the '+' button on the top right-hand corner.
 The **first command** needs to load the warcbase jar. Make sure to change the path to the location of your own warcbase installation:
 
 ```scala
-:cp /Users/ianmilligan1/dropbox/warcbase/target/warcbase-0.1.0-SNAPSHOT-fatjar.jar
+:cp /Users/ianmilligan1/dropbox/warcbase/warcbase-core/target/warcbase-core-0.1.0-SNAPSHOT-fatjar.jar
 ```
 
 You are now ready to run your first script. Try the following, making sure to provide a full path in lieu of `src/test/resources/arc/example.arc.gz`. 
@@ -149,7 +157,7 @@ import org.warcbase.spark.matchbox._
 import org.warcbase.spark.rdd.RecordRDD._ 
 
 val r = 
-RecordLoader.loadArchives("/USER/warcbase/src/test/resources/arc/example.arc.gz", sc) 
+RecordLoader.loadArchives("/USER/warcbase/warcbase-core/src/test/resources/arc/example.arc.gz", sc) 
 .keepValidPages() 
 .map(r => ExtractDomain(r.getUrl)) 
 .countItems() 
