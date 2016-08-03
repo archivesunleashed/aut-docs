@@ -2,7 +2,9 @@
 
 Warcbase supports image analysis, a growing area of interest within web archives.  
 
-For example, the following script:
+### Most frequent image URLs in a collection
+
+The following script:
 
 ```scala
 import org.warcbase.spark.matchbox._
@@ -27,3 +29,18 @@ Let's use the top-ranked example. [This link](http://web.archive.org/web/*/http:
 To do analysis on all images, you could thus prepend `http://web.archive.org/web/20070913051458/` to each URL and `wget` them en masse.
 
 For more information on `wget`, please consult [this lesson available on the Programming Historian website](http://programminghistorian.org/lessons/automated-downloading-with-wget). 
+
+### Most frequent images in a collection, based on MD5 hash
+
+Some images may be the same, but have different URLs. This UDF finds the popular images by calculating the MD5 hash of each and presenting the most frequent images based on that metric. This script:
+
+```scala
+import org.warcbase.spark.matchbox._
+import org.warcbase.spark.rdd.RecordRDD._
+import org.warcbase.spark.matchbox.RecordLoader
+
+val r = RecordLoader.loadArchives("/collections/webarchives/geocities/warcs/*.warc.gz",sc).persist()
+ExtractPopularImages(r, 2000, sc).saveAsTextFile("2000-Popular-Images-Geocities14")
+```
+
+Will save the 2000 most popular URLs to an output directory.
