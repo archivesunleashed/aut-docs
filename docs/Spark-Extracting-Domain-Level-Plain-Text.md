@@ -112,6 +112,14 @@ RecordLoader.loadArchives("path/to/example.warc.gz", sc)
   .saveAsTextFile("out2/")
 ```
 
+Note: if you created just a dump of plain text using another one of the earlier commands, you do not need to go back and run this. You can instead use bash to extract a sample of text. For example, running this command on a dump of all plain text stored in `alberta_education_curriculum.txt`:
+
+```bash
+sed -n -e '/^(201204/p' alberta_education_curriculum.txt > alberta_education_curriculum-201204.txt
+```
+
+Would select just the lines beginning with `(201204`, or April 2012.
+
 ### Plain text filtered by language
 
 The following Spark script keeps only French language pages from a certain top-level domain. It uses the [ISO 639.2 language codes](https://www.loc.gov/standards/iso639-2/php/code_list.php).
