@@ -12,7 +12,9 @@ There are two main dependencies to install, [git](https://git-scm.com/) and [Apa
 
 ### OS X
 
-In OS X, we recommend just using [homebrew](http://brew.sh/). This is a package manager that can simplify everything. You will also need to download an updated JDK 8, which [you can find here](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
+In OS X, we recommend just using [homebrew](http://brew.sh/). This is a package manager that can simplify everything. 
+
+You will also need to download an updated JDK 8, which [you can find here](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
 
 In your terminal, type:
 
@@ -35,11 +37,21 @@ In Linux, you can install git using:
 apt-get install git
 ```
 
-For Maven, [download it from here](https://maven.apache.org/download.cgi). We have tested using the tar archive. All you should need to do is add it to your path, as in:
+For Maven, [download it from here](https://maven.apache.org/download.cgi). We have tested using the tar archive.
 
+For example, here are the commands we use to install on Ubuntu 14 (starting in the user's home directory):
+
+```bash
+wget http://apache.mirror.gtcomm.net/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
+tar -xvf apache-maven-3.5.0-bin.tar.gz
+export M2_HOME=/home/ubuntu/apache-maven-3.5.0
+export M2=$M2_HOME/bin
+export PATH=$M2:$PATH
+sudo apt-get install openjdk-7-jdk
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 ```
-export PATH=/opt/apache-maven-3.3.9/bin:$PATH
-```
+
+This uses `wget` to download Maven, unzips it using `tar -xvf`, and then sets the Maven variables so that I can use maven from everywhere. 
 
 ## Step Two: Installing Warcbase
 
@@ -77,7 +89,19 @@ If you see `BUILD SUCCESS`, then... success! You only need to build warcbase onc
 
 ## Step Three: Testing with Spark Shell
 
-You will now need to install Spark Shell. You can [download it from here](http://spark.apache.org/downloads.html). [This pre-built version is ideal for all systems](http://www.apache.org/dyn/closer.lua/spark/spark-1.6.1/spark-1.6.1-bin-hadoop2.6.tgz).
+You will now need to install Spark Shell. You can [download it from here](http://spark.apache.org/downloads.html). I have used [this version](wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1-bin-hadoop2.6.tgz).
+
+You can grab it on the command line with:
+
+```bash
+wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1-bin-hadoop2.6.tgz
+```
+
+Unzip using
+
+```bash
+tar -xvf spark-1.6.1-bin-hadoop2.6.tgz
+```
 
 Now to test, load up the Spark shell. To do so, you will need to run the following from the `spark-1.6.1-bin-hadoop2.6` directory (or whatever version you ended up downloading). The command looks like this on OS X and Linux:
 
