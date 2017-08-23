@@ -1,9 +1,9 @@
-site_name: Warcbase
+site_name: The Archives Unleashed Toolkit
 docs_dir: docs
 dev_addr: 'localhost:8111'
-repo_url: https://github.com/lintool/warcbase
+repo_url: https://github.com/archivesunleashed/aut
 
-theme: yeti 
+theme: yeti
 pages:
 - Home: 'index.md'
 - Setup:
