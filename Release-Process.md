@@ -69,10 +69,6 @@ To make sure the release goes smoothly, you should ensure that:
 * Search for 'aut'
 * Click Close, then Refresh, then Release
 
-## GitHub Pages
-
-* `mvn site-deploy -DskipTests`
-
 ## Contributor Keys
 
 | Name         | Organization           | Address               | Code Signing Key Fingerprint | Key Id |
