@@ -4,7 +4,7 @@ Adapted from: https://wiki.duraspace.org/display/FF/Fedora+Release+Process
 
 To make sure the release goes smoothly, you should ensure that:
   * You have an account with commit access for aut on GitHub.
-  * You have an oss.sonatype.org account and have requested to be given permission to publish to the `io.archivesunleashed` groupId by adding a comment to the [Archives Unleased Sonatype Hosting Ticket](https://issues.sonatype.org/browse/OSSRH-33075)
+  * You have an [oss.sonatype.org](https://oss.sonatype.org/) account and have requested to be given permission to publish to the `io.archivesunleashed` groupId by adding a comment to the [Archives Unleased Sonatype Hosting Ticket](https://issues.sonatype.org/browse/OSSRH-33075)
   * Ensure you have a trusted code signing key; [create](https://wiki.duraspace.org/display/FCREPO/Creating+a+Code+Signing+Key) if you haven't before and add it to the [contributor keys](https://github.com/archivesunleashed/aut/wiki/Release-Process#contributor-keys) list below
   * Your maven settings (`~/.m2/settings.xml`) includes the following:
 ```xml
