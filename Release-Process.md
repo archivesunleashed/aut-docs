@@ -33,7 +33,7 @@ To make sure the release goes smoothly, you should ensure that:
 ```
 
 ## Steps:
-* `git clone git clone git@github.com:archivesunleashed/aut.git`
+* `git clone git@github.com:archivesunleashed/aut.git`
 * `cd Alpaca`
 * `git checkout -b release-X.Y.Z` (where X.Y.Z is your version number)
 * `mvn release:clean`
