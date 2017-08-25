@@ -7,7 +7,7 @@ The scripts require a NER classifier model. There is one provided in the Stanfor
 ## Extract entities from ARC/WARC files
 
 ```scala
-import org.warcbase.spark.matchbox.ExtractEntities
+import io.archivesunleashed.spark.matchbox.ExtractEntities
 
 sc.addFile("/path/to/classifier")
 
@@ -28,7 +28,7 @@ The output of this script and the one below will consist of lines that look like
 Run this script on texts [already extracted](https://github.com/lintool/warcbase/wiki/Spark-Extracting-Domain-Level-Plain-Text) from an ARC/WARC collection.
 
 ```scala
-import org.warcbase.spark.matchbox.ExtractEntities
+import io.archivesunleashed.spark.matchbox.ExtractEntities
 
 sc.addFile("/path/to/classifier")
 

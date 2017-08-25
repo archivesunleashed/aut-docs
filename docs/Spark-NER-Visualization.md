@@ -12,7 +12,7 @@ The visualizer can currently produce the following:
 The _matchbox_ contains a function in [NERCombinedJson](https://github.com/lintool/warcbase/blob/master/src/main/scala/org/warcbase/spark/matchbox/NERCombinedJson.scala) that will extract NER entities from [plain text records](./Spark-Extracting-Domain-Level-Plain-Text/), summarize them by crawl date, and save the results as a single JSON file. The following script calls the function. Modify the file names in (1) and (2) as appropriate.
 
 ```
-import org.warcbase.spark.matchbox.NERCombinedJson
+import io.archivesunleashed.spark.matchbox.NERCombinedJson
 
 sc.addFile("/path/to/english.all.3class.distsim.crf.ser.gz") // (1)
 

@@ -7,8 +7,8 @@ Warcbase supports image analysis, a growing area of interest within web archives
 The following script:
 
 ```scala
-import org.warcbase.spark.matchbox._
-import org.warcbase.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox._
+import io.archivesunleashed.spark.rdd.RecordRDD._
 
 val links = RecordLoader.loadArchives("/home/i2millig/warcbase/src/test/resources/warc/example.warc.gz", sc)
   .keepValidPages()
@@ -35,9 +35,9 @@ For more information on `wget`, please consult [this lesson available on the Pro
 Some images may be the same, but have different URLs. This UDF finds the popular images by calculating the MD5 hash of each and presenting the most frequent images based on that metric. This script:
 
 ```scala
-import org.warcbase.spark.matchbox._
-import org.warcbase.spark.rdd.RecordRDD._
-import org.warcbase.spark.matchbox.RecordLoader
+import io.archivesunleashed.spark.matchbox._
+import io.archivesunleashed.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox.RecordLoader
 
 val r = RecordLoader.loadArchives("/collections/webarchives/geocities/warcs/*.warc.gz",sc).persist()
 ExtractPopularImages(r, 2000, sc).saveAsTextFile("2000-Popular-Images-Geocities14")

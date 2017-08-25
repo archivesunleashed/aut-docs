@@ -126,8 +126,8 @@ This command accepts flags. As you get more advanced, you might want to pass it 
 Now run the following sample script to see if it works. To enter code blocks you will need to type `:paste` first. Paste the command, and then press `Ctrl+D`.
 
 ```scala
-import org.warcbase.spark.matchbox._
-import org.warcbase.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox._
+import io.archivesunleashed.spark.rdd.RecordRDD._
 
 val r = RecordLoader.loadArchives("warcbase-core/src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()
@@ -177,8 +177,8 @@ The **first command** needs to load the warcbase jar. Make sure to change the pa
 You are now ready to run your first script. Try the following, making sure to provide a full path in lieu of `src/test/resources/arc/example.arc.gz`. 
 
 ```scala
-import org.warcbase.spark.matchbox._ 
-import org.warcbase.spark.rdd.RecordRDD._ 
+import io.archivesunleashed.spark.matchbox._ 
+import io.archivesunleashed.spark.rdd.RecordRDD._ 
 
 val r = 
 RecordLoader.loadArchives("/USER/warcbase/warcbase-core/src/test/resources/arc/example.arc.gz", sc) 

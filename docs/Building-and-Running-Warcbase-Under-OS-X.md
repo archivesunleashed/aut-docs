@@ -134,11 +134,11 @@ Warcbase is useful for managing web archives, but its real power is as a platfor
 ### Building the URL mapping
 Most of the tools that follow require a URL mapping file, which maps every URL in a set of ARC/WARC files to a unique integer ID. There are two ways of doing this; the first is simpler:
 
-    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar org.warcbase.data.UrlMappingMapReduceBuilder -input /path/to/webarc/files -output fst.dat
+    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar io.archivesunleashed.data.UrlMappingMapReduceBuilder -input /path/to/webarc/files -output fst.dat
 
 If this does not work due to a lack of memory, try the following steps:
 
-    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar org.warcbase.analysis.ExtractUniqueUrls -input /path/to/webarchive/files -output urls 
+    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar io.archivesunleashed.analysis.ExtractUniqueUrls -input /path/to/webarchive/files -output urls 
     
 (If you have configured HBase to run in distributed mode rather than in standalone mode, which is the configuration provided above, you must now copy the `urls` directory out of HDFS into the local filesystem.)
 
@@ -180,30 +180,30 @@ Instead of extracting links between individual URLs, we can extract the site-lev
 
 Then run this MapReduce program:
 
-    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar org.warcbase.data.ExtractSiteLinks -hdfs /path/to/webarchive/files -output output -numReducers 1 -urlMapping fst.dat -prefixFile prefix.csv
+    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar io.archivesunleashed.data.ExtractSiteLinks -hdfs /path/to/webarchive/files -output output -numReducers 1 -urlMapping fst.dat -prefixFile prefix.csv
     
 ### Other analysis tools
 The tools described in this section are relatively simple. Some can process ARC and/or WARC files, while others exist in ARC and WARC versions.
 
 There are three counting tools. They count different content-types, crawl-dates, and urls:
     
-    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar  org.warcbase.analysis.CountArcContentTypes -input /arc/files/ -output contentTypes
+    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar  io.archivesunleashed.analysis.CountArcContentTypes -input /arc/files/ -output contentTypes
 
-    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar  org.warcbase.analysis.CountArcCrawlDates -input /arc/files/ -output crawlDates
+    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar  io.archivesunleashed.analysis.CountArcCrawlDates -input /arc/files/ -output crawlDates
     
-    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar  org.warcbase.analysis.CountArcUrls -input ~/arc/files/ -output urls
+    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar  io.archivesunleashed.analysis.CountArcUrls -input ~/arc/files/ -output urls
 
-For WARC files, replace "Arc" with "Warc" in the class names (e.g., `org.warcbase.analysis.CountArcContentTypes` becomes `org.warcbase.analysis.CountWarcContentTypes`).
+For WARC files, replace "Arc" with "Warc" in the class names (e.g., `io.archivesunleashed.analysis.CountArcContentTypes` becomes `io.archivesunleashed.analysis.CountWarcContentTypes`).
 
 There is a tool to extract unique URLs:
 
-    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar org.warcbase.analysis.ExtractUniqueUrls -input /arc/or/warc/files -output uniqueUrls
+    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar io.archivesunleashed.analysis.ExtractUniqueUrls -input /arc/or/warc/files -output uniqueUrls
 
 There is a pair of tools to find URLs, according to a regex pattern. 
 
-    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar  org.warcbase.analysis.FindArcUrls -input /arc/files/ -output foundUrls -pattern "http://.*org/.*"
+    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar  io.archivesunleashed.analysis.FindArcUrls -input /arc/files/ -output foundUrls -pattern "http://.*org/.*"
 
-    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar  org.warcbase.analysis.FindWarcUrls -input /warc/files/ -output foundUrls -pattern "http://.*org/.*"
+    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar  io.archivesunleashed.analysis.FindWarcUrls -input /warc/files/ -output foundUrls -pattern "http://.*org/.*"
     
 There is a tool to detect duplicates in the HBase:
 
@@ -211,6 +211,6 @@ There is a tool to detect duplicates in the HBase:
 
 There is also a web graph tool that pulls out link anchor text (background: https://github.com/lintool/warcbase/issues/8). 
 
-    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar  org.warcbase.analysis.graph.InvertAnchorText -hdfs /arc/or/warc/files -output output -numReducers 1 -urlMapping fst.dat
+    $ hadoop jar target/warcbase-0.1.0-SNAPSHOT-fatjar.jar  io.archivesunleashed.analysis.graph.InvertAnchorText -hdfs /arc/or/warc/files -output output -numReducers 1 -urlMapping fst.dat
 
 For all of these tools that employ a URL mapping, you must use the FST mapping generated for the set of data files you are analyzing.

@@ -44,8 +44,8 @@ It is a bit bare boned as it assumes some knowledge of a command line environmen
 - Try this following script. In order to paste code, type `paste` and then Ctrl+D when you finish it up. Depending on your directory, you might need to change `/home/ubuntu/warcbase/warcbase-core/src/test/resources/arc/example.arc.gz` to the path where warcbase is.
 
 ```scala
-import org.warcbase.spark.matchbox._ 
-import org.warcbase.spark.rdd.RecordRDD._ 
+import io.archivesunleashed.spark.matchbox._ 
+import io.archivesunleashed.spark.rdd.RecordRDD._ 
 
 val r = RecordLoader.loadArchives("/home/ubuntu/warcbase/warcbase-core/src/test/resources/arc/example.arc.gz", sc)
   .keepValidPages()

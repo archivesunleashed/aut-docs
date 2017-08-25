@@ -29,9 +29,9 @@ With the ensuing JSON file, you can use the following scripts. Here we're using 
 If you want the top 10 tweeted (shortened) URLs:
 
 ```scala
-import org.warcbase.spark.matchbox._
-import org.warcbase.spark.matchbox.TweetUtils._
-import org.warcbase.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox._
+import io.archivesunleashed.spark.matchbox.TweetUtils._
+import io.archivesunleashed.spark.rdd.RecordRDD._
 
 val tweets =
 RecordLoader.loadTweets("path/to/elxn42-search.json",
@@ -44,9 +44,9 @@ val r = tweets.flatMap(tweet => {"""http://[^ ]+""".r.findAllIn(tweet.text).toLi
 If you want to instead save all the URLs to a text file, the following script would work:
 
 ```scala
-import org.warcbase.spark.matchbox._
-import org.warcbase.spark.matchbox.TweetUtils._
-import org.warcbase.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox._
+import io.archivesunleashed.spark.matchbox.TweetUtils._
+import io.archivesunleashed.spark.rdd.RecordRDD._
 
 val tweets =
 RecordLoader.loadTweets("path/to/elxn42-search.json",
@@ -61,9 +61,9 @@ val r = tweets.flatMap(tweet => {"""http://[^ ]+""".r.findAllIn(tweet.text).toLi
 If you want the top 10 languages:
 
 ```scala
-import org.warcbase.spark.matchbox._
-import org.warcbase.spark.matchbox.TweetUtils._
-import org.warcbase.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox._
+import io.archivesunleashed.spark.matchbox.TweetUtils._
+import io.archivesunleashed.spark.rdd.RecordRDD._
 
 val tweets =
 RecordLoader.loadTweets("/mnt/vol1/data_sets/elxn42/ruest-white/elxn42-tweets-combined-deduplicated.json",
@@ -80,9 +80,9 @@ val lang =
 If you want the top 10 hashtags:
 
 ```scala
-import org.warcbase.spark.matchbox._
-import org.warcbase.spark.matchbox.TweetUtils._
-import org.warcbase.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox._
+import io.archivesunleashed.spark.matchbox.TweetUtils._
+import io.archivesunleashed.spark.rdd.RecordRDD._
 
 val tweets = 
 RecordLoader.loadTweets("/mnt/vol1/data_sets/elxn42/ruest-white/elxn42-tweets-combined-deduplicated.json", 
@@ -97,9 +97,9 @@ val r = tweets.flatMap(tweet => {"""#[^ ]+""".r.findAllIn(tweet.text).toList})
 If you want the top 10 tweeted images:
 
 ```scala
-import org.warcbase.spark.matchbox._
-import org.warcbase.spark.matchbox.TweetUtils._
-import org.warcbase.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox._
+import io.archivesunleashed.spark.matchbox.TweetUtils._
+import io.archivesunleashed.spark.rdd.RecordRDD._
 import org.json4s._
 import org.json4s.jackson.JsonMethods._
 

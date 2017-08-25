@@ -19,8 +19,8 @@ A fluent API is being developed for RDDs, and is now available on master.
 To use the API, two imports are required (run within Spark shell):    
 
 ```scala
-import org.warcbase.spark.rdd.RecordRDD._
-import org.warcbase.spark.matchbox.RecordLoader
+import io.archivesunleashed.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox.RecordLoader
 ```
 
 ### Running in the Spark Shell
@@ -43,8 +43,8 @@ To run multi-line commands, type `:paste` in Spark shell to start a multi-line c
 For example, the following script counts web pages by time:  
 
 ````scala
-import org.warcbase.spark.rdd.RecordRDD._
-import org.warcbase.spark.matchbox.RecordLoader
+import io.archivesunleashed.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox.RecordLoader
 
 val counts = RecordLoader.loadArchives("/shared/collections/CanadianPoliticalParties/arc/")
   .keepValidPages

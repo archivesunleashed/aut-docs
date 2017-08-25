@@ -7,8 +7,8 @@ You may want to get a birds-eye view of your ARCs or WARCs: what top-level domai
 If you just want a list of URLs, you can run this in Spark shell:
 
 ```scala
-import org.warcbase.spark.matchbox._ 
-import org.warcbase.spark.rdd.RecordRDD._ 
+import io.archivesunleashed.spark.matchbox._ 
+import io.archivesunleashed.spark.rdd.RecordRDD._ 
 
 val r = RecordLoader.loadArchives("/directory/to/arc/file.arc.gz", sc) 
 .keepValidPages()
@@ -19,8 +19,8 @@ val r = RecordLoader.loadArchives("/directory/to/arc/file.arc.gz", sc)
 This will give you a list of the top ten URLs. If you want all the URLs, exported to a file, you could run this instead. Note that your export directory cannot already exist.
 
 ```scala
-import org.warcbase.spark.matchbox._
-import org.warcbase.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox._
+import io.archivesunleashed.spark.rdd.RecordRDD._
 
 val r = RecordLoader.loadArchives("/directory/to/arc/file.arc.gz", sc) 
 .keepValidPages()
@@ -38,8 +38,8 @@ In the Spark Notebook, the following command will generate an interactive visual
 You'll be ready to run this then.
 
 ```scala
-import org.warcbase.spark.matchbox._ 
-import org.warcbase.spark.rdd.RecordRDD._ 
+import io.archivesunleashed.spark.matchbox._ 
+import io.archivesunleashed.spark.rdd.RecordRDD._ 
 
 val r = 
 RecordLoader.loadArchives("/directory/to/arc/file.arc.gz", sc) 
@@ -60,8 +60,8 @@ Here is a sample output from a 5GB collection of Canadian political party ARCs:
 Finally, you can use regular expressions to extract more fine-tuned information. For example, if you wanted to know all sitenames - i.e. the first-level directories of a given collection.
 
 ```scala
-import org.warcbase.spark.matchbox._
-import org.warcbase.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox._
+import io.archivesunleashed.spark.rdd.RecordRDD._
 
 val r = RecordLoader.loadArchives("/path/to/warcs", sc)
  .keepValidPages()
