@@ -1,32 +1,77 @@
-# Warcbase
+# Archives Unleashed Toolkit (aut)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/web-archive-group/WAHR/master/images/cpppig-visualization-small.png" alt="network of the Canadian Political Parties collection"/>
 </p>
 
-Warcbase is an open-source platform for managing web archives built on [Hadoop](https://hadoop.apache.org/) and [HBase](https://hbase.apache.org/). The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via [Spark](http://spark.apache.org/). For more information on the project and the team behind it, visit our [about page](./about/).
+The Archives Unleashed Toolkit is an open-source platform for managing web archives built on [Hadoop](https://hadoop.apache.org/) and [HBase](https://hbase.apache.org/). The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via [Spark](http://spark.apache.org/). For more information on the project and the team behind it, visit our [about page](./about/).
 
 Our documentation can be accessed by using the drop-down menus above.
 
 ## Getting Started
-You can [download Warcbase here](https://github.com/lintool/warcbase). The easiest way would be to follow our [Getting Started tutorial](./Getting-Started/). For a conceptual and practical introduction to the command line, please see Ian Milligan and James Baker's "Introduction to the Bash Command Line" at the [*Programming Historian*](http://programminghistorian.org/lessons/intro-to-bash).
 
-## Using Warcbase
-If you've just arrived, you're probably interested in using [**Spark to analyze your web archive collections**](./Analyzing-Web-Archives-with-Spark/): gathering collection statistics, textual analysis, network analysis, etc.
+The Archives Unleashed Toolkit requires both git and maven to work.  On Mac / OS X, we advise downloading and installing the [Homebrew Package Manager](http://brew.sh).
 
-If you want to explore web archives using other means, we have walkthroughs to use the SHINE front end on Solr indexes generated using Warcbase. See [this SHINE walkthrough](./Shine-Installing-Shine-Frontend-on-OS-X/) and this [building Lucene indexes](./Building-Lucene-Indexes-Using-Hadoop/) walkthrough.
+### Installing Git and Maven  
 
-# About Warcbase
-Warcbase is an open-source platform for managing web archives built on Hadoop and HBase. The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via Spark.
+#### MAC / OS X
 
-There are two main ways of using Warcbase:
+With Homebrew Installed, you can install git and maven
+
+```
+brew install git
+brew install maven
+```
+
+#### Windows
+
+Install git using [Git Bash](https://git-for-windows.github.io/). 
+
+[Download a copy of binary zip copy of Maven](https://maven.apache.org/download.cgi) Then follow [these instructions for "Windows Tips"](https://maven.apache.org/install.html). 
+
+Instead of `spark-shell` in subsequent instructions, you will need to call `spark-shell.cmd` instead.
+
+#### Linux
+
+apt-get install git
+[Download Maven from Apache](https://maven.apache.org/download.cgi). We have tested using the tar archive.
+
+More detailed instructions on this process are available on the [Getting Started Tutorial](./Getting-Started.md)
+
+### Installing the Archives Unleashed Toolkit
+
+```bash
+git clone http://github.com/archivesunleashed/aut.git
+cd aut
+mvn clean package
+```
+
+If it works you should see `BUILD SUCCESS!`.  
+
+If you run into any trouble, you may find the [Getting Started Tutorial](./Getting-Started.md) helpful.
+
+You should now be able to try out the toolkit's many tutorials.
+
+## Using the Archives Unleashed Toolkit
+
+We have prepared a number of tutorials to show what the AUT can do:
+
+* [**Spark to analyze your web archive collections**](./Analyzing-Web-Archives-with-Spark/) for gathering collection statistics, textual analysis, network analysis, etc.
+
+[This SHINE walkthrough](./Shine-Installing-Shine-Frontend-on-OS-X/) and this [building Lucene indexes](./Building-Lucene-Indexes-Using-Hadoop/) walkthrough shows how to use the SHINE front end on Solr indexes generated using aut. 
+
+
+# About aut
+Aut is an open-source platform for managing web archives built on Hadoop and HBase. The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via Spark.
+
+There are two main ways of using aut:
 
 + The first and most common is to analyze web archives using [Spark](http://spark.apache.org/).
-+ The second is to take advantage of HBase to provide random access as well as analytics capabilities. Random access allows Warcbase to provide temporal browsing of archived content (i.e., "wayback" functionality).
++ The second is to take advantage of HBase to provide random access as well as analytics capabilities. Random access allows aut to provide temporal browsing of archived content (i.e., "wayback" functionality).
 
-You can use Warcbase without HBase, and since HBase requires more extensive setup, it is recommended that if you're just starting out, play with the Spark analytics and don't worry about HBase.
+You can use aut without HBase, and since HBase requires more extensive setup, it is recommended that if you're just starting out, play with the Spark analytics and don't worry about HBase.
 
-Warcbase is built against CDH 5.4.1:
+AUT is built against CDH 5.4.1:
 
 + Hadoop version: 2.6.0-cdh5.4.1
 + HBase version: 1.0.0-cdh5.4.1
@@ -36,11 +81,13 @@ The Hadoop ecosystem is evolving rapidly, so there may be incompatibilities with
 
 You are currently in our documentation.
 
-Supporting files can be found in the [warcbase-resources repository](https://github.com/lintool/warcbase-resources).
+<!-- check this link by September 15th -->
+
+Supporting files can be found in the [aut-resources repository](https://github.com/archivesunleashed/aut-resources).
 
 ## Project Team
 
-Warcbase is brought to you by a team of researchers at the University of Waterloo, including:
+The Archives Unleashed Toolkit is brought to you by a team of researchers at the University of Waterloo, including:
 
 - **Jimmy Lin**, David R. Cheriton Chair, David R. Cheriton School of Computer Science
 - **Ian Milligan**, Assistant Professor, Department of History
