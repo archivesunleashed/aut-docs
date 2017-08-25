@@ -4,49 +4,71 @@
   <img src="https://raw.githubusercontent.com/web-archive-group/WAHR/master/images/cpppig-visualization-small.png" alt="network of the Canadian Political Parties collection"/>
 </p>
 
-The Archives Unleashed Toolkit is an open-source platform for managing web archives built on [Hadoop](https://hadoop.apache.org/) and [HBase](https://hbase.apache.org/). The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via [Spark](http://spark.apache.org/). For more information on the project and the team behind it, visit our [about page](./about/).
+The Archives Unleashed Toolkit is an open-source platform for managing web archives built on [Hadoop](https://hadoop.apache.org/). The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via [Spark](http://spark.apache.org/). For more information on the project and the team behind it, visit our [about page](./about/).
 
 Our documentation can be accessed by using the drop-down menus above.
 
 ## Getting Started
 
-The Archives Unleashed Toolkit requires both git and maven to work.  On Mac / OS X, we advise downloading and installing the [Homebrew Package Manager](http://brew.sh).
-
-### Installing Git and Maven  
-
-#### MAC / OS X
-
-With Homebrew Installed, you can install git and maven
-
-```
-brew install git
-brew install maven
-```
-
-#### Windows
-
-Install git using [Git Bash](https://git-for-windows.github.io/). 
-
-[Download a copy of binary zip copy of Maven](https://maven.apache.org/download.cgi) Then follow [these instructions for "Windows Tips"](https://maven.apache.org/install.html). 
-
-Instead of `spark-shell` in subsequent instructions, you will need to call `spark-shell.cmd` instead.
-
-#### Linux
-
-apt-get install git
-[Download Maven from Apache](https://maven.apache.org/download.cgi). We have tested using the tar archive.
-
-More detailed instructions on this process are available on the [Getting Started Tutorial](./Getting-Started.md)
-
-### Installing the Archives Unleashed Toolkit
+The Archives Unleashed Toolkit can be [downloaded as a JAR file for easy use](https://github.com/archivesunleashed/aut/releases/download/aut-0.9.0/aut-0.9.0-fatjar.jar) 
 
 ```bash
-git clone http://github.com/archivesunleashed/aut.git
+mkdir aut
 cd aut
-mvn clean package
+wget https://github.com/archivesunleashed/aut/releases/download/aut-0.9.0/aut-0.9.0-fatjar.jar
+# example arc file for testing
+wget https://github.com/archivesunleashed/aut/src/test/resources/arc/example.arc.gz
 ```
 
-If it works you should see `BUILD SUCCESS!`.  
+### Installing the Spark shell
+
+Download and unzip [The Spark Shell](wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1-bin-hadoop2.6.tgz) from the [Apache Spark Website](http://spark.apache.org/downloads.html).
+
+```bash
+wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1-bin-hadoop2.6.tgz
+tar -xvf spark-1.6.1-bin-hadoop2.6.tgz
+cd spark-1.6.1-bin-hadoop2.6
+./bin/spark-shell --jars ./aut-0.9.0-fatjar.jar
+```
+
+You should have the spark shell ready and running.
+
+```bash
+
+Welcome to
+  ____              __
+ / __/__  ___ _____/ /__
+ _\ \/ _ \/ _ `/ __/  '_/
+/___/ .__/\_,_/_/ /_/\_\   version 1.6.1
+   /_/
+
+Using Scala version 2.10.5 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_72)
+Type in expressions to have them evaluated.
+Type :help for more information.
+Spark context available as sc.
+SQL context available as sqlContext.
+
+scala> 
+
+```
+If you recently upgraded your Mac, your java version not be correct in terminal.  You will have to [change the path to the latest version in your ./bash_profile file.](https://stackoverflow.com/questions/21964709/how-to-set-or-change-the-default-java-jdk-version-on-os-x).
+
+Type `:p` at the scala prompt and go into paste mode.
+
+Type or paste the following:
+
+```
+import io.archivesunleashed.spark.matchbox._
+import io.archivesunleashed.spark.rdd.RecordRDD._
+
+val r = RecordLoader.loadArchives("~/aut/example.arc.gz", sc)
+.keepValidPages()
+.map(r => ExtractDomain(r.getUrl))
+.countItems()
+.take(10)
+
+```
+
 
 If you run into any trouble, you may find the [Getting Started Tutorial](./Getting-Started.md) helpful.
 
@@ -61,20 +83,13 @@ We have prepared a number of tutorials to show what the AUT can do:
 [This SHINE walkthrough](./Shine-Installing-Shine-Frontend-on-OS-X/) and this [building Lucene indexes](./Building-Lucene-Indexes-Using-Hadoop/) walkthrough shows how to use the SHINE front end on Solr indexes generated using aut. 
 
 
-# About aut
-Aut is an open-source platform for managing web archives built on Hadoop and HBase. The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via Spark.
+# About the Archives Unleashed Toolkit
 
-There are two main ways of using aut:
-
-+ The first and most common is to analyze web archives using [Spark](http://spark.apache.org/).
-+ The second is to take advantage of HBase to provide random access as well as analytics capabilities. Random access allows aut to provide temporal browsing of archived content (i.e., "wayback" functionality).
-
-You can use aut without HBase, and since HBase requires more extensive setup, it is recommended that if you're just starting out, play with the Spark analytics and don't worry about HBase.
+Aut is an open-source platform for managing web archives built on Hadoop. The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via Spark.
 
 AUT is built against CDH 5.4.1:
 
 + Hadoop version: 2.6.0-cdh5.4.1
-+ HBase version: 1.0.0-cdh5.4.1
 + Spark version: 1.3.0-cdh5.4.1
 
 The Hadoop ecosystem is evolving rapidly, so there may be incompatibilities with other versions.
