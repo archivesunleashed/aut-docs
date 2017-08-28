@@ -1,3 +1,3 @@
 # Analyzing Web Archives with Warcbase
 
-Read the documentation [here](http://lintool.github.io/warcbase-docs).
+Read the documentation [here](https://github.com/archivesunleashed/aut-docs).

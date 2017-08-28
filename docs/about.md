@@ -1,33 +1,29 @@
-# About Warcbase
-Warcbase is an open-source platform for managing web archives built on Hadoop and HBase. The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via Spark.
+# About the Archives Unleashed Toolkit
 
-There are two main ways of using Warcbase:
+The Archives Unleashed Toolkit, or AUT, applies modern big data analytics infrastructure to the scholarly analysis of web archives. Built on Hadoop, it provides powerful tools for analytics and data processing via Apache [Spark](http://spark.apache.org/).
 
-+ The first and most common is to analyze web archives using [Spark](http://spark.apache.org/).
-+ The second is to take advantage of HBase to provide random access as well as analytics capabilities. Random access allows Warcbase to provide temporal browsing of archived content (i.e., "wayback" functionality).
 
-You can use Warcbase without HBase, and since HBase requires more extensive setup, it is recommended that if you're just starting out, play with the Spark analytics and don't worry about HBase.
-
-Warcbase is built against CDH 5.4.1:
-
+AUT is built against CDH 5.4.1:
 + Hadoop version: 2.6.0-cdh5.4.1
-+ HBase version: 1.0.0-cdh5.4.1
 + Spark version: 1.3.0-cdh5.4.1
 
 The Hadoop ecosystem is evolving rapidly, so there may be incompatibilities with other versions.
 
 You are currently in our documentation.
 
-Supporting files can be found in the [warcbase-resources repository](https://github.com/lintool/warcbase-resources).
+Supporting files can be found in the [aut-resources repository](https://github.com/lintool/warcbase-resources).
 
 ## Project Team
 
-Warcbase is brought to you by a team of researchers at the University of Waterloo, including:
+The Archives Unleashed Toolkit is brought to you by a team of researchers at the University of Waterloo and York University.  Originally, called "warcbase", the AUT has had major contributions from a number of people including:
 
-- **Jimmy Lin**, David R. Cheriton Chair, David R. Cheriton School of Computer Science
-- **Ian Milligan**, Assistant Professor, Department of History
-- **Alice Zhou**, Undergraduate Research Assistant, David R. Cheriton School of Computer Science
-- **Jeremy Wiebe**, PhD Candidate, Department of History
+- **Jimmy Lin**, David R. Cheriton Chair, University of Waterloo David R. Cheriton School of Computer Science
+- **Ian Milligan**, Assistant Professor, University of Waterloo Department of History
+- **Nick Ruest**, Digital Assets Librarian, York University
+- **Ryan Deschamps**, Post-Doctoral Fellow, University of Waterloo Department of History 
+- **Alice Zhou**, Undergraduate Research Assistant, University of Waterloo David R. Cheriton School of Computer Science
+- **Jeremy Wiebe**, PhD Candidate, University of Waterloo Department of History
+
 
 ## License
 

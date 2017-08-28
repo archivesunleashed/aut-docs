@@ -7,15 +7,15 @@ Site link structures can be very useful, allowing you to learn such things as:
 - what paths could be taken through the network to connect pages;  
 - what communities existed within the link structure?  
 
-Many of the [filtering commands listed here](http://lintool.github.io/warcbase-docs/Spark-Several-Basic-Commands/) will work as well.
+Many of the [filtering commands listed here](./Spark-Several-Basic-Commands/) will work as well.
 
 ## Extraction of Simple Site Link Structure
 
 If your web archive does not have a temporal component, the following Spark script will generate the site-level link structure. In this case, it is loading all WARCs stored in an example collection of GeoCities files.
 
 ```scala
-import org.warcbase.spark.matchbox._
-import org.warcbase.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox._
+import io.archivesunleashed.spark.rdd.RecordRDD._
 import StringUtils._
 
 val links = RecordLoader.loadArchives("/collections/webarchives/geocities/warcs/", sc)
@@ -32,8 +32,8 @@ links.saveAsTextFile("geocities-links-all/")
 Note how you can add filters. In this case, we add a filter so you are looking at a network graph of pages containing the phrase "apple." Filters can go immediately after `.keepValidPages()`.
 
 ```scala
-import org.warcbase.spark.matchbox._
-import org.warcbase.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox._
+import io.archivesunleashed.spark.rdd.RecordRDD._
 import StringUtils._
 
 val links = RecordLoader.loadArchives("/collections/webarchives/geocities/warcs/", sc)
@@ -53,8 +53,8 @@ links.saveAsTextFile("geocities-links-all/")
 In this following example, we run the same script but only extract links coming from URLs matching the pattern `http://geocities.com/EnchantedForest/.*`. We do so by using the `keepUrlPatterns` command.
 
 ```scala
-import org.warcbase.spark.matchbox._
-import org.warcbase.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox._
+import io.archivesunleashed.spark.rdd.RecordRDD._
 import StringUtils._
 
 val links = RecordLoader.loadArchives("/collections/webarchives/geocities/warcs/", sc)
@@ -77,8 +77,8 @@ makes use of the `ExtractLinks` and `ExtractToLevelDomain` functions.
 If you prefer to group by crawl month (YYYMM), replace `getCrawlDate` with `getCrawlMonth` below.
 
 ```scala
-import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader}
-import org.warcbase.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader}
+import io.archivesunleashed.spark.rdd.RecordRDD._
 
 RecordLoader.loadArchives("/path/to/arc", sc)
   .keepValidPages()
@@ -117,15 +117,15 @@ and wish it to be counted.
 Archive records are represented in Spark as [tuples](https://en.wikipedia.org/wiki/Tuple), 
 and this is the standard format of results produced by most of the scripts presented here
 (e.g., see above). It may be useful, however, to have this data in TSV (tab-separated value)
-format, for further processing outside Warcbase. The following script uses `tabDelimit` (from
+format, for further processing outside AUT. The following script uses `tabDelimit` (from
 `TupleFormatter`) to transform tuples to tab-delimited strings; it also flattens any 
 nested tuples. (This is the same script as at the top of the page, with the addition of the 
 third and the second-last lines.)
 
 ```scala
-import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader}
-import org.warcbase.spark.rdd.RecordRDD._
-import org.warcbase.spark.matchbox.TupleFormatter._
+import io.archivesunleashed.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader}
+import io.archivesunleashed.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox.TupleFormatter._
 
 RecordLoader.loadArchives("/path/to/arc", sc)
   .keepValidPages()
@@ -151,8 +151,8 @@ Its output looks like:
 You may also wish to only extract links from a subset of pages, in which case you can also add in the [filters found here](./Spark-Several-Basic-Commands/). In this case, you would only receive links coming from websites in matching the URL pattern listed under `keepUrlPatterns`.
 
 ```scala
-import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader, WriteGDF}
-import org.warcbase.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader, WriteGDF}
+import io.archivesunleashed.spark.rdd.RecordRDD._
 
 val links = RecordLoader.loadArchives("/collections/webarchives/CanadianPoliticalParties/arc/", sc)
   .keepValidPages()
@@ -171,8 +171,8 @@ WriteGDF(links, "all-links-EnchantedForest.gdf")
 You may want to export your data directly to the [Gephi software suite](http://gephi.github.io/), an open-soure network analysis project. The following code writes to a GDF format:
 
 ```scala
-import org.warcbase.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader, WriteGDF}
-import org.warcbase.spark.rdd.RecordRDD._
+import io.archivesunleashed.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader, WriteGDF}
+import io.archivesunleashed.spark.rdd.RecordRDD._
 
 val links = RecordLoader.loadArchives("/collections/webarchives/CanadianPoliticalParties/arc/", sc)
   .keepValidPages()
@@ -195,4 +195,4 @@ Interested in playing with your link structures in browser like so?
 
 ![Example of the D3.js visualizer](https://raw.githubusercontent.com/web-archive-group/WAHR/master/images/d3js-example.png)
 
-Then read on to [Visualizing Site-Link Structure with D3.js](http://lintool.github.io/warcbase-docs/Spark-Network-Analysis/)
+Then read on to [Visualizing Site-Link Structure with D3.js](./Spark-Network-Analysis/)

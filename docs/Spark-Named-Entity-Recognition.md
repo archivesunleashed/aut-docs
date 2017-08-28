@@ -1,13 +1,13 @@
 # Named Entity Recognition
 
-The following Spark scripts use the [Stanford Named Entity Recognizer](http://nlp.stanford.edu/software/CRF-NER.shtml) to extract names of entities – persons, organizations, and locations – from collections of ARC/WARC files or extracted texts. You can find a version of Stanford NER in [our Warcbase-Resources repo located here](https://github.com/lintool/warcbase-resources).
+The following Spark scripts use the [Stanford Named Entity Recognizer](http://nlp.stanford.edu/software/CRF-NER.shtml) to extract names of entities – persons, organizations, and locations – from collections of ARC/WARC files or extracted texts. You can find a version of Stanford NER in [our aut-Resources repo located here](https://github.com/archivesunleashed/aut-resources).
 
 The scripts require a NER classifier model. There is one provided in the Stanford NER package (in the `classifiers` folder) called `english.all.3class.distsim.crf.ser.gz`, but you can also use your own.
 
 ## Extract entities from ARC/WARC files
 
 ```scala
-import org.warcbase.spark.matchbox.ExtractEntities
+import io.archivesunleashed.spark.matchbox.ExtractEntities
 
 sc.addFile("/path/to/classifier")
 
@@ -24,11 +24,8 @@ The output of this script and the one below will consist of lines that look like
 "LOCATION":["Canada","Canada","Canada","Canada"]})
 ```
 
-## Extract entities from extracted text
-Run this script on texts [already extracted](https://github.com/lintool/warcbase/wiki/Spark-Extracting-Domain-Level-Plain-Text) from an ARC/WARC collection.
-
 ```scala
-import org.warcbase.spark.matchbox.ExtractEntities
+import io.archivesunleashed.spark.matchbox.ExtractEntities
 
 sc.addFile("/path/to/classifier")
 

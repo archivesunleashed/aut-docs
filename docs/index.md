@@ -1,56 +1,103 @@
-# Warcbase
+# Archives Unleashed Toolkit (aut)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/web-archive-group/WAHR/master/images/cpppig-visualization-small.png" alt="network of the Canadian Political Parties collection"/>
 </p>
 
-Warcbase is an open-source platform for managing web archives built on [Hadoop](https://hadoop.apache.org/) and [HBase](https://hbase.apache.org/). The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via [Spark](http://spark.apache.org/). For more information on the project and the team behind it, visit our [about page](./about/).
+The Archives Unleashed Toolkit is an open-source platform for managing web archives built on [Hadoop](https://hadoop.apache.org/). The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via [Spark](http://spark.apache.org/). For more information on the project and the team behind it, visit our [about page](./about/).
 
 Our documentation can be accessed by using the drop-down menus above.
 
 ## Getting Started
-You can [download Warcbase here](https://github.com/lintool/warcbase). The easiest way would be to follow our [Getting Started tutorial](./Getting-Started/). For a conceptual and practical introduction to the command line, please see Ian Milligan and James Baker's "Introduction to the Bash Command Line" at the [*Programming Historian*](http://programminghistorian.org/lessons/intro-to-bash).
 
-## Using Warcbase
-If you've just arrived, you're probably interested in using [**Spark to analyze your web archive collections**](./Analyzing-Web-Archives-with-Spark/): gathering collection statistics, textual analysis, network analysis, etc.
+The Archives Unleashed Toolkit can be [downloaded as a JAR file for easy use](https://github.com/archivesunleashed/aut/releases/download/aut-0.9.0/aut-0.9.0-fatjar.jar) 
 
-If you want to explore web archives using other means, we have walkthroughs to use the SHINE front end on Solr indexes generated using Warcbase. See [this SHINE walkthrough](./Shine-Installing-Shine-Frontend-on-OS-X/) and this [building Lucene indexes](./Building-Lucene-Indexes-Using-Hadoop/) walkthrough.
+```bash
+mkdir aut
+cd aut
+curl -L "https://github.com/archivesunleashed/aut/releases/download/aut-0.9.0/aut-0.9.0-fatjar.jar" > aut-0.9.0-fatjar.jar
+# example arc file for testing
+curl -L "https://github.com/archivesunleashed/aut/blob/master/src/test/resources/arc/example.arc.gz?raw=true" > example.arc.gz
+```
 
-# About Warcbase
-Warcbase is an open-source platform for managing web archives built on Hadoop and HBase. The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via Spark.
+### Installing the Spark shell
 
-There are two main ways of using Warcbase:
+Download and unzip [The Spark Shell](wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1-bin-hadoop2.6.tgz) from the [Apache Spark Website](http://spark.apache.org/downloads.html).
 
-+ The first and most common is to analyze web archives using [Spark](http://spark.apache.org/).
-+ The second is to take advantage of HBase to provide random access as well as analytics capabilities. Random access allows Warcbase to provide temporal browsing of archived content (i.e., "wayback" functionality).
+```bash
+curl -L "http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1-bin-hadoop2.6.tgz" > spark-1.6.1-bin-hadoop2.6.tgz
+tar -xvf spark-1.6.1-bin-hadoop2.6.tgz
+cd spark-1.6.1-bin-hadoop2.6
+./bin/spark-shell --jars ../aut-0.9.0-fatjar.jar
+```
+> If for some reason you get `Failed to initialize compiler: 
+> object scala.runtime in compiler mirror not found.` error, 
+> this probably means the .jar file did not download properly.
+> Try downloading it directly from our [releases page](https://github.com/archivesunleashed/aut/releases/)
 
-You can use Warcbase without HBase, and since HBase requires more extensive setup, it is recommended that if you're just starting out, play with the Spark analytics and don't worry about HBase.
+You should have the spark shell ready and running.
 
-Warcbase is built against CDH 5.4.1:
+```bash
 
-+ Hadoop version: 2.6.0-cdh5.4.1
-+ HBase version: 1.0.0-cdh5.4.1
-+ Spark version: 1.3.0-cdh5.4.1
+Welcome to
+  ____              __
+ / __/__  ___ _____/ /__
+ _\ \/ _ \/ _ `/ __/  '_/
+/___/ .__/\_,_/_/ /_/\_\   version 1.6.1
+   /_/
 
-The Hadoop ecosystem is evolving rapidly, so there may be incompatibilities with other versions.
+Using Scala version 2.10.5 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_72)
+Type in expressions to have them evaluated.
+Type :help for more information.
+Spark context available as sc.
+SQL context available as sqlContext.
 
-You are currently in our documentation.
+scala> 
 
-Supporting files can be found in the [warcbase-resources repository](https://github.com/lintool/warcbase-resources).
+```
 
-## Project Team
+> If you recently upgraded your Mac OS X, your java version may not be correct in terminal.  You will 
+> have to [change the path to the latest version in your ./bash_profile file.](https://stackoverflow.com/questions/21964709/how-to-set-or-change-the-default-java-jdk-version-on-os-x).
 
-Warcbase is brought to you by a team of researchers at the University of Waterloo, including:
+### Test the Archives Unleashed Toolkit
 
-- **Jimmy Lin**, David R. Cheriton Chair, David R. Cheriton School of Computer Science
-- **Ian Milligan**, Assistant Professor, Department of History
-- **Alice Zhou**, Undergraduate Research Assistant, David R. Cheriton School of Computer Science
-- **Jeremy Wiebe**, PhD Candidate, Department of History
+Type `:p` at the scala prompt and go into paste mode.
 
-## License
+Type or paste the following:
 
-Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+```
+import io.archivesunleashed.spark.matchbox._
+import io.archivesunleashed.spark.rdd.RecordRDD._
 
-## Acknowlegments
+val r = RecordLoader.loadArchives("../example.arc.gz", sc)
+.keepValidPages()
+.map(r => ExtractDomain(r.getUrl))
+.countItems()
+.take(10)
 
-This work is supported in part by the National Science Foundation and by the Mellon Foundation (via Columbia University). Additional support has been forthcoming from the Social Sciences and Humanities Research Council of Canada and the Ontario Ministry of Research and Innovation's Early Researcher Award program.  Any opinions, findings, and conclusions or recommendations expressed are those of the researchers and do not necessarily reflect the views of the sponsors.
+```
+
+then `<ctrl> d` to exit paste mode and run the script.
+
+If you see:
+
+```
+r: Array[(String, Int)] = Array((www.archive.org,132), (deadlists.com,2), (www.hideout.com.br,1))
+```
+
+That means you're up and running!
+
+If you run into any trouble, you may find the [Getting Started Tutorial](./Getting-Started.md) helpful.
+
+You should now be able to try out the toolkit's many tutorials.
+
+## Using the Archives Unleashed Toolkit
+
+We have prepared a number of tutorials to show what the AUT can do:
+
+* [**Spark to analyze your web archive collections**](./Analyzing-Web-Archives-with-Spark/) for gathering collection statistics, textual analysis, network analysis, etc.
+
+* [This SHINE walkthrough](./Shine-Installing-Shine-Frontend-on-OS-X/) and this [building Lucene indexes](./Building-Lucene-Indexes-Using-Hadoop/) walkthrough shows how to use the SHINE front end on Solr indexes generated using aut. 
+
+
+More information about AUT can be found on the [About AUT page](./about.md)
