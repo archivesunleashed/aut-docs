@@ -17,7 +17,7 @@ mkdir aut
 cd aut
 curl -L "https://github.com/archivesunleashed/aut/releases/download/aut-0.9.0/aut-0.9.0-fatjar.jar" > aut-0.9.0-fatjar.jar
 # example arc file for testing
-curl -L "https://github.com/archivesunleashed/aut/blob/master/src/test/resources/arc/example.arc.gz?raw=true" > example.arc.gz
+curl -L "https://raw.githubusercontent.com/archivesunleashed/aut/master/src/test/resources/arc/example.arc.gz" > example.arc.gz
 ```
 
 ### Installing the Spark shell
