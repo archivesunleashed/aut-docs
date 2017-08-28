@@ -1,6 +1,6 @@
 # Network Analysis and Visualization in Spark using GraphX
 
-We use the Apache Spark [GraphX API](http://spark.apache.org/graphx/) to calculate graph information within warcbase. This can complement analysis done in Gephi.
+We use the Apache Spark [GraphX API](http://spark.apache.org/graphx/) to calculate graph information within AUT. This can complement analysis done in Gephi.
 
 ### Calculating Dynamic PageRank
 
@@ -55,15 +55,15 @@ The D3.js visualizer looks like this:
 
 ![Example of the D3.js visualizer](https://raw.githubusercontent.com/web-archive-group/WAHR/master/images/d3js-example.png)
 
-You can find it in `warcbase/vis/link-vis`. This page shows you two things: how you can load in sample data and visualize it, and then how you can replace the sample data with your own.
+You can find it in `aut/vis/link-vis`. This page shows you two things: how you can load in sample data and visualize it, and then how you can replace the sample data with your own.
 
 #### Using Sample Data
 
-To test it out, navigate to the `warcbase/vis/link-vis` directory on your command line. You can then complete the following steps:
+To test it out, navigate to the `aut/vis/link-vis` directory on your command line. You can then complete the following steps:
 
-1. Create a new directory labelled `data`, which will have the full path of ``warcbase/vis/link-vis/data`. 
-2. Copy the `graph.json` file from the [warcbase-resources](https://github.com/lintool/warcbase-resources) directory into `data`.
-3. Run `python -m SimpleHTTPServer 4321` from your `warcbase/vis/link-vis` directory. If you are using Python3, you may need to run `python -m http.server 4321` instead.
+1. Create a new directory labelled `data`, which will have the full path of ``aut/vis/link-vis/data`. 
+2. Copy the `graph.json` file from the [aut-resources](https://github.com/ArchivesUnleashed/aut-resources) directory into `data`.
+3. Run `python -m SimpleHTTPServer 4321` from your `aut/vis/link-vis` directory. If you are using Python3, you may need to run `python -m http.server 4321` instead.
 
 You can then navigate to [localhost:4321](http://localhost:4321) in your browser.
 

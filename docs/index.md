@@ -15,9 +15,9 @@ The Archives Unleashed Toolkit can be [downloaded as a JAR file for easy use](ht
 ```bash
 mkdir aut
 cd aut
-wget https://github.com/archivesunleashed/aut/releases/download/aut-0.9.0/aut-0.9.0-fatjar.jar
+curl -L "https://github.com/archivesunleashed/aut/releases/download/aut-0.9.0/aut-0.9.0-fatjar.jar" > aut-0.9.0-fatjar.jar
 # example arc file for testing
-wget https://github.com/archivesunleashed/aut/src/test/resources/arc/example.arc.gz
+curl -L "https://github.com/archivesunleashed/aut/src/test/resources/arc/example.arc.gz" > example.arc.gz
 ```
 
 ### Installing the Spark shell
@@ -25,11 +25,15 @@ wget https://github.com/archivesunleashed/aut/src/test/resources/arc/example.arc
 Download and unzip [The Spark Shell](wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1-bin-hadoop2.6.tgz) from the [Apache Spark Website](http://spark.apache.org/downloads.html).
 
 ```bash
-wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1-bin-hadoop2.6.tgz
+curl -L "http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1-bin-hadoop2.6.tgz" > spark-1.6.1-bin-hadoop2.6.tgz
 tar -xvf spark-1.6.1-bin-hadoop2.6.tgz
 cd spark-1.6.1-bin-hadoop2.6
-./bin/spark-shell --jars ./aut-0.9.0-fatjar.jar
+./bin/spark-shell --jars ../aut-0.9.0-fatjar.jar
 ```
+> If for some reason you get `Failed to initialize compiler: 
+> object scala.runtime in compiler mirror not found.` error, 
+> this probably means the .jar file did not download properly.
+> Try downloading it directly from our [releases page](https://github.com/archivesunleashed/aut/releases/)
 
 You should have the spark shell ready and running.
 
@@ -51,7 +55,11 @@ SQL context available as sqlContext.
 scala> 
 
 ```
-If you recently upgraded your Mac, your java version not be correct in terminal.  You will have to [change the path to the latest version in your ./bash_profile file.](https://stackoverflow.com/questions/21964709/how-to-set-or-change-the-default-java-jdk-version-on-os-x).
+
+> If you recently upgraded your Mac OS X, your java version may not be correct in terminal.  You will 
+> have to [change the path to the latest version in your ./bash_profile file.](https://stackoverflow.com/questions/21964709/how-to-set-or-change-the-default-java-jdk-version-on-os-x).
+
+### Test the Archives Unleashed Toolkit
 
 Type `:p` at the scala prompt and go into paste mode.
 
@@ -61,7 +69,7 @@ Type or paste the following:
 import io.archivesunleashed.spark.matchbox._
 import io.archivesunleashed.spark.rdd.RecordRDD._
 
-val r = RecordLoader.loadArchives("~/aut/example.arc.gz", sc)
+val r = RecordLoader.loadArchives("../example.arc.gz", sc)
 .keepValidPages()
 .map(r => ExtractDomain(r.getUrl))
 .countItems()
@@ -69,6 +77,15 @@ val r = RecordLoader.loadArchives("~/aut/example.arc.gz", sc)
 
 ```
 
+then `<ctrl> d` to exit paste mode and run the script.
+
+If you see:
+
+```
+r: Array[(String, Int)] = Array((www.archive.org,132), (deadlists.com,2), (www.hideout.com.br,1))
+```
+
+That means you're up and running!
 
 If you run into any trouble, you may find the [Getting Started Tutorial](./Getting-Started.md) helpful.
 
@@ -80,7 +97,7 @@ We have prepared a number of tutorials to show what the AUT can do:
 
 * [**Spark to analyze your web archive collections**](./Analyzing-Web-Archives-with-Spark/) for gathering collection statistics, textual analysis, network analysis, etc.
 
-[This SHINE walkthrough](./Shine-Installing-Shine-Frontend-on-OS-X/) and this [building Lucene indexes](./Building-Lucene-Indexes-Using-Hadoop/) walkthrough shows how to use the SHINE front end on Solr indexes generated using aut. 
+* [This SHINE walkthrough](./Shine-Installing-Shine-Frontend-on-OS-X/) and this [building Lucene indexes](./Building-Lucene-Indexes-Using-Hadoop/) walkthrough shows how to use the SHINE front end on Solr indexes generated using aut. 
 
 
 # About the Archives Unleashed Toolkit
@@ -104,10 +121,12 @@ Supporting files can be found in the [aut-resources repository](https://github.c
 
 The Archives Unleashed Toolkit is brought to you by a team of researchers at the University of Waterloo, including:
 
-- **Jimmy Lin**, David R. Cheriton Chair, David R. Cheriton School of Computer Science
-- **Ian Milligan**, Assistant Professor, Department of History
-- **Alice Zhou**, Undergraduate Research Assistant, David R. Cheriton School of Computer Science
-- **Jeremy Wiebe**, PhD Candidate, Department of History
+- **Jimmy Lin**, David R. Cheriton Chair, University of Waterloo David R. Cheriton School of Computer Science
+- **Ian Milligan**, Assistant Professor, University of Waterloo Department of History
+- **Alice Zhou**, Undergraduate Research Assistant, University of Waterloo David R. Cheriton School of Computer Science
+- **Jeremy Wiebe**, PhD Candidate, University of Waterloo Department of History
+- **Nick Ruest**, Digital Assets Librarian, York University
+- **Ryan Deschamps**, Post-Doctoral Fellow, Department of History 
 
 ## License
 

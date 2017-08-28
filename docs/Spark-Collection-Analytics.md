@@ -4,7 +4,7 @@ You may want to get a birds-eye view of your ARCs or WARCs: what top-level domai
 
 ### List of URLs 
 
-If you just want a list of URLs, you can run this in Spark shell:
+If you just want a list of URLs in the collection, you can paste `:p` this in Spark shell and run it with `ctrl-d`:
 
 ```scala
 import io.archivesunleashed.spark.matchbox._ 

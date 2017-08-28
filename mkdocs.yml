@@ -7,11 +7,10 @@ theme: yeti
 pages:
 - Home: 'index.md'
 - Setup:
-    - 'Installing Warcbase': 'Getting-Started.md'
     - 'Installing Spark Notebook on a Linux or Cloud Computer': 'Spark-Installing-Spark-Notebook-on-a-Cloud-Computer.md'
     - 'Sample Data': 'Sample-Data.md'
-- Web Archives:
-    - 'Analyzing Web Archives with Spark': 'Analyzing-Web-Archives-with-Spark.md'
+- Tutorials:
+    - 'Getting Started': 'Getting-Started.md'
     - 'Several Basic Spark Commands': 'Spark-Several-Basic-Commands.md'
     - 'Collection Analytics': 'Spark-Collection-Analytics.md'
     - 'Analysis of Site Link Structure': 'Spark-Analysis-of-Site-Link-Structure.md'

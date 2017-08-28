@@ -7,7 +7,7 @@ Site link structures can be very useful, allowing you to learn such things as:
 - what paths could be taken through the network to connect pages;  
 - what communities existed within the link structure?  
 
-Many of the [filtering commands listed here](http://lintool.github.io/warcbase-docs/Spark-Several-Basic-Commands/) will work as well.
+Many of the [filtering commands listed here](./Spark-Several-Basic-Commands/) will work as well.
 
 ## Extraction of Simple Site Link Structure
 
@@ -117,7 +117,7 @@ and wish it to be counted.
 Archive records are represented in Spark as [tuples](https://en.wikipedia.org/wiki/Tuple), 
 and this is the standard format of results produced by most of the scripts presented here
 (e.g., see above). It may be useful, however, to have this data in TSV (tab-separated value)
-format, for further processing outside Warcbase. The following script uses `tabDelimit` (from
+format, for further processing outside AUT. The following script uses `tabDelimit` (from
 `TupleFormatter`) to transform tuples to tab-delimited strings; it also flattens any 
 nested tuples. (This is the same script as at the top of the page, with the addition of the 
 third and the second-last lines.)
@@ -195,4 +195,4 @@ Interested in playing with your link structures in browser like so?
 
 ![Example of the D3.js visualizer](https://raw.githubusercontent.com/web-archive-group/WAHR/master/images/d3js-example.png)
 
-Then read on to [Visualizing Site-Link Structure with D3.js](http://lintool.github.io/warcbase-docs/Spark-Network-Analysis/)
+Then read on to [Visualizing Site-Link Structure with D3.js](./Spark-Network-Analysis/)
