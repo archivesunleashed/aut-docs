@@ -6,19 +6,14 @@ repo_url: https://github.com/archivesunleashed/aut
 theme: yeti
 pages:
 - Home: 'index.md'
-- Setup:
-    - 'Installing Spark Notebook on a Linux or Cloud Computer': 'Spark-Installing-Spark-Notebook-on-a-Cloud-Computer.md'
-    - 'Sample Data': 'Sample-Data.md'
+- Getting Started: 'Getting-Started.md'
 - Tutorials:
-    - 'Getting Started': 'Getting-Started.md'
     - 'Several Basic Spark Commands': 'Spark-Several-Basic-Commands.md'
     - 'Collection Analytics': 'Spark-Collection-Analytics.md'
     - 'Analysis of Site Link Structure': 'Spark-Analysis-of-Site-Link-Structure.md'
     - 'Network Analysis and Visualization in Spark using GraphX': 'Spark-Network-Analysis.md'
     - 'Extracting Domain Level Plain Text': 'Spark-Extracting-Domain-Level-Plain-Text.md'
-    - 'Named Entity Recognition': 'Spark-Named-Entity-Recognition.md'
-    - 'NER Visualization': 'Spark-NER-Visualization.md'
+    - 'Sample Data': 'Sample-Data.md'
     - 'Gephi: Converting Site Link Structure into Dynamic Visualization': 'Gephi-Converting-Site-Link-Structure-into-Dynamic-Visualization.md'
     - 'Images: Extracting Image Links': 'Spark-Image-Analysis.md'
-- Tweets:
     - 'Spark: Gathering Twitter JSON & Basic Analysis': 'Spark-Twitter-Analysis.md'

@@ -17,7 +17,7 @@ mkdir aut
 cd aut
 curl -L "https://github.com/archivesunleashed/aut/releases/download/aut-0.9.0/aut-0.9.0-fatjar.jar" > aut-0.9.0-fatjar.jar
 # example arc file for testing
-curl -L "https://github.com/archivesunleashed/aut/src/test/resources/arc/example.arc.gz" > example.arc.gz
+curl -L "https://github.com/archivesunleashed/aut/blob/master/src/test/resources/arc/example.arc.gz?raw=true" > example.arc.gz
 ```
 
 ### Installing the Spark shell
@@ -100,38 +100,4 @@ We have prepared a number of tutorials to show what the AUT can do:
 * [This SHINE walkthrough](./Shine-Installing-Shine-Frontend-on-OS-X/) and this [building Lucene indexes](./Building-Lucene-Indexes-Using-Hadoop/) walkthrough shows how to use the SHINE front end on Solr indexes generated using aut. 
 
 
-# About the Archives Unleashed Toolkit
-
-Aut is an open-source platform for managing web archives built on Hadoop. The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via Spark.
-
-AUT is built against CDH 5.4.1:
-
-+ Hadoop version: 2.6.0-cdh5.4.1
-+ Spark version: 1.3.0-cdh5.4.1
-
-The Hadoop ecosystem is evolving rapidly, so there may be incompatibilities with other versions.
-
-You are currently in our documentation.
-
-<!-- check this link by September 15th -->
-
-Supporting files can be found in the [aut-resources repository](https://github.com/archivesunleashed/aut-resources).
-
-## Project Team
-
-The Archives Unleashed Toolkit is brought to you by a team of researchers at the University of Waterloo, including:
-
-- **Jimmy Lin**, David R. Cheriton Chair, University of Waterloo David R. Cheriton School of Computer Science
-- **Ian Milligan**, Assistant Professor, University of Waterloo Department of History
-- **Alice Zhou**, Undergraduate Research Assistant, University of Waterloo David R. Cheriton School of Computer Science
-- **Jeremy Wiebe**, PhD Candidate, University of Waterloo Department of History
-- **Nick Ruest**, Digital Assets Librarian, York University
-- **Ryan Deschamps**, Post-Doctoral Fellow, Department of History 
-
-## License
-
-Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
-
-## Acknowlegments
-
-This work is supported in part by the National Science Foundation and by the Mellon Foundation (via Columbia University). Additional support has been forthcoming from the Social Sciences and Humanities Research Council of Canada and the Ontario Ministry of Research and Innovation's Early Researcher Award program.  Any opinions, findings, and conclusions or recommendations expressed are those of the researchers and do not necessarily reflect the views of the sponsors.
+More information about AUT can be found on the [About AUT page](./about.md)

@@ -1,8 +1,6 @@
 # About the Archives Unleashed Toolkit
 
-AUT is an open-source platform for managing web archives built on Hadoop. The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via Spark.
-
-There main ways of using AUT is to analyze web archives using [Spark](http://spark.apache.org/).
+The Archives Unleashed Toolkit, or AUT, applies modern big data analytics infrastructure to the scholarly analysis of web archives. Built on Hadoop, it provides powerful tools for analytics and data processing via Apache [Spark](http://spark.apache.org/).
 
 
 AUT is built against CDH 5.4.1:
@@ -17,14 +15,15 @@ Supporting files can be found in the [aut-resources repository](https://github.c
 
 ## Project Team
 
-The Archives Unleashed Toolkit is brought to you by a team of researchers at the University of Waterloo, including:
+The Archives Unleashed Toolkit is brought to you by a team of researchers at the University of Waterloo and York University.  Originally, called "warcbase", the AUT has had major contributions from a number of people including:
 
 - **Jimmy Lin**, David R. Cheriton Chair, University of Waterloo David R. Cheriton School of Computer Science
 - **Ian Milligan**, Assistant Professor, University of Waterloo Department of History
+- **Nick Ruest**, Digital Assets Librarian, York University
+- **Ryan Deschamps**, Post-Doctoral Fellow, University of Waterloo Department of History 
 - **Alice Zhou**, Undergraduate Research Assistant, University of Waterloo David R. Cheriton School of Computer Science
 - **Jeremy Wiebe**, PhD Candidate, University of Waterloo Department of History
-- **Nick Ruest**, Digital Assets Librarian, York University
-- **Ryan Deschamps**, Post-Doctoral Fellow, Department of History 
+
 
 ## License
 
