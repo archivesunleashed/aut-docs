@@ -17,4 +17,4 @@ pages:
     - 'Gephi: Converting Site Link Structure into Dynamic Visualization': 'Gephi-Converting-Site-Link-Structure-into-Dynamic-Visualization.md'
     - 'Images: Extracting Image Links': 'Spark-Image-Analysis.md'
     - 'Spark: Gathering Twitter JSON & Basic Analysis': 'Spark-Twitter-Analysis.md'
-  - About: 'about.md'
+- About: 'about.md'
