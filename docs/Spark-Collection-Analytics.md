@@ -29,11 +29,7 @@ val r = RecordLoader.loadArchives("/directory/to/arc/file.arc.gz", sc)
 ```
 ### Using Spark Notebook to See Top-Level Domains
 
-In the Spark Notebook, the following command will generate an interactive visualization. Remember that your first command in any Spark Notebook needs to point to warcbase like so:
-
-```
-:cp /Users/ianmilligan1/dropbox/warcbase/warcbase-core/target/warcbase-core-0.1.0-SNAPSHOT-fatjar.jar
-```
+In the Spark Notebook, the following command will generate an interactive visualization. 
 
 You'll be ready to run this then.
 

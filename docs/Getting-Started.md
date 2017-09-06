@@ -81,8 +81,6 @@ r: Array[(String, Int)] = Array((www.archive.org,132), (deadlists.com,2), (www.h
 
 That means you're up and running!
 
-If you run into any trouble, you may find the [Getting Started Tutorial](./Getting-Started.md) helpful.
-
 You should now be able to try out the toolkit's many tutorials.
 
 ## Using the Archives Unleashed Toolkit
