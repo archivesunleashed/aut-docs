@@ -14,6 +14,7 @@ pages:
     - 'Network Analysis and Visualization in Spark using GraphX': 'Spark-Network-Analysis.md'
     - 'Extracting Domain Level Plain Text': 'Spark-Extracting-Domain-Level-Plain-Text.md'
     - 'Sample Data': 'Sample-Data.md'
+    - 'Named Entity Recognition': 'Spark-Named-Entity-Recognition.md'
     - 'Gephi: Converting Site Link Structure into Dynamic Visualization': 'Gephi-Converting-Site-Link-Structure-into-Dynamic-Visualization.md'
     - 'Images: Extracting Image Links': 'Spark-Image-Analysis.md'
     - 'Spark: Gathering Twitter JSON & Basic Analysis': 'Spark-Twitter-Analysis.md'
