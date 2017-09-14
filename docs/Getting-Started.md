@@ -83,14 +83,6 @@ That means you're up and running!
 
 You should now be able to try out the toolkit's many tutorials.
 
-## Using the Archives Unleashed Toolkit
-
-We have prepared a number of tutorials to show what the AUT can do:
-
-* [**Spark to analyze your web archive collections**](./Analyzing-Web-Archives-with-Spark/) for gathering collection statistics, textual analysis, network analysis, etc.
-
-* [This SHINE walkthrough](./Shine-Installing-Shine-Frontend-on-OS-X/) and this [building Lucene indexes](./Building-Lucene-Indexes-Using-Hadoop/) walkthrough shows how to use the SHINE front end on Solr indexes generated using aut. 
-
 ## More Information
 
 - Assistance with setting up Spark is in the [Getting Started Section of the Home Page](./index.html).
