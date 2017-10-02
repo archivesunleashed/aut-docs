@@ -69,6 +69,9 @@ To make sure the release goes smoothly, you should ensure that:
 * Search for 'aut'
 * Click Close, then Refresh, then Release
 
+## Docker Aut
+* Update [download version](https://github.com/archivesunleashed/docker-aut/blob/master/Dockerfile#L17).
+
 ## Contributor Keys
 
 | Name         | Organization           | Address               | Code Signing Key Fingerprint | Key Id |
