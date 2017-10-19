@@ -6,7 +6,7 @@
 
 The Archives Unleashed Toolkit is an open-source platform for managing web archives built on [Hadoop](https://hadoop.apache.org/). The platform provides a flexible data model for storing and managing raw content as well as metadata and extracted knowledge. Tight integration with Hadoop provides powerful tools for analytics and data processing via [Spark](http://spark.apache.org/). For more information on the project and the team behind it, visit our [about page](./about/).
 
-Our documentation can be accessed by using the drop-down menus above.
+Our documentation can be accessed by using the drop-down menus above. For installation, see our [Getting Started](./Getting-Started/) section. In particular, [the walkthrough on the Filter-Analyze-Aggregate-Visualize cycle](./FAAV/) may help you begin to think about your research question.
 
 More information about AUT can be found on the [About AUT page](./about.md)
 

@@ -31,7 +31,7 @@ cd spark-1.6.1-bin-hadoop2.6
 
 You should have the spark shell ready and running.
 
-```bash
+```
 
 Welcome to
   ____              __
@@ -81,7 +81,7 @@ r: Array[(String, Int)] = Array((www.archive.org,132), (deadlists.com,2), (www.h
 
 That means you're up and running!
 
-You should now be able to try out the toolkit's many tutorials.
+You should now be able to try out the toolkit's many tutorials. We suggest that for your starting point, [our Filter-Analyze-Aggregate-Visualize cycle provides an introductory walkthrough to how you can explore your data](./FAAV/).
 
 ## More Information
 

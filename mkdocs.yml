@@ -7,6 +7,7 @@ theme: yeti
 pages:
 - Home: 'index.md'
 - Getting Started: 'Getting-Started.md'
+    - 'The FAAV Cycle': 'FAAV.md'
 - Tutorials:
     - 'Several Basic Spark Commands': 'Spark-Several-Basic-Commands.md'
     - 'Collection Analytics': 'Spark-Collection-Analytics.md'
