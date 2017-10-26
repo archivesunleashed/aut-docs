@@ -74,7 +74,7 @@ links.saveAsTextFile("geocities-links-all/")
 The following Spark script generates the aggregated site-level link structure, grouped by crawl date (YYYYMMDD). It
 makes use of the `ExtractLinks` and `ExtractToLevelDomain` functions.
 
-If you prefer to group by crawl month (YYYMM), replace `getCrawlDate` with `getCrawlMonth` below.
+If you prefer to group by crawl month (YYYMM), replace `getCrawlDate` with `getCrawlMonth` below. If you prefer to group by simply crawl year (YYYY), replace `getCrawlDate` with `getCrawlYear` below.
 
 ```scala
 import io.archivesunleashed.spark.matchbox.{ExtractDomain, ExtractLinks, RecordLoader}
