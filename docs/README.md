@@ -1,3 +1,3 @@
 # Analyzing Web Archives with Warcbase
 
-Read the documentation [here](https://github.com/archivesunleashed/aut-docs).
+Read the documentation [here](http://docs.archivesunleashed.io).
