@@ -70,7 +70,8 @@ To make sure the release goes smoothly, you should ensure that:
 * Click Close, then Refresh, then Release
 
 ## Docker Aut
-* Update [download version](https://github.com/archivesunleashed/docker-aut/blob/master/Dockerfile#L17).
+* Create release branch on repo
+* Add branch to [Build Settings](https://hub.docker.com/r/archivesunleashed/docker-aut/~/settings/automated-builds/)
 
 ## Contributor Keys
 
