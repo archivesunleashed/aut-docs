@@ -72,6 +72,10 @@ To make sure the release goes smoothly, you should ensure that:
 ## Docker Aut
 * Create release branch on repo
 * Add branch to [Build Settings](https://hub.docker.com/r/archivesunleashed/docker-aut/~/settings/automated-builds/)
+* Update master branch
+
+## archivesunleashed.org
+* update aut documentation where necessary
 
 ## Contributor Keys
 
