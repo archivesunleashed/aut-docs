@@ -1,6 +1,8 @@
 Adapted from: https://wiki.duraspace.org/display/FF/Fedora+Release+Process
 
-## Verify release privileges
+## Prerequisites
+
+### Verify release privileges
 
 To make sure the release goes smoothly, you should ensure that:
   * You have an account with commit access for aut on GitHub.
@@ -32,7 +34,13 @@ To make sure the release goes smoothly, you should ensure that:
 </settings>
 ```
 
-## Steps:
+### Make sure aut builds with `--packages`
+
+* Build [docker-aut](https://github.com/archivesunleashed/docker-aut/tree/master) on the master branch.
+
+## Release Process
+
+### Steps:
 * `git clone git@github.com:archivesunleashed/aut.git`
 * `cd aut`
 * `git checkout -b release-X.Y.Z` (where X.Y.Z is your version number)
@@ -47,7 +55,7 @@ To make sure the release goes smoothly, you should ensure that:
 * `git checkout release-X.Y.Z`
 * `git push origin HEAD:master`
 
-## Example:
+### Example:
 * `git clone git@github.com:archivesunleashed/aut.git`
 * `cd aut`
 * `git checkout -b release-0.9.0`
@@ -62,20 +70,21 @@ To make sure the release goes smoothly, you should ensure that:
 * `git checkout release-0.9.0`
 * `git push origin HEAD:master`
 
-## Sonatype
+### Sonatype
 
 * Login to https://oss.sonatype.org
 * Navigate to https://oss.sonatype.org/#stagingRepositories
 * Search for 'aut'
 * Click Close, then Refresh, then Release
 
-## Docker Aut
+### Docker Aut
 * Create release branch on repo
 * Add branch to [Build Settings](https://hub.docker.com/r/archivesunleashed/docker-aut/~/settings/automated-builds/)
 * Update master branch
 
-## archivesunleashed.org
-* update aut documentation where necessary
+### archivesunleashed.org
+* Update aut documentation where necessary
+* Update API docs [index.html](https://github.com/archivesunleashed/aut/blob/gh-pages/index.html)
 
 ## Contributor Keys
 
