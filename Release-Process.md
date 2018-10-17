@@ -53,6 +53,7 @@ To make sure the release goes smoothly, you should ensure that:
 * `mvn release:perform -DperformRelease -Dgoals=deploy`
 * `mvn site-deploy -DskipTests`
 * `git checkout release-X.Y.Z`
+* Update README
 * `git push origin HEAD:master`
 
 ### Example:
@@ -68,6 +69,7 @@ To make sure the release goes smoothly, you should ensure that:
 * `mvn release:perform -DperformRelease -Dgoals=deploy`
 * `mvn site-deploy -DskipTests`
 * `git checkout release-0.9.0`
+* Update README
 * `git push origin HEAD:master`
 
 ### Sonatype
