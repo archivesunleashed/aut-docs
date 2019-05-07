@@ -92,4 +92,4 @@ To make sure the release goes smoothly, you should ensure that:
 
 | Name         | Organization           | Address               | Code Signing Key Fingerprint | Key Id |
 |--------------|------------------------|-----------------------|---|:-:|
-| Nick Ruest   | York University        | ruestn at yorku.ca    | 159493E15691C84D615B7D1B417FAF1A0E1080CD | D4F78790 |
+| Nick Ruest   | York University        | ruestn at gmail dot com    | 159493E15691C84D615B7D1B417FAF1A0E1080CD | D4F78790 |
