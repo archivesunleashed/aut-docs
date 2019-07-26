@@ -2,4 +2,5 @@
   - [[0.18.0]]
   - [[0.17.0]]
 - [[Docker Install]]
+- [API Documentation](http://java.docs.archivesunleashed.io)
 - [[Release Process]]
