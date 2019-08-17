@@ -1,4 +1,3 @@
-## Using PySpark
 
 PySpark is slightly different from other Python programs in that it relies on Apache Spark's underlying Scala and Java code to manipulate datasets. You can read more about this in the [Spark documentation](http://spark.apache.org/docs/2.4.3/api/python/pyspark.html).
 
