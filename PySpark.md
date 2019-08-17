@@ -41,7 +41,7 @@ python -m ipykernel install --user
 With the dependencies downloaded, you are ready to launch your Jupyter Notebook. Use the following command, again from your `aut` directory:
 
 ```bash
-PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook /path/to/spark/bin/pyspark --jars target/aut-0.17.0-fatjar.jar --driver-class-path target/aut-0.17.0-fatjar.jar --py-files target/aut.zip
+PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook /path/to/spark/bin/pyspark --jars target/aut-0.17.0-fatjar.jar --driver-class-path target/ --py-files target/aut.zip
 ```
 
 A Jupyter Notebook _should_ load in your browser at <http://localhost:8888>. You may be asked for a token upon first launch, which just offers a bit of security. The token is available in the load screen and will look something like this:
@@ -64,16 +64,22 @@ A Jupyter Notebook _should_ load in your browser at <http://localhost:8888>. You
 
 Near the top right of the Jupyter homepage, you will see "New".
 
-Select a new Python 3 Notebook. In the top box enter
+Select a new Python 3 Notebook. In the first cell enter:
 
-
-*************COME BACK HERE*************
 ```python
-import RecordLoader
-```
-and hit Shift-Enter, or press the play button.
+from aut import *
 
-If you receive no errors, you are ready to begin working with your web archives!
+archive = WebArchive(sc, sqlContext, "src/test/resources/warc/")
+
+pages = archive.pages()
+pages.printSchema()
+```
+
+Then hit Shift-Enter, or press the play button.
+
+If you receive no errors, and see the following, you are ready to begin working with your web archives!
+
+![](https://user-images.githubusercontent.com/218561/63203995-42684080-c061-11e9-9361-f5e6177705ff.png)
 
 ## Dataframes: Collection Analytics
 
@@ -81,17 +87,20 @@ Pyspark also supports DataFrames, which enable more effective filtering. In this
 
 For these examples, we are going to use the `example.warc.gz` file that you downloaded above. We assume it is in the `aut` directory, but you can always change the path to it below.
 
+**PICK BACK UP FROM HERE**
+
+
 ### Setting up the Dataframe
 
 ```python
-import RecordLoader
+from aut import *
 from DFTransformations import *
 from ExtractDomain import ExtractDomain
 from ExtractLinks import ExtractLinks
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import desc
 
-path = "../example.arc.gz"
+path = "src/test/resources/warc/example.arc.gz"
 spark = SparkSession.builder.appName("setUpDataFrame").getOrCreate()
 sc = spark.sparkContext
 
