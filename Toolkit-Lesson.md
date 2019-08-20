@@ -6,16 +6,6 @@ The reality of any hands-on workshop is that things will break. We've tried our 
 
 If you have any questions, let [Nick Ruest](https://github.com/ruebot) or [Ian Milligan](https://github.com/ianmilligan1) know.
 
-## Table of Contents
-- [Installation and Use](#installation-and-use)
-- [Hello World: Our First Script](#hello-world)
-- [Extracting Some Text](#extracting-some-text)
-  - [Ouch! Our First Error](#error)
-  - [Other Text Analyis Filters](#other-filters)
-- [People, Places, and Things! Entities Ahoy!](#entities)
-- [Web of Links: Network Analysis](#network)
-- [Acknowlegements and Final Notes](#conclusion)
-
 # Installation and Use
 
 {{< note title="Got Docker?" >}}
@@ -152,7 +142,7 @@ RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
 
 Now let's look at the ensuing data. Go to the folder you provided in the very first startup – remember, in my case it was `/users/ianmilligan1/desktop/data` - and you will now have a folder called `liberal-party-text`. Open up the files with your text editor and check it out!
 
-## Ouch: Our First Error {#error}
+## Ouch: Our First Error
 
 One of the vexing parts of this interface is that it creates output directories – and if the directory already exists, it comes tumbling down.
 
@@ -184,7 +174,7 @@ To get around this, you can do two things:
 
 Good luck!
 
-## Other Text Analysis Filters {#other-filters}
+## Other Text Analysis Filters
 
 Take some time to explore the various options and variables that you can swap in and around the `.keepDomains` line. Check out the [documentation](http://archivesunleashed.org/aut/#plain-text-extraction) for some ideas.
 
