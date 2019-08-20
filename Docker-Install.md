@@ -11,25 +11,25 @@ To install Docker for a Mac OS, use this [link](https://store.docker.com/edition
 
 You'll need to create a free Docker ID to get started. It's a fairly quick signup process:
 
-![Creating an account](/images/docker-create-account.png)
+![Creating an account](https://archivesunleashed.org/images/docker-create-account.png)
 
 Once you have an account, log in to Docker and select the Docker Community for Mac (or Windows) program.
 
-![Download](/images/docker-download2.png)
+![Download](https://archivesunleashed.org/images/docker-download2.png)
 
 From the downloads folder, double click to start installation (.dmg file)
 
-![Download](/images/docker-download3.png)
+![Download](https://archivesunleashed.org/images/docker-download3.png)
 
 Once file has been verified you can drag and drop into your applications folder, then launch application.
 
-![install](/images/docker-install.png)
+![install](https://archivesunleashed.org/images/docker-install.png)
 
 <i>Please note</i>, depending on your security preferences a notice may show up warning you, you are about to open an application from the web. Select open to continue. 
 
 The Docker icon should appear in your menu bar along the top of your screen. When you click on the icon, there should be a green dot indicating docker is running
 
-![install-6](/images/docker-running.png)
+![install-6](https://archivesunleashed.org/images/docker-running.png)
 
 Now that the Docker application is installed you can log in with your Docker ID that you created earlier.
 
@@ -48,7 +48,7 @@ Try running the following two commands:
 
 Now you're ready to install AUT. Type the following command:
 
-```
+```bash
 docker run --rm -it archivesunleashed/docker-aut:0.17.0
 ```
 
