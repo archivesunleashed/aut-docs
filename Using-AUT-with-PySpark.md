@@ -86,8 +86,6 @@ Pyspark also supports DataFrames, which enable more effective filtering. In this
 
 For these examples, we are going to use the `example.warc.gz` file that you downloaded above. We assume it is in the `aut` directory, but you can always change the path to it below.
 
-**PICK BACK UP FROM HERE**
-
 
 ### Setting up the Dataframe
 
@@ -99,8 +97,8 @@ from pyspark.sql.functions import desc
 
 archive = WebArchive(sc, sqlContext, "src/test/resources/warc/")
 
-pages = archive.pages()
-pages.show()
+df = archive.pages()
+df.show()
 ```
 
 ### Using DataFrames to Count Domains
@@ -108,21 +106,19 @@ pages.show()
 Now you can run the following to see the top two domains.
 
 ```python
-df.groupBy("domain").count().sort(desc("count")).show(n=2)
+df.select(extract_domain("url").alias("Domain")).groupBy("Domain").count().sort(desc("count")).show(n=2)
 ```
 
 And you'll see:
 
 ```
-+---------------+-----+
-|         domain|count|
-+---------------+-----+
-|www.archive.org|  132|
-|  deadlists.com|    2|
-+---------------+-----+
++-------------+-----+
+|       Domain|count|
++-------------+-----+
+|  archive.org|  132|
+|deadlists.com|    2|
++-------------+-----+
 only showing top 2 rows
-
-
 ```
 
 ### Using DataFrames to Count Crawl Dates
@@ -130,17 +126,18 @@ only showing top 2 rows
 You can do this for a few other commands as well. For example, by crawl date:
 
 ```python
-df.groupBy("crawlDate").count().show()
+df.select(extract_domain("crawl_date").alias("Crawl Date")).groupBy("Crawl Date").count().show()
+
 ```
 
 And we get:
 
 ```
-+---------+-----+
-|crawlDate|count|
-+---------+-----+
-| 20080430|  135|
-+---------+-----+
++----------+-----+
+|Crawl Date|count|
++----------+-----+
+|  20080430|  135|
++----------+-----+
 ```
 
 ### Using DataFrames to List URLs
@@ -150,6 +147,22 @@ Finally, you can also get a list of the URLs in a collection with the following 
 ```
 df.select("url").rdd.flatMap(lambda x: x).take(10)
 ```
+
+And we get:
+
+```
+['http://www.archive.org/',
+ 'http://www.archive.org/index.php',
+ 'http://www.archive.org/details/DrinkingWithBob-MadonnaAdoptsAfricanBaby887',
+ 'http://www.archive.org/about/credits.php',
+ 'http://www.archive.org/services/get-item-image.php?identifier=gd1978-12-16.sonyecm250-no-dolby.walker-scotton.miller.82212.sbeok.flac16&collection=GratefulDead&mediatype=etree',
+ 'http://www.archive.org/details/secretarmiesb00spivrich',
+ 'http://www.archive.org/services/get-item-image.php?identifier=zh27814&collection=zh27&mediatype=audio',
+ 'http://www.archive.org/iathreads/post-view.php?id=191024',
+ 'http://www.archive.org/web/web.php',
+ 'http://www.archive.org/iathreads/forum-display.php?poster=rastamon']
+```
+
 
 You can see a list of the supported Data Frame elements with:
 
@@ -161,15 +174,14 @@ Which are:
 
 ```
 root
- |-- contentBytes: binary (nullable = true)
- |-- contentString: string (nullable = true)
- |-- crawlDate: string (nullable = true)
- |-- crawlMonth: string (nullable = true)
- |-- domain: string (nullable = true)
- |-- imageBytes: binary (nullable = true)
- |-- mimeType: string (nullable = true)
+root
+ |-- crawl_date: string (nullable = true)
  |-- url: string (nullable = true)
+ |-- mime_type_web_server: string (nullable = true)
+ |-- content: string (nullable = true)
 ```
+
+# COME BACK HERE
 
 ### Turn Your WARCs into Temporary Database Table
 
