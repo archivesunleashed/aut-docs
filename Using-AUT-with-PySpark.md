@@ -92,9 +92,6 @@ For these examples, we are going to use the `example.warc.gz` file that you down
 ```python
 from aut import *
 
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import desc
-
 archive = WebArchive(sc, sqlContext, "src/test/resources/warc/")
 
 df = archive.pages()
@@ -186,20 +183,14 @@ root
 ### Turn Your WARCs into Temporary Database Table
 
 ```python
+from aut import *
 
-import RecordLoader
-from DFTransformations import *
-from ExtractDomain import ExtractDomain
-from ExtractLinks import ExtractLinks
-from pyspark.sql import SparkSession
+archive = WebArchive(sc, sqlContext, "/home/nruest/Projects/au/aut/src/test/resources/warc/example.warc.gz")
 
-path = "../example.arc.gz"
-spark = SparkSession.builder.appName("extractLinks").getOrCreate()
-sc = spark.sparkContext
-df = RecordLoader.loadArchivesAsDF (path, sc, spark)
+df = archive.pages()
 
 df.createOrReplaceTempView("warc") # create a table called "warc"
-dfSQL = spark.sql('SELECT * FROM warc WHERE domain="www.archive.org" GROUP BY crawlMonth')
+dfSQL = spark.sql('SELECT * FROM warc WHERE url="www.archive.org" GROUP BY crawl_date')
 dfSQL.show()
 ```
 
