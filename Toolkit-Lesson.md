@@ -20,9 +20,8 @@ If you have any questions, let [Nick Ruest](https://github.com/ruebot) or [Ian M
 
 # Installation and Use
 
-{{< note title="Got Docker?" >}}
-This lesson requires that you install [Docker](https://www.docker.com/get-docker). We have instructions on how to install Docker [here](/aut/docker-install).
-{{< /note >}}
+**Got Docker?**
+This lesson requires that you install [Docker](https://www.docker.com/get-docker). We have instructions on how to install Docker [here](https://github.com/archivesunleashed/aut/wiki/Docker-Install).
 
 Later in this lesson, we use the networking tool [Gephi](https://gephi.org/).
 
@@ -38,13 +37,14 @@ For example, if your files are in `/Users/ianmilligan1/desktop/data` you would r
 
 `docker run --rm -it -v "/Users/ianmilligan1/desktop/data:/data" archivesunleashed/docker-aut:0.17.0`
 
-{{< warning title="Troubleshooting Tips" >}}
+<hr />
+**Troubleshooting Tips**
 The above commands are important, as they make the rest of the lesson possible!
 
 Remember that you need to have the second `:/data` in the above example. This is making a connection between the directory called "data" on my desktop with a directory in the Docker virtual machine called "docker." 
 
 Also, if you are using Windows, you will need to provide the path as it appears in your file system. For example: `C:\Users\ianmilligan1\data`.
-{{< /note >}}
+<hr />
 
 Once you run this command, you will have to wait a few minutes while data is downloaded and AUT builds. Once it is all working, you should see:
 
@@ -118,7 +118,7 @@ We like to use this example to do two things:
 * It is fairly simple and lets us know that AUT is working;
 * and it tells us what we can expect to find in the web archives! In this case, we have a lot of the Liberal Party of Canada, Equal Voice Canada, and the Green Party of Canada.
 
-**If you loaded your own data above**, you can access that directory by substituting the directory in the `loadArchives` command. Try it again! Remeber to type `:paste`, paste the following command in, and then `ctrl` + `D` to execute.
+**If you loaded your own data above**, you can access that directory by substituting the directory in the `loadArchives` command. Try it again! Remember to type `:paste`, paste the following command in, and then `ctrl` + `D` to execute.
 
 ```scala
 import io.archivesunleashed._
