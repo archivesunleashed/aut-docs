@@ -38,7 +38,9 @@ For example, if your files are in `/Users/ianmilligan1/desktop/data` you would r
 `docker run --rm -it -v "/Users/ianmilligan1/desktop/data:/data" archivesunleashed/docker-aut:0.17.0`
 
 <hr />
+
 **Troubleshooting Tips**
+
 The above commands are important, as they make the rest of the lesson possible!
 
 Remember that you need to have the second `:/data` in the above example. This is making a connection between the directory called "data" on my desktop with a directory in the Docker virtual machine called "docker." 
