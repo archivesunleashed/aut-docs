@@ -6,7 +6,7 @@ The other difference between PySpark and the Scala spark-shell is the lack of a 
 There are two ways around this. The easiest way is to create a new Python file with your script, and use `spark-submit`. For example, you might create a script with your text editor, save it as `file.py`, and then run it using the following.
 
 ```bash
-bin/spark-submit --jars ../aut-0.17.0-fatjar.jar --driver-class-path ../aut-0.17.0-fatjar.jar --py-files ../pyaut.zip /path/to/custom/python/file.py
+bin/spark-submit --jars ../aut-0.18.0-fatjar.jar --driver-class-path ../aut-0.18.0-fatjar.jar --py-files ../pyaut.zip /path/to/custom/python/file.py
 ```
 
 An easier method is the second method: using the interactive, browser-based [Jupyter Notebooks](https://jupyter.org/) to work with AUT. You can see it in action below.
@@ -40,7 +40,7 @@ python -m ipykernel install --user
 With the dependencies downloaded, you are ready to launch your Jupyter Notebook. Use the following command, again from your `aut` directory:
 
 ```bash
-PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook /path/to/spark/bin/pyspark --jars target/aut-0.17.0-fatjar.jar --driver-class-path target/aut-0.17.0-fatjar.jar --py-files target/aut.zip
+PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook /path/to/spark/bin/pyspark --jars target/aut-0.18.0-fatjar.jar --driver-class-path target/aut-0.18.0-fatjar.jar --py-files target/aut.zip
 ```
 
 A Jupyter Notebook _should_ load in your browser at <http://localhost:8888>. You may be asked for a token upon first launch, which just offers a bit of security. The token is available in the load screen and will look something like this:
@@ -546,25 +546,7 @@ Spark-Submit has more fine-tuned commands around the amount of memory you are de
 As a reminder, Spark-Submit syntax looks like:
 
 ```bash
-.bin/spark-submit --jars ../aut-0.10.1-fatjar.jar --driver-class-path ../aut-0.10.1-fatjar.jar --py-files ../pyaut.zip /path/to/custom/python/file.py
+.bin/spark-submit --jars ../aut-0.18.0-fatjar.jar --driver-class-path ../aut-0.18.0-fatjar.jar --py-files ../pyaut.zip /path/to/custom/python/file.py
 ```
 
 Where `file.py` is the Python script that you've written.
-
-## Troubleshooting
-
-### Import error: RecordLoader not found
-
-If you built AUT yourself, it is important that you zip them without their path names attached.
-
-So, instead of :
-
-```bash
-zip -r src/main/python pyaut.zip
-```
-
-use
-
-```bash
-(cd src/main/python && zip -r - .) > pyaut.zip
-```
