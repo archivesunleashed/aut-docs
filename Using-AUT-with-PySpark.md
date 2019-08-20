@@ -40,7 +40,7 @@ python -m ipykernel install --user
 With the dependencies downloaded, you are ready to launch your Jupyter Notebook. Use the following command, again from your `aut` directory:
 
 ```bash
-PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook /path/to/spark/bin/pyspark --jars target/aut-0.17.0-fatjar.jar --driver-class-path target/ --py-files target/aut.zip
+PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook /path/to/spark/bin/pyspark --jars target/aut-0.17.0-fatjar.jar --driver-class-path target/aut-0.17.0-fatjar.jar --py-files target/aut.zip
 ```
 
 A Jupyter Notebook _should_ load in your browser at <http://localhost:8888>. You may be asked for a token upon first launch, which just offers a bit of security. The token is available in the load screen and will look something like this:
