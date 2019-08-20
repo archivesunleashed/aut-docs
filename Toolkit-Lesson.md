@@ -6,6 +6,18 @@ The reality of any hands-on workshop is that things will break. We've tried our 
 
 If you have any questions, let [Nick Ruest](https://github.com/ruebot) or [Ian Milligan](https://github.com/ianmilligan1) know.
 
+## Table of Contents
+
+- [Installation and Use](#installation-and-use)
+  - [Hello World: Our First Script](#hello-world-our-first-script)
+- [Extracting some Text](#extracting-some-text)
+  - [Ouch: Our First Error](#ouch-our-first-error)
+  - [Other Text Analysis Filters](#other-text-analysis-filters)
+- [People, Places, and Things: Entities Ahoy!](#people-places-and-things-entities-ahoy)
+- [Web of Links: Network Analysis](#web-of-links-network-analysis)
+- [Working with the Data](#working-with-the-data)
+- [Acknowledgements and Final Notes](#acknowledgements-and-final-notes)
+
 # Installation and Use
 
 {{< note title="Got Docker?" >}}
