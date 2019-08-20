@@ -1,11 +1,7 @@
----
-title: Hands on With The Archives Unleashed Toolkit
-date: 2018-05-29T11:51:41-04:00
----
-
 Welcome to the Archives Unleashed Toolkit hands-on walkthrough!
 
-![Spark Terminal](/images/prompt.png)
+![Spark Terminal](https://archivesunleashed.org/images/prompt.png)
+
 The reality of any hands-on workshop is that things will break. We've tried our best to provide a robust environment that can let you walk through the basics of the Archives Unleashed Toolkit alongside us.
 
 If you have any questions, let [Nick Ruest](https://github.com/ruebot) or [Ian Milligan](https://github.com/ianmilligan1) know.
@@ -293,7 +289,7 @@ By now this should be seeming pretty straightforward! (remember to keep using `:
 
 The first step should be to work with this network diagram so you can make a beautiful visualization yourself. 
 
-![Gephi visualization](/images/gephi.png)
+![Gephi visualization](https://archivesunleashed.org/images/gephi.png)
 
 First, let's use these instructions to [work with Gephi](https://cloud.archivesunleashed.org/derivatives/gephi).
 
