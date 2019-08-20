@@ -1,3 +1,25 @@
+# Table of Contents
+
+- [Introduction](#introduction)
+- [Getting Started](#getting-started)
+- [DataFrames: Collection Analysis](#dataframes-collection-analysis)
+  - [Pages](#pages)
+  - [Links](#links)
+  - [Image Links](#image-links)
+  - [Images](#images)
+  - [PDFs](#pdfs)
+  - [Audio](#audio)
+  - [Video](#video)
+  - [Spreadsheets](#spreadsheets)
+  - [Presentation program files (i.e. PowerPoint)](#presentation-program-files-ie-powerpoint)
+  - [Word processor files (i.e. Word)](#word-processor-files-ie-word)
+  - [Plain text files](#plain-text-files)
+- [Using DataFrames to Count Domains](#using-dataframes-to-count-domains)
+- [Using DataFrames to Count Crawl Dates](#using-dataframes-to-count-crawl-dates)
+- [Using DataFrames to List URLs](#using-dataframes-to-list-urls)
+- [Turn Your WARCs into Temporary Database Table](#turn-your-warcs-into-temporary-database-table)
+- [Implementing at Scale](#implementing-at-scale)
+
 # Introduction
 
 PySpark is slightly different from other Python programs in that it relies on Apache Spark's underlying Scala and Java code to manipulate datasets. You can read more about this in the [Spark documentation](http://spark.apache.org/docs/2.4.3/api/python/pyspark.html).
