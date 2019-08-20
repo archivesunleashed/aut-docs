@@ -7,16 +7,16 @@ The reality of any hands-on workshop is that things will break. We've tried our 
 If you have any questions, let [Nick Ruest](https://github.com/ruebot) or [Ian Milligan](https://github.com/ianmilligan1) know.
 
 ## Table of Contents
-- [Installation and Use](#installation)
+- [Installation and Use](#installation-and-use)
 - [Hello World: Our First Script](#hello-world)
-- [Extracting Some Text](#extracting-text)
+- [Extracting Some Text](#extracting-some-text)
   - [Ouch! Our First Error](#error)
   - [Other Text Analyis Filters](#other-filters)
 - [People, Places, and Things! Entities Ahoy!](#entities)
 - [Web of Links: Network Analysis](#network)
 - [Acknowlegements and Final Notes](#conclusion)
 
-## Installation and Use {#installation}
+# Installation and Use
 
 {{< note title="Got Docker?" >}}
 This lesson requires that you install [Docker](https://www.docker.com/get-docker). We have instructions on how to install Docker [here](/aut/docker-install).
@@ -51,17 +51,17 @@ Welcome to
       ____              __
      / __/__  ___ _____/ /__
     _\ \/ _ \/ _ `/ __/  '_/
-   /___/ .__/\_,_/_/ /_/\_\   version 2.3.2
+   /___/ .__/\_,_/_/ /_/\_\   version 2.4.3
       /_/
-
-Using Scala version 2.11.8 (OpenJDK 64-Bit Server VM, Java 1.8.0_151)
+         
+Using Scala version 2.11.12 (OpenJDK 64-Bit Server VM, Java 1.8.0_212)
 Type in expressions to have them evaluated.
 Type :help for more information.
 
 scala>
 ```
 
-## Hello World: Our First Script {#hello-world}
+## Hello World: Our First Script
 
 Now that we are at the prompt, let's get used to running commands. The easiest way to use the Spark Shell is to _copy and paste_ scripts that you've written somewhere else in.
 
@@ -129,7 +129,7 @@ val r = RecordLoader.loadArchives("/data/*.gz", sc)
 .take(10)
 ```
 
-## Extracting some Text {#extracting-text}
+# Extracting some Text
 
 Now that we know what we might find in a web archive, let us try extracting some text. You might want to get just the text of a given website or domain, for example.
 
@@ -152,7 +152,7 @@ RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
 
 Now let's look at the ensuing data. Go to the folder you provided in the very first startup – remember, in my case it was `/users/ianmilligan1/desktop/data` - and you will now have a folder called `liberal-party-text`. Open up the files with your text editor and check it out!
 
-### Ouch: Our First Error {#error}
+## Ouch: Our First Error {#error}
 
 One of the vexing parts of this interface is that it creates output directories – and if the directory already exists, it comes tumbling down.
 
@@ -184,7 +184,7 @@ To get around this, you can do two things:
 
 Good luck!
 
-### Other Text Analysis Filters {#other-filters}
+## Other Text Analysis Filters {#other-filters}
 
 Take some time to explore the various options and variables that you can swap in and around the `.keepDomains` line. Check out the [documentation](http://archivesunleashed.org/aut/#plain-text-extraction) for some ideas.
 
@@ -235,7 +235,7 @@ RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
 
 You could now try uploading one of the plain text files using a website like [Voyant Tools](https://voyant-tools.org). 
 
-## People, Places, and Things: Entities Ahoy! {#entities}
+# People, Places, and Things: Entities Ahoy!
 
 One last thing we can do with text is to try to use [Named-entity recognition](https://en.wikipedia.org/wiki/Named-entity_recognition) (NER) to try to find people, organizations, and locations within the text.
 
@@ -261,7 +261,7 @@ When it is done, in the /data file you will have results. The first line should 
 
 Here we can see that in this website, it was probably taking about Sault Ste. Marie, Ontario. 
 
-## Web of Links: Network Analysis {#network}
+# Web of Links: Network Analysis
 
 One other thing we can do is a network analysis. By now you are probably getting good at running code.
 
@@ -285,7 +285,7 @@ WriteGEXF(links, "/data/links-for-gephi.gexf")
 
 By now this should be seeming pretty straightforward! (remember to keep using `:paste` to enter this code).
 
-## Working with the Data
+# Working with the Data
 
 The first step should be to work with this network diagram so you can make a beautiful visualization yourself. 
 
@@ -301,7 +301,7 @@ Secondly, if there is time, we can begin to think about how to work with the pla
 
 Good luck and thanks for joining us on this lesson plan.
 
-## Acknowledgements and Final Notes {#conclusion}
+# Acknowledgements and Final Notes
 
 The ARC and WARC file are drawn from the [Canadian Political Parties & Political Interest Groups Archive-It Collection](https://archive-it.org/collections/227), collected by the University of Toronto. We are grateful that they've provided this material to us.
 
