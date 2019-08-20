@@ -1,7 +1,11 @@
-- [[User Documentation]]
-  - [[0.18.0]]
-  - [[0.17.0]]
-- [[Using AUT with PySpark]]
-- [[Docker Install]]
-- [API Documentation](http://java.docs.archivesunleashed.io)
-- [[Release Process]]
+
+* [[User Documentation]]
+  * Releases
+    * [[0.18.0]]
+    * [[0.17.0]]
+  * User Guides
+    * [[Using AUT with PySpark]]
+    * [[Docker Install]]
+    * [[Toolkit Lesson]]
+* [API Documentation](http://java.docs.archivesunleashed.io)
+* [[Release Process]]
