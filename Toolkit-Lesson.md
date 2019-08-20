@@ -313,6 +313,4 @@ If you use their material, please cite it along the following lines:
 
 - University of Toronto Libraries, Canadian Political Parties and Interest Groups, Archive-It Collection 227, Canadian Action Party, http://wayback.archive-it.org/227/20051004191340/http://canadianactionparty.ca/Default2.asp
 
-You can find more information about this collection at [WebArchives.ca](http://webarchives.ca/). 
-
-This work is primarily supported by the [Andrew W. Mellon Foundation](https://mellon.org/). Other financial and in-kind support comes from the [Social Sciences and Humanities Research Council](http://www.sshrc-crsh.gc.ca), [Compute Canada](https://www.computecanada.ca), the [Ontario Ministry of Research, Innovation, and Science](https://www.ontario.ca/page/ministry-research-innovation-and-science), [York University Libraries](https://www.library.yorku.ca/web/), [Start Smart Labs](http://www.startsmartlabs.com), and the [Faculty of Arts](https://uwaterloo.ca/arts/) and [David R. Cheriton School of Computer Science](https://cs.uwaterloo.ca) at the [University of Waterloo](https://uwaterloo.ca).
+You can find more information about this collection at [WebArchives.ca](http://webarchives.ca/).
