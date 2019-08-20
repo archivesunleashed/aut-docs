@@ -93,17 +93,14 @@ For these examples, we are going to use the `example.warc.gz` file that you down
 
 ```python
 from aut import *
-from DFTransformations import *
-from ExtractDomain import ExtractDomain
-from ExtractLinks import ExtractLinks
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import desc
 
-path = "src/test/resources/warc/example.arc.gz"
-spark = SparkSession.builder.appName("setUpDataFrame").getOrCreate()
-sc = spark.sparkContext
+archive = WebArchive(sc, sqlContext, "src/test/resources/warc/")
 
-df = RecordLoader.loadArchivesAsDF (path, sc, spark)
+pages = archive.pages()
+pages.show()
 ```
 
 ### Using DataFrames to Count Domains
