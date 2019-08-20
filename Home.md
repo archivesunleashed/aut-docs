@@ -1,5 +1,3 @@
-Welcome to the aut wiki!
-
 * [[User Documentation]]
   * Releases
     * [[0.18.0]]
