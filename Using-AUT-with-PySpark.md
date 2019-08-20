@@ -178,8 +178,6 @@ root
  |-- content: string (nullable = true)
 ```
 
-# COME BACK HERE
-
 ### Turn Your WARCs into Temporary Database Table
 
 ```python
@@ -190,8 +188,28 @@ archive = WebArchive(sc, sqlContext, "/home/nruest/Projects/au/aut/src/test/reso
 df = archive.pages()
 
 df.createOrReplaceTempView("warc") # create a table called "warc"
-dfSQL = spark.sql('SELECT * FROM warc WHERE url="www.archive.org" GROUP BY crawl_date')
-dfSQL.show()
+dfSQL = spark.sql('SELECT * FROM warc WHERE url LIKE "%archive.org%" ORDER BY crawl_date DESC')
+dfSQL.show(5)
+```
+
+And we get:
+
+```
++----------+--------------------+--------------------+--------------------+
+|crawl_date|                 url|mime_type_web_server|             content|
++----------+--------------------+--------------------+--------------------+
+|  20080430|http://www.archiv...|           text/html|HTTP/1.1 200 OK
+...|
+|  20080430|http://www.archiv...|           text/html|HTTP/1.1 200 OK
+...|
+|  20080430|http://www.archiv...|           text/html|HTTP/1.1 200 OK
+...|
+|  20080430|http://www.archiv...|           text/html|HTTP/1.1 200 OK
+...|
+|  20080430|http://www.archiv...|           text/html|HTTP/1.1 302 Foun...|
++----------+--------------------+--------------------+--------------------+
+only showing top 5 rows
+
 ```
 
 ## Plain Text Extraction
@@ -199,6 +217,8 @@ dfSQL.show()
 ### All plain text
 
 This script extracts the crawl date, domain, URL, and plain text from HTML files in the sample WARC data (and saves the output to a folder called `output-text`).
+
+# COME BACK HERE
 
 ```python
 import RecordLoader
