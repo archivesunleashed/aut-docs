@@ -74,7 +74,7 @@ pages = archive.pages()
 pages.printSchema()
 ```
 
-Then hit Shift-Enter, or press the play button.
+Then hit <kbd>Shift</kbd>+<kbd>Enter</kbd>, or press the play button.
 
 If you receive no errors, and see the following, you are ready to begin working with your web archives!
 
