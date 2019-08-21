@@ -29,7 +29,7 @@ The other difference between PySpark and the Scala `spark-shell` is the lack of 
 There are two ways around this. The easiest way is to create a new Python file with your script, and use `spark-submit`. For example, you might create a script with your text editor, save it as `file.py`, and then run it using the following.
 
 ```bash
-bin/spark-submit --jars /path/to/aut-0.18.0-fatjar.jar --driver-class-path /path/to/aut-0.18.0-fatjar.jar --py-files /path/to/aut.zip /path/to/custom/python/file.py
+spark-submit --jars /path/to/aut-0.18.0-fatjar.jar --driver-class-path /path/to/aut-0.18.0-fatjar.jar --py-files /path/to/aut.zip /path/to/custom/python/file.py
 ```
 
 An easier method is the second method: using the interactive, browser-based [Jupyter Notebooks](https://jupyter.org/) to work with AUT. You can see it in action below.
@@ -350,7 +350,7 @@ Spark-Submit has more fine-tuned commands around the amount of memory you are de
 As a reminder, `spark-submit` syntax looks like:
 
 ```bash
-.bin/spark-submit --jars /path/to/aut-0.18.0-fatjar.jar --driver-class-path /path/to/aut-0.18.0-fatjar.jar --py-files /path/to/aut.zip /path/to/custom/python/file.py
+spark-submit --jars /path/to/aut-0.18.0-fatjar.jar --driver-class-path /path/to/aut-0.18.0-fatjar.jar --py-files /path/to/aut.zip /path/to/custom/python/file.py
 ```
 
 Where `file.py` is the Python script that you've written.
