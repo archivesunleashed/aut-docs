@@ -49,7 +49,7 @@ Try running the following two commands:
 Now you're ready to install AUT. Type the following command:
 
 ```bash
-docker run --rm -it archivesunleashed/docker-aut:0.17.0
+docker run --rm -it archivesunleashed/docker-aut:0.18.0
 ```
 
 This will take a while to download and install. Eventually, you'll hopefully see:
