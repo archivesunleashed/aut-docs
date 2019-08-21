@@ -7,7 +7,7 @@ This quick guide will walk through how to install Docker for Mac users. Much of 
 * [Docker Community Edition for Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows)
 
 # Install Docker 
-To install Docker for a Mac OS, use this [link](https://store.docker.com/editions/community/docker-ce-desktop-mac). You can also use these instructions to install Docker on a Windows 10 Professional installation, by using [this link](https://store.docker.com/editions/community/docker-ce-desktop-windows).
+To install Docker for a Mac OS, use this [link](https://store.docker.com/editions/community/docker-ce-desktop-mac). You can also use these instructions to install Docker on a Windows 10 Professional installation, by using [this link](https://store.docker.com/editions/community/docker-ce-desktop-windows). Unfortunately, you cannot install Docker on Windows 10 Home.
 
 You'll need to create a free Docker ID to get started. It's a fairly quick signup process:
 
