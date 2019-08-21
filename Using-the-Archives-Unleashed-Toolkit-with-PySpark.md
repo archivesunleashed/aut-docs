@@ -32,9 +32,11 @@ There are two ways around this. The easiest way is to create a new Python file w
 spark-submit --jars /path/to/aut-0.18.0-fatjar.jar --driver-class-path /path/to/aut-0.18.0-fatjar.jar --py-files /path/to/aut.zip /path/to/custom/python/file.py
 ```
 
-An easier method is the second method: using the interactive, browser-based [Jupyter Notebooks](https://jupyter.org/) to work with AUT. You can see it in action below.
+An easier method is the second method: using the interactive, browser-based [Jupyter Notebooks](https://jupyter.org/) to work with the Archives Unleashed Toolkit (AUT). You can see it in action below.
 
-Jupyter Notebooks are a great tool and we use it for all of our script prototyping. Once we want to use it on more than one WARC file, though, we find it's best to shift over to `spark-submit`. Our advice is that once it is working on one file in the Notebook, and you want to start crunching your big data, move back to Spark Submit. We'll discuss this a bit more after the tutorials.
+![Jupyter Notebook in Action](https://user-images.githubusercontent.com/3834704/63434418-09c6bf00-c3f3-11e9-8b9f-64671cc6a2a5.png)
+
+Jupyter Notebooks are a great tool and we use it for all of our script prototyping. Once we want to use it on more than one WARC file, though, we find it's best to shift over to `spark-submit`. Our advice is that once it is working on one file in the Notebook, and you want to start crunching your big data, move back to Spark Submit. 
 
 # Getting Started
 
@@ -134,7 +136,7 @@ df.show()
 
 ## Links
 
-Create a DataFrame with crawl_date, source, destination, and anchor:
+Create a DataFrame with crawl_date, source, destination, and anchor text (that's the text that you click on to use the hyperlink):
 
 ```python
 from aut import *
@@ -316,7 +318,7 @@ df.select("url").rdd.flatMap(lambda x: x).take(10)
 
 ![](https://user-images.githubusercontent.com/218561/63378775-f5d27d00-c360-11e9-8cc1-7b4085cc1e94.png)
 
-# Turn Your WARCs into Temporary Database Table
+# Turn Your WARCs into a Temporary Database Table
 
 Using any of the above DataFrames, you can begin to use [Spark SQL](https://spark.apache.org/docs/2.4.3/sql-programming-guide.html) with them.
 
@@ -340,7 +342,7 @@ dfSQL.show(5)
 
 Now that you've seen what's possible, try using your own files. We recommend the following:
 
-1. Write your scripts in Jupyter notebook based on one WARC or ARC file, and see if the results are what you might want to do.
+1. Write your scripts in a Jupyter notebook based on one WARC or ARC file, and see if the results are what you might want to do.
 2. Once you're ready to run it at scale, copy the notebook out of the Notebook and into a text editor.
 3. You may want to swap the `path` variable to include an entire directly - i.e. `path = "/path/to/warcs/*.gz"` rather than just pointing to one file.
 4. Use the Spark-Submit command to execute the script. 
