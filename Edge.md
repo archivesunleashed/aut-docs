@@ -1003,10 +1003,21 @@ val val doamins = Set("www.archive.org", "www.sloan.org")
 val r = RecordLoader.loadArchives("example.warc.gz",sc)
 r.discardDomains(domains)
 ```
+### Discard Languages
+
+Filters out detected languages ([ISO 639-2 codes](https://www.loc.gov/standards/iso639-2/php/code_list.php)).
+
+```scala
+import io.archivesunleashed._
+
+val val languages = Set("en", "fr")
+val r = RecordLoader.loadArchives("example.warc.gz",sc)
+r.keepLanguages(languages)
+```
 
 ### Discard Content
 
-Filters out detected that does pass Regular Expression test.
+Filters out detected content that does pass Regular Expression test.
 
 ```scala
 import io.archivesunleashed._
