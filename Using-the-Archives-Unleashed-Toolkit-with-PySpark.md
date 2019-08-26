@@ -29,7 +29,7 @@ Of notable difference between PySpark and the Scala `spark-shell`, the latter pr
 There are two ways around this. The first workaround is to create a new Python file with your script, and use `spark-submit`. For example, you might create a script with your text editor, save it as `file.py`, and then run it using the following.
 
 ```bash
-spark-submit --jars /path/to/aut-0.18.0-fatjar.jar --driver-class-path /path/to/aut-0.18.0-fatjar.jar --py-files /path/to/aut.zip /path/to/custom/python/file.py
+spark-submit --jars /path/to/aut-0.18.0-fatjar.jar --driver-class-path /path/to/aut-0.18.0-fatjar.jar --py-files /path/to/aut-0.18.0.zip /path/to/custom/python/file.py
 ```
 
 An easier method is to use the interactive, browser-based [Jupyter Notebooks](https://jupyter.org/) to work with the Archives Unleashed Toolkit (AUT). You can see it in action below.
@@ -54,12 +54,12 @@ If for some reason you are missing dependencies, install them with `conda instal
 Next, you will need to download the following AUT release files:
 
 - [`aut-0.18.0-fatjar.jar`](https://github.com/archivesunleashed/aut/releases/download/aut-0.18.0/aut-0.18.0-fatjar.jar)
-- [`aut.zip`](https://github.com/archivesunleashed/aut/releases/download/aut-0.18.0/aut.zip)
+- [`aut-0.18.0.zip`](https://github.com/archivesunleashed/aut/releases/download/aut-0.18.0/aut-0.18.0.zip)
 
 With the dependencies downloaded, you are ready to launch your Jupyter Notebook.
 
 ```bash
-PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook /path/to/spark/bin/pyspark --jars /path/to/aut-0.18.0-fatjar.jar --driver-class-path /path/to/aut-0.18.0-fatjar.jar --py-files /path/to/aut.zip
+PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook /path/to/spark/bin/pyspark --jars /path/to/aut-0.18.0-fatjar.jar --driver-class-path /path/to/aut-0.18.0-fatjar.jar --py-files /path/to/aut-0.18.0.zip
 ```
 
 A Jupyter Notebook _should_ automatically load in your browser at <http://localhost:8888>. You may be asked for a token upon first launch, which just offers a bit of security. The token is available in the load screen and will look something like this:
@@ -352,7 +352,7 @@ Spark-Submit has more fine-tuned commands around the amount of memory you are de
 As a reminder, `spark-submit` syntax looks like:
 
 ```bash
-spark-submit --jars /path/to/aut-0.18.0-fatjar.jar --driver-class-path /path/to/aut-0.18.0-fatjar.jar --py-files /path/to/aut.zip /path/to/custom/python/file.py
+spark-submit --jars /path/to/aut-0.18.0-fatjar.jar --driver-class-path /path/to/aut-0.18.0-fatjar.jar --py-files /path/to/aut-0.18.0.zip /path/to/custom/python/file.py
 ```
 
 Where `file.py` is the Python script that you've written.
