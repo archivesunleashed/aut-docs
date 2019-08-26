@@ -49,14 +49,17 @@ virtualenv python ~/.venv_path
 . ~/.venv_path/bin/activate
 ```
 
-If for some reason you are missing dependencies, install them with `conda install pyspark` or `pip install pyspark`.
+If for some reason you are missing dependencies, install them with `conda install` or `pip install`.
 
-Next, you will need to download the AUT PySpark library: [`aut.zip`](https://github.com/archivesunleashed/aut/releases/download/aut-0.18.0/aut.zip)
+Next, you will need to download the following AUT release files:
 
-With the library downloaded, you are ready to launch your Jupyter Notebook.
+- [`aut-0.18.0-fatjar.jar`](https://github.com/archivesunleashed/aut/releases/download/aut-0.18.0/aut-0.18.0-fatjar.jar)
+- [`aut.zip`](https://github.com/archivesunleashed/aut/releases/download/aut-0.18.0/aut.zip)
+
+With the dependencies downloaded, you are ready to launch your Jupyter Notebook.
 
 ```bash
-PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook /path/to/spark/bin/pyspark --packages "io.archivesunleashed:aut:0.18.0" --py-files /Users/svefritz/Desktop/aut.zip
+PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook /path/to/spark/bin/pyspark --jars /path/to/aut-0.18.0-fatjar.jar --driver-class-path /path/to/aut-0.18.0-fatjar.jar --py-files /path/to/aut.zip
 ```
 
 A Jupyter Notebook _should_ automatically load in your browser at <http://localhost:8888>. You may be asked for a token upon first launch, which just offers a bit of security. The token is available in the load screen and will look something like this:
