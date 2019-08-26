@@ -5,7 +5,7 @@
   - [Quick Start](#quick-start)
     - [Want a quick walkthrough?](#want-a-quick-walkthrough)
   - [Dependencies](#dependencies)
-  - [Installing and Running Spark shell](#installing-and-running-spark-shell)
+  - [Installing and Running Spark Shell](#installing-and-running-spark-shell)
   - [Test the Archives Unleashed Toolkit](#test-the-archives-unleashed-toolkit)
   - [A Note on Memory](#a-note-on-memory)
 - [Collection Analytics](#collection-analytics)
@@ -15,28 +15,28 @@
   - [List of HTTP Status Codes](#list-of-http-status-codes)
   - [Location of the Resource in ARCs and WARCs](#location-of-the-resource-in-arcs-and-warcs)
 - [Plain Text Extraction](#plain-text-extraction)
-  - [All plain text](#all-plain-text)
-  - [Plain text without HTTP headers](#plain-text-without-http-headers)
-  - [Plain text by domain](#plain-text-by-domain)
-  - [Plain text by URL pattern](#plain-text-by-url-pattern)
-  - [Plain text minus boilerplate](#plain-text-minus-boilerplate)
-  - [Plain text filtered by date](#plain-text-filtered-by-date)
-  - [Plain text filtered by language](#plain-text-filtered-by-language)
-  - [Plain text filtered by keyword](#plain-text-filtered-by-keyword)
+  - [All Plain Text](#all-plain-text)
+  - [Plain Text Without HTTP Headers](#plain-text-without-http-headers)
+  - [Plain Text by Domain](#plain-text-by-domain)
+  - [Plain Text by URL Pattern](#plain-text-by-url-pattern)
+  - [Plain Text Minus Boilerplate](#plain-text-minus-boilerplate)
+  - [Plain Text Filtered by Date](#plain-text-filtered-by-date)
+  - [Plain Text Filtered by Language](#plain-text-filtered-by-language)
+  - [Plain Text Filtered by Keyword](#plain-text-filtered-by-keyword)
 - [Raw HTML Extraction](#raw-html-extraction)
 - [Named Entity Recognition](#named-entity-recognition)
-  - [Extract entities from ARC/WARC files](#extract-entities-from-arcwarc-files)
+  - [Extract Entities from ARC/WARC Files](#extract-entities-from-arcwarc-files)
 - [Analysis of Site Link Structure](#analysis-of-site-link-structure)
   - [Extraction of Simple Site Link Structure](#extraction-of-simple-site-link-structure)
-  - [Extraction of a Link Structure, using Raw URLs (not domains)](#extraction-of-a-link-structure-using-raw-urls-not-domains)
-  - [Extraction of a Site Link Structure, organized by URL pattern](#extraction-of-a-site-link-structure-organized-by-url-pattern)
+  - [Extraction of a Link Structure, Using Raw URLs (not domains)](#extraction-of-a-link-structure-using-raw-urls-not-domains)
+  - [Extraction of a Site Link Structure, Organized by URL Pattern](#extraction-of-a-site-link-structure-organized-by-url-pattern)
   - [Grouping by Crawl Date](#grouping-by-crawl-date)
   - [Exporting as TSV](#exporting-as-tsv)
   - [Filtering by URL](#filtering-by-url)
   - [Exporting to Gephi Directly](#exporting-to-gephi-directly)
 - [Image Analysis](#image-analysis)
-  - [Most frequent image URLs in a collection](#most-frequent-image-urls-in-a-collection)
-  - [Most frequent images in a collection, based on MD5 hash](#most-frequent-images-in-a-collection-based-on-md5-hash)
+  - [Most Frequent Image URLs in a Collection](#most-frequent-image-urls-in-a-collection)
+  - [Most Frequent Image in a Collection, based on MD5 Hash](#most-frequent-images-in-a-collection-based-on-md5-hash)
 - [Filters](#filters)
   - [Keep Images](#keep-images)
   - [Keep MIME Types (web server)](#keep-mime-types-web-server)
@@ -240,7 +240,7 @@ If you want to see more than ten results, change the variable in the last line.
 
 ### List of Different Subdomains
 
-You can also use regular expressions to extract more fine-tuned information. For example, if you wanted to know all sitenames - i.e. the first-level directories of a given collection.
+Regular expressions can be used to extract more fine-tuned information. For example, if you wanted to know all sitenames - i.e. the first-level directories of a given collection.
 
 ```scala
 import io.archivesunleashed._
@@ -364,7 +364,7 @@ RecordLoader.loadArchives("example.arc.gz", sc)
 
 ### Plain text minus boilerplate
 
-The following Spark script generates plain text renderings for all the web pages in a collection, minus "boilerplate" content: advertisements, navigational elements, and elements of the website template. For more on the boilerplate removal library we are using, [please see this website and paper](http://www.l3s.de/~kohlschuetter/boilerplate/).
+The following Spark script generates plain text renderings for all the web pages in a collection, minus "boilerplate" content: advertisements, navigational elements, and elements of the website template. For more information on the boilerplate removal library we are using, [please see this website and paper](http://www.l3s.de/~kohlschuetter/boilerplate/).
 
 ```scala
 import io.archivesunleashed._
@@ -422,13 +422,13 @@ RecordLoader.loadArchives("example.arc.gz", sc)
   .saveAsTextFile("plain-text-date-filtered-2008-2015/")
 ```
 
-Note: if you created just a dump of plain text using another one of the earlier commands, you do not need to go back and run this. You can instead use bash to extract a sample of text. For example, running this command on a dump of all plain text stored in `alberta_education_curriculum.txt`:
+Note: if you created a dump of plain text using another one of the earlier commands, you do not need to go back and run this. You can instead use bash to extract a sample of text. For example, running this command on a dump of all plain text stored in `alberta_education_curriculum.txt`:
 
 ```bash
 sed -n -e '/^(201204/p' alberta_education_curriculum.txt > alberta_education_curriculum-201204.txt
 ```
 
-Would select just the lines beginning with `(201204`, or April 2012.
+would select just the lines beginning with `(201204`, or April 2012.
 
 ### Plain text filtered by language
 
@@ -463,7 +463,7 @@ val r = RecordLoader.loadArchives("example.arc.gz",sc)
 .saveAsTextFile("plain-text-radio/")
 ```
 
-There is also `discardContent` which does the opposite, if you have a frequent keyword you are not interested in.
+There is also `discardContent` which does the opposite, and can be used in cases where, for example, you have a frequent keyword you are not interested in.
 
 ## Raw HTML Extraction
 
@@ -556,7 +556,7 @@ val links = RecordLoader.loadArchives("example.arc.gz", sc)
 links.saveAsTextFile("links-all/")
 ```
 
-Note how you can add filters. In this case, we add a filter so you are looking at a network graph of pages containing the phrase "apple." Filters can go immediately after `.keepValidPages()`.
+Note how you can add filters are added. In this case, we add a filter which will result in a network graph of pages containing the phrase "apple." Filters can be applied immediately after `.keepValidPages()`.
 
 ```scala
 import io.archivesunleashed._
@@ -600,7 +600,7 @@ In a larger collection, you might want to add the following line:
 .filter(r => r._2 > 5)
 ```
 
-Before `.countItems()` to find just the documents that are linked to more than five times. As you can imagine, raw URLs are very numerous!
+before `.countItems()` to find just the documents that are linked to more than five times. As you can imagine, raw URLs are very numerous!
 
 ### Extraction of a Site Link Structure, organized by URL pattern
 
@@ -1051,7 +1051,7 @@ val df = RecordLoader.loadArchives("example.arc.gz", sc)
 df.printSchema()
 ```
 
-The below script will show you the top domains within the collection.
+The script below will show you the top domains within the collection.
 
 ```scala
 import io.archivesunleashed._
@@ -1253,7 +1253,7 @@ val res = df.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/export
 
 ## Loading Data from Amazon S3
 
-We also support loading data stored in [Amazon S3](https://aws.amazon.com/s3/). This advanced functionality requires that you provide spark shell with your AWS Access Key and AWS Secret Key, which you will get when creating your AWS credentials ([read more here](https://aws.amazon.com/blogs/security/wheres-my-secret-access-key/)).
+We also support loading data stored in [Amazon S3](https://aws.amazon.com/s3/). This advanced functionality requires that you provide Spark shell with your AWS Access Key and AWS Secret Key, which you will get when creating your AWS credentials ([read more here](https://aws.amazon.com/blogs/security/wheres-my-secret-access-key/)).
 
 This script, for example, will find the top ten domains from a set of WARCs found in an s3 bucket.
 
