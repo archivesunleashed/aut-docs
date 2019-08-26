@@ -11,9 +11,9 @@
   - [Audio](#audio)
   - [Video](#video)
   - [Spreadsheets](#spreadsheets)
-  - [Presentation program files (i.e. PowerPoint)](#presentation-program-files-ie-powerpoint)
-  - [Word processor files (i.e. Word)](#word-processor-files-ie-word)
-  - [Plain text files](#plain-text-files)
+  - [Presentation Program Files (i.e. PowerPoint)](#presentation-program-files-ie-powerpoint)
+  - [Word Processor Files (i.e. Word)](#word-processor-files-ie-word)
+  - [Plain Text Files](#plain-text-files)
 - [Using DataFrames to Count Domains](#using-dataframes-to-count-domains)
 - [Using DataFrames to Count Crawl Dates](#using-dataframes-to-count-crawl-dates)
 - [Using DataFrames to List URLs](#using-dataframes-to-list-urls)
@@ -22,17 +22,17 @@
 
 # Introduction
 
-PySpark is slightly different from other Python programs in that it relies on Apache Spark's underlying Scala and Java code to manipulate datasets. You can read more about this in the [Spark documentation](http://spark.apache.org/docs/2.4.3/api/python/pyspark.html).
+PySpark is a valuable tool for exploring and analyzing data at scale. It is slightly different from other Python programs in that it relies on Apache Spark's underlying Scala and Java code to manipulate datasets. You can read more about this in the [Spark documentation](http://spark.apache.org/docs/2.4.3/api/python/pyspark.html).
 
-The other difference between PySpark and the Scala `spark-shell` is the lack of a way to easily paste code to execute in the shell.
+Of notable difference between PySpark and the Scala `spark-shell`, the latter proves challenging when pasting code to execute in the shell.
 
-There are two ways around this. The easiest way is to create a new Python file with your script, and use `spark-submit`. For example, you might create a script with your text editor, save it as `file.py`, and then run it using the following.
+There are two ways around this. The first workaround is to create a new Python file with your script, and use `spark-submit`. For example, you might create a script with your text editor, save it as `file.py`, and then run it using the following.
 
 ```bash
 spark-submit --jars /path/to/aut-0.18.0-fatjar.jar --driver-class-path /path/to/aut-0.18.0-fatjar.jar --py-files /path/to/aut.zip /path/to/custom/python/file.py
 ```
 
-An easier method is the second method: using the interactive, browser-based [Jupyter Notebooks](https://jupyter.org/) to work with the Archives Unleashed Toolkit (AUT). You can see it in action below.
+An easier method is to use the interactive, browser-based [Jupyter Notebooks](https://jupyter.org/) to work with the Archives Unleashed Toolkit (AUT). You can see it in action below.
 
 ![Jupyter Notebook in Action](https://user-images.githubusercontent.com/3834704/63434418-09c6bf00-c3f3-11e9-8b9f-64671cc6a2a5.png)
 
@@ -51,7 +51,7 @@ virtualenv python ~/.venv_path
 
 If for some reason you are missing dependencies, install them with `conda install` or `pip install`.
 
-You will also need a couple AUT release files:
+Next, you will need to download the following AUT release files:
 
 - [`aut-0.18.0-fatjar.jar`](https://github.com/archivesunleashed/aut/releases/download/aut-0.18.0/aut-0.18.0-fatjar.jar)
 - [`aut.zip`](https://github.com/archivesunleashed/aut/releases/download/aut-0.18.0/aut.zip)
@@ -62,7 +62,7 @@ With the dependencies downloaded, you are ready to launch your Jupyter Notebook.
 PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook /path/to/spark/bin/pyspark --jars /path/to/aut-0.18.0-fatjar.jar --driver-class-path /path/to/aut-0.18.0-fatjar.jar --py-files /path/to/aut.zip
 ```
 
-A Jupyter Notebook _should_ load in your browser at <http://localhost:8888>. You may be asked for a token upon first launch, which just offers a bit of security. The token is available in the load screen and will look something like this:
+A Jupyter Notebook _should_ automatically load in your browser at <http://localhost:8888>. You may be asked for a token upon first launch, which just offers a bit of security. The token is available in the load screen and will look something like this:
 
 ```
 [I 19:18:30.893 NotebookApp] Writing notebook server cookie secret to /run/user/1001/jupyter/notebook_cookie_secret
@@ -80,9 +80,9 @@ A Jupyter Notebook _should_ load in your browser at <http://localhost:8888>. You
         http://localhost:8888/?token=87e7a47c5a015cb2b846c368722ec05c1100988fd9dcfe04
 ```
 
-Near the top right of the Jupyter homepage, you will see "New".
+Create a new notebook by clicking “New” (near the top right of the Jupyter homepage) and select “Python 3” from the drop down list.
 
-Select a new Python 3 Notebook. In the first cell enter:
+The notebook will open in a new window. In the first cell enter:
 
 ```python
 from aut import *
@@ -101,7 +101,7 @@ If you receive no errors, and see the following, you are ready to begin working 
 
 # DataFrames: Collection Analysis
 
-Pyspark also supports DataFrames, which enable more effective filtering. In this section, we will use them to get an overview of what is in a collection.
+An additional benefit of using PySpark is its support of DataFrames, which visually presents data in a tabular form and enables effective filtering. In this section, we will use DataFrames as a tool to provide an overview of a collection’s content.
 
 For these examples, we are going to use some [AUT sample data](https://github.com/archivesunleashed/aut-resources/archive/master.zip). Click the previous link, download it, and extract the zip file.
 
@@ -305,7 +305,7 @@ df.select(extract_domain("crawl_date").alias("Crawl Date")).groupBy("Crawl Date"
 
 # Using DataFrames to List URLs
 
-Finally, you can also get a list of the URLs in a collection with the following command:
+Finally, you can compile a list of the URLs in a collection with the following command:
 
 ```
 from aut import *
@@ -320,7 +320,7 @@ df.select("url").rdd.flatMap(lambda x: x).take(10)
 
 # Turn Your WARCs into a Temporary Database Table
 
-Using any of the above DataFrames, you can begin to use [Spark SQL](https://spark.apache.org/docs/2.4.3/sql-programming-guide.html) with them.
+Using any of the above DataFrames, you can begin to integrate [Spark SQL](https://spark.apache.org/docs/2.4.3/sql-programming-guide.html) commands.
 
 ```python
 from aut import *
