@@ -498,6 +498,8 @@ import io.archivesunleashed._
 import io.archivesunleashed.app._
 import io.archivesunleashed.matchbox._
 
+sc.addFile("/path/to/classifier")
+
 ExtractEntities.extractFromRecords("/path/to/classifier/english.all.3class.distsim.crf.ser.gz", "example.arc.gz", "output-ner/", sc)
 ```
 
