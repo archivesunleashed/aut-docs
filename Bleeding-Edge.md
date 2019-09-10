@@ -72,7 +72,7 @@ The Archives Unleashed Toolkit is an open-source platform for analyzing web arch
 
 Most of this documentation is built on [resilient distributed datasets (RDD)](https://spark.apache.org/docs/latest/rdd-programming-guide.html). We are working on adding support for [DataFrames](https://spark.apache.org/docs/latest/sql-programming-guide.html#datasets-and-dataframes). You can read more about this in our experimental [DataFrames section](#dataframes), and at our [[Using the Archives Unleashed Toolkit with PySpark]] tutorial.
 
-The Archives Unleashed Toolkit can also be used in conjuction with [Spark Notebooks](http://spark-notebook.io/), and [Apache Zepplin](https://zeppelin.apache.org/).
+The Archives Unleashed Toolkit can also be used in conjunction with [Spark Notebooks](http://spark-notebook.io/), and [Apache Zepplin](https://zeppelin.apache.org/).
 
 If you want to learn more about [Apache Spark](https://spark.apache.org/), we highly recommend [Spark: The Definitive Guide](http://shop.oreilly.com/product/0636920034957.do) 
 
