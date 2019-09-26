@@ -8,3 +8,4 @@ User Guides
 * [[Using the Archives Unleashed Toolkit with PySpark]]
 * [[Docker Install]]
 * [[Toolkit Lesson]]
+* [[Cookbook]]
