@@ -100,28 +100,28 @@ import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 val df_pdf = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractPDFDetailsDF();
-val res_pdf = df_pdf.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/pdf/collection-prefix-pdf", "extension")
+val res_pdf = df_pdf.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/binaries/pdf/collection-prefix-pdf", "extension")
 
 val df_audio = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractAudioDetailsDF();
-val res_audio = df_audio.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/audio/collection-prefix-audio", "extension")
+val res_audio = df_audio.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/binaries/audio/collection-prefix-audio", "extension")
 
 val df_video = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractVideoDetailsDF();
-val res_video = df_video.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/video/collection-prefix-video", "extension")
+val res_video = df_video.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/binaries/video/collection-prefix-video", "extension")
 
 val df_image = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractImageDetailsDF();
-val res_image = df_image.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/image/collection-prefix-image", "extension")
+val res_image = df_image.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/binaries/image/collection-prefix-image", "extension")
 
 val df_ss = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractSpreadsheetDetailsDF();
-val res_ss = df_ss.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/spreadsheet/collection-prefix-spreadsheet", "extension")
+val res_ss = df_ss.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/binaries/spreadsheet/collection-prefix-spreadsheet", "extension")
 
 val df_pp = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractPresentationProgramDetailsDF();
-val res_pp = df_pp.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/presentation-program/collection-prefix-presentation-program", "extension")
+val res_pp = df_pp.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/binaries/presentation-program/collection-prefix-presentation-program", "extension")
 
 val df_word = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractWordProcessorDetailsDF();
-val res_word = df_word.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/word-processor/collection-prefix-word-processor", "extension")
+val res_word = df_word.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/binaries/word-processor/collection-prefix-word-processor", "extension")
 
 val df_txt = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractTextFilesDetailsDF();
-val res_txt = df_txt.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/text/collection-prefix-text", "extension")
+val res_txt = df_txt.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/binaries/text/collection-prefix-text", "extension")
 
 sys.exit
 ```
