@@ -7,5 +7,6 @@
     * [[Using the Archives Unleashed Toolkit with PySpark]]
     * [[Docker Install]]
     * [[Toolkit Lesson]]
+    * [[Cookbook]]
 * [API Documentation](https://api.docs.archivesunleashed.io)
 * [[Release Process]]
