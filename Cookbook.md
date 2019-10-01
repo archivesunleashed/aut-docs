@@ -90,3 +90,38 @@ http://ar.geocities.com/ebanisteriaflamboyan/midis/filadelfia.mid,filadelfia.mid
 http://es.geocities.com/lapolla_directo5/20_Cara_Al_Culo,20_Cara_Al_Culo,mpga,audio/mpeg,audio/mpeg,fff4f06560dfb6cfaec576fee2439cce
 http://mx.geocities.com/fly26523/manga/dragonquest/audio/dw1_kng.mid,dw1_kng.mid,mid,audio/midi,audio/midi,fff1cf3a341f7041872f8c3a2cd43cf5
 ```
+
+## Extract Binaries to Disk
+
+The following script will extract all the binary files of PDFs, audio files, video files, word processor files, spreadsheet files, presentation program files, and text files to disk. 
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val df_pdf = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractPDFDetailsDF();
+val res_pdf = df_pdf.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/pdf/collection-prefix-pdf", "extension")
+
+val df_audio = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractAudioDetailsDF();
+val res_audio = df_audio.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/audio/collection-prefix-audio", "extension")
+
+val df_video = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractVideoDetailsDF();
+val res_video = df_video.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/video/collection-prefix-video", "extension")
+
+val df_image = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractImageDetailsDF();
+val res_image = df_image.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/image/collection-prefix-image", "extension")
+
+val df_ss = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractSpreadsheetDetailsDF();
+val res_ss = df_ss.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/spreadsheet/collection-prefix-spreadsheet", "extension")
+
+val df_pp = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractPresentationProgramDetailsDF();
+val res_pp = df_pp.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/presentation-program/collection-prefix-presentation-program", "extension")
+
+val df_word = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractWordProcessorDetailsDF();
+val res_word = df_word.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/word-processor/collection-prefix-word-processor", "extension")
+
+val df_txt = RecordLoader.loadArchives("/path/to/warcs/*", sc).extractTextFilesDetailsDF();
+val res_txt = df_txt.select($"bytes", $"extension").saveToDisk("bytes", "/path/to/derivatives/binaries/text/collection-prefix-text", "extension")
+
+sys.exit
+```
