@@ -1170,36 +1170,37 @@ import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 val df = RecordLoader.loadArchives("example.arc.gz", sc).extractImageDetailsDF();
-df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5", $"bytes").orderBy(desc("md5")).show()
+df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5", $"sha1", $"bytes").orderBy(desc("md5")).show()
 ```
 
 The results will look like this:
 
 ```
-+--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+
-|                 url|            filename|extension|mime_type_web_server|mime_type_tika|width|height|                 md5|               bytes|
-+--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+
-|http://www.archiv...|mediatype_movies.gif|      gif|           image/gif|     image/gif|   21|    21|ff05f9b408519079c...|R0lGODlhFQAVAKUpA...|
-|http://www.archiv...|    LOCLogoSmall.jpg|      jpg|          image/jpeg|    image/jpeg|  275|   300|fbf1aec668101b960...|/9j/4AAQSkZJRgABA...|
-|http://www.archiv...|   archive.small.jpg|      jpg|          image/jpeg|    image/jpeg|  300|   225|f611b554b9a44757d...|/9j/4RpBRXhpZgAAT...|
-|http://tsunami.ar...|  tsunamiweb1_02.jpg|      jpg|          image/jpeg|    image/jpeg|  384|   229|f02005e29ffb485ca...|/9j/4AAQSkZJRgABA...|
-|http://www.archiv...|alexa_websearch_l...|      gif|           image/gif|     image/gif|  301|    47|eecc909992272ce0d...|R0lGODlhLQEvAPcAA...|
-|http://www.archiv...|      lizardtech.gif|      gif|           image/gif|     image/gif|  140|    37|e7166743861126e51...|R0lGODlhjAAlANUwA...|
-|http://www.archiv...|       half_star.png|      png|           image/png|     image/png|   14|    12|e1e101f116d9f8251...|iVBORw0KGgoAAAANS...|
-|http://www.archiv...|         hewlett.jpg|      jpg|          image/jpeg|    image/jpeg|  300|   116|e1da27028b81db60e...|/9j/4AAQSkZJRgABA...|
-|http://www.archiv...|prelinger-header-...|      jpg|          image/jpeg|    image/jpeg|   84|    72|d39cce8b2f3aaa783...|/9j/4AAQSkZJRgABA...|
-|http://www.archiv...|           arrow.gif|      gif|           image/gif|     image/gif|   13|    11|c7ee6d7c17045495e...|R0lGODlhDQALALMAA...|
-|http://www.archiv...|          folder.png|      png|           image/png|     image/png|   20|    15|c1905fb5f16232525...|iVBORw0KGgoAAAANS...|
-|http://www.archiv...|     wayback-wtc.gif|      gif|           image/gif|     image/gif|   35|    35|c15ec074d95fe7e1e...|R0lGODlhIwAjANUAA...|
-|http://www.archiv...|     clicktoplay.png|      png|           image/png|     image/png|  320|   240|b148d9544a1a65ae4...|iVBORw0KGgoAAAANS...|
-|http://www.archiv...|    orange_arrow.gif|      gif|           image/gif|     image/gif|    8|    11|a820ac93e2a000c9d...|R0lGODlhCAALAJECA...|
-|http://www.archiv...|  arc-it-tagline.gif|      gif|           image/gif|     image/gif|  385|    30|9f70e6cc21ac55878...|R0lGODlhgQEeALMPA...|
-|http://www.archiv...|          guitar.jpg|      jpg|          image/jpeg|    image/jpeg|  140|   171|9ed163df5065418db...|/9j/4AAQSkZJRgABA...|
-|http://www.archiv...|        blendbar.jpg|      jpg|          image/jpeg|    image/jpeg| 1800|    89|9e41e4d6bdd53cd9d...|/9j/4AAQSkZJRgABA...|
-|http://www.archiv...|alexalogo-archive...|      gif|           image/gif|     image/gif|  304|    36|9da73cf504be0eb70...|R0lGODlhMAEkAOYAA...|
-|http://www.archiv...|             lma.jpg|      jpg|          image/jpeg|    image/jpeg|  215|    71|97ebd3441323f9b5d...|/9j/4AAQSkZJRgABA...|
-|http://i.creative...|           88x31.png|      png|           image/png|     image/png|   88|    31|9772d34b683f8af83...|iVBORw0KGgoAAAANS...|
-+--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+
++--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+--------------------+
+|                 url|            filename|extension|mime_type_web_server|mime_type_tika|width|height|                 md5|                sha1|               bytes|
++--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+--------------------+
+|http://www.archiv...|mediatype_movies.gif|      gif|           image/gif|     image/gif|   21|    21|ff05f9b408519079c...|194800d702aab9b87...|R0lGODlhFQAVAKUpA...|
+|http://www.archiv...|    LOCLogoSmall.jpg|      jpg|          image/jpeg|    image/jpeg|  275|   300|fbf1aec668101b960...|564c1a07152c12cea...|/9j/4AAQSkZJRgABA...|
+|http://www.archiv...|   archive.small.jpg|      jpg|          image/jpeg|    image/jpeg|  300|   225|f611b554b9a44757d...|e9bf7ef0ae3fc50f5...|/9j/4RpBRXhpZgAAT...|
+|http://tsunami.ar...|  tsunamiweb1_02.jpg|      jpg|          image/jpeg|    image/jpeg|  384|   229|f02005e29ffb485ca...|9eeb9c3c67d7efc51...|/9j/4AAQSkZJRgABA...|
+|http://www.archiv...|alexa_websearch_l...|      gif|           image/gif|     image/gif|  301|    47|eecc909992272ce0d...|ea18e226f3cf40005...|R0lGODlhLQEvAPcAA...|
+|http://www.archiv...|      lizardtech.gif|      gif|           image/gif|     image/gif|  140|    37|e7166743861126e51...|cf26e9ffc27be133f...|R0lGODlhjAAlANUwA...|
+|http://www.archiv...|       half_star.png|      png|           image/png|     image/png|   14|    12|e1e101f116d9f8251...|736abd06a978e2fd2...|iVBORw0KGgoAAAANS...|
+|http://www.archiv...|         hewlett.jpg|      jpg|          image/jpeg|    image/jpeg|  300|   116|e1da27028b81db60e...|eb418c17901b1b313...|/9j/4AAQSkZJRgABA...|
+|http://www.archiv...|prelinger-header-...|      jpg|          image/jpeg|    image/jpeg|   84|    72|d39cce8b2f3aaa783...|1c41a644123e8f861...|/9j/4AAQSkZJRgABA...|
+|http://www.archiv...|           arrow.gif|      gif|           image/gif|     image/gif|   13|    11|c7ee6d7c17045495e...|7013764e619066e60...|R0lGODlhDQALALMAA...|
+|http://www.archiv...|          folder.png|      png|           image/png|     image/png|   20|    15|c1905fb5f16232525...|ff7b8c60e8397cb5d...|iVBORw0KGgoAAAANS...|
+|http://www.archiv...|     wayback-wtc.gif|      gif|           image/gif|     image/gif|   35|    35|c15ec074d95fe7e1e...|f45425406600b136d...|R0lGODlhIwAjANUAA...|
+|http://www.archiv...|     clicktoplay.png|      png|           image/png|     image/png|  320|   240|b148d9544a1a65ae4...|477105e3a93b60dd8...|iVBORw0KGgoAAAANS...|
+|http://www.archiv...|    orange_arrow.gif|      gif|           image/gif|     image/gif|    8|    11|a820ac93e2a000c9d...|850b9daeef06bee6e...|R0lGODlhCAALAJECA...|
+|http://www.archiv...|  arc-it-tagline.gif|      gif|           image/gif|     image/gif|  385|    30|9f70e6cc21ac55878...|4601e2f642d8e55ac...|R0lGODlhgQEeALMPA...|
+|http://www.archiv...|          guitar.jpg|      jpg|          image/jpeg|    image/jpeg|  140|   171|9ed163df5065418db...|f6c9475009ae2416c...|/9j/4AAQSkZJRgABA...|
+|http://www.archiv...|        blendbar.jpg|      jpg|          image/jpeg|    image/jpeg| 1800|    89|9e41e4d6bdd53cd9d...|dc780bf80720c87c9...|/9j/4AAQSkZJRgABA...|
+|http://www.archiv...|alexalogo-archive...|      gif|           image/gif|     image/gif|  304|    36|9da73cf504be0eb70...|03e530ef04e4b68f7...|R0lGODlhMAEkAOYAA...|
+|http://www.archiv...|             lma.jpg|      jpg|          image/jpeg|    image/jpeg|  215|    71|97ebd3441323f9b5d...|ff9485b26300721b2...|/9j/4AAQSkZJRgABA...|
+|http://i.creative...|           88x31.png|      png|           image/png|     image/png|   88|    31|9772d34b683f8af83...|689bef4ffb8918612...|iVBORw0KGgoAAAANS...|
++--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+--------------------+
+
 only showing top 20 rows
 
 import io.archivesunleashed._
@@ -1227,17 +1228,17 @@ import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 val df = RecordLoader.loadArchives("example.media.warc.gz", sc).extractVideoDetailsDF();
-df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"bytes").orderBy(desc("md5")).show()
+df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes").orderBy(desc("md5")).show()
 ```
 
 The results will look like:
 
 ```
-+--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+
-|                 url|            filename|extension|mime_type_web_server|mime_type_tika|                 md5|               bytes|
-+--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+
-|https://ruebot.ne...|2018-11-12%2016.1...|      mp4|           video/mp4|     video/mp4|2cde7de3213a87269...|AAAAGGZ0eXBtcDQyA...|
-+--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+
++--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
+|                 url|            filename|extension|mime_type_web_server|mime_type_tika|                 md5|                sha1|               bytes|
++--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
+|https://ruebot.ne...|2018-11-12%2016.1...|      mp4|           video/mp4|     video/mp4|2cde7de3213a87269...|f28c72fa4c0464a1a...|AAAAGGZ0eXBtcDQyA...|
++--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
 
 import io.archivesunleashed._
 import io.archivesunleashed.df._
