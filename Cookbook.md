@@ -91,12 +91,12 @@ http://es.geocities.com/lapolla_directo5/20_Cara_Al_Culo,20_Cara_Al_Culo,mpga,au
 http://mx.geocities.com/fly26523/manga/dragonquest/audio/dw1_kng.mid,dw1_kng.mid,mid,audio/midi,audio/midi,fff1cf3a341f7041872f8c3a2cd43cf5
 ```
 
-## Extract Binary Info to CSV (S3)
+## Extract Binary Info to CSV (s3)
 
 The following script will extract all the binary information of PDFs, audio files, video files, word processor files, spreadsheet files, presentation program files, and text files to a S3 bucket.
 
 ```scala
- import io.archivesunleashed._
+import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 sc.setLogLevel("INFO")
