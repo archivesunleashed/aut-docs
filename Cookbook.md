@@ -91,6 +91,46 @@ http://es.geocities.com/lapolla_directo5/20_Cara_Al_Culo,20_Cara_Al_Culo,mpga,au
 http://mx.geocities.com/fly26523/manga/dragonquest/audio/dw1_kng.mid,dw1_kng.mid,mid,audio/midi,audio/midi,fff1cf3a341f7041872f8c3a2cd43cf5
 ```
 
+## Extract Binary Info to CSV (S3)
+
+The following script will extract all the binary information of PDFs, audio files, video files, word processor files, spreadsheet files, presentation program files, and text files to a S3 bucket.
+
+```scala
+ import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+sc.setLogLevel("INFO")
+
+sc.hadoopConfiguration.set("fs.s3a.access.key", "YOUR ACCESS KEY")
+sc.hadoopConfiguration.set("fs.s3a.secret.key", "YOUR SECRET KEY ")
+
+val df_pdf = RecordLoader.loadArchives("/local/path/to/data/*gz", sc).extractPDFDetailsDF();
+val res_pdf = df_pdf.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5").orderBy(desc("md5")).write.format("csv").option("header","true").mode("Overwrite").save("s3a://YourBucket/pdf")
+
+val df_audio = RecordLoader.loadArchives("/local/path/to/data/*gz", sc).extractAudioDetailsDF();
+val res_audio = df_audio.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5").orderBy(desc("md5")).write.format("csv").option("header","true").mode("Overwrite").save("s3a://YourBucket/audio")
+
+val df_video = RecordLoader.loadArchives("/local/path/to/data/*gz", sc).extractVideoDetailsDF();
+val res_video = df_video.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5").orderBy(desc("md5")).write.format("csv").option("header","true").mode("Overwrite").save("s3a://YourBucket/video")
+
+val df_image = RecordLoader.loadArchives("/local/path/to/data/*gz", sc).extractImageDetailsDF();
+val res_image = df_image.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5").orderBy(desc("md5")).write.format("csv").option("header","true").mode("Overwrite").save("s3a://YourBucket/image")
+
+val df_ss = RecordLoader.loadArchives("/local/path/to/data/*gz", sc).extractSpreadsheetDetailsDF();
+val res_ss = df_ss.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5").orderBy(desc("md5")).write.format("csv").option("header","true").mode("Overwrite").save("s3a://YourBucket/spreadsheet")
+
+val df_pp = RecordLoader.loadArchives("/local/path/to/data/*gz", sc).extractPresentationProgramDetailsDF();
+val res_pp = df_pp.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5").orderBy(desc("md5")).write.format("csv").option("header","true").mode("Overwrite").save("s3a://YourBucket/presentation-program")
+
+val df_word = RecordLoader.loadArchives("/local/path/to/data/*gz", sc).extractWordProcessorDetailsDF();
+val res_word = df_word.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5").orderBy(desc("md5")).write.format("csv").option("header","true").mode("Overwrite").save("s3a://YourBucket/word-processor")
+
+val df_txt = RecordLoader.loadArchives("/local/path/to/data/*gz", sc).extractTextFilesDetailsDF();
+val res_txt = df_txt.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5").orderBy(desc("md5")).write.format("csv").option("header","true").mode("Overwrite").save("s3a://YourBucket/text")
+
+sys.exit
+```
+
 ## Extract Binaries to Disk
 
 The following script will extract all the binary files of PDFs, audio files, video files, word processor files, spreadsheet files, presentation program files, and text files to disk. 
