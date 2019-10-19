@@ -134,7 +134,7 @@ TODO
 
 ## Get the Location of the Resource in ARCs and WARCs
 
-How do I find out the WARC or ARC that a page is contained in?
+How do I find out the WARC or ARC that each page is contained in?
 
 ### Scala RDD
 
@@ -159,7 +159,7 @@ RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .take(10)
 ```
 
-TODO: Check to see if `take(10)` is really the right thing to do here?
+TODO: Add script for the case where I only want to know the location of _one_ resource.
 
 ### Scala DF
 
