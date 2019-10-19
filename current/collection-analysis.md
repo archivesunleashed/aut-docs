@@ -51,12 +51,18 @@ import io.archivesunleashed._
 
 RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).extractValidPagesDF()
   .select($"Url")
-  .show(false)
+  .show(20, false)
 ```
 
 ### Python DF
 
-TODO
+```
+from aut import *
+
+WebArchive(sc, sqlContext, "src/test/resources/warc/example.warc.gz").pages() \
+    .select("url") \
+    .show(20, False)
+```
 
 ## List Top-Level Domains
 
@@ -85,7 +91,7 @@ import io.archivesunleashed.df._
 RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).extractValidPagesDF()
   .select(ExtractBaseDomain($"Url").as("Domain"))
   .groupBy("Domain").count().orderBy(desc("count"))
-  .show(false)
+  .show(20, False)
 ```
 
 ### Python DF
