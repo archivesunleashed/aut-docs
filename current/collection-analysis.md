@@ -4,11 +4,11 @@ You may want to get a birds-eye view of your ARCs or WARCs: what top-level domai
 
 How do I...
 
-- [List URLs](#list-urls)
+- [List URLs](#List-URLs)
 - [List Top-Level Domains](#List-Top-Level-Domains)
-- [List Different Subdomains](#list_different_subdomains)
-- [List HTTP Status Codes](#List_HTTP_Status_Codes)
-- [Get the Location of the Resource in ARCs and WARCs](#Get_the_Location_of_the_Resource_in_ARCs_and_WARCs)
+- [List Different Subdomains](#List-Different-Subdomains)
+- [List HTTP Status Codes](#List-HTTP-Status-Codes)
+- [Get the Location of the Resource in ARCs and WARCs](#Get-the-Location-of-the-Resource-in-ARCs-and-WARCs)
 
 ## List URLs
 
