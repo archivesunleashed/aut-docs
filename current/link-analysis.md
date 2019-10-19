@@ -67,7 +67,11 @@ val links = RecordLoader.loadArchives("example.arc.gz", sc)
 links.saveAsTextFile("full-links-all/")
 ```
 
-You can see that the above was achieved by removing the .map(r => (ExtractDomain(r._1).removePrefixWWW(), ExtractDomain(r._2).removePrefixWWW())) line.
+You can see that the above was achieved by removing the following line:
+
+```scala
+  .map(r => (ExtractDomain(r._1).removePrefixWWW(), ExtractDomain(r._2).removePrefixWWW()))
+```
 
 In a larger collection, you might want to add the following line:
 
@@ -119,7 +123,7 @@ RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
 ```
 
 The format of this output is:
-- Field one: Crawldate, yyyyMMdd
+- Field one: Crawldate, `yyyyMMdd`
 - Field two: Source domain (i.e. liberal.ca)
 - Field three: Target domain of link (i.e. ndp.ca)
 - Field four: number of links.
@@ -216,7 +220,7 @@ WriteGraph(links, "links-for-gephi.gexf")
 
 This file can then be directly opened by Gephi.
 
-We also support exporting to the GraphML format. To do so, the following variation on `WriteGraph` will work:
+We also support exporting to the [GraphML](https://en.wikipedia.org/wiki/GraphML) format. To do so, the following variation on `WriteGraph` will work:
 
 ```scala
 WriteGraph.asGraphml(links, "links-for-gephi.graphml")
