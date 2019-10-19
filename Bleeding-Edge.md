@@ -145,11 +145,10 @@ Type or paste the following:
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val r = RecordLoader.loadArchives("example.arc.gz", sc)
-.keepValidPages()
-.map(r => ExtractDomain(r.getUrl))
-.countItems()
-.take(10)
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+  .map(r => ExtractDomain(r.getUrl))
+  .countItems()
+  .take(10)
 ```
 
 then <kbd>CTRL</kbd>+<kbd>d</kbd> to exit paste mode and run the script.
@@ -202,10 +201,9 @@ If you just want a list of URLs in the collection, you can type :p into Spark Sh
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val r = RecordLoader.loadArchives("example.arc.gz", sc)
-.keepValidPages()
-.map(r => r.getUrl)
-.take(10)
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+  .map(r => r.getUrl)
+  .take(10)
 ```
 
 This will give you a list of the top ten URLs. If you want all the URLs, exported to a file, you could run this instead. Note that your export directory cannot already exist.
@@ -214,10 +212,9 @@ This will give you a list of the top ten URLs. If you want all the URLs, exporte
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val r = RecordLoader.loadArchives("example.arc.gz", sc)
-.keepValidPages()
-.map(r => r.getUrl)
-.saveAsTextFile("/path/to/export/directory/")
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+  .map(r => r.getUrl)
+  .saveAsTextFile("/path/to/export/directory/")
 ```
 
 ### List of Top-Level Domains
@@ -228,12 +225,10 @@ You may just want to see the domains within an item. The script below shows the 
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val r =
-RecordLoader.loadArchives("example.arc.gz", sc)
-.keepValidPages()
-.map(r => ExtractDomain(r.getUrl))
-.countItems()
-.take(10)
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+  .map(r => ExtractDomain(r.getUrl))
+  .countItems()
+  .take(10)
 ```
 
 If you want to see more than ten results, change the variable in the last line.
@@ -246,10 +241,9 @@ Regular expressions can be used to extract more fine-tuned information. For exam
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val r = RecordLoader.loadArchives("example.arc.gz", sc)
- .keepValidPages()
- .flatMap(r => """http://[^/]+/[^/]+/""".r.findAllIn(r.getUrl).toList)
- .take(10)
+RecordLoader.loadArchives("example.arc.gz", sc) .keepValidPages()
+  .flatMap(r => """http://[^/]+/[^/]+/""".r.findAllIn(r.getUrl).toList)
+  .take(10)
 ```
 
 In the above example, `"""...."""` declares that we are working with a regular expression, `.r` says turn it into a regular expression, `.findAllIn` says look for all matches in the URL. This will only return the first but that is generally good for our use cases. Finally, `.toList` turns it into a list so you can `flatMap`.
@@ -262,9 +256,9 @@ You may be interested in the [HTTP Status Codes](https://en.wikipedia.org/wiki/L
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val r = RecordLoader.loadArchives("example.arc.gz", sc)
-.map(r => (r.getUrl, r.getHttpStatus))
-.take(10)
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .map(r => (r.getUrl, r.getHttpStatus))
+  .take(10)
 ```
 
 ### Location of the Resource in ARCs and WARCs
@@ -275,10 +269,9 @@ Finally, you may want to know what WARC file the different resources are located
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val r = RecordLoader.loadArchives("example.arc.gz", sc)
-.keepValidPages()
-.map(r => (r.getUrl, r.getArchiveFilename))
-.take(10)
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+  .map(r => (r.getUrl, r.getArchiveFilename))
+  .take(10)
 ```
 
 Or, if you just want to know the filename, without the full path and filename, the following script will do that.
@@ -288,8 +281,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 import org.apache.commons.io.FilenameUtils
 
-RecordLoader.loadArchives("example.arc.gz", sc)
-  .keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .map(r => (r.getUrl, FilenameUtils.getName(r.getArchiveFilename)))
   .take(10)
 ```
@@ -304,8 +296,7 @@ This script extracts the crawl date, domain, URL, and plain text from HTML files
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
-  .keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
   .saveAsTextFile("plain-text/")
 ```
@@ -322,8 +313,7 @@ If you want to remove HTTP headers, you can add one more command: `RemoveHttpHea
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
-  .keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHttpHeader(r.getContentString))))
   .saveAsTextFile("plain-text-noheaders/")
 ```
@@ -338,8 +328,7 @@ The following Spark script generates plain text renderings for all the web pages
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
-  .keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .keepDomains(Set("www.archive.org"))
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHttpHeader(r.getContentString))))
   .saveAsTextFile("plain-text-domain/")
@@ -355,8 +344,7 @@ The `(?i)` makes this query case insensitive.
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
-  .keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .keepUrlPatterns(Set("(?i)http://www.archive.org/details/.*".r))
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHttpHeader(r.getContentString))))
   .saveAsTextFile("details/")
@@ -370,8 +358,7 @@ The following Spark script generates plain text renderings for all the web pages
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
-  .keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .keepDomains(Set("www.archive.org"))
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, ExtractBoilerpipeText(RemoveHttpHeader(r.getContentString))))
   .saveAsTextFile("plain-text-no-boilerplate/")
@@ -389,8 +376,7 @@ The following Spark script extracts plain text for a given collection by date (i
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
-  .keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .keepDate(List("200804"), ExtractDate.DateComponent.YYYYMM)
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHttpHeader(r.getContentString))))
   .saveAsTextFile("plain-text-date-filtered-200804/")
@@ -402,8 +388,7 @@ The following script extracts plain text for a given collection by year (in this
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
-  .keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .keepDate(List("2008"), ExtractDate.DateComponent.YYYY)
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHttpHeader(r.getContentString))))
   .saveAsTextFile("plain-text-date-filtered-2008/")
@@ -415,8 +400,7 @@ Finally, you can also extract multiple dates or years. In this case, we would ex
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
-  .keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .keepDate(List("2008","2015"), ExtractDate.DateComponent.YYYY)
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHttpHeader(r.getContentString))))
   .saveAsTextFile("plain-text-date-filtered-2008-2015/")
@@ -438,12 +422,11 @@ The following Spark script keeps only French language pages from a certain top-l
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
-.keepValidPages()
-.keepDomains(Set("www.archive.org"))
-.keepLanguages(Set("fr"))
-.map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHttpHeader(r.getContentString))))
-.saveAsTextFile("plain-text-fr/")
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+  .keepDomains(Set("www.archive.org"))
+  .keepLanguages(Set("fr"))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHttpHeader(r.getContentString))))
+  .saveAsTextFile("plain-text-fr/")
 ```
 
 ### Plain text filtered by keyword
@@ -456,11 +439,10 @@ For example, the following script takes all pages containing the keyword "radio"
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val r = RecordLoader.loadArchives("example.arc.gz",sc)
-.keepValidPages()
-.keepContent(Set("radio".r))
-.map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHttpHeader(r.getContentString))))
-.saveAsTextFile("plain-text-radio/")
+RecordLoader.loadArchives("example.arc.gz",sc).keepValidPages()
+  .keepContent(Set("radio".r))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHttpHeader(r.getContentString))))
+  .saveAsTextFile("plain-text-radio/")
 ```
 
 There is also `discardContent` which does the opposite, and can be used in cases where, for example, you have a frequent keyword you are not interested in.
@@ -475,8 +457,7 @@ The following script will produce the raw HTML of a WARC file. You can use the f
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
-  .keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, r.getContentString))
   .saveAsTextFile("plain-html/")
 ```
@@ -636,8 +617,7 @@ If you prefer to group by crawl month (YYYMM), replace `getCrawlDate` with `getC
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
-  .keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
