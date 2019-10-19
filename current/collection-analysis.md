@@ -10,7 +10,7 @@
 
 For all the scripts below, you can type `:p` into Spark Shell, paste the script, and then run it with <kbd>CTRL</kbd>+<kbd>d</kbd>:
 
-### To Take or To Save?
+### To Take or To Save
 
 All of the scripts below end in:
 
@@ -43,7 +43,7 @@ RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .take(10)
 ```
 
-Want to save all the results? See [To Take or To Save?](#To-Take-or-To-Save?)
+Want to save all the results? See [To Take or To Save](#To-Take-or-To-Save).
 
 ### Scala DF
 
