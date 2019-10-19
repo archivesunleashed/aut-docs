@@ -1,8 +1,6 @@
 # Collection Analysis
 
-You may want to get a birds-eye view of your ARCs or WARCs: what top-level domains are included, and at what times were they crawled?
-
-How do I...
+**How do I...**
 
 - [List URLs](#List-URLs)
 - [List Top-Level Domains](#List-Top-Level-Domains)
