@@ -20,7 +20,7 @@ All of the scripts below end in:
 
 This "takes" the first 10 results in the console.
 If you want more or fewer results, just change the number.
-Alternative, if you want to save the results to disk, replace the line above with:
+Alternatively, if you want to save the results to disk, replace the line above with:
 
 ```
   .saveAsTextFile("/path/to/export/directory/")
