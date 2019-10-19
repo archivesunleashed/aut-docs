@@ -8,6 +8,26 @@
 - [List HTTP Status Codes](#List-HTTP-Status-Codes)
 - [Get the Location of the Resource in ARCs and WARCs](#Get-the-Location-of-the-Resource-in-ARCs-and-WARCs)
 
+For all the scripts below, you can type `:p` into Spark Shell, paste the script, and then run it with <kbd>CTRL</kbd>+<kbd>d</kbd>:
+
+### To Take or To Save?
+
+All of the scripts below end in:
+
+```
+  .take(10)
+```
+
+This "takes" the first 10 results in the console.
+If you want more or fewer results, just change the number.
+Alternative, if you want to save the results to disk, replace the line above with:
+
+```
+  .saveAsTextFile("/path/to/export/directory/")
+```
+
+Replace `/path/to/export/directory/` with your desired location.
+
 ## List URLs
 
 ### Scala RDD
@@ -23,16 +43,7 @@ RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .take(10)
 ```
 
-This will give you a list of the top ten URLs. If you want all the URLs, exported to a file, you could run this instead. Note that your export directory cannot already exist.
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
-
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
-  .map(r => r.getUrl)
-  .saveAsTextFile("/path/to/export/directory/")
-```
+Want to save all the results? See [To Take or To Save?](#To-Take-or-To-Save?)
 
 ### Scala DF
 
