@@ -56,7 +56,7 @@ RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).extract
 
 ### Python DF
 
-```
+```python
 from aut import *
 
 WebArchive(sc, sqlContext, "src/test/resources/warc/example.warc.gz").pages() \
@@ -84,7 +84,7 @@ Want to save all the results? See [To Take or To Save](#To-Take-or-To-Save).
 
 ### Scala DF
 
-```
+```scala
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
