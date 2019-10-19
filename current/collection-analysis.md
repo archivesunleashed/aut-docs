@@ -4,13 +4,11 @@ You may want to get a birds-eye view of your ARCs or WARCs: what top-level domai
 
 How do I...
 
-- [list URLs](#list-urls)
-- [List of Top-Level Domains](#list-of-top-level-domains)
-- [List of Different Subdomains](#list-of-different-subdomains)
-- [List of HTTP Status Codes](#list-of-http-status-codes)
-- [Location of the Resource in ARCs and WARCs](#location-of-the-resource-in-arcs-and-warcs)
-
-## List URLs
+- [List URLs](#list-urls)
+- [List Top-Level Domains](#List_Top-Level_Domains)
+- [List Different Subdomains](#List_Different_Subdomains)
+- [List HTTP Status Codes](#List_HTTP_Status_Codes)
+- [Get the Location of the Resource in ARCs and WARCs](#Get_the_Location_of_the_Resource_in_ARCs_and_WARCs)
 
 ### Scala RDD
 
@@ -44,8 +42,9 @@ TODO
 
 TODO
 
+## List Top-Level Domains
 
-## List of Top-Level Domains
+### Scala RDD
 
 You may just want to see the domains within an item. The script below shows the top ten domains within a given file or set of files.
 
@@ -61,7 +60,17 @@ RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
 
 If you want to see more than ten results, change the variable in the last line.
 
-## List of Different Subdomains
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
+## List Different Subdomains
+
+### Scala RDD
 
 Regular expressions can be used to extract more fine-tuned information. For example, if you wanted to know all sitenames - i.e. the first-level directories of a given collection.
 
@@ -76,7 +85,17 @@ RecordLoader.loadArchives("example.arc.gz", sc) .keepValidPages()
 
 In the above example, `"""...."""` declares that we are working with a regular expression, `.r` says turn it into a regular expression, `.findAllIn` says look for all matches in the URL. This will only return the first but that is generally good for our use cases. Finally, `.toList` turns it into a list so you can `flatMap`.
 
-## List of HTTP Status Codes
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
+## List HTTP Status Codes
+
+### Scala RDD
 
 You may be interested in the [HTTP Status Codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) of each of the resources. The following script will list the status codes amongst the URLs.
 
@@ -89,7 +108,17 @@ RecordLoader.loadArchives("example.arc.gz", sc)
   .take(10)
 ```
 
-## Location of the Resource in ARCs and WARCs
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
+## Get the Location of the Resource in ARCs and WARCs
+
+### Scala RDD
 
 Finally, you may want to know what WARC file the different resources are located in! The following command will provide the full path and filename of the ARC/WARC that each url is found in.
 
@@ -113,3 +142,11 @@ RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .map(r => (r.getUrl, FilenameUtils.getName(r.getArchiveFilename)))
   .take(10)
 ```
+
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
