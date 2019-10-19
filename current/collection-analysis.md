@@ -8,7 +8,7 @@
 - [List HTTP Status Codes](#List-HTTP-Status-Codes)
 - [Get the Location of the Resource in ARCs and WARCs](#Get-the-Location-of-the-Resource-in-ARCs-and-WARCs)
 
-For all the scripts below, you can type `:p` into Spark Shell, paste the script, and then run it with <kbd>CTRL</kbd>+<kbd>d</kbd>:
+For all the scripts below, you can type `:paste` into Spark Shell, paste the script, and then run it with <kbd>CTRL</kbd>+<kbd>d</kbd>:
 
 ### To Take or To Save
 
@@ -36,9 +36,8 @@ How do I get a list of all URLs in the collection?
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).keepValidPages()
   .map(r => r.getUrl)
   .take(10)
 ```
@@ -47,7 +46,13 @@ Want to save all the results? See [To Take or To Save](#To-Take-or-To-Save).
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+
+RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).extractValidPagesDF()
+  .select($"Url")
+  .show(false)
+```
 
 ### Python DF
 
@@ -63,7 +68,7 @@ How do I extract a list of the top-level domains (and count how many pages belon
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).keepValidPages()
   .map(r => ExtractDomain(r.getUrl))
   .countItems()
   .take(10)
@@ -73,7 +78,15 @@ Want to save all the results? See [To Take or To Save](#To-Take-or-To-Save).
 
 ### Scala DF
 
-TODO
+```
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).extractValidPagesDF()
+  .select(ExtractBaseDomain($"Url").as("Domain"))
+  .groupBy("Domain").count().orderBy(desc("count"))
+  .show(false)
+```
 
 ### Python DF
 
