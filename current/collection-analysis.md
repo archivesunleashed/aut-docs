@@ -10,23 +10,6 @@
 
 For all the scripts below, you can type `:paste` into Spark Shell, paste the script, and then run it with <kbd>CTRL</kbd>+<kbd>d</kbd>:
 
-### To Take or To Save
-
-All of the scripts below end in:
-
-```
-  .take(10)
-```
-
-This "takes" the first 10 results in the console.
-If you want more or fewer results, just change the number.
-Alternatively, if you want to save the results to disk, replace the line above with:
-
-```
-  .saveAsTextFile("/path/to/export/directory/")
-```
-
-Replace `/path/to/export/directory/` with your desired location.
 
 ## List URLs
 
