@@ -1,4 +1,4 @@
-# What to do with DF Results
+# What to do with DataFrame Results
 
 This page answers the question of what to do with Scala or Python DF results.
 
