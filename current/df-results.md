@@ -53,6 +53,12 @@ Alternatively, if you want to save the results to disk, replace `.show(20, false
 Replace `/path/to/export/directory/` with your desired location.
 Note that this is a _directory_, not a _file_.
 
+Depending on your intended use of the output, you may want to include headers in the CSV file, in which case:
+
+```scala
+  .write.option("header","true").csv("/path/to/export/directory/")
+```
+
 If you want to store the results with the intention to read the results back later for further processing, then use Parquet format:
 
 ```scala
