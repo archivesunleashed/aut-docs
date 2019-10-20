@@ -10,7 +10,6 @@
 
 For all the scripts below, you can type `:paste` into Spark Shell, paste the script, and then run it with <kbd>CTRL</kbd>+<kbd>d</kbd>:
 
-
 ## List URLs
 
 How do I get a list of all URLs in the collection?
@@ -25,7 +24,7 @@ RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).keepVal
   .take(10)
 ```
 
-Want to save all the results? See [To Take or To Save](#To-Take-or-To-Save).
+What do I do with the results? See [this guide](rdd-results.md)!
 
 ### Scala DF
 
@@ -37,6 +36,8 @@ RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).extract
   .show(20, false)
 ```
 
+What do I do with the results? See [this guide](df-results.md)!
+
 ### Python DF
 
 ```python
@@ -46,6 +47,8 @@ WebArchive(sc, sqlContext, "src/test/resources/warc/example.warc.gz").pages() \
     .select("url") \
     .show(20, False)
 ```
+
+What do I do with the results? See [this guide](df-results.md)!
 
 ## List Top-Level Domains
 
@@ -63,7 +66,7 @@ RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).keepVal
   .take(10)
 ```
 
-Want to save all the results? See [To Take or To Save](#To-Take-or-To-Save).
+What do I do with the results? See [this guide](rdd-results.md)!
 
 ### Scala DF
 
@@ -76,6 +79,8 @@ RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).extract
   .groupBy("Domain").count().orderBy(desc("count"))
   .show(20, False)
 ```
+
+What do I do with the results? See [this guide](df-results.md)!
 
 ### Python DF
 
@@ -99,7 +104,7 @@ RecordLoader.loadArchives("example.arc.gz", sc) .keepValidPages()
 
 In the above example, `"""...."""` declares that we are working with a regular expression, `.r` says turn it into a regular expression, `.findAllIn` says look for all matches in the URL. This will only return the first but that is generally good for our use cases. Finally, `.toList` turns it into a list so you can `flatMap`.
 
-Want to save all the results? See [To Take or To Save](#To-Take-or-To-Save).
+What do I do with the results? See [this guide](rdd-results.md)!
 
 ### Scala DF
 
@@ -124,7 +129,7 @@ RecordLoader.loadArchives("example.arc.gz", sc)
   .take(10)
 ```
 
-Want to save all the results? See [To Take or To Save](#To-Take-or-To-Save).
+What do I do with the results? See [this guide](rdd-results.md)!
 
 ### Scala DF
 
@@ -162,6 +167,8 @@ RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
 ```
 
 TODO: Add script for the case where I only want to know the location of _one_ resource.
+
+What do I do with the results? See [this guide](rdd-results.md)!
 
 ### Scala DF
 
