@@ -1,19 +1,21 @@
 # Text Analysis
 
-- [All Plain Text](#All-Plain-Text)
-- [Plain Text Without HTTP Headers](#Plain-Text-Without-HTTP-Headers)
-- [Plain Text By Domain](#Plain-Text-By-Domain)
-- [Plain Text by URL Pattern](#Plain-Text-by-URL-Pattern)
-- [Plain Text Minus Boilerplate](#Plain-Text-Minus-Boilerplate)
-- [Plain Text Filtered by Date](#Plain-Text-Filtered-by-Date)
-- [Plain Text Filtered by Language](#Plain-Text-Filtered-by-Language)
-- [Plain text Filtered by Keyword](#Plain-Text-Filtered-by-Keyword)
-- [Raw HTML Extraction](#Raw-HTML-Extraction)
-- [Named Entity Recognition](#Named-Entity-Recognition)
+**How do I...**
+
+- [Extract All Plain Text](#Extract-All-Plain-Text)
+- [Extract Plain Text Without HTTP Headers](#Extract-Plain-Text-Without-HTTP-Headers)
+- [Extract Plain Text By Domain](#Extract-Plain-Text-By-Domain)
+- [Extract Plain Text by URL Pattern](#Extract-Plain-Text-by-URL-Pattern)
+- [Extract Plain Text Minus Boilerplate](#Extract-Plain-Text-Minus-Boilerplate)
+- [Extract Plain Text Filtered by Date](#Extract-Plain-Text-Filtered-by-Date)
+- [Extract Plain Text Filtered by Language](#Extract-Plain-Text-Filtered-by-Language)
+- [Extract Plain text Filtered by Keyword](#Extract-Plain-Text-Filtered-by-Keyword)
+- [Extract Raw HTML](#Extract-Raw-HTML)
+- [Extract Named Entities](#Extract-Named-Entities)
 
 For all the scripts below, you can type `:paste` into Spark Shell, paste the script, and then run it with <kbd>CTRL</kbd>+<kbd>d</kbd>:
 
-## All Plain Text
+## Extract All Plain Text
 
 ### Scala RDD
 
@@ -40,7 +42,7 @@ TODO
 
 TODO
 
-## Plain Text Without HTTP Headers
+## Extract Plain Text Without HTTP Headers
 
 ### Scala RDD
 
@@ -65,7 +67,7 @@ TODO
 
 TODO
 
-## Plain Text By Domain
+## Extract Plain Text By Domain
 
 ### Scala RDD
 
@@ -88,7 +90,7 @@ TODO
 
 TODO
 
-## Plain Text by URL Pattern
+## Extract Plain Text by URL Pattern
 
 ### Scala RDD
 
@@ -114,7 +116,7 @@ TODO
 
 TODO
 
-## Plain Text Minus Boilerplate
+## Extract Plain Text Minus Boilerplate
 
 ### Scala RDD
 
@@ -138,7 +140,7 @@ TODO
 
 TODO
 
-## Plain Text Filtered by Date
+## Extract Plain Text Filtered by Date
 
 ### Scala RDD
 
@@ -198,7 +200,7 @@ TODO
 
 TODO
 
-## Plain Text Filtered by Language
+## Extract Plain Text Filtered by Language
 
 ### Scala RDD
 
@@ -223,7 +225,7 @@ TODO
 
 TODO
 
-## Plain text Filtered by Keyword
+## Extract Plain text Filtered by Keyword
 
 ### Scala RDD
 
@@ -251,7 +253,7 @@ TODO
 
 TODO
 
-## Raw HTML Extraction
+## Extract Raw HTML
 
 ### Scala RDD
 
@@ -276,7 +278,7 @@ TODO
 
 TODO
 
-## Named Entity Recognition
+## Extract Named Entities
 
 ### Scala RDD
 
@@ -287,8 +289,6 @@ Named Entity Recognition is extremely resource intensive, and will take a very l
 The following Spark scripts use the [Stanford Named Entity Recognizer](http://nlp.stanford.edu/software/CRF-NER.shtml) to extract names of entities – persons, organizations, and locations – from collections of ARC/WARC files or extracted texts. You can find a version of Stanford NER in our aut-resources repo located [here](https://github.com/archivesunleashed/aut-resources).
 
 The scripts require a NER classifier model. There is one provided in the Stanford NER package (in the `classifiers` folder) called `english.all.3class.distsim.crf.ser.gz`, but you can also use your own.
-
-### Extract entities from ARC/WARC files
 
 ```scala
 import io.archivesunleashed._
