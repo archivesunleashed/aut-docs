@@ -2,7 +2,7 @@
 
 **How do I...**
 
-- [Extract All Plain Text](#All-Plain-Text)
+- [Extract All Plain Text](#Extract-All-Plain-Text)
 - [Extract Plain Text Without HTTP Headers](#Plain-Text-Without-HTTP-Headers)
 - [Extract Plain Text By Domain](#Plain-Text-By-Domain)
 - [Extract Plain Text by URL Pattern](#Plain-Text-by-URL-Pattern)
