@@ -1,5 +1,7 @@
 # The Archives Unleashed Toolkit: Latest Documentation
 
+![https://archivesunleashed.org/images/prompt.png](Spark Shell in Action)
+
 The Archives Unleashed Toolkit is an open-source platform for analyzing web archives built on [Hadoop](https://hadoop.apache.org/). Tight integration with Hadoop provides powerful tools for analytics and data processing via [Spark](http://spark.apache.org/).
 
 Most of this documentation is built on [resilient distributed datasets (RDD)](https://spark.apache.org/docs/latest/rdd-programming-guide.html). We are working on adding support for [DataFrames](https://spark.apache.org/docs/latest/sql-programming-guide.html#datasets-and-dataframes). You can read more about this in our experimental [DataFrames section](#dataframes), and at our [[Using the Archives Unleashed Toolkit with PySpark]] tutorial.
@@ -16,11 +18,11 @@ Our documentation is divided into several main sections, which cover the Archive
 
 ### Generating Results
 - [**Collection Analysis**](collection-analysis.md): How do I...
-  - [List URLs](collection-analysis.md#List-URLs)
-  - [List Top-Level Domains](collection-analysis.md#List-Top-Level-Domains)
-  - [List Different Subdomains](collection-analysis.md#List-Different-Subdomains)
-  - [List HTTP Status Codes](collection-analysis.md#List-HTTP-Status-Codes)
-  - [Get the Location of the Resource in ARCs and WARCs](collection-analysis.md#Get-the-Location-of-the-Resource-in-ARCs-and-WARCs)
+  - [Extract All URLs](#Extract-All-URLs)
+  - [Extract Top-Level Domains](#Extract-Top-Level-Domains)
+  - [Extract Different Subdomains](#Extract-Different-Subdomains)
+  - [Extract HTTP Status Codes](#Extract-HTTP-Status-Codes)
+  - [Extract the Location of the Resource in ARCs and WARCs](#Extract-the-Location-of-the-Resource-in-ARCs-and-WARCs)
 - [**Text Analysis**](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/text-analysis.md): How do I...
   - [Extract All Plain Text](text-analysis.md#Extract-All-Plain-Text)
   - [Extract Plain Text Without HTTP Headers](text-analysis.md#Extract-Plain-Text-Without-HTTP-Headers)
@@ -32,8 +34,17 @@ Our documentation is divided into several main sections, which cover the Archive
   - [Extract Plain text Filtered by Keyword](text-analysis.md#Extract-Plain-Text-Filtered-by-Keyword)
   - [Extract Raw HTML](text-analysis.md#Extract-Raw-HTML)
   - [Extract Named Entities](text-analysis.md#Extract-Named-Entities)
-- **[Link Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/link-analysis.md)**: How do I extract a simple site link structure, a raw URL link structure, organize links by URL patter or crawl date, filter by URL, or export as TSV or Gephi file.
-- **[Image Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/image-analysis.md)**: How do I find the most frequent images in a collection by URL or MD5 hash.
+- **[Link Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/link-analysis.md)**: How do I...
+  - [Extract Simple Site Link Structure](#Extract-Simple-Site-Link-Structure)
+  - [Extract Raw URL Link Structure][#Extract-Raw-URL-Link-Structure]
+  - [Organize Links by URL Pattern][#Organize-Links-by-URL-Pattern]
+  - [Organize Links by Crawl Date][#Organize-Links-by-Crawl-Date]
+  - [Export as TSV][#Export-as-TSV]
+  - [Filter by URL][#Filter-by-URL]
+  - [Export to Gephi][#Export-to-Gephi]
+- **[Image Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/image-analysis.md)**: How do I...
+  - [Most Frequent Image URLs](#Most-Frequent-Image-URLs)
+  - [Most Frequent Images MD5 Hash](#Most-Frequent-Images-MD5-Hash)
 
 ### Filtering Results
 - **[Filters](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/filters.md NOW)**: A variety of ways to filter results.
