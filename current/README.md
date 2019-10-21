@@ -21,7 +21,17 @@ Our documentation is divided into several main sections, which cover the Archive
   - [List Different Subdomains](collection-analysis.md#List-Different-Subdomains)
   - [List HTTP Status Codes](collection-analysis.md#List-HTTP-Status-Codes)
   - [Get the Location of the Resource in ARCs and WARCs](collection-analysis.md#Get-the-Location-of-the-Resource-in-ARCs-and-WARCs)
-- **[Text Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/text-analysis.md)**: How do I extract all plain text; plain text without HTTP headers; filter by domain, URL pattern, date, language, keyword; remove boilerplate; extract raw HTML or named entities.
+- [**Text Analysis**](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/text-analysis.md): How do I...
+  - [Extract All Plain Text](text-analysis.md#Extract-All-Plain-Text)
+  - [Extract Plain Text Without HTTP Headers](text-analysis.md#Extract-Plain-Text-Without-HTTP-Headers)
+  - [Extract Plain Text By Domain](text-analysis.md#Extract-Plain-Text-By-Domain)
+  - [Extract Plain Text by URL Pattern](text-analysis.md#Extract-Plain-Text-by-URL-Pattern)
+  - [Extract Plain Text Minus Boilerplate](text-analysis.md#Extract-Plain-Text-Minus-Boilerplate)
+  - [Extract Plain Text Filtered by Date](text-analysis.md#Extract-Plain-Text-Filtered-by-Date)
+  - [Extract Plain Text Filtered by Language](text-analysis.md#Extract-Plain-Text-Filtered-by-Language)
+  - [Extract Plain text Filtered by Keyword](text-analysis.md#Extract-Plain-Text-Filtered-by-Keyword)
+  - [Extract Raw HTML](text-analysis.md#Extract-Raw-HTML)
+  - [Extract Named Entities](text-analysis.md#Extract-Named-Entities)
 - **[Link Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/link-analysis.md)**: How do I extract a simple site link structure, a raw URL link structure, organize links by URL patter or crawl date, filter by URL, or export as TSV or Gephi file.
 - **[Image Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/image-analysis.md)**: How do I find the most frequent images in a collection by URL or MD5 hash.
 
