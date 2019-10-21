@@ -5,8 +5,8 @@ You're most likely looking for the [most recent documentation](current/README.md
 
 Documentation from previous releases are also available:
 
-+ [r0.18.0](r0.18.0/README.md)
-+ [r0.17.0](r0.17.0/README.md)
++ [aut-0.18.0](aut-0.18.0/README.md)
++ [aut-0.17.0](aut-0.17.0/README.md)
 
 ## Acknowledgments
 
