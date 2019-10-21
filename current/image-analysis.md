@@ -1,8 +1,13 @@
-## Image Analysis
+# Image Analysis
 
-AUT supports image analysis, a growing area of interest within web archives.
+- [Most Frequent Image URLs](#Most-Frequent-Image-URLs)
+- [Most Frequent Images MD5 Hash](#Most-Frequent-Images-MD5-Hash)
 
-### Most frequent image URLs in a collection
+The Archives Unleashed Toolkit supports image analysis, a growing area of interest within web archives.
+
+## Most Frequent Image URLs
+
+### Scala RDD
 
 The following script:
 
@@ -32,7 +37,15 @@ To do analysis on all images, you could thus prepend `http://web.archive.org/web
 
 For more information on `wget`, please consult [this lesson available on the Programming Historian website](http://programminghistorian.org/lessons/automated-downloading-with-wget).
 
-### Most frequent images in a collection, based on MD5 hash
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
+## Most Frequent Images MD5 Hash
 
 Some images may be the same, but have different URLs. This UDF finds the popular images by calculating the MD5 hash of each and presenting the most frequent images based on that metric. This script:
 
@@ -46,3 +59,11 @@ ExtractPopularImages(r, 500, sc).saveAsTextFile("500-Popular-Images")
 ```
 
 Will save the 500 most popular URLs to an output directory.
+
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO

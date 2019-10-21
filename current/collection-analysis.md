@@ -30,6 +30,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 
 ```scala
 import io.archivesunleashed._
+import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).extractValidPagesDF()
   .select($"Url")

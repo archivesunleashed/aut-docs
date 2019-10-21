@@ -1,7 +1,21 @@
+# Text Analysis
 
-## Plain Text Extraction
+- [All Plain Text](#All-Plain-Text)
+- [Plain Text Without HTTP Headers](#Plain-Text-Without-HTTP-Headers)
+- [Plain Text By Domain](#Plain-Text-By-Domain)
+- [Plain Text by URL Pattern](#Plain-Text-by-URL-Pattern)
+- [Plain Text Minus Boilerplate](#Plain-Text-Minus-Boilerplate)
+- [Plain Text Filtered by Date](#Plain-Text-Filtered-by-Date)
+- [Plain Text Filtered by Language](#Plain-Text-Filtered-by-Language)
+- [Plain text Filtered by Keyword](#Plain-Text-Filtered-by-Keyword)
+- [Raw HTML Extraction](#Raw-HTML-Extraction)
+- [Named Entity Recognition](#Named-Entity-Recognition)
 
-### All plain text
+For all the scripts below, you can type `:paste` into Spark Shell, paste the script, and then run it with <kbd>CTRL</kbd>+<kbd>d</kbd>:
+
+## All Plain Text
+
+### Scala RDD
 
 This script extracts the crawl date, domain, URL, and plain text from HTML files in the sample ARC data (and saves the output to out/). By default, HTTP headers are included in the plain text that is extracted.
 
@@ -18,7 +32,17 @@ If you wanted to use it on your own collection, you would change "src/test/resou
 
 Note that this will create a new directory to store the output, which cannot already exist.
 
-### Plain text without HTTP headers
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
+## Plain Text Without HTTP Headers
+
+### Scala RDD
 
 If you want to remove HTTP headers, you can add one more command: `RemoveHttpHeader`. The script would then look like:
 
@@ -33,7 +57,17 @@ RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
 
 As most plain text use cases do not require HTTP headers to be in the output, we are removing headers in the following examples.
 
-### Plain text by domain
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
+## Plain Text By Domain
+
+### Scala RDD
 
 The following Spark script generates plain text renderings for all the web pages in a collection with a URL matching a filter string. In the example case, it will go through the collection and find all of the URLs within the "archive.org" domain.
 
@@ -46,8 +80,17 @@ RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHttpHeader(r.getContentString))))
   .saveAsTextFile("plain-text-domain/")
 ```
+### Scala DF
 
-### Plain text by URL pattern
+TODO
+
+### Python DF
+
+TODO
+
+## Plain Text by URL Pattern
+
+### Scala RDD
 
 The following Spark script generates plain text renderings for all the web pages in a collection with a URL matching a regular expression pattern. In the example case, it will go through a WARC file and find all of the URLs beginning with `http://archive.org/details/`, and save the text of those URLs.
 
@@ -63,7 +106,17 @@ RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .saveAsTextFile("details/")
 ```
 
-### Plain text minus boilerplate
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
+## Plain Text Minus Boilerplate
+
+### Scala RDD
 
 The following Spark script generates plain text renderings for all the web pages in a collection, minus "boilerplate" content: advertisements, navigational elements, and elements of the website template. For more information on the boilerplate removal library we are using, [please see this website and paper](http://www.l3s.de/~kohlschuetter/boilerplate/).
 
@@ -77,7 +130,17 @@ RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .saveAsTextFile("plain-text-no-boilerplate/")
 ```
 
-### Plain text filtered by date
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
+## Plain Text Filtered by Date
+
+### Scala RDD
 
 AUT permits you to filter records by a list of full or partial date strings. It conceives
 of the date string as a `DateComponent`. Use `keepDate` to specify the year (`YYYY`), month (`MM`),
@@ -127,7 +190,17 @@ sed -n -e '/^(201204/p' alberta_education_curriculum.txt > alberta_education_cur
 
 would select just the lines beginning with `(201204`, or April 2012.
 
-### Plain text filtered by language
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
+## Plain Text Filtered by Language
+
+### Scala RDD
 
 The following Spark script keeps only French language pages from a certain top-level domain. It uses the [ISO 639.2 language codes](https://www.loc.gov/standards/iso639-2/php/code_list.php).
 
@@ -142,7 +215,17 @@ RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .saveAsTextFile("plain-text-fr/")
 ```
 
-### Plain text filtered by keyword
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
+## Plain text Filtered by Keyword
+
+### Scala RDD
 
 The following Spark script keeps only pages containing a certain keyword, which also stacks on the other scripts.
 
@@ -160,7 +243,17 @@ RecordLoader.loadArchives("example.arc.gz",sc).keepValidPages()
 
 There is also `discardContent` which does the opposite, and can be used in cases where, for example, you have a frequent keyword you are not interested in.
 
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
 ## Raw HTML Extraction
+
+### Scala RDD
 
 In most cases, users will be interested in working with plain text. In some cases, however, you may want to work with the acutal HTML of the pages themselves (for example, looking for specific tags or HTML content). 
 
@@ -175,7 +268,17 @@ RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .saveAsTextFile("plain-html/")
 ```
 
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
 ## Named Entity Recognition
+
+### Scala RDD
 
 **NER is Extremely Resource Intensive and Time Consuming!**
 
@@ -218,3 +321,11 @@ sc.addFile("/path/to/classifier")
 
 ExtractEntities.extractFromScrapeText("english.all.3class.distsim.crf.ser.gz", "/path/to/extracted/text", "output-ner/", sc)
 ```
+
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
