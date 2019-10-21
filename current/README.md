@@ -14,7 +14,12 @@ Our documentation is divided into several main sections, which cover the Archive
 - [Installing the Archives Unleashed Toolkit](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/install.md)
 
 ### Generating Results
-- **[Collection Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/index.md)**: How do I... [List URLs](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/collection-analysis.md#List-URLs), [List Top-Level Domains](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/collection-analysis.md#List-Top-Level-Domains), [List Different Subdomains](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/collection-analysis.md#List-Different-Subdomains), [List HTTP Status Codes](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/collection-analysis.md#List-HTTP-Status-Codes), [Get the Location of the Resource in ARCs and WARCs](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/collection-analysis.md#Get-the-Location-of-the-Resource-in-ARCs-and-WARCs)
+- [**Collection Analysis**](collection-analysis.md): How do I...
+  - [List URLs](collection-analysis.md#List-URLs)
+  - [List Top-Level Domains](collection-analysis.md#List-Top-Level-Domains)
+  - [List Different Subdomains](collection-analysis.md#List-Different-Subdomains)
+  - [List HTTP Status Codes](collection-analysis.md#List-HTTP-Status-Codes)
+  - [Get the Location of the Resource in ARCs and WARCs](collection-analysis.md#Get-the-Location-of-the-Resource-in-ARCs-and-WARCs)
 - **[Text Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/text-analysis.md)**: How do I extract all plain text; plain text without HTTP headers; filter by domain, URL pattern, date, language, keyword; remove boilerplate; extract raw HTML or named entities.
 - **[Link Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/link-analysis.md)**: How do I extract a simple site link structure, a raw URL link structure, organize links by URL patter or crawl date, filter by URL, or export as TSV or Gephi file.
 - **[Image Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/image-analysis.md)**: How do I find the most frequent images in a collection by URL or MD5 hash.
