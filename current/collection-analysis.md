@@ -2,15 +2,15 @@
 
 **How do I...**
 
-- [List URLs](#List-URLs)
-- [List Top-Level Domains](#List-Top-Level-Domains)
-- [List Different Subdomains](#List-Different-Subdomains)
-- [List HTTP Status Codes](#List-HTTP-Status-Codes)
-- [Get the Location of the Resource in ARCs and WARCs](#Get-the-Location-of-the-Resource-in-ARCs-and-WARCs)
+- [Extract All URLs](#Extract-All-URLs)
+- [Extract Top-Level Domains](#Extract-Top-Level-Domains)
+- [Extract Different Subdomains](#Extract-Different-Subdomains)
+- [Extract HTTP Status Codes](#Extract-HTTP-Status-Codes)
+- [Extract the Location of the Resource in ARCs and WARCs](#Extract-the-Location-of-the-Resource-in-ARCs-and-WARCs)
 
 For all the scripts below, you can type `:paste` into Spark Shell, paste the script, and then run it with <kbd>CTRL</kbd>+<kbd>d</kbd>:
 
-## List URLs
+## Extract All URLs
 
 How do I get a list of all URLs in the collection?
 
@@ -51,7 +51,7 @@ WebArchive(sc, sqlContext, "src/test/resources/warc/example.warc.gz").pages() \
 
 What do I do with the results? See [this guide](df-results.md)!
 
-## List Top-Level Domains
+## Extract Top-Level Domains
 
 How do I extract a list of the top-level domains (and count how many pages belong in each top-level domain)?
 
@@ -87,7 +87,7 @@ What do I do with the results? See [this guide](df-results.md)!
 
 TODO
 
-## List Different Subdomains
+## Extract Different Subdomains
 
 How do I use regular expressions to extract for fine-grained URL information?
 For example, supposed I wanted to extract the first-level directories?
@@ -115,7 +115,7 @@ TODO
 
 TODO
 
-## List HTTP Status Codes
+## Extract HTTP Status Codes
 
 How do I get the [HTTP Status Code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) associated with each resource in the collection?
 
@@ -140,7 +140,7 @@ TODO
 
 TODO
 
-## Get the Location of the Resource in ARCs and WARCs
+## Extract the Location of the Resource in ARCs and WARCs
 
 How do I find out the WARC or ARC that each page is contained in?
 
