@@ -3,15 +3,15 @@
 **How do I...**
 
 - [Extract All Plain Text](#Extract-All-Plain-Text)
-- [Extract Plain Text Without HTTP Headers](#Plain-Text-Without-HTTP-Headers)
-- [Extract Plain Text By Domain](#Plain-Text-By-Domain)
-- [Extract Plain Text by URL Pattern](#Plain-Text-by-URL-Pattern)
-- [Extract Plain Text Minus Boilerplate](#Plain-Text-Minus-Boilerplate)
-- [Extract Plain Text Filtered by Date](#Plain-Text-Filtered-by-Date)
-- [Extract Plain Text Filtered by Language](#Plain-Text-Filtered-by-Language)
-- [Extract Plain text Filtered by Keyword](#Plain-Text-Filtered-by-Keyword)
-- [Extract Raw HTML](#Raw-HTML-Extraction)
-- [Extract Named Entities](#Named-Entity-Recognition)
+- [Extract Plain Text Without HTTP Headers](#Extract-Plain-Text-Without-HTTP-Headers)
+- [Extract Plain Text By Domain](#Extract-Plain-Text-By-Domain)
+- [Extract Plain Text by URL Pattern](#Extract-Plain-Text-by-URL-Pattern)
+- [Extract Plain Text Minus Boilerplate](#Extract-Plain-Text-Minus-Boilerplate)
+- [Extract Plain Text Filtered by Date](#Extract-Plain-Text-Filtered-by-Date)
+- [Extract Plain Text Filtered by Language](#Extract-Plain-Text-Filtered-by-Language)
+- [Extract Plain text Filtered by Keyword](#Extract-Plain-Text-Filtered-by-Keyword)
+- [Extract Raw HTML](#Extract-Raw-HTML)
+- [Extract Named Entities](#Extract-Named-Entities)
 
 For all the scripts below, you can type `:paste` into Spark Shell, paste the script, and then run it with <kbd>CTRL</kbd>+<kbd>d</kbd>:
 
