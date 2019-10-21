@@ -10,7 +10,7 @@ Our documentation is divided into several main sections, which cover the Archive
 
 ### Getting Started
 
-- [Installing the Archives Unleashed Toolkit](LINK BROKEN RIGHT NOW)
+- [Installing the Archives Unleashed Toolkit](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/install.md)
 
 ### Generating Results
 - **[Collection Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/index.md)**: How do I... [List URLs](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/collection-analysis.md#List-URLs), [List Top-Level Domains](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/collection-analysis.md#List-Top-Level-Domains), [List Different Subdomains](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/collection-analysis.md#List-Different-Subdomains), [List HTTP Status Codes](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/collection-analysis.md#List-HTTP-Status-Codes), [Get the Location of the Resource in ARCs and WARCs](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/collection-analysis.md#Get-the-Location-of-the-Resource-in-ARCs-and-WARCs)
@@ -19,7 +19,7 @@ Our documentation is divided into several main sections, which cover the Archive
 - **[Image Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/image-analysis.md)**: How do I find the most frequent images in a collection by URL or MD5 hash.
 
 ### Filtering Results
-- **[Filters](LINK BROKEN RIGHT NOW)**: A variety of ways to filter results.
+- **[Filters](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/filters.md NOW)**: A variety of ways to filter results.
 
 ### What to do with Results
 - **[What to do with DataFrame Results](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/df-results.md)**

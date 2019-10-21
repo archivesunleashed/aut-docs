@@ -1,4 +1,4 @@
-# Plain Text Extraction
+# Text Analysis
 
 - [All Plain Text](#All-Plain-Text)
 - [Plain Text Without HTTP Headers](#Plain-Text-Without-HTTP-Headers)

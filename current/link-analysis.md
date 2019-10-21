@@ -1,12 +1,12 @@
 # Link Analysis
 
-- [Extraction of Simple Site Link Structure](#Extraction-of-Simple-Site-Link-Structure)
-- [Extraction of a Raw URL Link Structure][#Extraction-of-a-Raw-URL-Link-Structure]
-- [Links Organized by URL Pattern][#Links-Organized-by-URL-Pattern]
-- [Links Organized by Crawl Date][#Links-Organized-by-Crawl-Date]
-- [Links Exported as TSV][#Links-Exported-as-TSV]
-- [Links Filtered by URL][#Links-Filtered-by-URL]
-- [Links Exported to Gephi][#Links-Exported-to-Gephi]
+- [Extract Simple Site Link Structure](#Extract-Simple-Site-Link-Structure)
+- [Extract Raw URL Link Structure][#Extract-Raw-URL-Link-Structure]
+- [Organize Links by URL Pattern][#Organize-Links-by-URL-Pattern]
+- [Organize Links by Crawl Date][#Organize-Links-by-Crawl-Date]
+- [Export as TSV][#Export-as-TSV]
+- [Filter by URL][#Filter-by-URL]
+- [Export to Gephi][#Export-to-Gephi]
 
 Site link structures can be very useful, allowing you to learn such things as:
 
@@ -19,7 +19,7 @@ Most of the following examples show the **domain** to **domain** links. For exam
 
 We do provide one example below that provides raw data, however.
 
-## Extraction of Simple Site Link Structure
+## Extract Simple Site Link Structure
 
 ### Scala RDD
 
@@ -68,7 +68,7 @@ TODO
 
 TODO
 
-## Extraction of a Raw URL Link Structure
+## Extract Raw URL Link Structure
 
 ### Scala RDD
 
@@ -109,7 +109,7 @@ TODO
 
 TODO
 
-## Links Organized by URL Pattern
+## Organize Links by URL Pattern
 
 ### Scala RDD
 
@@ -140,7 +140,7 @@ TODO
 
 TODO
 
-## Links Organized by Crawl Date
+## Organize Links by Crawl Date
 
 ### Scala RDD
 
@@ -192,7 +192,7 @@ TODO
 
 TODO
 
-## Links Exported as TSV
+## Export as TSV
 
 ### Scala RDD
 
@@ -237,7 +237,7 @@ TODO
 
 TODO
 
-## Links Filtered by URL
+## Filter by URL
 
 ### Scala RDD
 
@@ -266,7 +266,7 @@ TODO
 
 TODO
 
-## Links Exported to Gephi
+## Export to Gephi
 
 ### Scala RDD
 
