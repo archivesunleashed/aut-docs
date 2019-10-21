@@ -1,4 +1,12 @@
-## Analysis of Site Link Structure
+# Link Analysis
+
+- [Extraction of Simple Site Link Structure](#Extraction-of-Simple-Site-Link-Structure)
+- [Extraction of a Raw URL Link Structure][#Extraction-of-a-Raw-URL-Link-Structure]
+- [Links Organized by URL Pattern][#Links-Organized-by-URL-Pattern]
+- [Links Organized by Crawl Date][#Links-Organized-by-Crawl-Date]
+- [Links Exported as TSV][#Links-Exported-as-TSV]
+- [Links Filtered by URL][#Links-Filtered-by-URL]
+- [Links Exported to Gephi][#Links-Exported-to-Gephi]
 
 Site link structures can be very useful, allowing you to learn such things as:
 
@@ -11,7 +19,9 @@ Most of the following examples show the **domain** to **domain** links. For exam
 
 We do provide one example below that provides raw data, however.
 
-### Extraction of Simple Site Link Structure
+## Extraction of Simple Site Link Structure
+
+### Scala RDD
 
 If your web archive does not have a temporal component, the following Spark script will generate the site-level link structure.
 
@@ -50,7 +60,17 @@ val links = RecordLoader.loadArchives("example.arc.gz", sc)
 links.saveAsTextFile("links-all-apple/")
 ```
 
-### Extraction of a Link Structure, using Raw URLs (not domains)
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
+## Extraction of a Raw URL Link Structure
+
+### Scala RDD
 
 This following script extracts all of the hyperlink relationships between sites, using the full URL pattern.
 
@@ -81,7 +101,17 @@ In a larger collection, you might want to add the following line:
 
 before `.countItems()` to find just the documents that are linked to more than five times. As you can imagine, raw URLs are very numerous!
 
-### Extraction of a Site Link Structure, organized by URL pattern
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
+## Links Organized by URL Pattern
+
+### Scala RDD
 
 In this following example, we run the same script but only extract links coming from URLs matching the pattern `http://www.archive.org/details/*`. We do so by using the `keepUrlPatterns` command.
 
@@ -102,7 +132,17 @@ val links = RecordLoader.loadArchives("example.arc.gz", sc)
 links.saveAsTextFile("details-links-all/")
 ```
 
-### Grouping by Crawl Date
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
+## Links Organized by Crawl Date
+
+### Scala RDD
 
 The following Spark script generates the aggregated site-level link structure, grouped by crawl date (YYYYMMDD). It
 makes use of the `ExtractLinks` and `ExtractToLevelDomain` functions.
@@ -144,8 +184,17 @@ item `(http://mysite.com/a/b/c/index.html, http://mysite.com/a/b/contact/, Conta
 be useful to have this absolute URL if you intend to call `ExtractDomain` on the link
 and wish it to be counted.
 
+### Scala DF
 
-### Exporting as TSV
+TODO
+
+### Python DF
+
+TODO
+
+## Links Exported as TSV
+
+### Scala RDD
 
 Archive records are represented in Spark as [tuples](https://en.wikipedia.org/wiki/Tuple),
 and this is the standard format of results produced by most of the scripts presented here
@@ -180,7 +229,18 @@ Its output looks like:
 20151108        canadians.org   canadians.org   11403
 ```
 
-### Filtering by URL
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
+## Links Filtered by URL
+
+### Scala RDD
+
 In this case, you would only receive links coming from websites in matching the URL pattern listed under `keepUrlPatterns`.
 
 ```scala
@@ -198,7 +258,17 @@ val links = RecordLoader.loadArchives("example.arc.gz", sc)
   .saveAsTextFile("sitelinks-details/")
 ```
 
-### Exporting to Gephi Directly
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
+
+## Links Exported to Gephi
+
+### Scala RDD
 
 You may want to export your data directly to the [Gephi software suite](http://gephi.github.io/), an open-soure network analysis project. The following code writes to the GEXF format:
 
@@ -225,3 +295,11 @@ We also support exporting to the [GraphML](https://en.wikipedia.org/wiki/GraphML
 ```scala
 WriteGraph.asGraphml(links, "links-for-gephi.graphml")
 ```
+
+### Scala DF
+
+TODO
+
+### Python DF
+
+TODO
