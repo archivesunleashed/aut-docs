@@ -1,6 +1,6 @@
 # The Archives Unleashed Toolkit: Latest Documentation
 
-![https://archivesunleashed.org/images/prompt.png](Spark Shell in Action)
+![Spark Shell in Action](https://user-images.githubusercontent.com/3834704/67403731-5d36c400-f580-11e9-88ad-f5311d96bbf9.png)
 
 The Archives Unleashed Toolkit is an open-source platform for analyzing web archives built on [Hadoop](https://hadoop.apache.org/). Tight integration with Hadoop provides powerful tools for analytics and data processing via [Spark](http://spark.apache.org/).
 
