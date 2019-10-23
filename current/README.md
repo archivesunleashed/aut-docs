@@ -50,8 +50,8 @@ Our documentation is divided into several main sections, which cover the Archive
 - **[Filters](filters.md)**: A variety of ways to filter results.
 
 ### What to do with Results
-- **[What to do with DataFrame Results](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/df-results.md)**
-- **[What to do with RDD Results](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/rdd-results.md)**
+- **[What to do with DataFrame Results](df-results.md)**
+- **[What to do with RDD Results](rdd-results.md)**
 
 ## Further Reading
 
