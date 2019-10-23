@@ -1,7 +1,5 @@
 # The Archives Unleashed Toolkit: Latest Documentation
 
-![Spark Shell in Action](https://user-images.githubusercontent.com/3834704/67403731-5d36c400-f580-11e9-88ad-f5311d96bbf9.png)
-
 The Archives Unleashed Toolkit is an open-source platform for analyzing web archives built on [Hadoop](https://hadoop.apache.org/). Tight integration with Hadoop provides powerful tools for analytics and data processing via [Spark](http://spark.apache.org/).
 
 Most of this documentation is built on [resilient distributed datasets (RDD)](https://spark.apache.org/docs/latest/rdd-programming-guide.html). We are working on adding support for [DataFrames](https://spark.apache.org/docs/latest/sql-programming-guide.html#datasets-and-dataframes). You can read more about this in our experimental [DataFrames section](#dataframes), and at our [[Using the Archives Unleashed Toolkit with PySpark]] tutorial.
