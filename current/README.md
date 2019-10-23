@@ -18,11 +18,11 @@ Our documentation is divided into several main sections, which cover the Archive
 
 ### Generating Results
 - [**Collection Analysis**](collection-analysis.md): How do I...
-  - [Extract All URLs](#Extract-All-URLs)
-  - [Extract Top-Level Domains](#Extract-Top-Level-Domains)
-  - [Extract Different Subdomains](#Extract-Different-Subdomains)
-  - [Extract HTTP Status Codes](#Extract-HTTP-Status-Codes)
-  - [Extract the Location of the Resource in ARCs and WARCs](#Extract-the-Location-of-the-Resource-in-ARCs-and-WARCs)
+  - [Extract All URLs](collection-analysis.md#Extract-All-URLs)
+  - [Extract Top-Level Domains](collection-analysis.md#Extract-Top-Level-Domains)
+  - [Extract Different Subdomains](collection-analysis.md#Extract-Different-Subdomains)
+  - [Extract HTTP Status Codes](collection-analysis.md#Extract-HTTP-Status-Codes)
+  - [Extract the Location of the Resource in ARCs and WARCs](collection-analysis.md#Extract-the-Location-of-the-Resource-in-ARCs-and-WARCs)
 - [**Text Analysis**](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/text-analysis.md): How do I...
   - [Extract All Plain Text](text-analysis.md#Extract-All-Plain-Text)
   - [Extract Plain Text Without HTTP Headers](text-analysis.md#Extract-Plain-Text-Without-HTTP-Headers)
@@ -35,19 +35,19 @@ Our documentation is divided into several main sections, which cover the Archive
   - [Extract Raw HTML](text-analysis.md#Extract-Raw-HTML)
   - [Extract Named Entities](text-analysis.md#Extract-Named-Entities)
 - **[Link Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/link-analysis.md)**: How do I...
-  - [Extract Simple Site Link Structure](#Extract-Simple-Site-Link-Structure)
-  - [Extract Raw URL Link Structure][#Extract-Raw-URL-Link-Structure]
-  - [Organize Links by URL Pattern][#Organize-Links-by-URL-Pattern]
-  - [Organize Links by Crawl Date][#Organize-Links-by-Crawl-Date]
-  - [Export as TSV][#Export-as-TSV]
-  - [Filter by URL][#Filter-by-URL]
-  - [Export to Gephi][#Export-to-Gephi]
-- **[Image Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/image-analysis.md)**: How do I...
-  - [Most Frequent Image URLs](#Most-Frequent-Image-URLs)
-  - [Most Frequent Images MD5 Hash](#Most-Frequent-Images-MD5-Hash)
+  - [Extract Simple Site Link Structure](link-analysis.md#Extract-Simple-Site-Link-Structure)
+  - [Extract Raw URL Link Structure](link-analysis.md#Extract-Raw-URL-Link-Structure)
+  - [Organize Links by URL Pattern](link-analysis.md#Organize-Links-by-URL-Pattern)
+  - [Organize Links by Crawl Date](link-analysis.md#Organize-Links-by-Crawl-Date)
+  - [Export as TSV](link-analysis.md#Export-as-TSV)
+  - [Filter by URL](link-analysis.md#Filter-by-URL)
+  - [Export to Gephi](link-analysis.md#Export-to-Gephi)
+- **[Image Analysis](image-analysis.md)**: How do I...
+  - [Most Frequent Image URLs](image-analysis.md#Most-Frequent-Image-URLs)
+  - [Most Frequent Images MD5 Hash](image-analysis.md#Most-Frequent-Images-MD5-Hash)
 
 ### Filtering Results
-- **[Filters](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/filters.md NOW)**: A variety of ways to filter results.
+- **[Filters](filters.md)**: A variety of ways to filter results.
 
 ### What to do with Results
 - **[What to do with DataFrame Results](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/df-results.md)**
