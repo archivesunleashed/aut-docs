@@ -1,12 +1,12 @@
 # Link Analysis
 
 - [Extract Simple Site Link Structure](#Extract-Simple-Site-Link-Structure)
-- [Extract Raw URL Link Structure][#Extract-Raw-URL-Link-Structure]
-- [Organize Links by URL Pattern][#Organize-Links-by-URL-Pattern]
-- [Organize Links by Crawl Date][#Organize-Links-by-Crawl-Date]
-- [Export as TSV][#Export-as-TSV]
-- [Filter by URL][#Filter-by-URL]
-- [Export to Gephi][#Export-to-Gephi]
+- [Extract Raw URL Link Structure](#Extract-Raw-URL-Link-Structure)
+- [Organize Links by URL Pattern](#Organize-Links-by-URL-Pattern)
+- [Organize Links by Crawl Date](#Organize-Links-by-Crawl-Date)
+- [Export as TSV](#Export-as-TSV)
+- [Filter by URL](#Filter-by-URL)
+- [Export to Gephi](#Export-to-Gephi)
 
 Site link structures can be very useful, allowing you to learn such things as:
 
