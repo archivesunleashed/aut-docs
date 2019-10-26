@@ -14,7 +14,7 @@ Our documentation is divided into several main sections, which cover the Archive
 
 - [Setting up the Archives Unleashed Toolkit](setting-up-aut.md)
 - [Using the Archives Unleashed Toolkit at Scale](aut-at-scale.md)
-- [Archives Unleashed Toolkit Lesson](toolkit-lesson.md)
+- [Archives Unleashed Toolkit Walkthrough](toolkit-walkthrough.md)
 - [Docker Installation](docker-install.md)
 - [Cookbook](cookbook.md)
 
