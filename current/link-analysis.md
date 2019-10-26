@@ -190,7 +190,14 @@ TODO
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+
+archive = WebArchive(sc, sqlContext, "example.arc.gz")
+
+df = archive.pages()
+df.select(extract_domain("crawl_date").alias("Crawl Date")).groupBy("Crawl Date").count().show()
+```
 
 ## Export as TSV
 

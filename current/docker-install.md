@@ -1,8 +1,9 @@
-# Introduction
+# Docker Installation
 
-This quick guide will walk through how to install Docker for Mac users. Much of this is also applicable to Windows users, although the screenshots are from a Mac.
+This quick guide will walk through how to install Docker for macOS users. Much of this is also applicable to Windows users, although the screenshots are from a macOS.
 
 # Resources
+
 * [Docker Community Edition for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac)
 * [Docker Community Edition for Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows)
 
