@@ -41,17 +41,18 @@ Our documentation is divided into several main sections, which cover the Archive
   - [Filter by URL](link-analysis.md#Filter-by-URL)
   - [Export to Gephi](link-analysis.md#Export-to-Gephi)
 - **[Image Analysis](image-analysis.md)**: How do I...
-  - [Most Frequent Image URLs](image-analysis.md#Most-Frequent-Image-URLs)
-  - [Most Frequent Images MD5 Hash](image-analysis.md#Most-Frequent-Images-MD5-Hash)
+  - [Extract Image Information](image-analysis.md#Extract-Image-information)
+  - [Extract Most Frequent Image URLs](image-analysis.md#Most-Frequent-Image-URLs)
+  - [Extract Most Frequent Images MD5 Hash](image-analysis.md#Most-Frequent-Images-MD5-Hash)
 - **[Binary Analysis](binary-analysis.md)**: How do I...
-  - [Audio](binary-analysis.md#Extract-Audio-Information)
-  - [Images](image-analysis.md#Extract-Image-information)
-  - [PDFs](binary-analysis.md#Extract-PDF-Information)
-  - [Presentation program files](binary-analysis.md#Extract-Presentation-Program-Files-Information)
-  - [Spreadsheets](binary-analysis.md#Extract-Spreadsheet-Information)
-  - [Text files](binary-analysis.md#Extract-Text-Files-Information)
-  - [Videos](binary-analysis.md#Extract-Video-Information)
-  - [Word processor files](binary-analysis.md#Extract-Word-Processor-Files-Information) 
+  - [Extract Audio Information](binary-analysis.md#Extract-Audio-Information)
+  - [Extract Image Information](image-analysis.md#Extract-Image-information)
+  - [Extract PDF Information](binary-analysis.md#Extract-PDF-Information)
+  - [Extract Presentation Program File Information](binary-analysis.md#Extract-Presentation-Program-Files-Information)
+  - [Extract Spreadsheet Information](binary-analysis.md#Extract-Spreadsheet-Information)
+  - [Extract Text File Information](binary-analysis.md#Extract-Text-Files-Information)
+  - [Extract Video Information](binary-analysis.md#Extract-Video-Information)
+  - [Extract Word Processor File Information](binary-analysis.md#Extract-Word-Processor-Files-Information) 
 
 ### Filtering Results
 - **[Filters](filters.md)**: A variety of ways to filter results.
