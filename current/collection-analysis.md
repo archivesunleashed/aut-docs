@@ -85,7 +85,17 @@ What do I do with the results? See [this guide](df-results.md)!
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+from pyspark.sql.functions import desc
+
+archive = WebArchive(sc, sqlContext, "src/test/resources/warc/example.warc.gz")
+
+df = archive.pages()
+df.select(extract_domain("url").alias("Domain")).groupBy("Domain").count().sort(desc("count")).show(n=10)
+```
+
+What do I do with the results? See [this guide](df-results.md)!
 
 ## Extract Different Subdomains
 
@@ -178,3 +188,4 @@ TODO
 ### Python DF
 
 TODO
+

@@ -1,10 +1,12 @@
+# Archives Unleashed Toolkit Walkthrough
+
 Welcome to the Archives Unleashed Toolkit hands-on walkthrough!
 
 ![Spark Terminal](https://archivesunleashed.org/images/prompt.png)
 
 The reality of any hands-on workshop is that things will break. We've tried our best to provide a robust environment that can let you walk through the basics of the Archives Unleashed Toolkit alongside us.
 
-If you have any questions, let [Nick Ruest](https://github.com/ruebot) or [Ian Milligan](https://github.com/ianmilligan1) know.
+If you have any questions, let us know in [Slack](http://slack.archivesunleashed.org/)!
 
 ## Table of Contents
 
@@ -21,7 +23,7 @@ If you have any questions, let [Nick Ruest](https://github.com/ruebot) or [Ian M
 # Installation and Use
 
 **Got Docker?**
-This lesson requires that you install [Docker](https://www.docker.com/get-docker). We have instructions on how to install Docker [here](https://github.com/archivesunleashed/aut/wiki/Docker-Install).
+This lesson requires that you install [Docker](https://www.docker.com/get-docker). We have instructions on how to install Docker [here](https://github.com/archivesunleashed/docker-aut/wiki/Docker-Install-Instructions).
 
 Later in this lesson, we use the networking tool [Gephi](https://gephi.org/).
 

@@ -12,7 +12,10 @@ Our documentation is divided into several main sections, which cover the Archive
 
 ### Getting Started
 
-- [Installing the Archives Unleashed Toolkit](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/install.md)
+- [Setting up the Archives Unleashed Toolkit](setting-up-aut.md)
+- [Using the Archives Unleashed Toolkit at Scale](aut-at-scale.md)
+- [Archives Unleashed Toolkit Walkthrough](toolkit-walkthrough.md)
+- [Cookbook (short scripts for reference)](cookbook.md)
 
 ### Generating Results
 - [**Collection Analysis**](collection-analysis.md): How do I...
