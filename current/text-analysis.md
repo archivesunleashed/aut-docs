@@ -286,9 +286,9 @@ TODO
 
 Named Entity Recognition is extremely resource intensive, and will take a very long time. Our recommendation is to begin testing NER on one or two WARC files, before trying it on a larger body of information. Depending on the speed of your system, it can take a day or two to process information that you are used to working with in under an hour.
 
-The following Spark scripts use the [Stanford Named Entity Recognizer](http://nlp.stanford.edu/software/CRF-NER.shtml) to extract names of entities – persons, organizations, and locations – from collections of ARC/WARC files or extracted texts. You can find a version of Stanford NER in our aut-resources repo located [here](https://github.com/archivesunleashed/aut-resources).
+The following script uses the [Stanford Named Entity Recognizer](http://nlp.stanford.edu/software/CRF-NER.shtml) to extract names of entities – persons, organizations, and locations – from collections of ARC/WARC files or extracted texts. You can find a version of Stanford NER in our aut-resources repo located [here](https://github.com/archivesunleashed/aut-resources).
 
-The scripts require a NER classifier model. There is one provided in the Stanford NER package (in the `classifiers` folder) called `english.all.3class.distsim.crf.ser.gz`, but you can also use your own.
+The script requires a NER classifier model. There is one provided in the Stanford NER package (in the `classifiers` folder) called `english.all.3class.distsim.crf.ser.gz`, but you can also use your own.
 
 ```scala
 import io.archivesunleashed._
@@ -302,24 +302,11 @@ ExtractEntities.extractFromRecords("/path/to/classifier/english.all.3class.dists
 
 Note the call to `addFile()`. This is necessary if you are running this script on a cluster; it puts a copy of the classifier on each worker node. The classifier and input file paths may be local or on the cluster (e.g., `hdfs:///user/joe/collection/`).
 
-The output of this script and the one below will consist of lines that look like this:
+The output of this script will be in the [WANE format](https://webarchive.jira.com/wiki/spaces/ARS/pages/88309872/WANE+Overview+and+Technical+Details), consisting of a JSON per line:
 
-```
-(20090204,http://greenparty.ca/fr/node/6852?size=display,{"PERSON":["Parti Vert","Paul Maillet","Adam Saab"],
-"ORGANIZATION":["GPC Candidate Ottawa Orleans","Contact Cabinet","Accueil Paul Maillet GPC Candidate Ottawa Orleans Original","Circonscriptions Nouvelles Événements Blogues Politiques Contact Mon Compte"],
-"LOCATION":["Canada","Canada","Canada","Canada"]})
-```
-
-This following script takes the plain text that you may have extracted earlier and extracts the entities.
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.app._
-import io.archivesunleashed.matchbox._
-
-sc.addFile("/path/to/classifier")
-
-ExtractEntities.extractFromScrapeText("english.all.3class.distsim.crf.ser.gz", "/path/to/extracted/text", "output-ner/", sc)
+```json
+{"timestamp":"20091218","url":"http://www.equalvoice.ca/images/images/french/js/images/sponsors/enbridge.jpg","named_entities":{"PERSON":["Sheila James Fund","Coyle","Sheila James","Regan"],"ORGANIZATION":["Equal Voice Equal Voice HOME","Mission Advisory Board Board of Directors & Staff Programs and Events EV Programs EV Events EV Speaks Out Research","NCR Ottawa British Columbia Alberta North Alberta South Youth Founders","Equal Voice","Equal Voice"],"LOCATION":["Toronto","Toronto Municipal Nova Scotia Newfoundland","Canada"]},"digest":"sha1:5U34IRCL74PEWGYHRGCXBCB3D2TDWHFE"}
+{"timestamp":"20091218","url":"http://www.liberal.ca/share_e.aspx?link=http://www.liberal.ca/en/newsroom/liberal-tv/category/56E6B9156BA42F5F_events/4.36363636364/ZSj39F5L1rM~hommage-a-ceux-qui-ont-servi","named_entities":{"PERSON":["Edward Isand","Ignatieff","Harper","Flaherty","Stephen Harper","Ignatieff","Michael"],"ORGANIZATION":["Liberal Party of Canada","Liberal Party of Canada Home","Community Party Central History Board of directors Election Readiness Commissions En Famille","Quebec Saskatchewan Contact us Newsroom Blog Media Releases Official Graphics Media Contact Information RSS Newsfeeds Liberal TV","Party","Liberal Party of Canada","Liberal Party","Yarmouth","Federal Liberal Agency of Canada","Liberal Party of Canada"],"LOCATION":["Alberta British Columbia Manitoba New Brunswick Newfoundland","Labrador Nova Scotia Ontario","Copenhagen","Canada","Canada"]},"digest":"sha1:LQ45W44PR6MG6MZEGEVMZVQC3YHIWDRC"}
 ```
 
 ### Scala DF
