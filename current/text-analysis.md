@@ -110,7 +110,12 @@ RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
 
 ### Scala DF
 
-TODO
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).extractValidPagesDF()
+  .select($"url")
+  .show(20, false)
 
 ### Python DF
 
