@@ -61,7 +61,16 @@ As most plain text use cases do not require HTTP headers to be in the output, we
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+  val pages = RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).extractValidPagesDF()
+  .select(RemoveHTML($"content"))
+  .head(10)
+
+pages(1).getString(0)
+```
 
 ### Python DF
 
