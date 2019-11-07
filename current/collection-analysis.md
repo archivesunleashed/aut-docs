@@ -76,9 +76,9 @@ import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).extractValidPagesDF()
-  .select(ExtractBaseDomain($"Url").as("Domain"))
+  .select(ExtractDomain($"Url").as("Domain"))
   .groupBy("Domain").count().orderBy(desc("count"))
-  .show(20, False)
+  .show(20, false)
 ```
 
 What do I do with the results? See [this guide](df-results.md)!
