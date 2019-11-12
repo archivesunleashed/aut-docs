@@ -310,3 +310,72 @@ TODO
 ### Python DF
 
 TODO
+
+## Finding Hyperlinks within Collection on Pages with Certain Keyword
+
+The following script will extract a DataFrame with the following columns, `domain`, `URL`, `crawl date`, `origin page`, and `destination page`, given a search term `Keystone` of the content (full-text). The example uses the sample data in [`aut-resources`](https://github.com/archivesunleashed/aut-resources/tree/master/Sample-Data).
+
+### Scala RDD
+
+TODO
+
+### Scala DF
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val result = udf((vs: Seq[Any]) => vs(0)
+               .toString
+               .split(",")(1))
+
+val df = RecordLoader
+          .loadArchives("Sample-Data/*gz", sc)
+          .extractValidPagesDF()
+          .select(RemovePrefixWWW(ExtractDomain($"url"))
+            .as("Domain"), $"url"
+            .as("url"),$"crawl_date", explode_outer(ExtractLinks($"url", $"content"))
+            .as("link"))
+            .filter($"content".contains("keystone"))
+
+df
+  .select($"url", $"Domain", $"crawl_date", result(array($"link"))
+    .as("destination_page"))
+  .show()
+
+// Exiting paste mode, now interpreting.
+
++--------------------+---------------+----------+--------------------+          
+|                 url|         Domain|crawl_date|    destination_page|
++--------------------+---------------+----------+--------------------+
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
+|http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
++--------------------+---------------+----------+--------------------+
+only showing top 20 rows
+
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+result: org.apache.spark.sql.expressions.UserDefinedFunction = UserDefinedFunction(<function1>,StringType,None)
+df: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [Domain: string, url: string ... 2 more fields]
+```
+
+### Python DF
+
+TODO
