@@ -15,9 +15,9 @@ Our documentation is divided into several main sections, which cover the Archive
 - [Setting up the Archives Unleashed Toolkit](setting-up-aut.md)
 - [Using the Archives Unleashed Toolkit at Scale](aut-at-scale.md)
 - [Archives Unleashed Toolkit Walkthrough](toolkit-walkthrough.md)
-- [Cookbook (short scripts for reference)](cookbook.md)
 
 ### Generating Results
+
 - [**Collection Analysis**](collection-analysis.md): How do I...
   - [Extract All URLs](collection-analysis.md#Extract-All-URLs)
   - [Extract Top-Level Domains](collection-analysis.md#Extract-Top-Level-Domains)
@@ -58,9 +58,21 @@ Our documentation is divided into several main sections, which cover the Archive
   - [Extract Word Processor File Information](binary-analysis.md#Extract-Word-Processor-Files-Information) 
 
 ### Filtering Results
+
 - **[Filters](filters.md)**: A variety of ways to filter results.
 
+### Standard Derivatives
+
+**How do I...**
+
+- [Create the Archives Unleashed Cloud Scholarly Derivatives](standard-derivatives.md#Create-the-Archives-Unleashed-Scholarly-Derivatives)
+- [Extract Binary Info to CSV](standard-derivatives.md#Extract-Binary-Info-to-CSV)
+- [Extract Binary Info to CSV (s3)](standard-derivatives.md#Extract-Binary-Info-to-CSV-s3)
+- [Extract Binary Info to Parquet](standard-derivatives.md#Extract-Binary-Info-to-Parquet)
+- [Extract Binaries to Disk](standard-derivatives.md#Extract-Binaries-to-Disk)
+
 ### What to do with Results
+
 - **[What to do with DataFrame Results](df-results.md)**
 - **[What to do with RDD Results](rdd-results.md)**
 
