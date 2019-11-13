@@ -14,6 +14,12 @@ For all the scripts below, you can type `:paste` into Spark Shell, paste the scr
 
 How do I create the [scholarly derivatives](https://cloud.archivesunleashed.org/derivatives) that the Archives Unleashed Cloud creates on my own web archive collection?
 
+Note, the full-text and domains output needs to be concatenated together into a single file respectively to replicate the Cloud output, and the GraphML file needs to be run through [`graphpass`](https://github.com/archivesunleashed/graphpass) with the following command:
+
+```bash
+$ graphpass input.graphml output.gexf -gq
+```
+
 ### Scala RDD
 
 ```scala
@@ -25,20 +31,24 @@ sc.setLogLevel("INFO")
 
 val statusCodes = Set("200")
 
+// Web archive collection.
 warcs = RecordLoader
   .loadArchives("/path/to/data", sc)
   .keepValidPages()
   .keepHttpStatus(statusCodes)
 
+// Domains file.
 warcs
   .map(r => ExtractDomain(r.getUrl))
   .countItems()
   .saveAsTextFile("/path/to/derivatives/auk/all-domains/output")
 
+// Full-text.
 warcs
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHttpHeader(r.getContentString))))
   .saveAsTextFile("/path/to/derivatives/auk/full-text/output")
 
+// Gephi GraphML.
 val links = warcs
   .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\\\s*www\\\\.", ""), ExtractDomain(f._2).replaceAll("^\\\\s*www\\\\.", ""))))
@@ -47,7 +57,7 @@ val links = warcs
   .filter(r => r._2 > 5)
 
 WriteGraph
-  .asGraphml(links, "/path/to/derivatives/auk/graph/example-gephi.graphml")
+  .asGraphml(links, "/path/to/derivatives/auk/graph/example.graphml")
 
 sys.exit
 ```
@@ -76,43 +86,52 @@ import io.archivesunleashed.df._
 
 sc.setLogLevel("INFO")
 
+// Web archive collection (dataset).
 val warcs = RecordLoader.loadArchives("/path/to/data", sc)
 
-warcs
-  .extractPDFDetailsDF()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/csv/pdf", "extension")
-
+// Audio Files.
 warcs
   .extractAudioDetailsDF()
     .select($"bytes", $"extension")
     .saveToDisk("bytes", "/path/to/derivatives/csv/audio", "extension")
 
-warcs
-  .extractVideoDetailsDF()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/csv/video", "extension")
-
+// Images.
 warcs
   .extractImageDetailsDF()
     .select($"bytes", $"extension")
     .saveToDisk("bytes", "/path/to/derivatives/csv/image", "extension")
 
+ // PDFs.
+warcs
+  .extractPDFDetailsDF()
+    .select($"bytes", $"extension")
+    .saveToDisk("bytes", "/path/to/derivatives/csv/pdf", "extension")
+
+// Spreadsheets.
 warcs
   .extractSpreadsheetDetailsDF()
     .select($"bytes", $"extension")
     .saveToDisk("bytes", "/path/to/derivatives/csv/spreadsheet", "extension")
 
+// Presentation Program Files.
 warcs
   .extractPresentationProgramDetailsDF()
     .select($"bytes", $"extension")
     .saveToDisk("bytes", "/path/to/derivatives/csv/presentation-program", "extension")
 
+// Text Files.
 warcs
   .extractTextFilesDetailsDF()
     .select($"bytes", $"extension")
     .saveToDisk("bytes", "/path/to/derivatives/csv/text", "extension")
 
+// Videos.
+warcs
+  .extractVideoDetailsDF()
+    .select($"bytes", $"extension")
+    .saveToDisk("bytes", "/path/to/derivatives/csv/video", "extension")
+
+// Word Processor Files.
 warcs
   .extractWordProcessorDetailsDF()
     .select($"bytes", $"extension")
@@ -126,24 +145,34 @@ sys.exit
 ```python
 from aut import *
 
+# Web archive collection (dataset).
 warcs = WebArchive(sc, sqlContext, "/path/to/aut-resources-master/Sample-Data/*gz")
 
+# Audio Files.
 warcs.audio().write.csv('/path/to/derivatives/csv/audio', header='true')
 
+# Images.
 warcs.images().write.csv('/path/to/derivatives/csv/images', header='true')
 
+# Image Links.
 warcs.image_links().write.csv('/path/to/derivatives/csv/images-links', header='true')
 
+# PDFs.
 warcs.pdfs().write.csv('/path/to/derivatives/csv/pdfs', header='true')
 
+# Spreadsheets.
 warcs.spreadsheets().write.csv('/path/to/derivatives/csv/spreadsheets', header='true')
 
+# Presentation Program Files.
 warcs.presentation_program().write.csv('/path/to/derivatives/csv/presentation_program', header='true')
 
+# Text Files.
 warcs.text_files().write.csv('/path/to/derivatives/csv/text_files', header='true')
 
+# Videos.
 warcs.video().write.csv('/path/to/derivatives/csv/video', header='true')
 
+# Word Processor Files.
 warcs.word_processor().write.csv('/path/to/derivatives/csv/word_processor', header='true')
 ```
 
@@ -166,22 +195,13 @@ sc.setLogLevel("INFO")
 sc.hadoopConfiguration.set("fs.s3a.access.key", "YOUR ACCESS KEY")
 sc.hadoopConfiguration.set("fs.s3a.secret.key", "YOUR SECRET KEY ")
 
-// Local web archive collection
+// Local web archive collection.
 val warcs = RecordLoader.loadArchives("/local/path/to/data", sc)
 
-// S3 hosted web archive collection
-val warcsS3 = RecordLoader.loadArchives("s3a://your-data-bucket/"", sc)
+// S3 hosted web archive collection.
+val warcsS3 = RecordLoader.loadArchives("s3a://your-data-bucket/", sc)
 
-warcs
-  .extractPDFDetailsDF()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("s3a://your-derivative-bucket/pdf")
-
+// Audio Files.
 warcs
   .extractAudioDetailsDF()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
@@ -191,16 +211,7 @@ warcs
     .mode("Overwrite")
     .save("s3a://your-derivative-bucket/audio")
 
-warcs
-  .extractVideoDetailsDF()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("s3a://your-derivative-bucket/video")
-
+// Images.
 warcs
   .extractImageDetailsDF()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5")
@@ -211,16 +222,18 @@ warcs
     .mode("Overwrite")
     .save("s3a://your-derivative-bucket/image")
 
+ // PDFs.
 warcs
-  .extractSpreadsheetDetailsDF()
+  .extractPDFDetailsDF()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
     .format("csv")
     .option("header","true")
     .mode("Overwrite")
-    .save("s3a://your-derivative-bucket/spreadsheet")
+    .save("s3a://your-derivative-bucket/pdf")
 
+// Presentation Program Files.
 warcs
   .extractPresentationProgramDetailsDF()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
@@ -231,6 +244,18 @@ warcs
     .mode("Overwrite")
     .save("s3a://your-derivative-bucket/presentation-program")
 
+// Spreadsheets.
+warcs
+  .extractSpreadsheetDetailsDF()
+    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+    .orderBy(desc("md5"))
+    .write
+    .format("csv")
+    .option("header","true")
+    .mode("Overwrite")
+    .save("s3a://your-derivative-bucket/spreadsheet")
+
+// Text Files.
 warcs
   .extractTextFilesDetailsDF()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
@@ -241,6 +266,18 @@ warcs
     .mode("Overwrite")
     .save("s3a://your-derivative-bucket/text")
 
+// Videos.
+warcs
+  .extractVideoDetailsDF()
+    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+    .orderBy(desc("md5"))
+    .write
+    .format("csv")
+    .option("header","true")
+    .mode("Overwrite")
+    .save("s3a://your-derivative-bucket/video")
+
+// Word Processor Files.
 warcs
   .extractWordProcessorDetailsDF()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
@@ -272,6 +309,7 @@ TODO
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
+// Web archive collection.
 val warcs = RecordLoader.loadArchives("/path/to/data", sc)
 
 // Web graph.
@@ -368,6 +406,7 @@ sys.exit
 ```python
 from aut import *
 
+# Web archive collection.
 warcs = WebArchive(sc, sqlContext, "/path/to/aut-resources-master/Sample-Data/*gz")
 
 # Web graph.
@@ -418,52 +457,56 @@ TODO
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
+// Web archive collection.
 warcs = RecordLoader.loadArchives("/path/to/warcs", sc)
 
-warcs
-  .extractPDFDetailsDF()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/pdf/collection-prefix-pdf", "extension")
-
+// Audio Files.
 warcs
   .extractAudioDetailsDF()
     .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/audio/collection-prefix-audio", "extension")
+    .saveToDisk("bytes", "/path/to/derivatives/binaries/audio/your-prefix-audio", "extension")
 
-warcs
-  .extractVideoDetailsDF()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/video/collection-prefix-video", "extension")
-
+// Images.
 warcs
   .extractImageDetailsDF()
     .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/image/collection-prefix-image", "extension")
+    .saveToDisk("bytes", "/path/to/derivatives/binaries/image/your-prefix-image", "extension")
 
+ // PDFs
 warcs
-  .extractSpreadsheetDetailsDF()
+  .extractPDFDetailsDF()
     .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/spreadsheet/collection-prefix-spreadsheet", "extension")
+    .saveToDisk("bytes", "/path/to/derivatives/binaries/pdf/your-prefix-pdf", "extension")
 
+// Presentation Program Files.
 warcs
   .extractPresentationProgramDetailsDF()
     .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/presentation-program/collection-prefix-presentation-program", "extension")
+    .saveToDisk("bytes", "/path/to/derivatives/binaries/presentation-program/your-prefix-presentation-program", "extension")
 
+// Spreadsheets.
 warcs
-  .extractWordProcessorDetailsDF()
+  .extractSpreadsheetDetailsDF()
     .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/word-processor/collection-prefix-word-processor", "extension")
+    .saveToDisk("bytes", "/path/to/derivatives/binaries/spreadsheet/your-prefix-spreadsheet", "extension")
 
+// Text Files.
 warcs
   .extractTextFilesDetailsDF()
     .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/text/collection-prefix-text", "extension")
+    .saveToDisk("bytes", "/path/to/derivatives/binaries/text/your-prefix-text", "extension")
 
+// Videos.
 warcs
   .extractVideoDetailsDF()
     .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/text/collection-prefix-video", "extension")
+    .saveToDisk("bytes", "/path/to/derivatives/binaries/text/your-prefix-video", "extension")
+
+// Word Processor Files.
+warcs
+  .extractWordProcessorDetailsDF()
+    .select($"bytes", $"extension")
+    .saveToDisk("bytes", "/path/to/derivatives/binaries/word-processor/your-prefix-word-processor", "extension")
 
 sys.exit
 ```
