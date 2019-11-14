@@ -86,56 +86,95 @@ import io.archivesunleashed.df._
 
 sc.setLogLevel("INFO")
 
-// Web archive collection (dataset).
+// Web archive collection.
 val warcs = RecordLoader.loadArchives("/path/to/data", sc)
 
 // Audio Files.
 warcs
   .extractAudioDetailsDF()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/csv/audio", "extension")
+    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+    .orderBy(desc("md5"))
+    .write.format("csv")
+    .option("header","true")
+    .mode("Overwrite")
+    .save("/path/to/derivatives/csv/audio")
 
 // Images.
 warcs
   .extractImageDetailsDF()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/csv/image", "extension")
+    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5")
+    .orderBy(desc("md5"))
+    .write
+    .format("csv")
+    .option("header","true")
+    .mode("Overwrite")
+    .save("/path/to/derivatives/csv/image")
 
- // PDFs.
+// PDFs.
 warcs
   .extractPDFDetailsDF()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/csv/pdf", "extension")
-
-// Spreadsheets.
-warcs
-  .extractSpreadsheetDetailsDF()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/csv/spreadsheet", "extension")
+    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+    .orderBy(desc("md5"))
+    .write
+    .format("csv")
+    .option("header","true")
+    .mode("Overwrite")
+    .save("/path/to/derivatives/csv/pdf")
 
 // Presentation Program Files.
 warcs
   .extractPresentationProgramDetailsDF()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/csv/presentation-program", "extension")
+    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+    .orderBy(desc("md5"))
+    .write
+    .format("csv")
+    .option("header","true")
+    .mode("Overwrite")
+    .save("/path/to/derivatives/csv/presentation-program")
+
+// Spreadsheets.
+warcs
+  .extractSpreadsheetDetailsDF()
+    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+    .orderBy(desc("md5"))
+    .write
+    .format("csv")
+    .option("header","true")
+    .mode("Overwrite")
+    .save("/path/to/derivatives/csv/spreadsheet")
 
 // Text Files.
 warcs
   .extractTextFilesDetailsDF()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/csv/text", "extension")
+    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+    .orderBy(desc("md5"))
+    .write
+    .format("csv")
+    .option("header","true")
+    .mode("Overwrite")
+    .save("/path/to/derivatives/csv/text")
 
 // Videos.
 warcs
   .extractVideoDetailsDF()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/csv/video", "extension")
+    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+    .orderBy(desc("md5"))
+    .write
+    .format("csv")
+    .option("header","true")
+    .mode("Overwrite")
+    .save("/path/to/derivatives/csv/video")
 
 // Word Processor Files.
 warcs
   .extractWordProcessorDetailsDF()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/csv/word-processor", "extension")
+    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+    .orderBy(desc("md5"))
+    .write
+    .format("csv")
+    .option("header","true")
+    .mode("Overwrite")
+    .save("/path/to/derivatives/csv/word-processor")
 
 sys.exit
 ```
@@ -222,7 +261,7 @@ warcs
     .mode("Overwrite")
     .save("s3a://your-derivative-bucket/image")
 
- // PDFs.
+// PDFs.
 warcs
   .extractPDFDetailsDF()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
