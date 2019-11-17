@@ -29,13 +29,10 @@ import io.archivesunleashed.matchbox._
 
 sc.setLogLevel("INFO")
 
-val statusCodes = Set("200")
-
 // Web archive collection.
 warcs = RecordLoader
   .loadArchives("/path/to/data", sc)
   .keepValidPages()
-  .keepHttpStatus(statusCodes)
 
 // Domains file.
 warcs
@@ -91,7 +88,7 @@ val warcs = RecordLoader.loadArchives("/path/to/data", sc)
 
 // Audio Files.
 warcs
-  .extractAudioDetailsDF()
+  .audio()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write.format("csv")
@@ -101,7 +98,7 @@ warcs
 
 // Images.
 warcs
-  .extractImageDetailsDF()
+  .images()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -112,7 +109,7 @@ warcs
 
 // PDFs.
 warcs
-  .extractPDFDetailsDF()
+  .pdfs()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -123,7 +120,7 @@ warcs
 
 // Presentation Program Files.
 warcs
-  .extractPresentationProgramDetailsDF()
+  .presentationProgramFiles()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -134,7 +131,7 @@ warcs
 
 // Spreadsheets.
 warcs
-  .extractSpreadsheetDetailsDF()
+  .spreadsheets()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -145,7 +142,7 @@ warcs
 
 // Text Files.
 warcs
-  .extractTextFilesDetailsDF()
+  .textFiles()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -156,7 +153,7 @@ warcs
 
 // Videos.
 warcs
-  .extractVideoDetailsDF()
+  .videos()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -167,7 +164,7 @@ warcs
 
 // Word Processor Files.
 warcs
-  .extractWordProcessorDetailsDF()
+  .wordProcessorFiles()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -242,7 +239,7 @@ val warcsS3 = RecordLoader.loadArchives("s3a://your-data-bucket/", sc)
 
 // Audio Files.
 warcs
-  .extractAudioDetailsDF()
+  .audio()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write.format("csv")
@@ -252,7 +249,7 @@ warcs
 
 // Images.
 warcs
-  .extractImageDetailsDF()
+  .images()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -263,7 +260,7 @@ warcs
 
 // PDFs.
 warcs
-  .extractPDFDetailsDF()
+  .pdfs()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -274,7 +271,7 @@ warcs
 
 // Presentation Program Files.
 warcs
-  .extractPresentationProgramDetailsDF()
+  .presentationProgramFiles()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -285,7 +282,7 @@ warcs
 
 // Spreadsheets.
 warcs
-  .extractSpreadsheetDetailsDF()
+  .spreadsheets()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -296,7 +293,7 @@ warcs
 
 // Text Files.
 warcs
-  .extractTextFilesDetailsDF()
+  .textFiles()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -307,7 +304,7 @@ warcs
 
 // Videos.
 warcs
-  .extractVideoDetailsDF()
+  .videos()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -318,7 +315,7 @@ warcs
 
 // Word Processor Files.
 warcs
-  .extractWordProcessorDetailsDF()
+  .wordProcessorFiles()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -353,21 +350,21 @@ val warcs = RecordLoader.loadArchives("/path/to/data", sc)
 
 // Web graph.
 warcs
-  .extractHyperlinksDF()
+  .webgraph()
     .select($"src".as("source_url"), $"dest".as("destination_url"), $"anchor", $"crawl_date")
     .write
     .parquet("/path/to/derivatives/parquet/webgraph/");
 
 // Valid Pages.
 warcs
-  .extractValidPagesDF()
+  .pagesDF()
      .select($"crawl_date", $"url", $"mime_type_web_server", $"mime_type_tika", RemoveHTML($"content").as("text"))
      .write
      .parquet("/path/to/derivatives/parquet/pages/");
 
 // Audio Files.
 warcs
-  .extractAudioDetailsDF()
+  .audio()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -375,7 +372,7 @@ warcs
 
 // Images.
 warcs
-  .extractImageDetailsDF()
+  .images()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -384,14 +381,14 @@ warcs
 
 // Images Links.
 warcs
-  .extractImageLinksDF()
+  .imageLinks()
     .select($"src", $"image_url")
     .write
     .parquet("/path/to/derivatives/parquet/image")
 
 // PDFs.
 warcs
-  .extractPDFDetailsDF()
+  .pdfs()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -399,7 +396,7 @@ warcs
 
 // Presentation Program Files.
 warcs
-  .extractPresentationProgramDetailsDF()
+  .presentationProgramFiles()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -407,7 +404,7 @@ warcs
 
 // Spreadsheets.
 warcs
-  .extractSpreadsheetDetailsDF();
+  .spreadsheets();
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -415,7 +412,7 @@ warcs
 
 // Text Files.
 warcs
-  .extractTextFilesDetailsDF()
+  .textFiles()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -423,7 +420,7 @@ warcs
 
 // Videos.
 warcs
-  .extractVideoDetailsDF()
+  .videos()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -431,7 +428,7 @@ warcs
 
 // Word Processor Files.
 warcs
-  .extractWordProcessorDetailsDF()
+  .wordProcessorFiles()
     .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
     .orderBy(desc("md5"))
     .write
@@ -501,49 +498,49 @@ warcs = RecordLoader.loadArchives("/path/to/warcs", sc)
 
 // Audio Files.
 warcs
-  .extractAudioDetailsDF()
+  .audio()
     .select($"bytes", $"extension")
     .saveToDisk("bytes", "/path/to/derivatives/binaries/audio/your-prefix-audio", "extension")
 
 // Images.
 warcs
-  .extractImageDetailsDF()
+  .images()
     .select($"bytes", $"extension")
     .saveToDisk("bytes", "/path/to/derivatives/binaries/image/your-prefix-image", "extension")
 
  // PDFs
 warcs
-  .extractPDFDetailsDF()
+  .pdfs()
     .select($"bytes", $"extension")
     .saveToDisk("bytes", "/path/to/derivatives/binaries/pdf/your-prefix-pdf", "extension")
 
 // Presentation Program Files.
 warcs
-  .extractPresentationProgramDetailsDF()
+  .presentationProgramFiles()
     .select($"bytes", $"extension")
     .saveToDisk("bytes", "/path/to/derivatives/binaries/presentation-program/your-prefix-presentation-program", "extension")
 
 // Spreadsheets.
 warcs
-  .extractSpreadsheetDetailsDF()
+  .spreadsheets()
     .select($"bytes", $"extension")
     .saveToDisk("bytes", "/path/to/derivatives/binaries/spreadsheet/your-prefix-spreadsheet", "extension")
 
 // Text Files.
 warcs
-  .extractTextFilesDetailsDF()
+  .textFiles()
     .select($"bytes", $"extension")
     .saveToDisk("bytes", "/path/to/derivatives/binaries/text/your-prefix-text", "extension")
 
 // Videos.
 warcs
-  .extractVideoDetailsDF()
+  .videos()
     .select($"bytes", $"extension")
     .saveToDisk("bytes", "/path/to/derivatives/binaries/text/your-prefix-video", "extension")
 
 // Word Processor Files.
 warcs
-  .extractWordProcessorDetailsDF()
+  .wordProcessorFiles()
     .select($"bytes", $"extension")
     .saveToDisk("bytes", "/path/to/derivatives/binaries/word-processor/your-prefix-word-processor", "extension")
 
