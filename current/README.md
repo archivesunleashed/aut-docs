@@ -66,9 +66,7 @@ Our documentation is divided into several main sections, which cover the Archive
 **How do I...**
 
 - [Create the Archives Unleashed Cloud Scholarly Derivatives](standard-derivatives.md#Create-the-Archives-Unleashed-Scholarly-Derivatives)
-- [Extract Binary Info to CSV](standard-derivatives.md#Extract-Binary-Info-to-CSV)
-- [Extract Binary Info to CSV (s3)](standard-derivatives.md#Extract-Binary-Info-to-CSV-s3)
-- [Extract Binary Info to Parquet](standard-derivatives.md#Extract-Binary-Info-to-Parquet)
+- [Extract Binary Info](standard-derivatives.md#Extract-Binary-Info)
 - [Extract Binaries to Disk](standard-derivatives.md#Extract-Binaries-to-Disk)
 
 ### What to do with Results

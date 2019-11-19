@@ -3,9 +3,7 @@
 **How do I...**
 
 - [Create the Archives Unleashed Cloud Scholarly Derivatives](#Create-the-Archives-Unleashed-Scholarly-Derivatives)
-- [Extract Binary Info to CSV](#Extract-Binary-Info-to-CSV)
-- [Extract Binary Info to CSV (s3)](#Extract-Binary-Info-to-CSV-s3)
-- [Extract Binary Info to Parquet](#Extract-Binary-Info-to-Parquet)
+- [Extract Binary Info](#Extract-Binary-Info)
 - [Extract Binaries to Disk](#Extract-Binaries-to-Disk)
 
 For all the scripts below, you can type `:paste` into Spark Shell, paste the script, and then run it with <kbd>CTRL</kbd>+<kbd>d</kbd>:
@@ -67,155 +65,11 @@ TODO
 
 TODO
 
-## Extract Binary Info to CSV
+## Extract Binary Info
 
-How do I extract binary information of PDFs, audio files, video files, word processor files, spreadsheet files, presentation program files, and text files to a CSV file?
+How do I extract binary information of PDFs, audio files, video files, word processor files, spreadsheet files, presentation program files, and text files to a CSV file, or into the [Apache Parquet](https://parquet.apache.org/) format to [work with later](df-results.md#what-to-do-with-dataframe-results)?
 
-### Scala RDD
-
-TODO
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-sc.setLogLevel("INFO")
-
-// Web archive collection.
-val warcs = RecordLoader.loadArchives("/path/to/data", sc)
-
-// Audio Files.
-warcs
-  .audio()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write.format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("/path/to/derivatives/csv/audio")
-
-// Images.
-warcs
-  .images()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("/path/to/derivatives/csv/image")
-
-// PDFs.
-warcs
-  .pdfs()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("/path/to/derivatives/csv/pdf")
-
-// Presentation Program Files.
-warcs
-  .presentationProgramFiles()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("/path/to/derivatives/csv/presentation-program")
-
-// Spreadsheets.
-warcs
-  .spreadsheets()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("/path/to/derivatives/csv/spreadsheet")
-
-// Text Files.
-warcs
-  .textFiles()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("/path/to/derivatives/csv/text")
-
-// Videos.
-warcs
-  .videos()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("/path/to/derivatives/csv/video")
-
-// Word Processor Files.
-warcs
-  .wordProcessorFiles()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("/path/to/derivatives/csv/word-processor")
-
-sys.exit
-```
-
-### Python DF
-
-```python
-from aut import *
-
-# Web archive collection (dataset).
-warcs = WebArchive(sc, sqlContext, "/path/to/aut-resources-master/Sample-Data/*gz")
-
-# Audio Files.
-warcs.audio().write.csv('/path/to/derivatives/csv/audio', header='true')
-
-# Images.
-warcs.images().write.csv('/path/to/derivatives/csv/images', header='true')
-
-# Image Links.
-warcs.image_links().write.csv('/path/to/derivatives/csv/images-links', header='true')
-
-# PDFs.
-warcs.pdfs().write.csv('/path/to/derivatives/csv/pdfs', header='true')
-
-# Spreadsheets.
-warcs.spreadsheets().write.csv('/path/to/derivatives/csv/spreadsheets', header='true')
-
-# Presentation Program Files.
-warcs.presentation_program().write.csv('/path/to/derivatives/csv/presentation_program', header='true')
-
-# Text Files.
-warcs.text_files().write.csv('/path/to/derivatives/csv/text_files', header='true')
-
-# Videos.
-warcs.video().write.csv('/path/to/derivatives/csv/video', header='true')
-
-# Word Processor Files.
-warcs.word_processor().write.csv('/path/to/derivatives/csv/word_processor', header='true')
-```
-
-## Extract Binary Info to CSV (s3)
-
-How do I extract binary information of PDFs, audio files, video files, word processor files, spreadsheet files, presentation program files, and text files to a S3 bucket?
-
+You can also read and write to Amazon S3 by supplying your AWS credentials, and using `s3a`.
 ### Scala RDD
 
 TODO
@@ -237,202 +91,85 @@ val warcs = RecordLoader.loadArchives("/local/path/to/data", sc)
 // S3 hosted web archive collection.
 val warcsS3 = RecordLoader.loadArchives("s3a://your-data-bucket/", sc)
 
-// Audio Files.
-warcs
-  .audio()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write.format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("s3a://your-derivative-bucket/audio")
+// Choose your format: CSV or Parquet.
 
-// Images.
-warcs
-  .images()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("s3a://your-derivative-bucket/image")
+// For CSV:
+//  .write
+//  .format("csv")
+//  .option("header","true")
+//  .mode("Overwrite")
+//  .save("/path/to/derivatives/csv/audio")
 
-// PDFs.
-warcs
-  .pdfs()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("s3a://your-derivative-bucket/pdf")
-
-// Presentation Program Files.
-warcs
-  .presentationProgramFiles()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("s3a://your-derivative-bucket/presentation-program")
-
-// Spreadsheets.
-warcs
-  .spreadsheets()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("s3a://your-derivative-bucket/spreadsheet")
-
-// Text Files.
-warcs
-  .textFiles()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("s3a://your-derivative-bucket/text")
-
-// Videos.
-warcs
-  .videos()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("s3a://your-derivative-bucket/video")
-
-// Word Processor Files.
-warcs
-  .wordProcessorFiles()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .format("csv")
-    .option("header","true")
-    .mode("Overwrite")
-    .save("s3a://your-derivative-bucket/word-processor")
-
-sys.exit
-```
-
-### Python DF
-
-TODO
-
-## Extract Binary Info to Parquet
-
-How do I extract binary information of PDFs, audio files, video files, word processor files, spreadsheet files, presentation program files, and text files to the [Apache Parquet](https://parquet.apache.org/) format to [work with later](df-results.md#what-to-do-with-dataframe-results)?
-
-### Scala RDD
-
-TODO
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-// Web archive collection.
-val warcs = RecordLoader.loadArchives("/path/to/data", sc)
-
-// Web graph.
-warcs
-  .webgraph()
-    .select($"src".as("source_url"), $"dest".as("destination_url"), $"anchor", $"crawl_date")
-    .write
-    .parquet("/path/to/derivatives/parquet/webgraph/");
-
-// Valid Pages.
-warcs
-  .pagesDF()
-     .select($"crawl_date", $"url", $"mime_type_web_server", $"mime_type_tika", RemoveHTML($"content").as("text"))
-     .write
-     .parquet("/path/to/derivatives/parquet/pages/");
+// For Parquet:
+// .write
+// .parquet("/path/to/derivatives/parquet/pages/")
 
 // Audio Files.
-warcs
-  .audio()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .parquet("/path/to/derivatives/parquet/audio")
+warcs.audio()
+  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+  .orderBy(desc("md5"))
+  .write.format("csv")
+  .option("header","true")
+  .mode("Overwrite")
+  .save("/path/to/derivatives/csv/audio")
 
 // Images.
-warcs
-  .images()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .parquet("/path/to/derivatives/parquet/image")
-
-
-// Images Links.
-warcs
-  .imageLinks()
-    .select($"src", $"image_url")
-    .write
-    .parquet("/path/to/derivatives/parquet/image")
+warcsS3.images()
+  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5")
+  .orderBy(desc("md5"))
+  .write
+  .parquet("/path/to/derivatives/parquet/image")
 
 // PDFs.
-warcs
-  .pdfs()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .parquet("/path/to/derivatives/parquet/pdf")
+warcs.pdfs()
+  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+  .orderBy(desc("md5"))
+  .write
+  .format("csv")
+  .option("header","true")
+  .mode("Overwrite")
+  .save("s3a://your-derivatives-bucket/csv/pdf")
 
 // Presentation Program Files.
-warcs
-  .presentationProgramFiles()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .parquet("/path/to/derivatives/parquet/presentation-program")
+warcs.presentationProgramFiles()
+  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+  .orderBy(desc("md5"))
+  .write
+  .parquet("s3a://your-derivatives-bucket/parquet/presentation-program")
 
 // Spreadsheets.
-warcs
-  .spreadsheets();
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .parquet("/path/to/derivatives/parquet/spreadsheet")
+warcs.spreadsheets()
+  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+  .orderBy(desc("md5"))
+  .write
+  .format("csv")
+  .option("header","true")
+  .mode("Overwrite")
+  .save("/path/to/derivatives/csv/spreadsheet")
 
 // Text Files.
-warcs
-  .textFiles()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .parquet("/path/to/derivatives/parquet/text")
+warcs.textFiles()
+  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+  .orderBy(desc("md5"))
+  .write
+  .parquet("/path/to/derivatives/parquet/text")
 
 // Videos.
-warcs
-  .videos()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .parquet("/path/to/derivatives/parquet/video")
+warcs.videos()
+  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+  .orderBy(desc("md5"))
+  .write
+  .format("csv")
+  .option("header","true")
+  .mode("Overwrite")
+  .save("/path/to/derivatives/csv/video")
 
 // Word Processor Files.
-warcs
-  .wordProcessorFiles()
-    .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-    .orderBy(desc("md5"))
-    .write
-    .parquet("/path/to/derivatives/parquet/word-processor")
+warcs.wordProcessorFiles()
+  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
+  .orderBy(desc("md5"))
+  .write
+  .parquet("/path/to/derivatives/parquet/word-processor")
 
 sys.exit
 ```
@@ -442,41 +179,44 @@ sys.exit
 ```python
 from aut import *
 
-# Web archive collection.
+# Web archive collection (dataset).
 warcs = WebArchive(sc, sqlContext, "/path/to/aut-resources-master/Sample-Data/*gz")
 
-# Web graph.
-warcs.links().write.parquet("/path/to/derivatives/parquet/webgraph/")
+# Choose your format: CSV or Parquet.
 
-# Valid pages.
-warcs.pages().write.parquet("/path/to/derivatives/parquet/pages/")
+# For CSV:
+# .write.csv('/path/to/derivatives/csv/audio', header='true')
+# Include header='true' if you want headers.
+
+# For Parquet:
+# .write.parquet("/path/to/derivatives/parquet/pages/")
 
 # Audio Files.
-warcs.audio().write.parquet('/path/to/derivatives/parquet/audio')
+warcs.audio().write.csv('/path/to/derivatives/csv/audio', header='true')
 
 # Images.
 warcs.images().write.parquet('/path/to/derivatives/parquet/images')
 
 # Image Links.
-warcs.image_links().write.parquet('/path/to/derivatives/parquet/images-links')
+warcs.image_links().write.csv('/path/to/derivatives/csv/images-links', header='true')
 
 # PDFs.
-warcs.pdfs().write.parquet('/path/to/derivatives/parquet/pdfs')
+warcs.pdfs().write.parquet('/path/to/derivatives/csv/pdfs')
 
-# Spreadsheets
-warcs.spreadsheets().write.parquet('/path/to/derivatives/parquet/spreadsheets')
+# Spreadsheets.
+warcs.spreadsheets().write.csv('/path/to/derivatives/csv/spreadsheets', header='true')
 
 # Presentation Program Files.
-warcs.presentation_program().write.parquet('/path/to/derivatives/parquet/presentation_program')
+warcs.presentation_program().write.parquet('/path/to/derivatives/csv/presentation_program')
 
 # Text Files.
-warcs.text_files().write.parquet('/path/to/derivatives/parquet/text_files')
+warcs.text_files().write.csv('/path/to/derivatives/csv/text_files', header='true')
 
 # Videos.
-warcs.video().write.parquet('/path/to/derivatives/parquet/video')
+warcs.video().write.parquet('/path/to/derivatives/csv/video')
 
 # Word Processor Files.
-warcs.word_processor().write.parquet('/path/to/derivatives/parquet/word_processor')
+warcs.word_processor().write.csv('/path/to/derivatives/csv/word_processor', header='true')
 ```
 
 ## Extract Binaries to Disk
@@ -497,52 +237,44 @@ import io.archivesunleashed.df._
 warcs = RecordLoader.loadArchives("/path/to/warcs", sc)
 
 // Audio Files.
-warcs
-  .audio()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/audio/your-prefix-audio", "extension")
+warcs.audio()
+  .select($"bytes", $"extension")
+  .saveToDisk("bytes", "/path/to/derivatives/binaries/audio/your-prefix-audio", "extension")
 
 // Images.
-warcs
-  .images()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/image/your-prefix-image", "extension")
+warcs.images()
+  .select($"bytes", $"extension")
+  .saveToDisk("bytes", "/path/to/derivatives/binaries/image/your-prefix-image", "extension")
 
  // PDFs
-warcs
-  .pdfs()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/pdf/your-prefix-pdf", "extension")
+warcs.pdfs()
+  .select($"bytes", $"extension")
+  .saveToDisk("bytes", "/path/to/derivatives/binaries/pdf/your-prefix-pdf", "extension")
 
 // Presentation Program Files.
-warcs
-  .presentationProgramFiles()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/presentation-program/your-prefix-presentation-program", "extension")
+warcs.presentationProgramFiles()
+  .select($"bytes", $"extension")
+  .saveToDisk("bytes", "/path/to/derivatives/binaries/presentation-program/your-prefix-presentation-program", "extension")
 
 // Spreadsheets.
-warcs
-  .spreadsheets()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/spreadsheet/your-prefix-spreadsheet", "extension")
+warcs.spreadsheets()
+  .select($"bytes", $"extension")
+  .saveToDisk("bytes", "/path/to/derivatives/binaries/spreadsheet/your-prefix-spreadsheet", "extension")
 
 // Text Files.
-warcs
-  .textFiles()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/text/your-prefix-text", "extension")
+warcs.textFiles()
+  .select($"bytes", $"extension")
+  .saveToDisk("bytes", "/path/to/derivatives/binaries/text/your-prefix-text", "extension")
 
 // Videos.
-warcs
-  .videos()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/text/your-prefix-video", "extension")
+warcs.videos()
+  .select($"bytes", $"extension")
+  .saveToDisk("bytes", "/path/to/derivatives/binaries/text/your-prefix-video", "extension")
 
 // Word Processor Files.
-warcs
-  .wordProcessorFiles()
-    .select($"bytes", $"extension")
-    .saveToDisk("bytes", "/path/to/derivatives/binaries/word-processor/your-prefix-word-processor", "extension")
+warcs.wordProcessorFiles()
+  .select($"bytes", $"extension")
+  .saveToDisk("bytes", "/path/to/derivatives/binaries/word-processor/your-prefix-word-processor", "extension")
 
 sys.exit
 ```
