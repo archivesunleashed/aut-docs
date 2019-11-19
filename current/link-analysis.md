@@ -32,8 +32,8 @@ import io.archivesunleashed.util._
 
 val links = RecordLoader.loadArchives("example.arc.gz", sc)
   .keepValidPages()
-  .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
-  .map(r => (ExtractDomain(r._1).removePrefixWWW(), ExtractDomain(r._2).removePrefixWWW()))
+  .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
+  .map(r => (ExtractDomainRDD(r._1).removePrefixWWW(), ExtractDomainRDD(r._2).removePrefixWWW()))
   .filter(r => r._1 != "" && r._2 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -51,8 +51,8 @@ import io.archivesunleashed.util._
 val links = RecordLoader.loadArchives("example.arc.gz", sc)
   .keepValidPages()
   .keepContent(Set("apple".r))
-  .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
-  .map(r => (ExtractDomain(r._1).removePrefixWWW(), ExtractDomain(r._2).removePrefixWWW()))
+  .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
+  .map(r => (ExtractDomainRDD(r._1).removePrefixWWW(), ExtractDomainRDD(r._2).removePrefixWWW()))
   .filter(r => r._1 != "" && r._2 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -80,7 +80,7 @@ import io.archivesunleashed.matchbox._
 
 val links = RecordLoader.loadArchives("example.arc.gz", sc)
   .keepValidPages()
-  .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
+  .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
   .filter(r => r._1 != "" && r._2 != "")
   .countItems()
 
@@ -90,7 +90,7 @@ links.saveAsTextFile("full-links-all/")
 You can see that the above was achieved by removing the following line:
 
 ```scala
-  .map(r => (ExtractDomain(r._1).removePrefixWWW(), ExtractDomain(r._2).removePrefixWWW()))
+  .map(r => (ExtractDomainRDD(r._1).removePrefixWWW(), ExtractDomainRDD(r._2).removePrefixWWW()))
 ```
 
 In a larger collection, you might want to add the following line:
@@ -123,8 +123,8 @@ import io.archivesunleashed.util._
 val links = RecordLoader.loadArchives("example.arc.gz", sc)
   .keepValidPages()
   .keepUrlPatterns(Set("(?i)http://www.archive.org/details/.*".r))
-  .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
-  .map(r => (ExtractDomain(r._1).removePrefixWWW(), ExtractDomain(r._2).removePrefixWWW()))
+  .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
+  .map(r => (ExtractDomainRDD(r._1).removePrefixWWW(), ExtractDomainRDD(r._2).removePrefixWWW()))
   .filter(r => r._1 != "" && r._2 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -154,8 +154,8 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
-  .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
+  .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
+  .flatMap(r => r._2.map(f => (r._1, ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -218,8 +218,8 @@ import io.archivesunleashed.matchbox.TupleFormatter._
 
 RecordLoader.loadArchives("/path/to/arc", sc)
   .keepValidPages()
-  .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
+  .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
+  .flatMap(r => r._2.map(f => (r._1, ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -257,8 +257,8 @@ import io.archivesunleashed.matchbox._
 val links = RecordLoader.loadArchives("example.arc.gz", sc)
   .keepValidPages()
   .keepUrlPatterns(Set("http://www.archive.org/details/.*".r))
-  .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
+  .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
+  .flatMap(r => r._2.map(f => (r._1, ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -286,8 +286,8 @@ import io.archivesunleashed.matchbox._
 
 val links = RecordLoader.loadArchives("example.arc.gz", sc)
   .keepValidPages()
-  .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
+  .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
+  .flatMap(r => r._2.map(f => (r._1, ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -331,9 +331,9 @@ val result = udf((vs: Seq[Any]) => vs(0)
 val df = RecordLoader
           .loadArchives("Sample-Data/*gz", sc)
           .extractValidPagesDF()
-          .select(RemovePrefixWWW(ExtractDomain($"url"))
+          .select(RemovePrefixWWWDF(ExtractDomainDF($"url"))
             .as("Domain"), $"url"
-            .as("url"),$"crawl_date", explode_outer(ExtractLinks($"url", $"content"))
+            .as("url"),$"crawl_date", explode_outer(ExtractLinksDF($"url", $"content"))
             .as("link"))
             .filter($"content".contains("keystone"))
 

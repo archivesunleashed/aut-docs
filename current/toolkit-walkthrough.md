@@ -85,11 +85,11 @@ Now cut and paste the following script:
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val r = RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
-.keepValidPages()
-.map(r => ExtractDomain(r.getUrl))
-.countItems()
-.take(10)
+RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
+  .keepValidPages()
+  .map(r => ExtractDomainRDD(r.getUrl))
+  .countItems()
+  .take(10)
 ```
 
 Let's take a moment to look at this script. It:
@@ -128,11 +128,11 @@ We like to use this example to do two things:
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val r = RecordLoader.loadArchives("/data/*.gz", sc)
-.keepValidPages()
-.map(r => ExtractDomain(r.getUrl))
-.countItems()
-.take(10)
+RecordLoader.loadArchives("/data/*.gz", sc)
+  .keepValidPages()
+  .map(r => ExtractDomainDF(r.getUrl))
+  .countItems()
+  .take(10)
 ```
 
 # Extracting some Text
@@ -150,7 +150,7 @@ import io.archivesunleashed.matchbox._
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .keepValidPages()
   .keepDomains(Set("www.liberal.ca"))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(r.getContentString)))
   .saveAsTextFile("/data/liberal-party-text")
 ```
 
@@ -173,7 +173,7 @@ import io.archivesunleashed.matchbox._
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .keepValidPages()
   .keepDomains(Set("www.liberal.ca"))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(r.getContentString)))
   .saveAsTextFile("/data/liberal-party-text")
 ```
 
@@ -210,7 +210,7 @@ RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .keepValidPages()
   .keepDomains(Set("www.liberal.ca"))
   .keepLanguages(Set("fr"))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(r.getContentString)))
   .saveAsTextFile("/data/liberal-party-french-text")
 ```
 
@@ -223,7 +223,7 @@ import io.archivesunleashed.matchbox._
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .keepValidPages()
   .keepDate(List("2006"), ExtractDate.DateComponent.YYYY)
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(r.getContentString)))
   .saveAsTextFile("/data/2006-text")
 ```
 
@@ -235,7 +235,7 @@ import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .keepValidPages()
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHttpHeader(RemoveHTML(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHttpHeaderRDD(RemoveHTMLRDD(r.getContentString))))
   .saveAsTextFile("/data/text-no-headers")
 ```
 
@@ -280,8 +280,8 @@ import io.archivesunleashed.matchbox._
 
 val links = RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .keepValidPages()
-  .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
+  .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
+  .flatMap(r => r._2.map(f => (r._1, ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)

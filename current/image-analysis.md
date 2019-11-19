@@ -153,7 +153,7 @@ import io.archivesunleashed.matchbox._
 
 val links = RecordLoader.loadArchives("example.arc.gz", sc)
   .keepValidPages()
-  .flatMap(r => ExtractImageLinks(r.getUrl, r.getContentString))
+  .flatMap(r => ExtractImageLinksRDD(r.getUrl, r.getContentString))
   .countItems()
   .take(10)
 ```

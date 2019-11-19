@@ -33,26 +33,23 @@ warcs = RecordLoader
   .keepValidPages()
 
 // Domains file.
-warcs
-  .map(r => ExtractDomain(r.getUrl))
+warcs.map(r => ExtractDomainoRDD(r.getUrl))
   .countItems()
   .saveAsTextFile("/path/to/derivatives/auk/all-domains/output")
 
 // Full-text.
-warcs
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHttpHeader(r.getContentString))))
+warcs.map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHttpHeaderRDD(r.getContentString))))
   .saveAsTextFile("/path/to/derivatives/auk/full-text/output")
 
 // Gephi GraphML.
 val links = warcs
-  .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\\\s*www\\\\.", ""), ExtractDomain(f._2).replaceAll("^\\\\s*www\\\\.", ""))))
+  .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
+  .flatMap(r => r._2.map(f => (r._1, ExtractDomainRDD(f._1).replaceAll("^\\\\s*www\\\\.", ""), ExtractDomainRDD(f._2).replaceAll("^\\\\s*www\\\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)
 
-WriteGraph
-  .asGraphml(links, "/path/to/derivatives/auk/graph/example.graphml")
+WriteGraph.asGraphml(links, "/path/to/derivatives/auk/graph/example.graphml")
 
 sys.exit
 ```

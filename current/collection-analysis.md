@@ -62,7 +62,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).keepValidPages()
-  .map(r => ExtractDomain(r.getUrl))
+  .map(r => ExtractDomainRDD(r.getUrl))
   .countItems()
   .take(10)
 ```
@@ -76,7 +76,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).extractValidPagesDF()
-  .select(ExtractDomain($"Url").as("Domain"))
+  .select(ExtractDomainDF($"Url").as("Domain"))
   .groupBy("Domain").count().orderBy(desc("count"))
   .show(20, false)
 ```
@@ -188,4 +188,3 @@ TODO
 ### Python DF
 
 TODO
-

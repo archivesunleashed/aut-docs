@@ -46,11 +46,11 @@ import io.archivesunleashed.matchbox._
 sc.hadoopConfiguration.set("fs.s3a.access.key", "<my-access-key>")
 sc.hadoopConfiguration.set("fs.s3a.secret.key", "<my-secret-key>")
 
-val r = RecordLoader.loadArchives("s3a://<my-bucket>/*.gz", sc)
-.keepValidPages()
-.map(r => ExtractDomain(r.getUrl))
-.countItems()
-.take(10)
+RecordLoader.loadArchives("s3a://<my-bucket>/*.gz", sc)
+  .keepValidPages()
+  .map(r => ExtractDomainRDD(r.getUrl))
+  .countItems()
+  .take(10)
 ```
 
 ### Troubleshooting S3 

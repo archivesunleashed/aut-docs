@@ -72,8 +72,8 @@ import io.archivesunleashed.df._
 val df = RecordLoader.loadArchives("example.arc.gz", sc)
   .extractHyperlinksDF()
 
-df.select(RemovePrefixWWW(ExtractBaseDomain($"Src")).as("SrcDomain"),
-    RemovePrefixWWW(ExtractBaseDomain($"Dest")).as("DestDomain"))
+df.select(RemovePrefixWWWDF(ExtractBaseDomain($"Src")).as("SrcDomain"),
+    RemovePrefixWWWDF(ExtractBaseDomain($"Dest")).as("DestDomain"))
   .groupBy("SrcDomain", "DestDomain").count().orderBy(desc("SrcDomain")).show()
 ```
 

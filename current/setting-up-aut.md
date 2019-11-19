@@ -235,7 +235,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("/path/to/git/repo/of/aut/src/test/resources/arc/example.arc.gz", sc).keepValidPages()
-  .map(r => ExtractDomain(r.getUrl))
+  .map(r => ExtractDomainRDD(r.getUrl))
   .countItems()
   .take(10)
 ```
