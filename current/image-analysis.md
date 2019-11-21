@@ -261,7 +261,7 @@ import io.archivesunleashed.app._
 import io.archivesunleashed.matchbox._
 
 val r = RecordLoader.loadArchives("example.arc.gz",sc).persist()
-ExtractPopularImages(r, 500, sc).saveAsTextFile("500-Popular-Images")
+ExtractPopularImagesRDD(r, 500, sc).saveAsTextFile("500-Popular-Images")
 ```
 
 Will save the 500 most popular URLs to an output directory.
@@ -275,7 +275,7 @@ import io.archivesunleashed.app._
 val df = RecordLoader.loadArchives("example.arc.gz",sc)
 					 .images()
 
-ExtractPopularImages(df,10,30,30).show()
+ExtractPopularImagesDF(df,10,30,30).show()
 ```
 
 ### Python DF
