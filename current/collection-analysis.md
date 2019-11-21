@@ -44,7 +44,7 @@ What do I do with the results? See [this guide](df-results.md)!
 ```python
 from aut import *
 
-WebArchive(sc, sqlContext, "src/test/resources/warc/example.warc.gz").pages() \
+WebArchive(sc, sqlContext, "src/test/resources/warc/example.warc.gz").webpages() \
     .select("url") \
     .show(20, False)
 ```
@@ -91,7 +91,7 @@ from pyspark.sql.functions import desc
 
 archive = WebArchive(sc, sqlContext, "src/test/resources/warc/example.warc.gz")
 
-df = archive.pages()
+df = archive.webpages()
 df.select(extract_domain("url").alias("Domain")).groupBy("Domain").count().sort(desc("count")).show(n=10)
 ```
 
