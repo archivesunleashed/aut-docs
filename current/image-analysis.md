@@ -3,6 +3,7 @@
 - [Extract Image Information](#Extract-Image-information)
 - [Extract Most Frequent Image URLs](#Extract-Most-Frequent-Image-URLs)
 - [Extract Most Frequent Images MD5 Hash](#Extract-Most-Frequent-Images-MD5-Hash)
+- [Find Images Shared Between Domains](#Find-Images-Shared-Between-Domains)
 
 The Archives Unleashed Toolkit supports image analysis, a growing area of interest within web archives.
 
@@ -271,5 +272,55 @@ Will save the 500 most popular URLs to an output directory.
 TODO
 
 ### Python DF
+
+TODO
+
+## Find Images Shared Between Domains
+
+How to find images shared between domains that appear more than once _in more than one domain_.
+
+### Scala DF
+
+```scala
+import io.archivesunleashed.matchbox._
+import io.archivesunleashed._
+
+val imgDetails = udf((url: String, MimeTypeTika: String, content: String) => ExtractImageDetails(url,MimeTypeTika,content.getBytes()).md5Hash)
+val imgLinks = udf((url: String, content: String) => ExtractImageLinks(url, content))
+val domain = udf((url: String) => ExtractDomain(url))
+
+val total = RecordLoader
+              .loadArchives("/path/to/warcs", sc)
+              .extractValidPagesDF()
+              .select(
+                $"crawl_date".as("crawl_date"),
+                domain($"url").as("Domain"),
+                explode_outer(imgLinks(($"url"),
+                ($"content"))).as("ImageUrl"),
+                imgDetails(($"url"),
+                ($"mime_type_tika"),
+                ($"content")).as("MD5")
+              )
+              .filter($"crawl_date" rlike "200910[0-9]{2}")
+
+val links = total
+              .groupBy("MD5")
+              .count()
+              .where(countDistinct("Domain")>=2)
+
+val result = total
+               .join(links, "MD5")
+               .groupBy("Domain","MD5")
+               .agg(first("ImageUrl")
+               .as("ImageUrl"))
+               .orderBy(asc("MD5"))
+               .write
+               .format("csv")
+               .option("header","true")
+               .mode("Overwrite")
+               .save("/path/to/output")
+```
+
+### PythonDF
 
 TODO
