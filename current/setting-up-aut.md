@@ -214,8 +214,8 @@ from aut import *
 
 archive = WebArchive(sc, sqlContext, "src/test/resources/warc/")
 
-pages = archive.pages()
-pages.printSchema()
+webpages = archive.webpages()
+webpages.printSchema()
 ```
 
 Then hit <kbd>Shift</kbd>+<kbd>Enter</kbd>, or press the play button.

@@ -195,7 +195,7 @@ from aut import *
 
 archive = WebArchive(sc, sqlContext, "example.arc.gz")
 
-df = archive.pages()
+df = archive.webpages()
 df.select(extract_domain("crawl_date").alias("Crawl Date")).groupBy("Crawl Date").count().show()
 ```
 
