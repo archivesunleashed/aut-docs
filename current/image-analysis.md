@@ -268,7 +268,15 @@ Will save the 500 most popular URLs to an output directory.
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.app._
+
+val df = RecordLoader.loadArchives("example.arc.gz",sc)
+					 .images()
+
+ExtractPopularImages(df,10,30,30).show()
+```
 
 ### Python DF
 
