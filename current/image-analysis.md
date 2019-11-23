@@ -286,12 +286,12 @@ import io.archivesunleashed.matchbox._
 import io.archivesunleashed._
 
 val imgDetails = udf((url: String, MimeTypeTika: String, content: String) => ExtractImageDetails(url,MimeTypeTika,content.getBytes()).md5Hash)
-val imgLinks = udf((url: String, content: String) => ExtractImageLinks(url, content))
-val domain = udf((url: String) => ExtractDomain(url))
+val imgLinks = udf((url: String, content: String) => ExtractImageLinksRDD(url, content))
+val domain = udf((url: String) => ExtractDomainRDD(url))
 
 val total = RecordLoader
               .loadArchives("/path/to/warcs", sc)
-              .extractValidPagesDF()
+              .webpages()
               .select(
                 $"crawl_date".as("crawl_date"),
                 domain($"url").as("Domain"),
