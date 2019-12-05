@@ -197,7 +197,7 @@ Take some time to explore the various options and variables that you can swap in
 Some options:
 
 * **Keep URL Patterns**: Instead of domains, what if you wanted to have text relating to just a certain pattern? Substitute `.keepDomains` for a command like: `.keepUrlPatterns(Set("(?i)http://geocities.com/EnchantedForest/.*".r))`
-* **Filter by Date**: What if we just wanted data from 2006? You could add the following command after `.keepValidPages()`: `.keepDate(List("2006"), ExtractDate.DateComponent.YYYY)`
+* **Filter by Date**: What if we just wanted data from 2006? You could add the following command after `.keepValidPages()`: `.keepDate(List("2006"), ExtractDateRDD.DateComponent.YYYY)`
 * **Filter by Language**: What if you just want French-language pages? After `.keepDomains` add a new line: `.keepLanguages(Set("fr"))`.
 
 For example, if we just wanted the French-language Liberal pages, we would run:
@@ -222,7 +222,7 @@ import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .keepValidPages()
-  .keepDate(List("2006"), ExtractDate.DateComponent.YYYY)
+  .keepDate(List("2006"), ExtractDateRDD.DateComponent.YYYY)
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(r.getContentString)))
   .saveAsTextFile("/data/2006-text")
 ```

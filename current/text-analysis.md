@@ -26,7 +26,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(r.getContentString)))
   .saveAsTextFile("plain-text/")
 ```
 
@@ -53,7 +53,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeaderRDD(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("plain-text-noheaders/")
 ```
 
@@ -67,7 +67,7 @@ import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("example.warc.gz", sc)
   .extractValidPagesDF()
-  .select(RemoveHTML($"content"))
+  .select(RemoveHTMLDF($"content"))
   .write
   .option("header","true")
   .csv("plain-text-noheaders/")
@@ -89,7 +89,7 @@ import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .keepDomains(Set("www.archive.org"))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeaderRDD(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("plain-text-domain/")
 ```
 ### Scala DF
@@ -114,7 +114,7 @@ import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .keepUrlPatterns(Set("(?i)http://www.archive.org/details/.*".r))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeaderRDD(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("details/")
 ```
 
@@ -138,7 +138,7 @@ import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .keepDomains(Set("www.archive.org"))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, ExtractBoilerpipeText(RemoveHTTPHeaderRDD(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, ExtractBoilerpipeTextRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("plain-text-no-boilerplate/")
 ```
 
@@ -165,8 +165,8 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
-  .keepDate(List("200804"), ExtractDate.DateComponent.YYYYMM)
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeaderRDD(r.getContentString))))
+  .keepDate(List("200804"), ExtractDateRDD.DateComponent.YYYYMM)
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("plain-text-date-filtered-200804/")
 ```
 
@@ -177,8 +177,8 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
-  .keepDate(List("2008"), ExtractDate.DateComponent.YYYY)
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeaderRDD(r.getContentString))))
+  .keepDate(List("2008"), ExtractDateRDD.DateComponent.YYYY)
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("plain-text-date-filtered-2008/")
 ```
 
@@ -189,8 +189,8 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
-  .keepDate(List("2008","2015"), ExtractDate.DateComponent.YYYY)
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeaderRDD(r.getContentString))))
+  .keepDate(List("2008","2015"), ExtractDateRDD.DateComponent.YYYY)
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("plain-text-date-filtered-2008-2015/")
 ```
 
@@ -223,7 +223,7 @@ import io.archivesunleashed.matchbox._
 RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .keepDomains(Set("www.archive.org"))
   .keepLanguages(Set("fr"))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeaderRDD(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("plain-text-fr/")
 ```
 
@@ -249,7 +249,7 @@ import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("example.arc.gz",sc).keepValidPages()
   .keepContent(Set("radio".r))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeaderRDD(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("plain-text-radio/")
 ```
 
