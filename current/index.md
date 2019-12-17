@@ -19,7 +19,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .extractValidPagesDF()
+  .webpages()
 
 df.printSchema()
 ```
@@ -31,7 +31,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .extractValidPagesDF()
+  .webpages()
 
 df.select(ExtractBaseDomain($"Url").as("Domain"))
   .groupBy("Domain").count().orderBy(desc("count")).show()

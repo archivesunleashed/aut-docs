@@ -66,7 +66,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("example.warc.gz", sc)
-  .extractValidPagesDF()
+  .webpages()
   .select(RemoveHTMLDF($"content"))
   .write
   .option("header","true")

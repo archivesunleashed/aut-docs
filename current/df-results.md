@@ -13,7 +13,7 @@ If you want to return a set of results, the counterpart of `.take(10)` with RDDs
 So, something like (in Scala):
 
 ```scala
-RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).extractValidPagesDF()
+RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).webpages()
   // more transformations here...
   .head(10)
 ```
