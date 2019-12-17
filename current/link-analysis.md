@@ -330,7 +330,7 @@ val result = udf((vs: Seq[Any]) => vs(0)
 
 val df = RecordLoader
           .loadArchives("Sample-Data/*gz", sc)
-          .extractValidPagesDF()
+          .webpages()
           .select(RemovePrefixWWWDF(ExtractDomainDF($"url"))
             .as("Domain"), $"url"
             .as("url"),$"crawl_date", explode_outer(ExtractLinksDF($"url", $"content"))

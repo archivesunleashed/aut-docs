@@ -32,7 +32,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).extractValidPagesDF()
+RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).webpages()
   .select($"Url")
   .show(20, false)
 ```
@@ -75,7 +75,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).extractValidPagesDF()
+RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).webpages()
   .select(ExtractDomainDF($"Url").as("Domain"))
   .groupBy("Domain").count().orderBy(desc("count"))
   .show(20, false)
