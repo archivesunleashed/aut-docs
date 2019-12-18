@@ -264,6 +264,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("example.warc.gz",sc)
+  .webpages()
   .discardMimeTypesDF(Set("text/html"))
 ```
 
@@ -336,6 +337,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("example.warc.gz",sc)
+  .webpages()
   .discardDateDF("20080429")
 ```
 
@@ -364,6 +366,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("example.warc.gz",sc)
+  .webpages()
   .discardUrlsDF(Set("http://www.archive.org/"))
 ```
 
@@ -414,6 +417,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("example.warc.gz",sc)
+  .webpages()
   .discardDomainsDF(Set("www.archive.org"))
 ```
 
