@@ -56,7 +56,34 @@ sys.exit
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+sc.setLogLevel("INFO")
+
+// Web archive collection.
+val warcs = RecordLoader.loadArchives("/path/to/data", sc)
+  .webpages()
+
+// Domains file.
+warcs.groupBy(ExtractDomainDF($"Url").alias("url"))
+  .count()
+  .sort($"count".desc)
+  .write.csv("/path/to/derivatives/auk/all-domains/output")
+
+// Full-text.
+warcs.select($"crawl_date", ExtractDomainDF(($"url").alias("domain")), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF(($"content"))))
+  .write.csv("/path/to/derivatives/auk/full-text/output")
+
+// TODO See: https://github.com/archivesunleashed/aut/issues/223
+//val links = validPages
+//  .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
+//  .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\\\s*www\\\\.", ""), ExtractDomain(f._2).replaceAll("^\\\\s*www\\\\.", ""))))
+//  .filter(r => r._2 != "" && r._3 != "")
+//  .countItems()
+//  .filter(r => r._2 > 5)
+```
 
 ### Python DF
 
