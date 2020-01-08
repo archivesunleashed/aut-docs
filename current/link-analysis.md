@@ -62,7 +62,16 @@ links.saveAsTextFile("links-all-apple/")
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.arc.gz", sc).webgraph()
+  .groupBy(RemovePrefixWWWDF(ExtractDomainDF($"src")).as("src"), RemovePrefixWWWDF(ExtractDomainDF($"dest")).as("dest"))
+  .count()
+  .filter($"count" > 5)
+  .write.csv("links-all/")
+```
 
 ### Python DF
 
