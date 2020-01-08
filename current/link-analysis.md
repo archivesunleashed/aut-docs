@@ -69,6 +69,7 @@ import io.archivesunleashed.df._
 RecordLoader.loadArchives("example.arc.gz", sc).webgraph()
   .groupBy(RemovePrefixWWWDF(ExtractDomainDF($"src")).as("src"), RemovePrefixWWWDF(ExtractDomainDF($"dest")).as("dest"))
   .count()
+  .filter(($"src".isNotNull) || ($"dest".isNotNull))
   .filter($"count" > 5)
   .write.csv("links-all/")
 ```
