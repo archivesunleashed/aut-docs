@@ -39,7 +39,14 @@ r.keepImages()
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.warc.gz",sc)
+  .all()
+  .keepImagesDF()
+```
 
 ### Python DF
 
@@ -54,14 +61,23 @@ Removes all data but selected MIME Types (identified by the web server).
 ```scala
 import io.archivesunleashed._
 
-val mimetypes = Set("text/html", "text/plain")
+val mimeTypes = Set("text/html", "text/plain")
 val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.keepMimeTypes(mimetypes)
+r.keepMimeTypes(mimeTypes)
 ```
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val mimeTypes = Set("text/html", "text/plain")
+
+RecordLoader.loadArchives("example.warc.gz",sc)
+  .all()
+  .keepMimeTypesDF(mimeTypes)
+```
 
 ### Python DF
 
@@ -83,7 +99,16 @@ r.keepMimeTypesTika(mimetypes)
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val mimeTypes = Set("text/html", "text/plain")
+
+RecordLoader.loadArchives("example.warc.gz",sc)
+  .all()
+  .keepMimeTypesTikaDF(mimeTypes)
+```
 
 ### Python DF
 
@@ -167,7 +192,16 @@ r.keepUrls(urls)
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val urls = Set("www.archive.org")
+
+RecordLoader.loadArchives("example.warc.gz",sc)
+  .all()
+  .keepUrlsDF(urls)
+```
 
 ### Python DF
 
@@ -188,6 +222,17 @@ r.keepUrlPatterns(urls)
 ```
 
 ### Scala DF
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val urlsPattern = Set(".*images.*".r)
+
+RecordLoader.loadArchives("example.warc.gz",sc)
+  .all()
+  .keepUrlPatternsDF(urlPattern)
+```
 
 TODO
 
@@ -242,7 +287,16 @@ r.keepLanguages(languages)
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val languages = Set("th","de","ht")
+
+RecordLoader.loadArchives("example.warc.gz",sc)
+  .webpages()
+  .keepLanguagesDF(languages)
+```
 
 ### Python DF
 
