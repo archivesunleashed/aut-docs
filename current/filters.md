@@ -105,7 +105,16 @@ r.keepHttpStatus(statusCodes)
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val statusCodes = Set("200")
+
+RecordLoader.loadArchives("example.warc.gz",sc)
+  .all()
+  .keepHttpStatusDF(statusCodes)
+```
 
 ### Python DF
 
@@ -127,7 +136,16 @@ r.keepDate(dates)
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val dates = List("04")
+
+RecordLoader.loadArchives("example.warc.gz",sc)
+  .all()
+  .keepDateDF(dates)
+```
 
 ### Python DF
 
@@ -193,7 +211,16 @@ r.keepDomains(domains)
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val urls = Set("http://www.archive.org/")
+
+RecordLoader.loadArchives("example.warc.gz",sc)
+  .webpages()
+  .keepUrlsDF(urls)
+```
 
 ### Python DF
 
@@ -237,7 +264,17 @@ r.keepContent(content)
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val content = Set("Content-Length: [0-9]{4}".r)
+
+RecordLoader.loadArchives("example.warc.gz", sc)
+   .all()
+  .select("url", "content")
+  .keepContentDF(content)
+```
 
 ### Python DF
 
@@ -310,7 +347,16 @@ r.discardHttpStatus(statusCodes)
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val statusCodes = Set("200")
+
+RecordLoader.loadArchives("example.warc.gz",sc)
+  .all()
+  .discardHttpStatusDF(statusCodes)
+```
 
 ### Python DF
 
@@ -390,7 +436,17 @@ r.discardUrlPatterns(urls)
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val urlPattern = Set(".*images.*".r)
+
+RecordLoader.loadArchives("example.warc.gz",sc)
+  .all()
+  .select("url")
+  .discardUrlPatternsDF(urlPattern)
+```
 
 ### Python DF
 
@@ -441,7 +497,17 @@ r.keepLanguages(languages)
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val languages = Set("th","de","ht")
+
+RecordLoader.loadArchives("example.warc.gz",sc)
+  .all()
+  .select("url")
+  .discardLanguagesDF(languages)
+```
 
 ### Python DF
 
@@ -463,7 +529,17 @@ r.discardContent(content)
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val content = Set("Content-Length: [0-9]{4}".r)
+
+RecordLoader.loadArchives("example.warc.gz",sc)
+  .all()
+  .select("url", "content")
+  .discardContentDF(content)
+```
 
 ### Python DF
 
