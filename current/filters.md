@@ -343,9 +343,9 @@ Filters out detected MIME Types (identified by the web server).
 ```scala
 import io.archivesunleashed._
 
-val mimetypes = Set("text/html", "text/plain")
+val mimeTypes = Set("text/html", "text/plain")
 val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.discardMimeTypes(mimetypes)
+r.discardMimeTypes(mimeTypes)
 ```
 
 ### Scala DF
@@ -354,9 +354,11 @@ r.discardMimeTypes(mimetypes)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
+val mimeTypes = Set("text/html", "text/plain")
+
 RecordLoader.loadArchives("example.warc.gz",sc)
   .webpages()
-  .discardMimeTypesDF(Set("text/html"))
+  .discardMimeTypesDF(mimeTypes)
 ```
 
 ### Python DF
@@ -372,14 +374,23 @@ Filters out detected MIME Types (identified by [Apache Tika](https://tika.apache
 ```scala
 import io.archivesunleashed._
 
-val mimetypes = Set("text/html", "text/plain")
+val mimeTypes = Set("text/html", "text/plain")
 val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.discardMimeTypesTika(mimetypes)
+r.discardMimeTypesTika(mimeTypes)
 ```
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val mimeTypes = Set("text/html", "text/plain")
+
+RecordLoader.loadArchives("example.warc.gz",sc)
+  .webpages()
+  .discardMimeTypesTikaDF(mimeTypes)
+```
 
 ### Python DF
 
