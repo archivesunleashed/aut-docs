@@ -67,9 +67,10 @@ TODO
 How do I extract binary information of PDFs, audio files, video files, word processor files, spreadsheet files, presentation program files, and text files to a CSV file, or into the [Apache Parquet](https://parquet.apache.org/) format to [work with later](df-results.md#what-to-do-with-dataframe-results)?
 
 You can also read and write to Amazon S3 by supplying your AWS credentials, and using `s3a`.
+
 ### Scala RDD
 
-TODO
+**Will not be implemented.**
 
 ### Scala DF
 
@@ -222,7 +223,7 @@ How do I all the binary files of PDFs, audio files, video files, word processor 
 
 ### Scala RDD
 
-TODO
+**Will not be implemented.**
 
 ### Scala DF
 
