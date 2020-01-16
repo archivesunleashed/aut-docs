@@ -108,7 +108,7 @@ For example, supposed I wanted to extract the first-level directories?
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc) .keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .flatMap(r => """http://[^/]+/[^/]+/""".r.findAllIn(r.getUrl).toList)
   .take(10)
 ```
@@ -119,7 +119,19 @@ What do I do with the results? See [this guide](rdd-results.md)!
 
 ### Scala DF
 
-TODO
+```scala
+
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val urlPattern = Set("""http://[^/]+/[^/]+/""".r)
+
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .webpages()
+  .select($"url")
+  .keepUrlPatternsDF(urlPattern)
+  .show(10, false)
+```
 
 ### Python DF
 
@@ -144,7 +156,15 @@ What do I do with the results? See [this guide](rdd-results.md)!
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .all()
+  .select($"url", $"http_status_code")
+  .show(10, false)
+```
 
 ### Python DF
 
@@ -183,7 +203,15 @@ What do I do with the results? See [this guide](rdd-results.md)!
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .all()
+  .select($"url", $"archive_filename")
+  .show(10, false)
+```
 
 ### Python DF
 
