@@ -81,4 +81,67 @@ Note that this works even across languages (e.g., export to Parquet from Scala, 
 
 ## Python
 
-TODO: Python basically the same, but with Python syntax. However, we should be explicit and lay out the steps.
+If you want to return a set of results, the counterpart of `.take(10)` with RDDs is `.head(10)`.
+So, something like (in Python):
+
+```python
+WebArchive(sc, sqlContext, "/home/nruest/Projects/au/sample-data/geocites/1").webpages()\
+  # more transformations here...
+  .select("http_status_code")
+  .head(10)
+```
+
+In the PySpark console, the results are returned as a List of rows, like the following:
+
+```
+[Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200')]
+```
+
+You can assign the tranformations to a variable, like this:
+
+```python
+archive = WebArchive(sc, sqlContext, "/home/nruest/Projects/au/sample-data/geocites/1").webpages()
+  # more transformations here...
+  .head(10)
+```
+
+If you want _all_ results, replace `.head(10)` with `.collect()`.
+This will return _all_ results to the console.
+
+**WARNING**: Be careful with `.collect()`! If your results contain ten million records, TWUT will try to return _all of them_  to your console (on your physical machine).
+Most likely, your machine won't have enough memory!
+
+Alternatively, if you want to save the results to disk, replace `.show(20, false)` with the following:
+
+```python
+archive.write.csv("/path/to/export/directory/")
+```
+
+Replace `/path/to/export/directory/` with your desired location.
+Note that this is a _directory_, not a _file_.
+
+Depending on your intended use of the output, you may want to include headers in the CSV file, in which case:
+
+```python
+archive.write.csv("/path/to/export/directory/", header='true')
+```
+
+If you want to store the results with the intention to read the results back later for further processing, then use Parquet format:
+
+```python
+archive.write.parquet("/path/to/export/directory/")
+```
+
+Replace `/path/to/export/directory/` with your desired location.
+Note that this is a _directory_, not a _file_.
+
+Later, as in a completely separate session, you can read the results back in and continuing processing, as follows:
+
+```python
+archive = spark.read.parquet("/path/to/export/directory/")
+
+archive.show(20, false)
+```
+
+Parquet encodes metadata such as the schema and column types, so you can pick up exactly where you left off.
+Note that this works even across languages (e.g., export to Parquet from Scala, read back in Python) or any system that supports Parquet.
