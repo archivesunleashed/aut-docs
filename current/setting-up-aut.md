@@ -3,7 +3,7 @@
 - [Introduction](#Introduction)
 - [Dependencies](#Dependencies)
 - [Installing and Running Apache Spark](#Installing-and-Running-Apache-Spark)
-- [Archives Unleashed Toolkit with Spark Shell](#Archives Unleashed Toolkit with Spark Shell)
+- [Archives Unleashed Toolkit with Spark Shell](#Archives-Unleashed-Toolkit-with-Spark-Shell)
 - [Archives Unleashed Toolkit with PySpark](#Archives-Unleashed-Toolkit-with-PySpark)
 - [Archives Unleashed Toolkit with Jupyter](#Archives-Unleashed-Toolkit-with-Jupyter)
 - [Test the Archives Unleashed Toolkit](#Test-the-Archives-Unleashed-Toolkit)
