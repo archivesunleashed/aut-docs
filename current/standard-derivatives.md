@@ -28,12 +28,11 @@ import io.archivesunleashed.matchbox._
 sc.setLogLevel("INFO")
 
 // Web archive collection.
-warcs = RecordLoader
-  .loadArchives("/path/to/data", sc)
+warcs = RecordLoader.loadArchives("/path/to/data", sc)
   .keepValidPages()
 
 // Domains file.
-warcs.map(r => ExtractDomainoRDD(r.getUrl))
+warcs.map(r => ExtractDomainRDD(r.getUrl))
   .countItems()
   .saveAsTextFile("/path/to/derivatives/auk/all-domains/output")
 
@@ -92,82 +91,60 @@ val warcsS3 = RecordLoader.loadArchives("s3a://your-data-bucket/", sc)
 // Choose your format: CSV or Parquet.
 
 // For CSV:
-//  .write
-//  .format("csv")
-//  .option("header","true")
-//  .mode("Overwrite")
-//  .save("/path/to/derivatives/csv/audio")
+//  .write.csv("/path/to/derivatives/csv/audio")
+//  .write.csv("s3a://your-derivatives-bucket/parquet/pages")
 
 // For Parquet:
-// .write
-// .parquet("/path/to/derivatives/parquet/pages/")
+// .write.parquet("/path/to/derivatives/parquet/pages/")
+// .write.parquet("s3a://your-derivatives-bucket/parquet/pages")
 
 // Audio Files.
 warcs.audio()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
-  .write.format("csv")
-  .option("header","true")
-  .mode("Overwrite")
-  .save("/path/to/derivatives/csv/audio")
+  .write.csv("/path/to/derivatives/csv/audio")
 
 // Images.
 warcsS3.images()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5")
   .orderBy(desc("md5"))
-  .write
-  .parquet("/path/to/derivatives/parquet/image")
+  .write.parquet("/path/to/derivatives/parquet/image")
 
 // PDFs.
 warcs.pdfs()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
-  .write
-  .format("csv")
-  .option("header","true")
-  .mode("Overwrite")
-  .save("s3a://your-derivatives-bucket/csv/pdf")
+  .write.csv("s3a://your-derivatives-bucket/csv/pdf")
 
 // Presentation Program Files.
 warcs.presentationProgramFiles()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
-  .write
-  .parquet("s3a://your-derivatives-bucket/parquet/presentation-program")
+  .write.parquet("s3a://your-derivatives-bucket/parquet/presentation-program")
 
 // Spreadsheets.
 warcs.spreadsheets()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
-  .write
-  .format("csv")
-  .option("header","true")
-  .mode("Overwrite")
-  .save("/path/to/derivatives/csv/spreadsheet")
+  .write.csv("/path/to/derivatives/csv/spreadsheet")
 
 // Text Files.
 warcs.textFiles()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
-  .write
-  .parquet("/path/to/derivatives/parquet/text")
+  .write.parquet("/path/to/derivatives/parquet/text")
 
 // Videos.
 warcs.videos()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
-  .write
-  .format("csv")
-  .option("header","true")
-  .mode("Overwrite")
-  .save("/path/to/derivatives/csv/video")
+  .write.csv("/path/to/derivatives/csv/video")
 
 // Word Processor Files.
 warcs.wordProcessorFiles()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
-  .write
-  .parquet("/path/to/derivatives/parquet/word-processor")
+  .write.parquet("/path/to/derivatives/parquet/word-processor")
 
 sys.exit
 ```
