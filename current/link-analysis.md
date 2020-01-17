@@ -14,9 +14,7 @@ Site link structures can be very useful, allowing you to learn such things as:
 - what paths could be taken through the network to connect pages;
 - what communities existed within the link structure?
 
-Most of the following examples show the **domain** to **domain** links. For example, you discover how many times that `liberal.ca` linked to `twitter.com`, rather than learning that `http://liberal.ca/contact` linked to `http://twitter.com/liberal_party`. The reason we do that is that in general, if you are working with any data at scale, the sheer number of raw URLs can become overwhelming.
-
-We do provide one example below that provides raw data, however.
+Most of the following examples show the **domain** to **domain** links. For example, you discover how many times that `liberal.ca` linked to `twitter.com`, rather than learning that `http://liberal.ca/contact` linked to `http://twitter.com/liberal_party`. The reason we do that is that in general, if you are working with any data at scale, the sheer number of raw URLs can become overwhelming. Though, we do provide one example below that provides raw data.
 
 ## Extract Simple Site Link Structure
 
@@ -76,9 +74,11 @@ import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("example.arc.gz", sc)
-  .webgraph()
+  .webpages()
   .keepContentDF(Set("apple".r))
-  .groupBy(RemovePrefixWWWDF(ExtractDomainDF($"src")).as("src"), RemovePrefixWWWDF(ExtractDomainDF($"dest")).as("dest"))
+  .select(explode(ExtractLinksDF($"url", $"content")).as("links"))
+  .select(RemovePrefixWWWDF(ExtractDomainDF(col("links._1"))).as("src"), RemovePrefixWWWDF(ExtractDomainDF(col("links._2"))).as("dest"))
+  .groupBy("src", "dest")
   .count()
   .filter($"count" > 5)
   .write.csv("links-all-apple-df/")
@@ -127,7 +127,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("example.arc.gz", sc)
-  .webpages()
+  .webgraph()
   .groupBy(ExtractDomainDF($"src"), ExtractDomainDF($"dest"))
   .count()
   .filter($"count" > 5)
@@ -169,7 +169,9 @@ import io.archivesunleashed.df._
 RecordLoader.loadArchives("example.arc.gz", sc)
   .webpages()
   .keepUrlPatternsDF(Set("(?i)http://www.archive.org/details/.*".r))
-  .groupBy(RemovePrefixWWWDF(ExtractDomainDF($"src")), RemovePrefixWWWDF(ExtractDomainDF($"dest")))
+  .select(explode(ExtractLinksDF($"url", $"content")).as("links")
+  .select(RemovePrefixWWWDF(ExtractDomainDF(col("links._1"))).as("src"), RemovePrefixWWWDF(ExtractDomainDF(col("links._2"))).as("dest"))
+  .groupBy("src", "dest")
   .count()
   .filter($"count" > 5)
   .write.csv("details-links-all-df/")
@@ -216,11 +218,11 @@ The format of this output is:
 
 In the above example, you are seeing links within the same domain.
 
-Note also that `ExtractLinks` takes an optional third parameter of a base URL. If you set this – typically to the source URL –
-ExtractLinks will resolve a relative path to its absolute location. For example, if
-`val url = "http://mysite.com/some/dirs/here/index.html"` and `val html = "... <a href='../contact/'>Contact</a> ..."`, and we call `ExtractLinks(url, html, url)`, the list it returns will include the
+Note also that `ExtractLinksRDD` takes an optional third parameter of a base URL. If you set this – typically to the source URL –
+`ExtractLinksRDD` will resolve a relative path to its absolute location. For example, if
+`val url = "http://mysite.com/some/dirs/here/index.html"` and `val html = "... <a href='../contact/'>Contact</a> ..."`, and we call `ExtractLinksRDD(url, html, url)`, the list it returns will include the
 item `(http://mysite.com/a/b/c/index.html, http://mysite.com/a/b/contact/, Contact)`. It may
-be useful to have this absolute URL if you intend to call `ExtractDomain` on the link
+be useful to have this absolute URL if you intend to call `ExtractDomainRDD` on the link
 and wish it to be counted.
 
 ### Scala DF
@@ -276,9 +278,11 @@ import io.archivesunleashed._
 import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("example.arc.gz", sc)
-  .webgraph()
+  .webpages()
   .keepUrlPatternsDF(Set("http://www.archive.org/details/.*".r))
-  .groupBy($"crawl_date", RemovePrefixWWWDF(ExtractDomainDF($"src")), RemovePrefixWWWDF(ExtractDomainDF($"dest")))
+  .select(explode(ExtractLinksDF($"url", $"content")).as("links"))
+  .select(RemovePrefixWWWDF(ExtractDomainDF(col("links._1"))).as("src"), RemovePrefixWWWDF(ExtractDomainDF(col("links._2"))).as("dest"))
+  .groupBy("src", "dest")
   .count()
   .filter($"count" > 5)
   .write.csv("sitelinks-details-df/")
@@ -292,7 +296,7 @@ TODO
 
 ### Scala RDD
 
-You may want to export your data directly to the [Gephi software suite](http://gephi.github.io/), an open-soure network analysis project. The following code writes to the GEXF format:
+You may want to export your data directly to the [Gephi software suite](http://gephi.github.io/), an open-source network analysis project. The following code writes to the GEXF format:
 
 ```scala
 import io.archivesunleashed._

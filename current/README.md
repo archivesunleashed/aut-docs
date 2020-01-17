@@ -31,7 +31,7 @@ Our documentation is divided into several main sections, which cover the Archive
   - [Extract Plain Text Minus Boilerplate](text-analysis.md#Extract-Plain-Text-Minus-Boilerplate)
   - [Extract Plain Text Filtered by Date](text-analysis.md#Extract-Plain-Text-Filtered-by-Date)
   - [Extract Plain Text Filtered by Language](text-analysis.md#Extract-Plain-Text-Filtered-by-Language)
-  - [Extract Plain text Filtered by Keyword](text-analysis.md#Extract-Plain-Text-Filtered-by-Keyword)
+  - [Extract Plain Text Filtered by Keyword](text-analysis.md#Extract-Plain-Text-Filtered-by-Keyword)
   - [Extract Raw HTML](text-analysis.md#Extract-Raw-HTML)
   - [Extract Named Entities](text-analysis.md#Extract-Named-Entities)
 - **[Link Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/link-analysis.md)**: How do I...
@@ -81,6 +81,6 @@ Jimmy Lin, Ian Milligan, Jeremy Wiebe, and Alice Zhou. [Warcbase: Scalable Analy
 
 ## Acknowledgments
 
-This work is primarily supported by the [Andrew W. Mellon Foundation](https://mellon.org/). Other financial and in-kind support comes from the [Social Sciences and Humanities Research Council](http://www.sshrc-crsh.gc.ca/), [Compute Canada](https://www.computecanada.ca/), the [Ontario Ministry of Research, Innovation, and Science](https://www.ontario.ca/page/ministry-research-innovation-and-science), [York University Libraries](https://www.library.yorku.ca/web/), [Start Smart Labs](http://www.startsmartlabs.com/), and the [Faculty of Arts](https://uwaterloo.ca/arts/) and [David R. Cheriton School of Computer Science](https://cs.uwaterloo.ca/) at the [University of Waterloo](https://uwaterloo.ca/).
+This work is primarily supported by the [Andrew W. Mellon Foundation](https://mellon.org/). Other financial and in-kind support comes from the [Social Sciences and Humanities Research Council](http://www.sshrc-crsh.gc.ca/), [Compute Canada](https://www.computecanada.ca/), the [Ontario Ministry of Research, Innovation, and Science](https://www.ontario.ca/page/ministry-research-innovation-and-science), [York University Libraries](https://www.library.yorku.ca/web/), [Start Smart Labs](http://www.startsmartlabs.com/), the [Faculty of Arts](https://uwaterloo.ca/arts/) and [David R. Cheriton School of Computer Science](https://cs.uwaterloo.ca/) at the [University of Waterloo](https://uwaterloo.ca/).
 
 Any opinions, findings, and conclusions or recommendations expressed are those of the researchers and do not necessarily reflect the views of the sponsors.

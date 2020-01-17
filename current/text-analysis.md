@@ -9,7 +9,7 @@
 - [Extract Plain Text Minus Boilerplate](#Extract-Plain-Text-Minus-Boilerplate)
 - [Extract Plain Text Filtered by Date](#Extract-Plain-Text-Filtered-by-Date)
 - [Extract Plain Text Filtered by Language](#Extract-Plain-Text-Filtered-by-Language)
-- [Extract Plain text Filtered by Keyword](#Extract-Plain-Text-Filtered-by-Keyword)
+- [Extract Plain Text Filtered by Keyword](#Extract-Plain-Text-Filtered-by-Keyword)
 - [Extract Raw HTML](#Extract-Raw-HTML)
 - [Extract Named Entities](#Extract-Named-Entities)
 
@@ -75,7 +75,7 @@ As most plain text use cases do not require HTTP headers to be in the output, we
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.warc.gz", sc)
+RecordLoader.loadArchives("example.arc.gz", sc)
   .webpages()
   .select(RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
   .write.csv("plain-text-noheaders-df/")
@@ -107,7 +107,7 @@ RecordLoader.loadArchives("example.arc.gz", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.warc.gz", sc)
+RecordLoader.loadArchives("example.arc.gz", sc)
   .webpages()
   .keepDomainsDF(Set("www.archive.org"))
   .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
@@ -143,7 +143,7 @@ RecordLoader.loadArchives("example.arc.gz", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.warc.gz", sc)
+RecordLoader.loadArchives("example.arc.gz", sc)
   .webpages()
   .keepUrlPatternsDF(Set("(?i)http://www.archive.org/details/.*".r))
   .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
@@ -177,7 +177,7 @@ RecordLoader.loadArchives("example.arc.gz", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.warc.gz", sc)
+RecordLoader.loadArchives("example.arc.gz", sc)
   .webpages()
   .keepDomainsDF(Set("www.archive.org"))
   .select($"crawl_date", ExtractDomainDF($"url"), $"url", ExtractBoilerpipeTextDF(RemoveHTTPHeaderDF($"content")))
@@ -249,10 +249,10 @@ would select just the lines beginning with `(201204`, or April 2012.
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.warc.gz", sc)
+RecordLoader.loadArchives("example.arc.gz", sc)
   .webpages()
-  .keepDateDF(List("2008","2015"), ExtractDateDF.DateComponent.YYYY)
-  .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
+  .keepDateDF(List("2008","2015"), "YYYY")
+  .select($"crawl_date", ExtractDomainDF($"url").as("domain"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")).as("content"))
   .write.csv("plain-text-date-filtered-2008-2015-df/")
 ```
 
@@ -284,7 +284,7 @@ RecordLoader.loadArchives("example.arc.gz", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.warc.gz", sc)
+RecordLoader.loadArchives("example.arc.gz", sc)
   .webpages()
   .keepDomainsDF(Set("www.archive.org"))
   .keepLanguagesDF(Set("fr"))
@@ -296,11 +296,11 @@ RecordLoader.loadArchives("example.warc.gz", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.warc.gz", sc)
+RecordLoader.loadArchives("example.arc.gz", sc)
   .webpages()
   .keepDomainsDF(Set("www.archive.org"))
+  .filter($"language" === "fr")
   .select($"crawl_date", ExtractDomainDF($"url"), $"url", $"language", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
-  .filter($"language" == "fr")
   .write.csv("plain-text-fr-df/")
 ```
 
@@ -335,7 +335,7 @@ There is also `discardContent` which does the opposite, and can be used in cases
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.warc.gz", sc)
+RecordLoader.loadArchives("example.arc.gz", sc)
   .webpages()
   .keepContentDF(Set("radio".r))
   .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
