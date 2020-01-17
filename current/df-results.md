@@ -59,7 +59,7 @@ Depending on your intended use of the output, you may want to include headers in
   .write.option("header","true").csv("/path/to/export/directory/")
 ```
 
-If you want to store the results with the intention to read the results back later for further processing, then use Parquet format:
+If you want to store the results with the intention to read the results back later for further processing, then use [Parquet](https://parquet.apache.org/) format (a [columnar storage format](http://en.wikipedia.org/wiki/Column-oriented_DBMS):
 
 ```scala
   .write.parquet("/path/to/export/directory/")

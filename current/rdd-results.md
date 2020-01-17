@@ -51,7 +51,7 @@ Note that this is a _directory_, not a _file_.
 
 You can also format your results to a format of your choice before passing them to `saveAsTextFile()`.
 
-FOr example, rchive records are represented in Spark as [tuples](https://en.wikipedia.org/wiki/Tuple),
+Fr example, archive records are represented in Spark as [tuples](https://en.wikipedia.org/wiki/Tuple),
 and this is the standard format of results produced by most of the scripts presented here
 (e.g., see above). It may be useful, however, to have this data in TSV (tab-separated value)
 format, for further processing outside AUT. The following script uses `tabDelimit` (from

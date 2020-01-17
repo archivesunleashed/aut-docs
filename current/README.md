@@ -2,7 +2,7 @@
 
 The Archives Unleashed Toolkit is an open-source platform for analyzing web archives built on [Apache Spark](http://spark.apache.org/), which provides powerful tools for analytics and data processing.
 
-This documentation is centred on a cookbook approach, providing a series of "recipes" for addressing a number of common analytics tasks, and inspiration for your own analysis. We generally provide examples for [resilient distributed datasets (RDD)](https://spark.apache.org/docs/latest/rdd-programming-guide.html) in Scala, and [DataFrames](https://spark.apache.org/docs/latest/sql-programming-guide.html#datasets-and-dataframes) in both Scala and Python. We leave it up to you to choose Scala or Python flavours of Spark.
+This documentation is based on a cookbook approach, providing a series of "recipes" for addressing a number of common analytics tasks to provide inspiration for your own analysis. We generally provide examples for [resilient distributed datasets (RDD)](https://spark.apache.org/docs/latest/rdd-programming-guide.html) in Scala, and [DataFrames](https://spark.apache.org/docs/latest/sql-programming-guide.html#datasets-and-dataframes) in both Scala and Python. We leave it up to you to choose Scala or Python flavours of Spark.
 
 If you want to learn more about [Apache Spark](https://spark.apache.org/), we highly recommend [Spark: The Definitive Guide](http://shop.oreilly.com/product/0636920034957.do) 
 ## Table of Contents
