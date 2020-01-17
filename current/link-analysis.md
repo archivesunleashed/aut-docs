@@ -320,11 +320,11 @@ WriteGraph.asGraphml(links, "links-for-gephi.graphml")
 
 ### Scala DF
 
-TODO
+**To be implemented.**
 
 ### Python DF
 
-TODO
+**To be implemented.**
 
 ## Finding Hyperlinks within Collection on Pages with Certain Keyword
 
