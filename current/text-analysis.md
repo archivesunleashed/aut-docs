@@ -25,9 +25,10 @@ This script extracts the crawl date, domain, URL, and plain text from HTML files
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .keepValidPages()
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(r.getContentString)))
-  .saveAsTextFile("plain-text/")
+  .saveAsTextFile("plain-text-rdd/")
 ```
 
 If you wanted to use it on your own collection, you would change "src/test/resources/arc/example.arc.gz" to the directory with your own ARC or WARC files, and change "out/" on the last line to where you want to save your output data.
@@ -36,7 +37,15 @@ Note that this will create a new directory to store the output, which cannot alr
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .webpages()
+  .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF($"content"))
+  .write.csv("plain-text-df/")
+```
 
 ### Python DF
 
@@ -52,9 +61,10 @@ If you want to remove HTTP headers, you can add one more command: `RemoveHttpHea
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .keepValidPages()
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
-  .saveAsTextFile("plain-text-noheaders/")
+  .saveAsTextFile("plain-text-noheaders-rdd/")
 ```
 
 As most plain text use cases do not require HTTP headers to be in the output, we are removing headers in the following examples.
@@ -67,10 +77,8 @@ import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("example.warc.gz", sc)
   .webpages()
-  .select(RemoveHTMLDF($"content"))
-  .write
-  .option("header","true")
-  .csv("plain-text-noheaders/")
+  .select(RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
+  .write.csv("plain-text-noheaders-df/")
 ```
 
 ### Python DF
@@ -87,14 +95,24 @@ The following Spark script generates plain text renderings for all the web pages
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .keepValidPages()
   .keepDomains(Set("www.archive.org"))
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
-  .saveAsTextFile("plain-text-domain/")
+  .saveAsTextFile("plain-text-domain-rdd/")
 ```
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.warc.gz", sc)
+  .webpages()
+  .keepDomainsDF(Set("www.archive.org"))
+  .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
+  .write.csv("plain-text-domain-df/")
+```
 
 ### Python DF
 
@@ -112,15 +130,25 @@ The `(?i)` makes this query case insensitive.
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .keepValidPages()
   .keepUrlPatterns(Set("(?i)http://www.archive.org/details/.*".r))
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
-  .saveAsTextFile("details/")
+  .saveAsTextFile("details-rdd/")
 ```
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.warc.gz", sc)
+  .webpages()
+  .keepUrlPatternsDF(Set("(?i)http://www.archive.org/details/.*".r))
+  .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
+  .write.csv("details-df/")
+```
 
 ### Python DF
 
@@ -136,15 +164,25 @@ The following Spark script generates plain text renderings for all the web pages
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .keepValidPages()
   .keepDomains(Set("www.archive.org"))
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, ExtractBoilerpipeTextRDD(RemoveHTTPHeaderRDD(r.getContentString))))
-  .saveAsTextFile("plain-text-no-boilerplate/")
+  .saveAsTextFile("plain-text-no-boilerplate-rdd/")
 ```
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.warc.gz", sc)
+  .webpages()
+  .keepDomainsDF(Set("www.archive.org"))
+  .select($"crawl_date", ExtractDomainDF($"url"), $"url", ExtractBoilerpipeTextDF(RemoveHTTPHeaderDF($"content")))
+  .write.csv("plain-text-no-boilerplate-df/")
+```
 
 ### Python DF
 
@@ -164,7 +202,8 @@ The following Spark script extracts plain text for a given collection by date (i
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .keepValidPages()
   .keepDate(List("200804"), ExtractDateRDD.DateComponent.YYYYMM)
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("plain-text-date-filtered-200804/")
@@ -176,7 +215,8 @@ The following script extracts plain text for a given collection by year (in this
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .keepValidPages()
   .keepDate(List("2008"), ExtractDateRDD.DateComponent.YYYY)
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("plain-text-date-filtered-2008/")
@@ -188,10 +228,11 @@ Finally, you can also extract multiple dates or years. In this case, we would ex
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .keepValidPages()
   .keepDate(List("2008","2015"), ExtractDateRDD.DateComponent.YYYY)
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
-  .saveAsTextFile("plain-text-date-filtered-2008-2015/")
+  .saveAsTextFile("plain-text-date-filtered-2008-2015-rdd/")
 ```
 
 Note: if you created a dump of plain text using another one of the earlier commands, you do not need to go back and run this. You can instead use bash to extract a sample of text. For example, running this command on a dump of all plain text stored in `alberta_education_curriculum.txt`:
@@ -204,7 +245,16 @@ would select just the lines beginning with `(201204`, or April 2012.
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.warc.gz", sc)
+  .webpages()
+  .keepDateDF(List("2008","2015"), ExtractDateDF.DateComponent.YYYY)
+  .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
+  .write.csv("plain-text-date-filtered-2008-2015-df/")
+```
 
 ### Python DF
 
@@ -220,16 +270,39 @@ The following Spark script keeps only French language pages from a certain top-l
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .keepValidPages()
   .keepDomains(Set("www.archive.org"))
   .keepLanguages(Set("fr"))
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
-  .saveAsTextFile("plain-text-fr/")
+  .saveAsTextFile("plain-text-fr-rdd/")
 ```
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.warc.gz", sc)
+  .webpages()
+  .keepDomainsDF(Set("www.archive.org"))
+  .keepLanguagesDF(Set("fr"))
+  .select($"crawl_date", ExtractDomainDF($"url"), $"url", $"language", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
+  .write.csv("plain-text-fr-df/")
+```
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.warc.gz", sc)
+  .webpages()
+  .keepDomainsDF(Set("www.archive.org"))
+  .select($"crawl_date", ExtractDomainDF($"url"), $"url", $"language", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
+  .filter($"language" == "fr")
+  .write.csv("plain-text-fr-df/")
+```
 
 ### Python DF
 
@@ -247,17 +320,27 @@ For example, the following script takes all pages containing the keyword "radio"
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz",sc).keepValidPages()
+RecordLoader.loadArchives("example.arc.gz",sc)
+  .keepValidPages()
   .keepContent(Set("radio".r))
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
-  .saveAsTextFile("plain-text-radio/")
+  .saveAsTextFile("plain-text-radio-rdd/")
 ```
 
 There is also `discardContent` which does the opposite, and can be used in cases where, for example, you have a frequent keyword you are not interested in.
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.warc.gz", sc)
+  .webpages()
+  .keepContentDF(Set("radio".r))
+  .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
+  .write.csv("plain-text-radio-df/")
+```
 
 ### Python DF
 
@@ -275,14 +358,23 @@ The following script will produce the raw HTML of a WARC file. You can use the f
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, r.getContentString))
-  .saveAsTextFile("plain-html/")
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .keepValidPages()
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTTPHeaderRDD(r.getContentString)))
+  .saveAsTextFile("plain-html-rdd/")
 ```
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.warc.gz", sc)
+  .webpages()
+  .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTTPHeaderDF($"content"))
+  .write.csv("plain-html-df/")
+```
 
 ### Python DF
 
