@@ -4,7 +4,6 @@
 - [Extract Raw URL Link Structure](#Extract-Raw-URL-Link-Structure)
 - [Organize Links by URL Pattern](#Organize-Links-by-URL-Pattern)
 - [Organize Links by Crawl Date](#Organize-Links-by-Crawl-Date)
-- [Export as TSV](#Export-as-TSV)
 - [Filter by URL](#Filter-by-URL)
 - [Export to Gephi](#Export-to-Gephi)
 
@@ -30,15 +29,14 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 import io.archivesunleashed.util._
 
-val links = RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("example.arc.gz", sc)
   .keepValidPages()
   .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
   .map(r => (ExtractDomainRDD(r._1).removePrefixWWW(), ExtractDomainRDD(r._2).removePrefixWWW()))
   .filter(r => r._1 != "" && r._2 != "")
   .countItems()
   .filter(r => r._2 > 5)
-
-links.saveAsTextFile("links-all/")
+  .saveAsTextFile("links-all-rdd/")
 ```
 
 Note how you can add filters are added. In this case, we add a filter which will result in a network graph of pages containing the phrase "apple." Filters can be applied immediately after `.keepValidPages()`.
@@ -48,7 +46,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 import io.archivesunleashed.util._
 
-val links = RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("example.arc.gz", sc)
   .keepValidPages()
   .keepContent(Set("apple".r))
   .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
@@ -56,8 +54,7 @@ val links = RecordLoader.loadArchives("example.arc.gz", sc)
   .filter(r => r._1 != "" && r._2 != "")
   .countItems()
   .filter(r => r._2 > 5)
-
-links.saveAsTextFile("links-all-apple/")
+  .saveAsTextFile("links-all-apple-rdd/")
 ```
 
 ### Scala DF
@@ -66,11 +63,25 @@ links.saveAsTextFile("links-all-apple/")
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc).webgraph()
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .webgraph()
   .groupBy(RemovePrefixWWWDF(ExtractDomainDF($"src")).as("src"), RemovePrefixWWWDF(ExtractDomainDF($"dest")).as("dest"))
   .count()
   .filter($"count" > 5)
-  .write.csv("links-all/")
+  .write.csv("links-all-df/")
+```
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .webgraph()
+  .keepContentDF(Set("apple".r))
+  .groupBy(RemovePrefixWWWDF(ExtractDomainDF($"src")).as("src"), RemovePrefixWWWDF(ExtractDomainDF($"dest")).as("dest"))
+  .count()
+  .filter($"count" > 5)
+  .write.csv("links-all-apple-df/")
 ```
 
 ### Python DF
@@ -87,13 +98,12 @@ This following script extracts all of the hyperlink relationships between sites,
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val links = RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("example.arc.gz", sc)
   .keepValidPages()
   .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
   .filter(r => r._1 != "" && r._2 != "")
   .countItems()
-
-links.saveAsTextFile("full-links-all/")
+  .saveAsTextFile("full-links-all-rdd/")
 ```
 
 You can see that the above was achieved by removing the following line:
@@ -112,7 +122,17 @@ before `.countItems()` to find just the documents that are linked to more than f
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .webpages()
+  .groupBy(ExtractDomainDF($"src"), ExtractDomainDF($"dest"))
+  .count()
+  .filter($"count" > 5)
+  .write.csv("full-links-all-df/")
+```
 
 ### Python DF
 
@@ -129,7 +149,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 import io.archivesunleashed.util._
 
-val links = RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("example.arc.gz", sc)
   .keepValidPages()
   .keepUrlPatterns(Set("(?i)http://www.archive.org/details/.*".r))
   .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
@@ -137,13 +157,23 @@ val links = RecordLoader.loadArchives("example.arc.gz", sc)
   .filter(r => r._1 != "" && r._2 != "")
   .countItems()
   .filter(r => r._2 > 5)
-
-links.saveAsTextFile("details-links-all/")
+  .saveAsTextFile("details-links-all-rdd/")
 ```
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .webpages()
+  .keepUrlPatternsDF(Set("(?i)http://www.archive.org/details/.*".r))
+  .groupBy(RemovePrefixWWWDF(ExtractDomainDF($"src")), RemovePrefixWWWDF(ExtractDomainDF($"dest")))
+  .count()
+  .filter($"count" > 5)
+  .write.csv("details-links-all-df/")
+```
 
 ### Python DF
 
@@ -168,7 +198,7 @@ RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)
-  .saveAsTextFile("sitelinks-by-date/")
+  .saveAsTextFile("sitelinks-by-date-rdd/")
 ```
 
 The format of this output is:
@@ -195,7 +225,17 @@ and wish it to be counted.
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .webgraph()
+  .groupBy($"crawl_date", RemovePrefixWWWDF(ExtractDomainDF($"src")), RemovePrefixWWWDF(ExtractDomainDF($"dest")))
+  .count()
+  .filter($"count" > 5)
+  .write.csv("sitelinks-by-date-df/")
+```
 
 ### Python DF
 
@@ -207,51 +247,6 @@ archive = WebArchive(sc, sqlContext, "example.arc.gz")
 df = archive.webpages()
 df.select(extract_domain("crawl_date").alias("Crawl Date")).groupBy("Crawl Date").count().show()
 ```
-
-## Export as TSV
-
-### Scala RDD
-
-Archive records are represented in Spark as [tuples](https://en.wikipedia.org/wiki/Tuple),
-and this is the standard format of results produced by most of the scripts presented here
-(e.g., see above). It may be useful, however, to have this data in TSV (tab-separated value)
-format, for further processing outside AUT. The following script uses `tabDelimit` (from
-`TupleFormatter`) to transform tuples to tab-delimited strings; it also flattens any
-nested tuples. (This is the same script as at the top of the page, with the addition of the
-third and the second-last lines.)
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
-import io.archivesunleashed.matchbox.TupleFormatter._
-
-RecordLoader.loadArchives("/path/to/arc", sc)
-  .keepValidPages()
-  .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
-  .filter(r => r._2 != "" && r._3 != "")
-  .countItems()
-  .filter(r => r._2 > 5)
-  .map(tabDelimit(_))
-  .saveAsTextFile("sitelinks-tsv/")
-```
-
-Its output looks like:
-```
-20151107        liberal.ca      youtube.com     16334
-20151108        socialist.ca    youtube.com     11690
-20151108        socialist.ca    ustream.tv      11584
-20151107        canadians.org   canadians.org   11426
-20151108        canadians.org   canadians.org   11403
-```
-
-### Scala DF
-
-TODO
-
-### Python DF
-
-TODO
 
 ## Filter by URL
 
@@ -271,12 +266,23 @@ val links = RecordLoader.loadArchives("example.arc.gz", sc)
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)
-  .saveAsTextFile("sitelinks-details/")
+  .saveAsTextFile("sitelinks-details-rdd/")
 ```
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+RecordLoader.loadArchives("example.arc.gz", sc)
+  .webgraph()
+  .keepUrlPatternsDF(Set("http://www.archive.org/details/.*".r))
+  .groupBy($"crawl_date", RemovePrefixWWWDF(ExtractDomainDF($"src")), RemovePrefixWWWDF(ExtractDomainDF($"dest")))
+  .count()
+  .filter($"count" > 5)
+  .write.csv("sitelinks-details-df/")
+```
 
 ### Python DF
 
@@ -326,7 +332,7 @@ The following script will extract a DataFrame with the following columns, `domai
 
 ### Scala RDD
 
-TODO
+**Will not be implemented.**
 
 ### Scala DF
 ```scala
@@ -337,8 +343,7 @@ val result = udf((vs: Seq[Any]) => vs(0)
                .toString
                .split(",")(1))
 
-val df = RecordLoader
-          .loadArchives("Sample-Data/*gz", sc)
+val df = RecordLoader.loadArchives("Sample-Data/*gz", sc)
           .webpages()
           .select(RemovePrefixWWWDF(ExtractDomainDF($"url"))
             .as("Domain"), $"url"
@@ -346,8 +351,7 @@ val df = RecordLoader
             .as("link"))
             .filter($"content".contains("keystone"))
 
-df
-  .select($"url", $"Domain", $"crawl_date", result(array($"link"))
+df.select($"url", $"Domain", $"crawl_date", result(array($"link"))
     .as("destination_page"))
   .show()
 

@@ -2,17 +2,16 @@
 
 The Archives Unleashed Toolkit is an open-source platform for analyzing web archives built on [Apache Spark](http://spark.apache.org/), which provides powerful tools for analytics and data processing.
 
-Most of this documentation is built on [resilient distributed datasets (RDD)](https://spark.apache.org/docs/latest/rdd-programming-guide.html). We are working on adding support for [DataFrames](https://spark.apache.org/docs/latest/sql-programming-guide.html#datasets-and-dataframes). You can read more about this in our experimental [DataFrames section](#dataframes), and at our [[Using the Archives Unleashed Toolkit with PySpark]] tutorial.
+This documentation is centred on a cookbook approach, providing a series of "recipes" for addressing a number of common analytics tasks, and inspiration for your own analysis. We generally provide examples for [resilient distributed datasets (RDD)](https://spark.apache.org/docs/latest/rdd-programming-guide.html) in Scala, and [DataFrames](https://spark.apache.org/docs/latest/sql-programming-guide.html#datasets-and-dataframes) in both Scala and Python. We leave it up to you to choose Scala or Python flavours of Spark.
 
 If you want to learn more about [Apache Spark](https://spark.apache.org/), we highly recommend [Spark: The Definitive Guide](http://shop.oreilly.com/product/0636920034957.do) 
-
 ## Table of Contents
 
 Our documentation is divided into several main sections, which cover the Archives Unleashed Toolkit workflow from analyzing collections to understanding and working with the results.
 
 ### Getting Started
 
-- [Setting up the Archives Unleashed Toolkit](setting-up-aut.md)
+- [Setting Things Up](https://github.com/archivesunleashed/aut/#dependencies)
 - [Using the Archives Unleashed Toolkit at Scale](aut-at-scale.md)
 - [Archives Unleashed Toolkit Walkthrough](toolkit-walkthrough.md)
 
