@@ -15,7 +15,7 @@ The Archives Unleashed Toolkit supports binary object types for analysis:
 
 ### Scala RDD
 
-TODO
+**Will not be implemented.**
 
 ### Scala DF
 
@@ -142,7 +142,7 @@ only showing top 20 rows
 
 ### Scala RDD
 
-TODO
+**Will not be implemented.**
 
 ### Scala DF
 
@@ -274,7 +274,7 @@ only showing top 20 rows
 
 ### Scala RDD
 
-TODO
+**Will not be implemented.**
 
 ### Scala DF
 
@@ -406,7 +406,7 @@ only showing top 20 rows
 
 ### Scala RDD
 
-TODO
+**Will not be implemented.**
 
 ### Scala DF
 
@@ -538,7 +538,7 @@ only showing top 20 rows
 
 ### Scala RDD
 
-TODO
+**Will not be implemented.**
 
 ### Scala DF
 
@@ -670,7 +670,7 @@ only showing top 20 rows
 
 ### Scala RDD
 
-TODO
+**Will not be implemented.**
 
 ### Scala DF
 
@@ -802,7 +802,7 @@ only showing top 20 rows
 
 ### Scala RDD
 
-TODO
+**Will not be implemented.**
 
 ### Scala DF
 
