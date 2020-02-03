@@ -25,9 +25,8 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractAudioDetailsDF();
+val df = RecordLoader.loadArchives("example.arc.gz", sc)
+  .audio();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -75,11 +74,10 @@ If you wanted to work with all the audio files in a collection, you could extrac
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
+import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractAudioDetailsDF();
+val df = RecordLoader.loadArchives("example.arc.gz", sc)
+  .audio();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -152,9 +150,8 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractPDFDetailsDF();
+val df = RecordLoader.loadArchives("example.arc.gz", sc)
+  .pdfs();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -207,11 +204,10 @@ If you wanted to work with all the PDF files in a collection, you could extract 
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
+import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractPDFDetailsDF();
+val df = RecordLoader.loadArchives("example.arc.gz", sc)
+  .pdfs();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -284,9 +280,8 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractPresentationProgramDetailsDF();
+val df = RecordLoader.loadArchives("example.arc.gz", sc)
+  .presentationProgramFiles();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -339,11 +334,10 @@ If you wanted to work with all the PDF files in a collection, you could extract 
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
+import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractPresentationProgramDetailsDF();
+val df = RecordLoader.loadArchives("example.arc.gz", sc)
+  .presentationProgramFiles();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -416,9 +410,8 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractSpreadsheetDetailsDF();
+val df = RecordLoader.loadArchives("example.arc.gz", sc)
+  .spreadsheets();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -471,11 +464,10 @@ If you wanted to work with all the PDF files in a collection, you could extract 
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
+import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractSpreadsheetDetailsDF();
+val df = RecordLoader.loadArchives("example.arc.gz", sc)
+  .spreadsheets();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -548,9 +540,8 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractTextFilesDetailsDF();
+val df = RecordLoader.loadArchives("example.arc.gz", sc)
+  .textFiles();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -603,11 +594,10 @@ If you wanted to work with all the PDF files in a collection, you could extract 
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
+import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractTextFilesDetailsDF();
+val df = RecordLoader.loadArchives("example.arc.gz", sc)
+  .textFiles();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -680,9 +670,8 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractVideoDetailsDF();
+val df = RecordLoader.loadArchives("example.arc.gz", sc)
+  .videos();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -735,11 +724,10 @@ If you wanted to work with all the PDF files in a collection, you could extract 
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
+import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractVideoDetailsDF();
+val df = RecordLoader.loadArchives("example.arc.gz", sc)
+  .videos();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -812,9 +800,8 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractWordProcessorDetailsDF();
+val df = RecordLoader.loadArchives("example.arc.gz", sc)
+  .wordProcessorFiles();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -867,11 +854,10 @@ If you wanted to work with all the PDF files in a collection, you could extract 
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
+import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractWordProcessorDetailsDF();
+val df = RecordLoader.loadArchives("example.arc.gz", sc)
+  .wordProcessorFiles();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
