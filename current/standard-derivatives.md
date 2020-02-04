@@ -28,7 +28,7 @@ import io.archivesunleashed.matchbox._
 sc.setLogLevel("INFO")
 
 // Web archive collection.
-warcs = RecordLoader.loadArchives("/path/to/data", sc)
+warcs = RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
 
 // Domains file.
@@ -43,7 +43,9 @@ warcs.map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHttpH
 // Gephi GraphML.
 val links = warcs
   .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractDomainRDD(f._1).replaceAll("^\\\\s*www\\\\.", ""), ExtractDomainRDD(f._2).replaceAll("^\\\\s*www\\\\.", ""))))
+  .flatMap(r => r._2.map(f => (r._1,
+                               ExtractDomainRDD(f._1).replaceAll("^\\\\s*www\\\\.", ""),
+                               ExtractDomainRDD(f._2).replaceAll("^\\\\s*www\\\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -83,7 +85,7 @@ sc.hadoopConfiguration.set("fs.s3a.access.key", "YOUR ACCESS KEY")
 sc.hadoopConfiguration.set("fs.s3a.secret.key", "YOUR SECRET KEY ")
 
 // Local web archive collection.
-val warcs = RecordLoader.loadArchives("/local/path/to/data", sc)
+val warcs = RecordLoader.loadArchives("/local/path/to/warcs", sc)
 
 // S3 hosted web archive collection.
 val warcsS3 = RecordLoader.loadArchives("s3a://your-data-bucket/", sc)
@@ -256,4 +258,4 @@ sys.exit
 
 ### Python DF
 
-TODO
+**To be implemented.**

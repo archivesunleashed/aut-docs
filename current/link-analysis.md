@@ -27,7 +27,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 import io.archivesunleashed.util._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
   .map(r => (ExtractDomainRDD(r._1).removePrefixWWW(), ExtractDomainRDD(r._2).removePrefixWWW()))
@@ -44,7 +44,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 import io.archivesunleashed.util._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepContent(Set("apple".r))
   .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
@@ -61,7 +61,7 @@ RecordLoader.loadArchives("example.arc.gz", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webgraph()
   .groupBy(RemovePrefixWWWDF(ExtractDomainDF($"src")).as("src"), RemovePrefixWWWDF(ExtractDomainDF($"dest")).as("dest"))
   .count()
@@ -73,7 +73,7 @@ RecordLoader.loadArchives("example.arc.gz", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .keepContentDF(Set("apple".r))
   .select(explode(ExtractLinksDF($"url", $"content")).as("links"))
@@ -98,7 +98,7 @@ This following script extracts all of the hyperlink relationships between sites,
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
   .filter(r => r._1 != "" && r._2 != "")
@@ -126,7 +126,7 @@ before `.countItems()` to find just the documents that are linked to more than f
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webgraph()
   .groupBy(ExtractDomainDF($"src"), ExtractDomainDF($"dest"))
   .count()
@@ -149,7 +149,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 import io.archivesunleashed.util._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepUrlPatterns(Set("(?i)http://www.archive.org/details/.*".r))
   .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
@@ -166,7 +166,7 @@ RecordLoader.loadArchives("example.arc.gz", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .keepUrlPatternsDF(Set("(?i)http://www.archive.org/details/.*".r))
   .select(explode(ExtractLinksDF($"url", $"content")).as("links")
@@ -194,7 +194,7 @@ If you prefer to group by crawl month (YYYMM), replace `getCrawlDate` with `getC
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
   .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1, ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
@@ -231,7 +231,7 @@ and wish it to be counted.
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webgraph()
   .groupBy($"crawl_date", RemovePrefixWWWDF(ExtractDomainDF($"src")), RemovePrefixWWWDF(ExtractDomainDF($"dest")))
   .count()
@@ -244,7 +244,7 @@ RecordLoader.loadArchives("example.arc.gz", sc)
 ```python
 from aut import *
 
-archive = WebArchive(sc, sqlContext, "example.arc.gz")
+archive = WebArchive(sc, sqlContext, "/path/to/warcs")
 
 df = archive.webpages()
 df.select(extract_domain("crawl_date").alias("Crawl Date")).groupBy("Crawl Date").count().show()
@@ -260,7 +260,7 @@ In this case, you would only receive links coming from websites in matching the 
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val links = RecordLoader.loadArchives("example.arc.gz", sc)
+val links = RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepUrlPatterns(Set("http://www.archive.org/details/.*".r))
   .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
@@ -277,7 +277,7 @@ val links = RecordLoader.loadArchives("example.arc.gz", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .keepUrlPatternsDF(Set("http://www.archive.org/details/.*".r))
   .select(explode(ExtractLinksDF($"url", $"content")).as("links"))
@@ -303,10 +303,12 @@ import io.archivesunleashed._
 import io.archivesunleashed.app._
 import io.archivesunleashed.matchbox._
 
-val links = RecordLoader.loadArchives("example.arc.gz", sc)
+val links = RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
+  .flatMap(r => r._2.map(f => (r._1,
+                               ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""),
+                               ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -353,7 +355,7 @@ val df = RecordLoader.loadArchives("Sample-Data/*gz", sc)
             .as("Domain"), $"url"
             .as("url"),$"crawl_date", explode_outer(ExtractLinksDF($"url", $"content"))
             .as("link"))
-            .filter($"content".contains("keystone"))
+          .filter($"content".contains("keystone"))
 
 df.select($"url", $"Domain", $"crawl_date", result(array($"link"))
     .as("destination_page"))

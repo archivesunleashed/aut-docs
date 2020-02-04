@@ -19,7 +19,7 @@ How do I get a list of all URLs in the collection?
 ```scala
 import io.archivesunleashed._
 
-RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
   .map(r => r.getUrl)
   .take(10)
 ```
@@ -32,7 +32,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).webpages()
+RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
   .select($"Url")
   .show(20, false)
 ```
@@ -44,7 +44,7 @@ What do I do with the results? See [this guide](df-results.md)!
 ```python
 from aut import *
 
-WebArchive(sc, sqlContext, "src/test/resources/warc/example.warc.gz").webpages() \
+WebArchive(sc, sqlContext, "/path/to/warcs").webpages() \
     .select("url") \
     .show(20, False)
 ```
@@ -61,7 +61,7 @@ How do I extract a list of the top-level domains (and count how many pages belon
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
   .map(r => ExtractDomainRDD(r.getUrl))
   .countItems()
   .take(10)
@@ -75,7 +75,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).webpages()
+RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
   .select(ExtractDomainDF($"Url").as("Domain"))
   .groupBy("Domain").count().orderBy(desc("count"))
   .show(20, false)
@@ -89,7 +89,7 @@ What do I do with the results? See [this guide](df-results.md)!
 from aut import *
 from pyspark.sql.functions import desc
 
-archive = WebArchive(sc, sqlContext, "src/test/resources/warc/example.warc.gz")
+archive = WebArchive(sc, sqlContext, "/path/to/warcs")
 
 df = archive.webpages()
 df.select(extract_domain("url").alias("Domain")).groupBy("Domain").count().sort(desc("count")).show(n=10)
@@ -108,7 +108,7 @@ For example, supposed I wanted to extract the first-level directories?
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
   .flatMap(r => """http://[^/]+/[^/]+/""".r.findAllIn(r.getUrl).toList)
   .take(10)
 ```
@@ -126,7 +126,7 @@ import io.archivesunleashed.df._
 
 val urlPattern = Set("""http://[^/]+/[^/]+/""".r)
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select($"url")
   .keepUrlPatternsDF(urlPattern)
@@ -147,7 +147,7 @@ How do I get the [HTTP Status Code](https://en.wikipedia.org/wiki/List_of_HTTP_s
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .map(r => (r.getUrl, r.getHttpStatus))
   .take(10)
 ```
@@ -160,7 +160,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .all()
   .select($"url", $"http_status_code")
   .show(10, false)
@@ -180,7 +180,7 @@ How do I find out the WARC or ARC that each page is contained in?
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
   .map(r => (r.getUrl, r.getArchiveFilename))
   .take(10)
 ```
@@ -192,7 +192,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 import org.apache.commons.io.FilenameUtils
 
-RecordLoader.loadArchives("example.arc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
   .map(r => (r.getUrl, FilenameUtils.getName(r.getArchiveFilename)))
   .take(10)
 ```
@@ -207,7 +207,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .all()
   .select($"url", $"archive_filename")
   .show(10, false)

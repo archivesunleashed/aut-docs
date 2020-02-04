@@ -25,13 +25,13 @@ This script extracts the crawl date, domain, URL, and plain text from HTML files
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(r.getContentString)))
   .saveAsTextFile("plain-text-rdd/")
 ```
 
-If you wanted to use it on your own collection, you would change "src/test/resources/arc/example.arc.gz" to the directory with your own ARC or WARC files, and change "out/" on the last line to where you want to save your output data.
+If you wanted to use it on your own collection, you would change "src/test/resources/arc//path/to/warcs" to the directory with your own ARC or WARC files, and change "out/" on the last line to where you want to save your output data.
 
 Note that this will create a new directory to store the output, which cannot already exist.
 
@@ -41,7 +41,7 @@ Note that this will create a new directory to store the output, which cannot alr
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF($"content"))
   .write.csv("plain-text-df/")
@@ -61,7 +61,7 @@ If you want to remove HTTP headers, you can add one more command: `RemoveHttpHea
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("plain-text-noheaders-rdd/")
@@ -75,7 +75,7 @@ As most plain text use cases do not require HTTP headers to be in the output, we
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select(RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
   .write.csv("plain-text-noheaders-df/")
@@ -95,7 +95,7 @@ The following Spark script generates plain text renderings for all the web pages
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepDomains(Set("www.archive.org"))
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
@@ -107,7 +107,7 @@ RecordLoader.loadArchives("example.arc.gz", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .keepDomainsDF(Set("www.archive.org"))
   .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
@@ -130,7 +130,7 @@ The `(?i)` makes this query case insensitive.
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepUrlPatterns(Set("(?i)http://www.archive.org/details/.*".r))
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
@@ -143,7 +143,7 @@ RecordLoader.loadArchives("example.arc.gz", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .keepUrlPatternsDF(Set("(?i)http://www.archive.org/details/.*".r))
   .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
@@ -164,7 +164,7 @@ The following Spark script generates plain text renderings for all the web pages
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepDomains(Set("www.archive.org"))
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, ExtractBoilerpipeTextRDD(RemoveHTTPHeaderRDD(r.getContentString))))
@@ -177,7 +177,7 @@ RecordLoader.loadArchives("example.arc.gz", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .keepDomainsDF(Set("www.archive.org"))
   .select($"crawl_date", ExtractDomainDF($"url"), $"url", ExtractBoilerpipeTextDF(RemoveHTTPHeaderDF($"content")))
@@ -202,7 +202,7 @@ The following Spark script extracts plain text for a given collection by date (i
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepDate(List("200804"), ExtractDateRDD.DateComponent.YYYYMM)
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
@@ -215,7 +215,7 @@ The following script extracts plain text for a given collection by year (in this
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepDate(List("2008"), ExtractDateRDD.DateComponent.YYYY)
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
@@ -228,7 +228,7 @@ Finally, you can also extract multiple dates or years. In this case, we would ex
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepDate(List("2008","2015"), ExtractDateRDD.DateComponent.YYYY)
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
@@ -249,7 +249,7 @@ would select just the lines beginning with `(201204`, or April 2012.
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .keepDateDF(List("2008","2015"), "YYYY")
   .select($"crawl_date", ExtractDomainDF($"url").as("domain"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")).as("content"))
@@ -270,7 +270,7 @@ The following Spark script keeps only French language pages from a certain top-l
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepDomains(Set("www.archive.org"))
   .keepLanguages(Set("fr"))
@@ -284,7 +284,7 @@ RecordLoader.loadArchives("example.arc.gz", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .keepDomainsDF(Set("www.archive.org"))
   .keepLanguagesDF(Set("fr"))
@@ -296,7 +296,7 @@ RecordLoader.loadArchives("example.arc.gz", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .keepDomainsDF(Set("www.archive.org"))
   .filter($"language" === "fr")
@@ -320,7 +320,7 @@ For example, the following script takes all pages containing the keyword "radio"
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz",sc)
+RecordLoader.loadArchives("/path/to/warcs",sc)
   .keepValidPages()
   .keepContent(Set("radio".r))
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
@@ -335,7 +335,7 @@ There is also `discardContent` which does the opposite, and can be used in cases
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .keepContentDF(Set("radio".r))
   .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
@@ -358,7 +358,7 @@ The following script will produce the raw HTML of a WARC file. You can use the f
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTTPHeaderRDD(r.getContentString)))
   .saveAsTextFile("plain-html-rdd/")
@@ -399,7 +399,7 @@ import io.archivesunleashed.matchbox._
 
 sc.addFile("/path/to/classifier")
 
-ExtractEntities.extractFromRecords("/path/to/classifier/english.all.3class.distsim.crf.ser.gz", "example.arc.gz", "output-ner/", sc)
+ExtractEntities.extractFromRecords("/path/to/classifier/english.all.3class.distsim.crf.ser.gz", "/path/to/warcs", "output-ner/", sc)
 ```
 
 Note the call to `addFile()`. This is necessary if you are running this script on a cluster; it puts a copy of the classifier on each worker node. The classifier and input file paths may be local or on the cluster (e.g., `hdfs:///user/joe/collection/`).

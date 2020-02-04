@@ -11,7 +11,7 @@ The Archives Unleashed Toolkit supports image analysis, a growing area of intere
 
 ### Scala RDD
 
-TODO
+**Will not be implemented.**
 
 ### Scala DF
 
@@ -21,9 +21,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractImageDetailsDF();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).extractImageDetailsDF();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -81,9 +79,7 @@ If you wanted to work with all the images in a collection, you could extract the
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractImageDetailsDF();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).extractImageDetailsDF();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -96,7 +92,7 @@ The following script:
 ```python
 from aut import *
 
-archive = WebArchive(sc, sqlContext, "/path/to/aut-resources-master/Sample-Data/*gz")
+archive = WebArchive(sc, sqlContext, "/path/to/warcs")
 
 df = archive.images()
 df.show()
@@ -152,7 +148,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val links = RecordLoader.loadArchives("example.arc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .flatMap(r => ExtractImageLinksRDD(r.getUrl, r.getContentString))
   .countItems()
@@ -182,9 +178,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader
-  .loadArchives("example.arc.gz", sc)
-  .extractImageLinksDF();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).extractImageLinksDF();
 
 df.groupBy($"image_url")
   .count()
@@ -223,7 +217,7 @@ The following script:
 ```python
 from aut import *
 
-archive = WebArchive(sc, sqlContext, "example.arc.gz")
+archive = WebArchive(sc, sqlContext, "/path/to/warcs")
 
 df = archive.image_links()
 
@@ -261,7 +255,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.app._
 import io.archivesunleashed.matchbox._
 
-val r = RecordLoader.loadArchives("example.arc.gz",sc).persist()
+val r = RecordLoader.loadArchives("/path/to/warcs",sc).persist()
 ExtractPopularImagesRDD(r, 500, sc).saveAsTextFile("500-Popular-Images")
 ```
 
@@ -273,8 +267,7 @@ Will save the 500 most popular URLs to an output directory.
 import io.archivesunleashed._
 import io.archivesunleashed.app._
 
-val df = RecordLoader.loadArchives("example.arc.gz",sc)
-					 .images()
+val df = RecordLoader.loadArchives("/path/to/warcs",sc).images()
 
 ExtractPopularImagesDF(df,10,30,30).show()
 ```
@@ -297,9 +290,7 @@ val imgDetails = udf((url: String, MimeTypeTika: String, content: String) => Ext
 val imgLinks = udf((url: String, content: String) => ExtractImageLinksRDD(url, content))
 val domain = udf((url: String) => ExtractDomainRDD(url))
 
-val total = RecordLoader
-              .loadArchives("/path/to/warcs", sc)
-              .webpages()
+val total = RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
               .select(
                 $"crawl_date".as("crawl_date"),
                 domain($"url").as("Domain"),
@@ -307,26 +298,19 @@ val total = RecordLoader
                 ($"content"))).as("ImageUrl"),
                 imgDetails(($"url"),
                 ($"mime_type_tika"),
-                ($"content")).as("MD5")
-              )
+                ($"content")).as("MD5"))
               .filter($"crawl_date" rlike "200910[0-9]{2}")
 
-val links = total
-              .groupBy("MD5")
+val links = total.groupBy("MD5")
               .count()
               .where(countDistinct("Domain")>=2)
 
-val result = total
-               .join(links, "MD5")
+val result = total.join(links, "MD5")
                .groupBy("Domain","MD5")
                .agg(first("ImageUrl")
                .as("ImageUrl"))
                .orderBy(asc("MD5"))
-               .write
-               .format("csv")
-               .option("header","true")
-               .mode("Overwrite")
-               .save("/path/to/output")
+               .write.csv("/path/to/output")
 ```
 
 ### PythonDF

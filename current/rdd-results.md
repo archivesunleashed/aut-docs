@@ -5,7 +5,7 @@ This page answers to question of what to do with Scala RDD results.
 Most script snippets in the documentation begin start with `RecordLoader` and end with `take`, as in:
 
 ```scala
-RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).keepValidPages()
+RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
   // more transformations here...
   .take(10)
 ```
@@ -27,7 +27,7 @@ Don't like the variable name Scala gives you?
 You can do something like this:
 
 ```scala
-val r = RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).keepValidPages()
+val r = RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
   // more transformations here...
   .take(10)
 ```
@@ -67,7 +67,9 @@ import io.archivesunleashed.matchbox.TupleFormatter._
 RecordLoader.loadArchives("/path/to/arc", sc)
   .keepValidPages()
   .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
+  .flatMap(r => r._2.map(f => (r._1,
+                               ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""),
+                               ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)

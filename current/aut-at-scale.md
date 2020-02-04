@@ -29,8 +29,8 @@ $ spark-shell --master local[12] --driver-memory 4G --packages "io.archivesunlea
 
 If you continue to have errors, look at your output and logs. They will usually point you in the right direction. For instance, you may also need to increase the network timeout value. Once in a while, AUT might get stuck on an odd record and take longer than normal to process it. The `--conf spark.network.timeout=10000000` will ensure that AUT continues to work on material, although it may take a while to process. This command then works:
 
-```
-spark-2.4.3-bin-hadoop2.7/bin/spark-shell --master local[12] --driver-memory 90G --conf spark.network.timeout=10000000 --packages "io.archivesunleashed:aut:0.18.1-SNAPSHOT"
+```shell
+$ spark-shell --master local[12] --driver-memory 90G --conf spark.network.timeout=10000000 --packages "io.archivesunleashed:aut:0.18.1-SNAPSHOT"
 ```
 
 ## Reading Data from AWS S3
@@ -45,6 +45,25 @@ import io.archivesunleashed.matchbox._
 
 sc.hadoopConfiguration.set("fs.s3a.access.key", "<my-access-key>")
 sc.hadoopConfiguration.set("fs.s3a.secret.key", "<my-secret-key>")
+
+RecordLoader.loadArchives("s3a://<my-bucket>/*.gz", sc)
+  .keepValidPages()
+  .map(r => ExtractDomainRDD(r.getUrl))
+  .countItems()
+  .take(10)
+```
+
+### Reading Data from a S3-like Endpoint
+
+We also support loading data stored in an Amazon S3-like system such as [Ceph RADOS](https://docs.ceph.com/docs/master/rados/). Similar to the above example, you'll need an access key and secret, and additionally you'll need to define your endpoint.
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.matchbox._
+
+sc.hadoopConfiguration.set("fs.s3a.access.key", "<my-access-key>")
+sc.hadoopConfiguration.set("fs.s3a.secret.key", "<my-secret-key>")
+sc.hadoopConfiguration.set("fs.s3a.endpoint", "<my-end-point>")
 
 RecordLoader.loadArchives("s3a://<my-bucket>/*.gz", sc)
   .keepValidPages()
