@@ -31,8 +31,6 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .saveAsTextFile("plain-text-rdd/")
 ```
 
-If you wanted to use it on your own collection, you would change "src/test/resources/arc//path/to/warcs" to the directory with your own ARC or WARC files, and change "out/" on the last line to where you want to save your output data.
-
 Note that this will create a new directory to store the output, which cannot already exist.
 
 ### Scala DF
