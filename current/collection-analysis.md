@@ -2,6 +2,7 @@
 
 **How do I...**
 
+- [View all fields available](#View-All-Fields-Available)
 - [Extract All URLs](#Extract-All-URLs)
 - [Extract Top-Level Domains](#Extract-Top-Level-Domains)
 - [Extract Different Subdomains](#Extract-Different-Subdomains)
@@ -9,6 +10,56 @@
 - [Extract the Location of the Resource in ARCs and WARCs](#Extract-the-Location-of-the-Resource-in-ARCs-and-WARCs)
 
 For all the scripts below, you can type `:paste` into Spark Shell, paste the script, and then run it with <kbd>CTRL</kbd>+<kbd>d</kbd>:
+
+## View All Fields Available
+
+How do I get a list of the fields available to work with? In this case, we have the `.all()` method, and can make use of `printSchema`.
+
+### Scala RDD
+
+**Will not be implemented.**
+
+### Scala DF
+
+```scala
+import io.archivesunleashed._
+  
+RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).all()
+  .printSchema()
+```
+
+```
+root
+ |-- crawl_date: string (nullable = true)
+ |-- url: string (nullable = true)
+ |-- mime_type_web_server: string (nullable = true)
+ |-- mime_type_tika: string (nullable = true)
+ |-- content: string (nullable = true)
+ |-- bytes: binary (nullable = true)
+ |-- http_status_code: string (nullable = true)
+ |-- archive_filename: string (nullable = true)
+```
+
+### Python DF
+
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "src/test/resources/warc/example.warc.gz").all() \
+  .printSchema()
+```
+
+```
+root
+ |-- crawl_date: string (nullable = true)
+ |-- url: string (nullable = true)
+ |-- mime_type_web_server: string (nullable = true)
+ |-- mime_type_tika: string (nullable = true)
+ |-- content: string (nullable = true)
+ |-- bytes: binary (nullable = true)
+ |-- http_status_code: string (nullable = true)
+ |-- archive_filename: string (nullable = true)
+```
 
 ## Extract All URLs
 
