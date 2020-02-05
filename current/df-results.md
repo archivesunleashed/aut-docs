@@ -13,7 +13,7 @@ If you want to return a set of results, the counterpart of `.take(10)` with RDDs
 So, something like (in Scala):
 
 ```scala
-RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).webpages()
+RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
   // more transformations here...
   .head(10)
 ```
@@ -31,7 +31,7 @@ Don't like the variable name Scala gives you?
 You can do something like this:
 
 ```scala
-val r = RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).keepValidPages()
+val r = RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
   // more transformations here...
   .head(10)
 ```
@@ -85,7 +85,7 @@ If you want to return a set of results, the counterpart of `.take(10)` with RDDs
 So, something like (in Python):
 
 ```python
-WebArchive(sc, sqlContext, "/home/nruest/Projects/au/sample-data/geocites/1").webpages()\
+WebArchive(sc, sqlContext, "/path/to/warcs").webpages()\
   # more transformations here...
   .select("http_status_code")
   .head(10)
@@ -100,7 +100,7 @@ In the PySpark console, the results are returned as a List of rows, like the fol
 You can assign the tranformations to a variable, like this:
 
 ```python
-archive = WebArchive(sc, sqlContext, "/home/nruest/Projects/au/sample-data/geocites/1").webpages()
+archive = WebArchive(sc, sqlContext, "/path/to/warcs").webpages()
   # more transformations here...
   .head(10)
 ```

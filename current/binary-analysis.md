@@ -25,8 +25,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .audio();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).audio();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -76,8 +75,7 @@ If you wanted to work with all the audio files in a collection, you could extrac
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .audio();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).audio();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -90,7 +88,7 @@ The following script:
 ```python
 from aut import *
 
-archive = WebArchive(sc, sqlContext, "example.arc.gz")
+archive = WebArchive(sc, sqlContext, "/path/to/warcs")
 
 df = archive.audio()
 df.show()
@@ -150,8 +148,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .pdfs();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).pdfs();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -206,8 +203,7 @@ If you wanted to work with all the PDF files in a collection, you could extract 
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .pdfs();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).pdfs();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -220,7 +216,7 @@ The following script:
 ```python
 from aut import *
 
-archive = WebArchive(sc, sqlContext, "example.arc.gz")
+archive = WebArchive(sc, sqlContext, "/path/to/warcs")
 
 df = archive.pdfs()
 df.show()
@@ -280,8 +276,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .presentationProgramFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).presentationProgramFiles();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -336,8 +331,7 @@ If you wanted to work with all the PDF files in a collection, you could extract 
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .presentationProgramFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).presentationProgramFiles();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -350,7 +344,7 @@ The following script:
 ```python
 from aut import *
 
-archive = WebArchive(sc, sqlContext, "example.arc.gz")
+archive = WebArchive(sc, sqlContext, "/path/to/warcs")
 
 df = archive.presentation_program()
 df.show()
@@ -410,8 +404,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .spreadsheets();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).spreadsheets();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -466,8 +459,7 @@ If you wanted to work with all the PDF files in a collection, you could extract 
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .spreadsheets();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).spreadsheets();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -480,7 +472,7 @@ The following script:
 ```python
 from aut import *
 
-archive = WebArchive(sc, sqlContext, "example.arc.gz")
+archive = WebArchive(sc, sqlContext, "/path/to/warcs")
 
 df = archive.spreadsheets()
 df.show()
@@ -540,8 +532,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .textFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).textFiles();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -596,8 +587,7 @@ If you wanted to work with all the PDF files in a collection, you could extract 
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .textFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).textFiles();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -610,7 +600,7 @@ The following script:
 ```python
 from aut import *
 
-archive = WebArchive(sc, sqlContext, "example.arc.gz")
+archive = WebArchive(sc, sqlContext, "/path/to/warcs")
 
 df = archive.text_files()
 df.show()
@@ -670,8 +660,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .videos();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).videos();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -726,8 +715,7 @@ If you wanted to work with all the PDF files in a collection, you could extract 
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .videos();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).videos();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -740,7 +728,7 @@ The following script:
 ```python
 from aut import *
 
-archive = WebArchive(sc, sqlContext, "example.arc.gz")
+archive = WebArchive(sc, sqlContext, "/path/to/warcs")
 
 df = archive.video()
 df.show()
@@ -800,8 +788,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .wordProcessorFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).wordProcessorFiles();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -856,8 +843,7 @@ If you wanted to work with all the PDF files in a collection, you could extract 
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("example.arc.gz", sc)
-  .wordProcessorFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).wordProcessorFiles();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -870,7 +856,7 @@ The following script:
 ```python
 from aut import *
 
-archive = WebArchive(sc, sqlContext, "example.arc.gz")
+archive = WebArchive(sc, sqlContext, "/path/to/warcs")
 
 df = archive.word_processor()
 df.show()
