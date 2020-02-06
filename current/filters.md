@@ -4,6 +4,7 @@ The following filters can be used on any `RecordLoader` DataFrames or RDDs.
 
 **How do I...**
 
+- [Keep Valid Pages](filters.md#keep-valid-pages)
 - [Keep Images](filters.md#keep-images)
 - [Keep MIME Types (web server)](filters.md#keep-mime-types-web-server)
 - [Keep MIME Types (Apache Tika)](filters.md#keep-mime-types-apache-tika)
@@ -23,6 +24,30 @@ The following filters can be used on any `RecordLoader` DataFrames or RDDs.
 - [Discard Domains](filters.md#discard-domains)
 - [Discard Languages](filters.md#discard-languages)
 - [Discard Content](filters.md#discard-content)
+
+## Keep Valid Pages
+
+Removes all pages that do not have a crawl date and is a robots.txt file, and keeps pages that are of the MIME type `text/html`, `application/xhtml+xml`, or ends with `html` or `html`, and have a `200` HTTP response status code.
+
+### Scala RDD
+
+```scala
+import io.archivesunleashed._
+
+RecordLoader.loadArchives("/path/to/warcs",sc).keepValidPages()
+```
+
+### Scala DF
+
+```scala
+import io.archivesunleashed._
+
+RecordLoader.loadArchives("/path/to/warcs",sc).all().keepValidPagesDF()
+```
+
+### Python DF
+
+**To be implemented.**
 
 ## Keep Images
 

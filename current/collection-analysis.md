@@ -24,7 +24,7 @@ How do I get a list of the fields available to work with? In this case, we have 
 ```scala
 import io.archivesunleashed._
   
-RecordLoader.loadArchives("src/test/resources/warc/example.warc.gz", sc).all()
+RecordLoader.loadArchives("/path/to/warcs", sc).all()
   .printSchema()
 ```
 
@@ -45,7 +45,7 @@ root
 ```python
 from aut import *
 
-WebArchive(sc, sqlContext, "src/test/resources/warc/example.warc.gz").all() \
+WebArchive(sc, sqlContext, "/path/to/warcs").all() \
   .printSchema()
 ```
 
