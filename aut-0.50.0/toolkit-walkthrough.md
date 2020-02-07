@@ -219,7 +219,7 @@ Take some time to explore the various options and variables that you can swap in
 Some options:
 
 * **Keep URL Patterns**: Instead of domains, what if you wanted to have text relating to just a certain pattern? Substitute `.keepDomainsDF` for a command like: `.keepUrlPatternsDF(Set("(?i)http://geocities.com/EnchantedForest/.*".r))`
-* **Filter by Date**: What if we just wanted data from 2006? You could add the following command after `.webpages()`: `.keepDateDF(List("2006"), ExtractDateRDF.DateComponent.YYYY)`
+* **Filter by Date**: What if we just wanted data from 2006? You could add the following command after `.webpages()`: `.keepDateDF(List("2006"), "YYYY")`
 * **Filter by Language**: What if you just want French-language pages? After `.keepDomainsDF` add a new line: `.keepLanguagesDF(Set("fr"))`.
 
 For example, if we just wanted the French-language Liberal pages, we would run:
@@ -247,7 +247,7 @@ import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .keepDateDF(List("2006"), ExtractDateRDD.DateComponent.YYYY)
+  .keepDateDF(List("2006"), "YYYY")
   .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF($"content").alias("content"))
   .write.csv("/data/2006-text")
 ```
