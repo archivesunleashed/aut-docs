@@ -2,7 +2,7 @@
 
 Welcome to the Archives Unleashed Toolkit hands-on walkthrough!
 
-![Spark Terminal](https://archivesunleashed.org/images/prompt.png)
+![Spark Terminal](https://user-images.githubusercontent.com/218561/73990154-4d1bd800-4916-11ea-9b6e-10e4503dfa38.png)
 
 The reality of any hands-on workshop is that things will break. We've tried our best to provide a robust environment that can let you walk through the basics of the Archives Unleashed Toolkit alongside us.
 
@@ -33,11 +33,11 @@ Make a directory in your userspace, somewhere where you can find it: on your des
 
 Use the following command, replacing `/path/to/your/data` with the directory. **If you want to use your own ARC or WARC files, please put them in this directory**.
 
-`docker run --rm -it -v "/path/to/your/data:/data" archivesunleashed/docker-aut:0.50.0`
+`docker run --rm -it -v "/path/to/your/data:/data" archivesunleashed/docker-aut:latest`
 
 For example, if your files are in `/Users/ianmilligan1/desktop/data` you would run the above command like:
 
-`docker run --rm -it -v "/Users/ianmilligan1/desktop/data:/data" archivesunleashed/docker-aut:0.50.0`
+`docker run --rm -it -v "/Users/ianmilligan1/desktop/data:/data" archivesunleashed/docker-aut:latest`
 
 <hr />
 
@@ -57,7 +57,7 @@ Welcome to
       ____              __
      / __/__  ___ _____/ /__
     _\ \/ _ \/ _ `/ __/  '_/
-   /___/ .__/\_,_/_/ /_/\_\   version 2.4.3
+   /___/ .__/\_,_/_/ /_/\_\   version 2.4.4
       /_/
          
 Using Scala version 2.11.12 (OpenJDK 64-Bit Server VM, Java 1.8.0_212)
@@ -83,23 +83,25 @@ Now cut and paste the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
-
+import io.archivesunleashed.df._
+  
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
-  .keepValidPages()
-  .map(r => ExtractDomainRDD(r.getUrl))
-  .countItems()
-  .take(10)
+  .all()
+  .keepValidPagesDF()
+  .groupBy(ExtractDomainDF($"url").alias("domain"))
+  .count()
+  .sort($"count".desc)
+  .show(10, false)
 ```
 
 Let's take a moment to look at this script. It:
 
 * begins by importing the AUT libraries;
 * tells the program where it can find the data (in this case, the sample data that we have included in this Docker image);
-* tells it only to keep the "valid" pages, in this case HTML data;
+* tells it only to keep the "[valid](https://github.com/archivesunleashed/aut-docs/blob/master/aut-0.50.0/filters.md#keep-valid-pages)" pages, in this case HTML data;
 * tells it to `ExtractDomain`, or find the base domain of each URL - i.e. `www.google.com/cats` we are interested just in the domain, or `www.google.com`;
 * count them - how many times does `www.google.com` appear in this collection, for example;
-* and display the top ten!
+* and display a DataFrame the top ten!
 
 Once it is pasted in, let's run it.
 
@@ -110,11 +112,24 @@ You should see:
 ```
 // Exiting paste mode, now interpreting.
 
-import io.archivesunleashed.spark.matchbox._
-import io.archivesunleashed.spark.rdd.RecordRDD._
-r: Array[(String, Int)] = Array((www.equalvoice.ca,4644), (www.liberal.ca,1968), (greenparty.ca,732), (www.policyalternatives.ca,601), (www.fairvote.ca,465), (www.ndp.ca,417), (www.davidsuzuki.org,396), (www.canadiancrc.com,90), (www.gca.ca,40), (communist-party.ca,39))
++-------------------------+-----+                                               
+|domain                   |count|
++-------------------------+-----+
+|www.equalvoice.ca        |4274 |
+|www.liberal.ca           |1968 |
+|www.policyalternatives.ca|588  |
+|greenparty.ca            |535  |
+|www.fairvote.ca          |442  |
+|www.ndp.ca               |416  |
+|www.davidsuzuki.org      |348  |
+|www.canadiancrc.com      |88   |
+|communist-party.ca       |39   |
+|www.ccsd.ca              |22   |
++-------------------------+-----+
+only showing top 10 rows
 
-scala>
+import io.archivesunleashed._
+import io.archivesunleashed.df._
 ```
 
 We like to use this example to do two things:
@@ -126,13 +141,15 @@ We like to use this example to do two things:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
-
+import io.archivesunleashed.df._
+  
 RecordLoader.loadArchives("/data/*.gz", sc)
-  .keepValidPages()
-  .map(r => ExtractDomainDF(r.getUrl))
-  .countItems()
-  .take(10)
+  .all()
+  .keepValidPagesDF()
+  .groupBy(ExtractDomainDF($"url").alias("domain"))
+  .count()
+  .sort($"count".desc)
+  .show(10, false)
 ```
 
 # Extracting some Text
@@ -145,13 +162,15 @@ To load this script, remember: type `paste`, copy-and-paste it into the shell, a
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
+import io.archivesunleashed.df._
+
+val domains = Set("www.liberal.ca")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
-  .keepValidPages()
-  .keepDomains(Set("www.liberal.ca"))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(r.getContentString)))
-  .saveAsTextFile("/data/liberal-party-text")
+  .webpages()
+  .keepDomainsDF(domains)
+  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF($"content").alias("content"))
+  .write.csv("/data/liberal-party-text")
 ```
 
 **If you're using your own data, that's why the domain count was key!** Swap out the "liberal.ca" command above with the domain that you want to look at from your own data.
@@ -168,19 +187,22 @@ Try running the **exact same script** that you did above.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
+import io.archivesunleashed.df._
+
+val domains = Set("www.liberal.ca")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
-  .keepValidPages()
-  .keepDomains(Set("www.liberal.ca"))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(r.getContentString)))
-  .saveAsTextFile("/data/liberal-party-text")
+  .webpages()
+  .keepDomainsDF(domains)
+  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF($"content").alias("content"))
+  .write.csv("/data/liberal-party-text")
 ```
 
 Instead of a nice crisp feeling of success, you will see a long dump of text beginning with:
 
 ```
-org.apache.hadoop.mapred.FileAlreadyExistsException: Output directory file:/data/liberal-party-text already exists
+20/02/06 23:43:05 WARN SparkSession$Builder: Using an existing SparkSession; some configuration may not take effect.
+org.apache.spark.sql.AnalysisException: path file:/data/liberal-party-text already exists.;
 ```
 
 To get around this, you can do two things:
@@ -192,51 +214,54 @@ Good luck!
 
 ## Other Text Analysis Filters
 
-Take some time to explore the various options and variables that you can swap in and around the `.keepDomains` line. Check out the [documentation](http://archivesunleashed.org/aut/#plain-text-extraction) for some ideas.
+Take some time to explore the various options and variables that you can swap in and around the `.keepDomainsDF` line. Check out the [documentation](https://github.com/archivesunleashed/aut-docs/blob/master/aut-0.50.0/text-analysis.md) for some ideas.
 
 Some options:
 
-* **Keep URL Patterns**: Instead of domains, what if you wanted to have text relating to just a certain pattern? Substitute `.keepDomains` for a command like: `.keepUrlPatterns(Set("(?i)http://geocities.com/EnchantedForest/.*".r))`
-* **Filter by Date**: What if we just wanted data from 2006? You could add the following command after `.keepValidPages()`: `.keepDate(List("2006"), ExtractDateRDD.DateComponent.YYYY)`
-* **Filter by Language**: What if you just want French-language pages? After `.keepDomains` add a new line: `.keepLanguages(Set("fr"))`.
+* **Keep URL Patterns**: Instead of domains, what if you wanted to have text relating to just a certain pattern? Substitute `.keepDomainsDF` for a command like: `.keepUrlPatternsDF(Set("(?i)http://geocities.com/EnchantedForest/.*".r))`
+* **Filter by Date**: What if we just wanted data from 2006? You could add the following command after `.webpages()`: `.keepDateDF(List("2006"), ExtractDateRDF.DateComponent.YYYY)`
+* **Filter by Language**: What if you just want French-language pages? After `.keepDomainsDF` add a new line: `.keepLanguagesDF(Set("fr"))`.
 
 For example, if we just wanted the French-language Liberal pages, we would run:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
+import io.archivesunleashed.df._
+
+val domains = Set("www.liberal.ca")
+val languages = Set("fr")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
-  .keepValidPages()
-  .keepDomains(Set("www.liberal.ca"))
-  .keepLanguages(Set("fr"))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(r.getContentString)))
-  .saveAsTextFile("/data/liberal-party-french-text")
+  .webpages()
+  .keepDomainsDF(domains)
+  .keepLanguagesDF(languages)
+  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF($"content").alias("content"))
+  .write.csv("/data/liberal-party-french-text")
 ```
 
 Or if we wanted to just have pages from 2006, we would run:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
+import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
-  .keepValidPages()
-  .keepDate(List("2006"), ExtractDateRDD.DateComponent.YYYY)
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(r.getContentString)))
-  .saveAsTextFile("/data/2006-text")
+  .webpages()
+  .keepDateDF(List("2006"), ExtractDateRDD.DateComponent.YYYY)
+  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF($"content").alias("content"))
+  .write.csv("/data/2006-text")
 ```
 
 Finally, if we want to remove the HTTP headers – let's say if we want to create some nice word clouds – we can add a final command: `RemoveHttpHeader`.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
+import io.archivesunleashed.df._
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
-  .keepValidPages()
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHttpHeaderRDD(RemoveHTMLRDD(r.getContentString))))
-  .saveAsTextFile("/data/text-no-headers")
+  .webpages()
+  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTTPHeaderDF(RemoveHTMLDF($"content").alias("content")))
+  .write.csv("/data/text-no-headers")
 ```
 
 You could now try uploading one of the plain text files using a website like [Voyant Tools](https://voyant-tools.org). 
@@ -262,7 +287,7 @@ This will take a fair amount of time, even on a small amount of data. It is very
 When it is done, in the /data file you will have results. The first line should look like:
 
 ```
-(20060622,http://www.gca.ca/indexcms/?organizations&orgid=27,{"PERSON":["Marie"],"ORGANIZATION":["Green Communities Canada","Green Communities Canada News and Events Our Programs Join Green Communities Canada Downloads Privacy Policy Site Map GCA Clean North Kathie Brosemer"],"LOCATION":["St. E. Sault","Canada"]})
+{"timestamp":"20060622","url":"http://www.gca.ca/indexcms/?organizations&orgid=27","named_entities":{"persons":["Marie"],"organizations":["Green Communities Canada","Green Communities Canada News and Events Our Programs Join Green Communities Canada Downloads Privacy Policy Site Map GCA Clean North Kathie Brosemer"],"locations":["St. E. Sault","Canada"]},"digest":"sha1:3e3dc1e855b994d838564ac8d921451451a199d5"}
 ```
 
 Here we can see that in this website, it was probably taking about Sault Ste. Marie, Ontario. 
