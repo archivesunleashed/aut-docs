@@ -14,6 +14,7 @@ Our documentation is divided into several main sections, which cover the Archive
 - [Setting Things Up](https://github.com/archivesunleashed/aut/#dependencies)
 - [Using the Archives Unleashed Toolkit at Scale](aut-at-scale.md)
 - [Archives Unleashed Toolkit Walkthrough](toolkit-walkthrough.md)
+- [DataFrame Schemas](dataframe-schemas.md)
 
 ### Generating Results
 
