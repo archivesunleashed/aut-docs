@@ -42,6 +42,7 @@ Below you can find all of the DataFrame schemas available in the Toolkit. For ex
 - `crawl_date` (string)
 - `src` (string)
 - `image_url` (string)
+- `alt_text` (string)
 
 ## Images
 
