@@ -105,7 +105,7 @@ Let's take a moment to look at this script. It:
 
 Once it is pasted in, let's run it.
 
-You run pasted scripts by holding the *Ctrl* key and the *D* key at the same time. Try that now.
+You run pasted scripts by pressing `ctrl` + `d`. Try that now.
 
 You should see:
 
@@ -158,7 +158,7 @@ Now that we know what we might find in a web archive, let us try extracting some
 
 Above we learned that the Liberal Party of Canada's website has 1,968 captures in the sample files we provided. Let's try to just extract that text.
 
-To load this script, remember: type `paste`, copy-and-paste it into the shell, and then hold `ctrl` and `D` at the same time.
+To load this script, remember: type `:paste`, copy-and-paste it into the shell, and then press `ctrl` + `d`.
 
 ```scala
 import io.archivesunleashed._
@@ -284,7 +284,7 @@ ExtractEntities.extractFromRecords("/aut-resources/NER/english.all.3class.distsi
 
 This will take a fair amount of time, even on a small amount of data. It is very computationally intensive! I often use it as an excuse to go make a cup of coffee.
 
-When it is done, in the /data file you will have results. The first line should look like:
+When it is done, you will have results in the `/data` directory. The first line should look like:
 
 ```
 {"timestamp":"20060622","url":"http://www.gca.ca/indexcms/?organizations&orgid=27","named_entities":{"persons":["Marie"],"organizations":["Green Communities Canada","Green Communities Canada News and Events Our Programs Join Green Communities Canada Downloads Privacy Policy Site Map GCA Clean North Kathie Brosemer"],"locations":["St. E. Sault","Canada"]},"digest":"sha1:3e3dc1e855b994d838564ac8d921451451a199d5"}
