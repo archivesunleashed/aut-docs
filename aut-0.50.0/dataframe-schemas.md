@@ -1,5 +1,7 @@
 # Archives Unleashed Toolkit DataFrames
 
+Below you can find all of the DataFrame schemas available in the Toolkit. For example, you can use `.all()` extract the overall content f  rom a web archive record. Some of the most popular ones include `.all()` (which includes content, URLs, and file types); `.webpages()` (w  hich includes full-text content and language); and `.webgraph()` which includes hyperlink information.
+
 ## All
 
 **`.all()`**
@@ -21,7 +23,6 @@
 - `url` (string)
 - `mime_type_web_server` (string)
 - `mime_type_tika` (string)
-- `content` (string)
 - `language` (string)
 - `content` (string)
 
