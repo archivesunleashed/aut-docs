@@ -34,9 +34,9 @@
 - `dest` (string)
 - `anchor` (string)
 
-## Image Graph
+## Image Links
 
-**`.imageGraph()`**
+**`.imageLinks()`**
 
 - `crawl_date` (string)
 - `src` (string)
