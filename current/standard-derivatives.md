@@ -28,7 +28,7 @@ import io.archivesunleashed.matchbox._
 sc.setLogLevel("INFO")
 
 // Web archive collection.
-warcs = RecordLoader.loadArchives("/path/to/warcs", sc)
+val warcs = RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
 
 // Domains file.
@@ -37,7 +37,7 @@ warcs.map(r => ExtractDomainRDD(r.getUrl))
   .saveAsTextFile("/path/to/derivatives/auk/all-domains/output")
 
 // Full-text.
-warcs.map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHttpHeaderRDD(r.getContentString))))
+warcs.map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("/path/to/derivatives/auk/full-text/output")
 
 // Gephi GraphML.
