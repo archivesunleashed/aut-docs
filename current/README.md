@@ -76,9 +76,10 @@ Our documentation is divided into several main sections, which cover the Archive
 
 ## Further Reading
 
-The toolkit grew out of a previous project called [Warcbase](https://github.com/lintool/warcbase). The following article provides a nice overview, much of which is still relevant:
+The following two articles provide an overview of the project:
 
-Jimmy Lin, Ian Milligan, Jeremy Wiebe, and Alice Zhou. [Warcbase: Scalable Analytics Infrastructure for Exploring Web Archives](https://dl.acm.org/authorize.cfm?key=N46731). *ACM Journal on Computing and Cultural Heritage*, 10(4), Article 22, 2017.
++ Jimmy Lin, Ian Milligan, Jeremy Wiebe, and Alice Zhou. [Warcbase: Scalable Analytics Infrastructure for Exploring Web Archives](https://dl.acm.org/authorize.cfm?key=N46731). _ACM Journal on Computing and Cultural Heritage_, 10(4), Article 22, 2017.
++ Nick Ruest, Jimmy Lin, Ian Milligan, Samantha Fritz. [The Archives Unleashed Project: Technology, Process, and Community to Improve Scholarly Access to Web Archives](https://arxiv.org/abs/2001.05399). 2020.
 
 ## Acknowledgments
 
