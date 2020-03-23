@@ -59,7 +59,8 @@ Our documentation is divided into several main sections, which cover the Archive
 
 ### Filtering Results
 
-- **[Filters](filters.md)**: A variety of ways to filter results.
+- **[DataFrame Filters](filters-df.md)**:
+- **[RDD Filters](filters-rdd.md)**:
 
 ### Standard Derivatives
 
@@ -71,8 +72,8 @@ Our documentation is divided into several main sections, which cover the Archive
 
 ### What to do with Results
 
-- **[What to do with DataFrame Results](df-results.md)**
-- **[What to do with RDD Results](rdd-results.md)**
+- **[What to do with DataFrame Results](df-results.md)**: A variety of User Defined Functions for filters that can be used on any DataFrame column.
+- **[What to do with RDD Results](rdd-results.md)**: A variety of ways to filter RDD results 
 
 ## Further Reading
 
