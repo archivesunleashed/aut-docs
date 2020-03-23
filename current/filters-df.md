@@ -4,37 +4,20 @@ The following UDFs (User Defined Functions) for filters can be used on any DataF
 
 **This column...**
 
-- [Has Content]()
-- [Has Domain(s)]()
-- [Has HTTP Status]()
+- [Has Content](#Has-Content)
+- [Has Date(s)](#Has-Dates)
+- [Has Domain(s)](#Has-Domains)
+- [Has HTTP Status](#Has-HTTP-Status)
 - [Has Images](#Has-Images)
-- [Has Language(s)]()
-- [Has MIME Type (Apache Tika)]()
-- [Has MIME Type (web server)]()
-- [Has URL Pattern(s)]()
-- [Has URL(s)]()
+- [Has Language(s)](#Has-Languages)
+- [Has MIME Type (Apache Tika)](#Has-MIME-Type-Apache-Tika)
+- [Has MIME Type (web server)](#Has-MIME-Type-web-server)
+- [Has URL Pattern(s)](#Has-URL-Patterns)
+- [Has URL(s)](#Has-URLs)
 
-## Has Images
+## Has Content
 
-Filters all data except images. 
-
-### Scala DF
-
-```scala
-RecordLoader.loadArchives("/path/to/warcs",sc)
-  .all()
-  .select($"mime_type_tika", $"mime_type_web_server", $"url")
-  .filter(hasImages($"crawl_date", DetectMimeTypeTikaDF($"bytes")))
-  .show(10,false)
-```
-
-### Python DF
-
-TODO
-
-## Keep MIME Types (web server)
-
-Removes all data but selected MIME Types (identified by the web server).
+Filters or removes all data that does or does not pass a specified regular expression test on content.
 
 ### Scala DF
 
@@ -42,62 +25,21 @@ Removes all data but selected MIME Types (identified by the web server).
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val mimeTypes = Set("text/html", "text/plain")
+val content = Array("Content-Length: [0-9]{4}")
 
-RecordLoader.loadArchives("/path/to/warcs",sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .all()
-  .keepMimeTypesDF(mimeTypes)
+  .select("url", "content")
+  .filter(!hasContent($"content", lit(content)))
 ```
 
 ### Python DF
 
-TODO
+**To be implemented.**
 
-## Keep MIME Types (Apache Tika)
+## Has Dates
 
-Removes all data but selected MIME Types (identified by [Apache Tika](https://tika.apache.org/)).
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-val mimeTypes = Set("text/html", "text/plain")
-
-RecordLoader.loadArchives("/path/to/warcs",sc)
-  .all()
-  .keepMimeTypesTikaDF(mimeTypes)
-```
-
-### Python DF
-
-TODO
-
-## Keep HTTP Status
-
-Removes all data that does not have selected status codes specified.
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-val statusCodes = Set("200")
-
-RecordLoader.loadArchives("/path/to/warcs",sc)
-  .all()
-  .keepHttpStatusDF(statusCodes)
-```
-
-### Python DF
-
-TODO
-
-## Keep Dates
-
-Removes all data that does not have selected date.
+Filters or keeps all data that does or does not match the date(s) specified.
 
 ### Scala DF
 
@@ -114,32 +56,11 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
 
 ### Python DF
 
-TODO
+**To be implemented.**
 
-## Keep URLs
+## Has Domain(s)
 
-Removes all data but selected exact URLs.
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-val urls = Set("www.archive.org")
-
-RecordLoader.loadArchives("/path/to/warcs",sc)
-  .all()
-  .keepUrlsDF(urls)
-```
-
-### Python DF
-
-TODO
-
-## Keep URL Patterns
-
-Removes all data but selected URL patterns (regex).
+Filters or keeps all data that does or does not match the source domain(s) specified.
 
 ### Scala DF
 
@@ -147,128 +68,21 @@ Removes all data but selected URL patterns (regex).
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val urlsPattern = Set(".*images.*".r)
-
-RecordLoader.loadArchives("/path/to/warcs",sc)
-  .all()
-  .keepUrlPatternsDF(urlPattern)
-```
-
-TODO
-
-### Python DF
-
-TODO
-
-## Keep Domains
-
-Removes all data but selected source domains.
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-val urls = Set("http://www.archive.org/")
+val domains = Array("www.archive.org", "www.sloan.org")
 
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .webpages()
-  .keepUrlsDF(urls)
+  .select($"url")
+  .filter(!hasDomains(ExtractDomainDF($"url"), lit(domains)))
 ```
 
 ### Python DF
 
-TODO
+**To be implemented.**
 
-## Keep Languages
+## Has HTTP Status
 
-Removes all data not in selected language ([ISO 639-2 codes](https://www.loc.gov/standards/iso639-2/php/code_list.php)).
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-val languages = Set("th","de","ht")
-
-RecordLoader.loadArchives("/path/to/warcs",sc)
-  .webpages()
-  .keepLanguagesDF(languages)
-```
-
-### Python DF
-
-TODO
-
-## Keep Content
-
-Removes all content that does not pass Regular Expression test.
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-val content = Set("Content-Length: [0-9]{4}".r)
-
-RecordLoader.loadArchives("/path/to/warcs", sc)
-  .all()
-  .select("url", "content")
-  .keepContentDF(content)
-```
-
-### Python DF
-
-TODO
-
-## Discard MIME Types (web server)
-
-Filters out detected MIME Types (identified by the web server).
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-val mimeTypes = Set("text/html", "text/plain")
-
-RecordLoader.loadArchives("/path/to/warcs",sc)
-  .webpages()
-  .discardMimeTypesDF(mimeTypes)
-```
-
-### Python DF
-
-TODO
-
-## Discard MIME Types (Apache Tika)
-
-Filters out detected MIME Types (identified by [Apache Tika](https://tika.apache.org/)).
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-val mimeTypes = Set("text/html", "text/plain")
-
-RecordLoader.loadArchives("/path/to/warcs",sc)
-  .webpages()
-  .discardMimeTypesTikaDF(mimeTypes)
-```
-
-### Python DF
-
-TODO
-
-## Discard HTTP Status
-
-Filters out detected HTTP status codes.
+Filters or keeps all data that does or does not match the status codes specified.
 
 ### Scala DF
 
@@ -280,35 +94,55 @@ val statusCodes = Set("200")
 
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .all()
-  .discardHttpStatusDF(statusCodes)
+  .keepHttpStatusDF(statusCodes)
 ```
 
 ### Python DF
 
-TODO
+**To be implemented.**
 
-## Discard Dates
+## Has Images
 
-Filters out detected dates.
+Filters or keeps all data except images. 
+
+### Scala DF
+
+```scala
+RecordLoader.loadArchives("/path/to/warcs",sc)
+  .all()
+  .select($"mime_type_tika", $"mime_type_web_server", $"url")
+  .filter(hasImages($"crawl_date", DetectMimeTypeTikaDF($"bytes")))
+```
+
+### Python DF
+
+**To be implemented.**
+
+## Has Languages
+
+Filters or keeps all data that does or does not match the language(s) ([ISO 639-2 codes](https://www.loc.gov/standards/iso639-2/php/code_list.php)) specified.
 
 ### Scala DF
 
 ```scala
 import io.archivesunleashed._
 import io.archivesunleashed.df._
+
+val languages = Array("th","de","ht")
 
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .webpages()
-  .discardDateDF("20080429")
+  .select($"url", $"content")
+  .filter(hasLanguages(DetectLanguageDF(RemoveHTMLDF($"content")), lit(languages)))
 ```
 
 ### Python DF
 
-TODO
+**To be implemented.**
 
-## Discard URLs
+## Keep MIME Types (Apache Tika)
 
-Filters out detected URLs.
+Filters or keeps all data that does or does not match the MIME type(s) (identified by [Apache Tika](https://tika.apache.org/)) specified.
 
 ### Scala DF
 
@@ -316,40 +150,21 @@ Filters out detected URLs.
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("/path/to/warcs",sc)
-  .webpages()
-  .discardUrlsDF(Set("http://www.archive.org/"))
-```
-
-### Python DF
-
-TODO
-
-## Discard URL Patterns
-
-Filters out detected URL patterns (regex).
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-val urlPattern = Set(".*images.*".r)
+val mimeTypes = Array("text/html", "text/plain")
 
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .all()
-  .select("url")
-  .discardUrlPatternsDF(urlPattern)
+  .select($"url", $"mime_type_tika")
+  .filter(!hasMIMETypesTika($"mime_type_tika", lit(mimeTypes)))
 ```
 
 ### Python DF
 
-TODO
+**To be implemented.**
 
-## Discard Domains
+## Keep MIME Types (web server)
 
-Filters out detected source domains.
+Filters or keeps all data that does or does not match the MIME type(s) (identified by the web server) specified.
 
 ### Scala DF
 
@@ -357,40 +172,21 @@ Filters out detected source domains.
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-RecordLoader.loadArchives("/path/to/warcs",sc)
-  .webpages()
-  .discardDomainsDF(Set("www.archive.org"))
-```
-
-### Python DF
-
-TODO
-
-## Discard Languages
-
-Filters out detected languages ([ISO 639-2 codes](https://www.loc.gov/standards/iso639-2/php/code_list.php)).
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-val languages = Set("th","de","ht")
+val mimeTypes = Array("text/html", "text/plain")
 
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .all()
-  .select("url")
-  .discardLanguagesDF(languages)
+  .select($"url", $"mime_type_web_server")
+  .filter(!hasMIMETypesTika($"mime_type_web_server", lit(mimeTypes)))
 ```
 
 ### Python DF
 
-TODO
+**To be implemented.**
 
-## Discard Content
+## Has URL Patterns
 
-Filters out detected content that does pass Regular Expression test.
+Filters or removes all data that does or does not pass a specified regular expression test on URL patterns.
 
 ### Scala DF
 
@@ -398,14 +194,36 @@ Filters out detected content that does pass Regular Expression test.
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val content = Set("Content-Length: [0-9]{4}".r)
+val urlsPattern = Array(".*images.*")
 
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .all()
-  .select("url", "content")
-  .discardContentDF(content)
+  .select($"url", $"content")
+  .filter(hasUrlPatterns($"url", lit(urlsPattern)))
 ```
 
 ### Python DF
 
-TODO
+**To be implemented.**
+
+## Has URLs
+
+Filters or keeps all data that does or does not match the URL(s) specified.
+
+### Scala DF
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+
+val urls = Array("www.archive.org")
+
+RecordLoader.loadArchives("/path/to/warcs",sc)
+  .all()
+  .select($"url", $"content")
+  .filter(hasUrls($"url", lit(urls)))
+```
+
+### Python DF
+
+**To be implemented.**
