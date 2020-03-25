@@ -90,11 +90,12 @@ Filters or keeps all data that does or does not match the status codes specified
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val statusCodes = Set("200")
+val statusCodes = Array("200","000")
 
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .all()
-  .keepHttpStatusDF(statusCodes)
+  .select($"url",$"http_status_code")
+  .filter(!hasHTTPStatus($"http_status_code", lit(statusCodes)))
 ```
 
 ### Python DF
