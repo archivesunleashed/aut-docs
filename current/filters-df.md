@@ -47,11 +47,12 @@ Filters or keeps all data that does or does not match the date(s) specified.
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val dates = List("04")
+val dates = Array("2008", "200908", "20070502")
 
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .all()
-  .keepDateDF(dates)
+  .select($"url", $"crawl_date")
+  .filter(!hasDate($"crawl_date", lit(dates)))
 ```
 
 ### Python DF
