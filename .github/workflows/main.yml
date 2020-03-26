@@ -10,5 +10,7 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@master
+    - name: Install mdl
+      run: gem install mdl
     - name: Run mdl
       run: mdl -s ".github/workflows/mdl-config.rb" current
