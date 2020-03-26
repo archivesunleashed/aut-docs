@@ -78,7 +78,8 @@ RecordLoader.loadArchives("/path/to/arc", sc)
 ```
 
 Its output looks like:
-```
+
+```tsv
 20151107        liberal.ca      youtube.com     16334
 20151108        socialist.ca    youtube.com     11690
 20151108        socialist.ca    ustream.tv      11584

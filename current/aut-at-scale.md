@@ -12,7 +12,7 @@ As your datasets grow, you may need to provide more memory to Apache Spark. You'
 You can add a [configuration](https://spark.apache.org/docs/latest/configuration.html) option for adjusting available memory like so:
 
 ```shell
-$ spark-shell --driver-memory 4G --packages "io.archivesunleashed:aut:0.50.1-SNAPSHOT"
+spark-shell --driver-memory 4G --packages "io.archivesunleashed:aut:0.50.1-SNAPSHOT"
 ```
 
 In the above case, you give Apache Spark 4GB of memory to execute the program.
@@ -24,13 +24,13 @@ On a 16-core machine, you may want to drop to 12 cores if you are having memory 
 You can do so like this (example is using 12 threads on a 16-core machine):
 
 ```shell
-$ spark-shell --master local[12] --driver-memory 4G --packages "io.archivesunleashed:aut:0.50.1-SNAPSHOT"
+spark-shell --master local[12] --driver-memory 4G --packages "io.archivesunleashed:aut:0.50.1-SNAPSHOT"
 ```
 
 If you continue to have errors, look at your output and logs. They will usually point you in the right direction. For instance, you may also need to increase the network timeout value. Once in a while, AUT might get stuck on an odd record and take longer than normal to process it. The `--conf spark.network.timeout=10000000` will ensure that AUT continues to work on material, although it may take a while to process. This command then works:
 
 ```shell
-$ spark-shell --master local[12] --driver-memory 90G --conf spark.network.timeout=10000000 --packages "io.archivesunleashed:aut:0.50.1-SNAPSHOT"
+spark-shell --master local[12] --driver-memory 90G --conf spark.network.timeout=10000000 --packages "io.archivesunleashed:aut:0.50.1-SNAPSHOT"
 ```
 
 ## Reading Data from AWS S3
@@ -72,11 +72,11 @@ RecordLoader.loadArchives("s3a://<my-bucket>/*.gz", sc)
   .take(10)
 ```
 
-### Troubleshooting S3 
+### Troubleshooting S3
 
 If you run into this `AmazonHttpClient` timeout error:
 
-```
+```java
 19/10/24 11:12:51 INFO AmazonHttpClient: Unable to execute HTTP request: Timeout waiting for connection from pool
 org.apache.http.conn.ConnectionPoolTimeoutException: Timeout waiting for connection from pool
   at org.apache.http.impl.conn.PoolingClientConnectionManager.leaseConnection(PoolingClientConnectionManager.java:231)

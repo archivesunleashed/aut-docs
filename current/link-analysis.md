@@ -114,7 +114,7 @@ You can see that the above was achieved by removing the following line:
 
 In a larger collection, you might want to add the following line:
 
-```
+```scala
 .filter(r => r._2 > 5)
 ```
 
@@ -204,12 +204,13 @@ RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
 ```
 
 The format of this output is:
+
 - Field one: Crawldate, `yyyyMMdd`
 - Field two: Source domain (i.e. liberal.ca)
 - Field three: Target domain of link (i.e. ndp.ca)
 - Field four: number of links.
 
-```
+```scala
 ((20080612,liberal.ca,liberal.ca),1832983)
 ((20060326,ndp.ca,ndp.ca),1801775)
 ((20060426,ndp.ca,ndp.ca),1771993)
@@ -341,6 +342,7 @@ The following script will extract a DataFrame with the following columns, `domai
 **Will not be implemented.**
 
 ### Scala DF
+
 ```scala
 import io.archivesunleashed._
 import io.archivesunleashed.df._
@@ -363,7 +365,7 @@ df.select($"url", $"Domain", $"crawl_date", result(array($"link"))
 
 // Exiting paste mode, now interpreting.
 
-+--------------------+---------------+----------+--------------------+          
++--------------------+---------------+----------+--------------------+
 |                 url|         Domain|crawl_date|    destination_page|
 +--------------------+---------------+----------+--------------------+
 |http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|

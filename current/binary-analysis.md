@@ -33,16 +33,17 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server|mime_type_tika|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
@@ -95,18 +96,19 @@ df.show()
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - Width
-  - Height
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- Width
+- Height
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server|mime_type_tika|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
@@ -156,16 +158,17 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server| mime_type_tika|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
@@ -223,18 +226,19 @@ df.show()
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - Width
-  - Height
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- Width
+- Height
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server| mime_type_tika|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
@@ -284,16 +288,17 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server|      mime_type_tika|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
@@ -351,18 +356,19 @@ df.show()
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - Width
-  - Height
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- Width
+- Height
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server|      mime_type_tika|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
@@ -412,16 +418,17 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server|      mime_type_tika|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
@@ -479,18 +486,19 @@ df.show()
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - Width
-  - Height
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- Width
+- Height
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server|      mime_type_tika|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
@@ -540,16 +548,17 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server|      mime_type_tika|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
@@ -607,18 +616,19 @@ df.show()
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - Width
-  - Height
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- Width
+- Height
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
 |                 url|      filename|extension|mime_type_web_server|      mime_type_tika|                 md5|                sha1|               bytes|
 +--------------------+--------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
@@ -668,16 +678,17 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server| mime_type_tika|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
@@ -735,18 +746,19 @@ df.show()
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - Width
-  - Height
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- Width
+- Height
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server| mime_type_tika|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
@@ -796,16 +808,17 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------------+---------+--------------------+------------------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server|    mime_type_tika|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+------------------+--------------------+--------------------+--------------------+
@@ -863,18 +876,19 @@ df.show()
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - Width
-  - Height
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- Width
+- Height
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------------+---------+--------------------+------------------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server|    mime_type_tika|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+------------------+--------------------+--------------------+--------------------+

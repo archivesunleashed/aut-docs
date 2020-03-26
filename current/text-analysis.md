@@ -99,6 +99,7 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("plain-text-domain-rdd/")
 ```
+
 ### Scala DF
 
 ```scala
@@ -348,7 +349,7 @@ TODO
 
 ### Scala RDD
 
-In most cases, users will be interested in working with plain text. In some cases, however, you may want to work with the acutal HTML of the pages themselves (for example, looking for specific tags or HTML content). 
+In most cases, users will be interested in working with plain text. In some cases, however, you may want to work with the acutal HTML of the pages themselves (for example, looking for specific tags or HTML content).
 
 The following script will produce the raw HTML of a WARC file. You can use the filters from above to filter it down accordingly by domain, language, etc.
 

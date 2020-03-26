@@ -73,7 +73,7 @@ Below you can find all of the DataFrame schemas available in the Toolkit. For ex
 - `md5` (string)
 - `sha1` (string)
 - `bytes` (binary)
- 
+
 ## Audio
 
 **`.audio()`**
@@ -87,7 +87,7 @@ Below you can find all of the DataFrame schemas available in the Toolkit. For ex
 - `md5` (string)
 - `sha1` (string)
 - `bytes` (binary)
- 
+
 ## Videos
 
 **`.videoss()`**
@@ -101,7 +101,7 @@ Below you can find all of the DataFrame schemas available in the Toolkit. For ex
 - `md5` (string)
 - `sha1` (string)
 - `bytes` (binary)
- 
+
 ## Spreadsheets
 
 **`.spreadsheets()`**
@@ -115,7 +115,7 @@ Below you can find all of the DataFrame schemas available in the Toolkit. For ex
 - `md5` (string)
 - `sha1` (string)
 - `bytes` (binary)
- 
+
 ## Presentation Program Files
 
 **`.presentationProgramFiles()`**
@@ -129,7 +129,7 @@ Below you can find all of the DataFrame schemas available in the Toolkit. For ex
 - `md5` (string)
 - `sha1` (string)
 - `bytes` (binary)
- 
+
 ## Word Processor Files
 
 **`.wordProcessorFiles()`**
@@ -143,7 +143,7 @@ Below you can find all of the DataFrame schemas available in the Toolkit. For ex
 - `md5` (string)
 - `sha1` (string)
 - `bytes` (binary)
- 
+
 ## Text Files
 
 **`.textFiles()`**

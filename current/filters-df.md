@@ -105,7 +105,7 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
 
 ## Has Images
 
-Filters or keeps all data except images. 
+Filters or keeps all data except images.
 
 ### Scala DF
 

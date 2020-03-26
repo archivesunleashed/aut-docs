@@ -50,7 +50,7 @@ RecordLoader.loadArchives("/path/to/warcs",sc).all().keepValidPagesDF()
 
 ## Keep Images
 
-Removes all data except images. 
+Removes all data except images.
 
 ### Scala RDD
 

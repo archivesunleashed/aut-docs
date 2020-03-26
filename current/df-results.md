@@ -70,7 +70,7 @@ Note that this is a _directory_, not a _file_.
 
 Later, as in a completely separate session, you can read the results back in and continuing processing, as follows:
 
-```
+```scala
 val results = spark.read.parquet("/path/to/export/directory/")
 
 results.show(20, false)
@@ -93,7 +93,7 @@ WebArchive(sc, sqlContext, "/path/to/warcs").webpages()\
 
 In the PySpark console, the results are returned as a List of rows, like the following:
 
-```
+```python
 [Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200')]
 ```
 

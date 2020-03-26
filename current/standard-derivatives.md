@@ -15,7 +15,7 @@ How do I create the [scholarly derivatives](https://cloud.archivesunleashed.org/
 Note, the full-text and domains output needs to be concatenated together into a single file respectively to replicate the Cloud output, and the GraphML file needs to be run through [GraphPass](https://github.com/archivesunleashed/graphpass) with the following command:
 
 ```bash
-$ graphpass input.graphml output.gexf -gq
+graphpass input.graphml output.gexf -gq
 ```
 
 ### Scala RDD

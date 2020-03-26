@@ -29,18 +29,19 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - Width
-  - Height
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- Width
+- Height
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server|mime_type_tika|width|height|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+--------------------+
@@ -99,18 +100,19 @@ df.show()
 ```
 
 Will extract all following information from images in a web colllection:
-  - image url
-  - filename
-  - extension
-  - MimeType as identified by the hosting web server
-  - MimeType as identified by [Apache Tika](https://tika.apache.org)
-  - Width
-  - Height
-  - md5 hash
-  - sha1 hash
-  - bytes
 
-```
+- image url
+- filename
+- extension
+- MimeType as identified by the hosting web server
+- MimeType as identified by [Apache Tika](https://tika.apache.org)
+- Width
+- Height
+- md5 hash
+- sha1 hash
+- bytes
+
+```dataframe
 +--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server|mime_type_tika|width|height|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+--------------------+
@@ -154,9 +156,10 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .countItems()
   .take(10)
 ```
+
 Will extract the top ten URLs of images found within a collection, in an array like so:
 
-```
+```scala
 links: Array[(String, Int)] = Array((http://www.archive.org/images/star.png,408), (http://www.archive.org/images/no_star.png,122), (http://www.archive.org/images/logo.jpg,118), (http://www.archive.org/images/main-header.jpg,84), (http://www.archive.org/images/rss.png,20), (http://www.archive.org/images/mail.gif,13), (http://www.archive.org/images/half_star.png,10), (http://www.archive.org/images/arrow.gif,7), (http://ia300142.us.archive.org/3/items/americana/am_libraries.gif?cnt=0,3), (http://ia310121.us.archive.org/2/items/GratefulDead/gratefuldead.gif?cnt=0,3), (http://www.archive.org/images/wayback.gif,2), (http://www.archive.org/images/wayback-election2000.gif,2), (http://www.archive.org/images/wayback-wt...
 ```
 
@@ -188,7 +191,7 @@ df.groupBy($"image_url")
 
 Will extract the top ten URLs of images found within a collection, in a DataFrame like so:
 
-```
+```dataframe
 +--------------------+-----+
 |           image_url|count|
 +--------------------+-----+
@@ -229,7 +232,7 @@ df.groupBy("image_url")
 
 Will extract the top ten URLs of images found within a collection, in a DataFrame like so:
 
-```
+```dataframe
 +--------------------+-----+
 |           image_url|count|
 +--------------------+-----+
