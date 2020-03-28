@@ -27,7 +27,9 @@ The following filters can be used on any `RecordLoader` RDDs.
 
 ## Keep Valid Pages
 
-Removes all pages that do not have a crawl date and is a robots.txt file, and keeps pages that are of the MIME type `text/html`, `application/xhtml+xml`, or ends with `html` or `html`, and have a `200` HTTP response status code.
+Removes all pages that do not have a crawl date and is a robots.txt file, and
+keeps pages that are of the MIME type `text/html`, `application/xhtml+xml`, or
+ends with `html` or `html`, and have a `200` HTTP response status code.
 
 ### Scala RDD
 

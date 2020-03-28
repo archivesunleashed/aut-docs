@@ -9,8 +9,15 @@ Adapted from: <https://wiki.duraspace.org/display/FF/Fedora+Release+Process>
 To make sure the release goes smoothly, you should ensure that:
 
 * You have an account with commit access for aut on GitHub.
-* You have an [oss.sonatype.org](https://oss.sonatype.org/) account and have requested to be given permission to publish to the `io.archivesunleashed` groupId by adding a comment to the [Archives Unleased Sonatype Hosting Ticket](https://issues.sonatype.org/browse/OSSRH-33075)
-* Ensure you have a trusted code signing key; [create](https://wiki.duraspace.org/display/FCREPO/Creating+a+Code+Signing+Key) if you haven't before and add it to the [contributor keys](https://github.com/archivesunleashed/aut/wiki/Release-Process#contributor-keys) list below
+* You have an [oss.sonatype.org](https://oss.sonatype.org/) account and have
+  requested to be given permission to publish to the `io.archivesunleashed`
+  groupId by adding a comment to the
+  [Archives Unleased Sonatype Hosting Ticket](https://issues.sonatype.org/browse/OSSRH-33075)
+* Ensure you have a trusted code signing key;
+  [create](https://wiki.duraspace.org/display/FCREPO/Creating+a+Code+Signing+Key)
+  if you haven't before and add it to the
+  [contributor keys](https://github.com/archivesunleashed/aut/wiki/Release-Process#contributor-keys)
+  list below
 * Your maven settings (`~/.m2/settings.xml`) includes the following:
 
 ```xml
@@ -40,7 +47,9 @@ To make sure the release goes smoothly, you should ensure that:
 
 ### Make sure aut builds with `--packages`
 
-* Build [docker-aut](https://github.com/archivesunleashed/docker-aut/tree/master) on the master branch.
+* Build
+  [docker-aut](https://github.com/archivesunleashed/docker-aut/tree/master) on
+  the master branch.
 
 ## Release Process
 
@@ -50,7 +59,8 @@ To make sure the release goes smoothly, you should ensure that:
 * `cd aut`
 * `git checkout -b release-X.Y.Z` (where X.Y.Z is your version number)
 * `mvn release:clean`
-* `mvn release:prepare -DreleaseVersion=$CURR -DdevelopmentVersion=$NEXT -DautoVersionSubmodules=true -DpushChanges=false`
+* `mvn release:prepare -DreleaseVersion=$CURR -DdevelopmentVersion=$NEXT
+  -DautoVersionSubmodules=true -DpushChanges=false`
 * `rm -rf ~/.m2/repository/io/archivesunleashed`
 * `git checkout $REPO-$CURR # detached head state`
 * `mvn clean install`
@@ -67,7 +77,9 @@ To make sure the release goes smoothly, you should ensure that:
 * `cd aut`
 * `git checkout -b release-0.9.0`
 * `mvn release:clean`
-* `mvn release:prepare -DreleaseVersion=0.9.0 -DdevelopmentVersion=0.9.1-SNAPSHOT -DautoVersionSubmodules=true -DpushChanges=false`
+* `mvn release:prepare -DreleaseVersion=0.9.0
+  -DdevelopmentVersion=0.9.1-SNAPSHOT -DautoVersionSubmodules=true
+  -DpushChanges=false`
 * `rm -rf ~/.m2/repository/io/archivesunleashed`
 * `git co aut-0.9.0`
 * `mvn clean install`
