@@ -6,16 +6,23 @@
 - [Extract Binary Info](#Extract-Binary-Info)
 - [Extract Binaries to Disk](#Extract-Binaries-to-Disk)
 
-For all the scripts below, you can type `:paste` into Spark Shell, paste the script, and then run it with <kbd>CTRL</kbd>+<kbd>d</kbd>:
+For all the scripts below, you can type `:paste` into Spark Shell, paste the
+script, and then run it with <kbd>CTRL</kbd>+<kbd>d</kbd>:
 
 ## Create the Archives Unleashed Cloud Scholarly Derivatives
 
-How do I create the [scholarly derivatives](https://cloud.archivesunleashed.org/derivatives) that the Archives Unleashed Cloud creates on my own web archive collection?
+How do I create the [scholarly
+derivatives](https://cloud.archivesunleashed.org/derivatives) that the Archives
+Unleashed Cloud creates on my own web archive collection?
 
-Note, the full-text and domains output needs to be concatenated together into a single file respectively to replicate the Cloud output, and the GraphML file needs to be run through [GraphPass](https://github.com/archivesunleashed/graphpass) with the following command:
+Note, the full-text and domains output needs to be concatenated together into a
+single file respectively to replicate the Cloud output, and the GraphML file
+needs to be run through
+[GraphPass](https://github.com/archivesunleashed/graphpass) with the following
+command:
 
 ```bash
-$ graphpass input.graphml output.gexf -gq
+graphpass input.graphml output.gexf -gq
 ```
 
 ### Scala RDD
@@ -65,9 +72,13 @@ TODO
 
 ## Extract Binary Info
 
-How do I extract the binary information of PDFs, audio files, video files, word processor files, spreadsheet files, presentation program files, and text files to a CSV file, or into the [Apache Parquet](https://parquet.apache.org/) format to [work with later](df-results.md#what-to-do-with-dataframe-results)?
+How do I extract the binary information of PDFs, audio files, video files, word
+processor files, spreadsheet files, presentation program files, and text files
+to a CSV file, or into the [Apache Parquet](https://parquet.apache.org/) format
+to [work with later](df-results.md#what-to-do-with-dataframe-results)?
 
-You can also read and write to Amazon S3 by supplying your AWS credentials, and using `s3a`.
+You can also read and write to Amazon S3 by supplying your AWS credentials, and
+using `s3a`.
 
 ### Scala RDD
 
@@ -198,7 +209,8 @@ warcs.word_processor().write.csv('/path/to/derivatives/csv/word_processor', head
 
 ## Extract Binaries to Disk
 
-How do I all the binary files of PDFs, audio files, video files, word processor files, spreadsheet files, presentation program files, and text files to disk?
+How do I all the binary files of PDFs, audio files, video files, word processor
+files, spreadsheet files, presentation program files, and text files to disk?
 
 ### Scala RDD
 

@@ -1,6 +1,8 @@
 # Filters DataFrame
 
-The following UDFs (User Defined Functions) for filters can be used on any DataFrame column. In addition, each of the UDFs can be negated with `!`, e.g. `!hasImages`.
+The following UDFs (User Defined Functions) for filters can be used on any
+DataFrame column. In addition, each of the UDFs can be negated with `!`, e.g.
+`!hasImages`.
 
 **This column...**
 
@@ -17,7 +19,8 @@ The following UDFs (User Defined Functions) for filters can be used on any DataF
 
 ## Has Content
 
-Filters or removes all data that does or does not pass a specified regular expression test on content.
+Filters or removes all data that does or does not pass a specified regular
+expression test on content.
 
 ### Scala DF
 
@@ -105,7 +108,7 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
 
 ## Has Images
 
-Filters or keeps all data except images. 
+Filters or keeps all data except images.
 
 ### Scala DF
 
@@ -122,7 +125,9 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
 
 ## Has Languages
 
-Filters or keeps all data that does or does not match the language(s) ([ISO 639-2 codes](https://www.loc.gov/standards/iso639-2/php/code_list.php)) specified.
+Filters or keeps all data that does or does not match the language(s) ([ISO
+639-2 codes](https://www.loc.gov/standards/iso639-2/php/code_list.php))
+specified.
 
 ### Scala DF
 
@@ -144,7 +149,8 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
 
 ## Keep MIME Types (Apache Tika)
 
-Filters or keeps all data that does or does not match the MIME type(s) (identified by [Apache Tika](https://tika.apache.org/)) specified.
+Filters or keeps all data that does or does not match the MIME type(s)
+(identified by [Apache Tika](https://tika.apache.org/)) specified.
 
 ### Scala DF
 
@@ -166,7 +172,8 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
 
 ## Keep MIME Types (web server)
 
-Filters or keeps all data that does or does not match the MIME type(s) (identified by the web server) specified.
+Filters or keeps all data that does or does not match the MIME type(s)
+(identified by the web server) specified.
 
 ### Scala DF
 
@@ -188,7 +195,8 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
 
 ## Has URL Patterns
 
-Filters or removes all data that does or does not pass a specified regular expression test on URL patterns.
+Filters or removes all data that does or does not pass a specified regular
+expression test on URL patterns.
 
 ### Scala DF
 

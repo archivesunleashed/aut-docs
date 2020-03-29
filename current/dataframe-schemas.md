@@ -1,6 +1,10 @@
 # Archives Unleashed Toolkit DataFrames
 
-Below you can find all of the DataFrame schemas available in the Toolkit. For example, you can use `.all()` extract the overall content from a web archive record. Some of the most popular ones include `.all()` (which includes content, URLs, and file types); `.webpages()` (which includes full-text content and language); and `.webgraph()` which includes hyperlink information.
+Below you can find all of the DataFrame schemas available in the Toolkit. For
+example, you can use `.all()` extract the overall content from a web archive
+record. Some of the most popular ones include `.all()` (which includes content,
+URLs, and file types); `.webpages()` (which includes full-text content and
+language); and `.webgraph()` which includes hyperlink information.
 
 ## All
 
@@ -73,7 +77,7 @@ Below you can find all of the DataFrame schemas available in the Toolkit. For ex
 - `md5` (string)
 - `sha1` (string)
 - `bytes` (binary)
- 
+
 ## Audio
 
 **`.audio()`**
@@ -87,7 +91,7 @@ Below you can find all of the DataFrame schemas available in the Toolkit. For ex
 - `md5` (string)
 - `sha1` (string)
 - `bytes` (binary)
- 
+
 ## Videos
 
 **`.videoss()`**
@@ -101,7 +105,7 @@ Below you can find all of the DataFrame schemas available in the Toolkit. For ex
 - `md5` (string)
 - `sha1` (string)
 - `bytes` (binary)
- 
+
 ## Spreadsheets
 
 **`.spreadsheets()`**
@@ -115,7 +119,7 @@ Below you can find all of the DataFrame schemas available in the Toolkit. For ex
 - `md5` (string)
 - `sha1` (string)
 - `bytes` (binary)
- 
+
 ## Presentation Program Files
 
 **`.presentationProgramFiles()`**
@@ -129,7 +133,7 @@ Below you can find all of the DataFrame schemas available in the Toolkit. For ex
 - `md5` (string)
 - `sha1` (string)
 - `bytes` (binary)
- 
+
 ## Word Processor Files
 
 **`.wordProcessorFiles()`**
@@ -143,7 +147,7 @@ Below you can find all of the DataFrame schemas available in the Toolkit. For ex
 - `md5` (string)
 - `sha1` (string)
 - `bytes` (binary)
- 
+
 ## Text Files
 
 **`.textFiles()`**
