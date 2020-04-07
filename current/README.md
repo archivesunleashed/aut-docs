@@ -86,6 +86,7 @@ and working with the results.
 - [Create the Archives Unleashed Cloud Scholarly Derivatives](standard-derivatives.md#Create-the-Archives-Unleashed-Scholarly-Derivatives)
 - [Extract Binary Info](standard-derivatives.md#Extract-Binary-Info)
 - [Extract Binaries to Disk](standard-derivatives.md#Extract-Binaries-to-Disk)
+- [Use the Toolkit with spark-submit](aut-spark-submit-app.md)
 
 ### What to do with Results
 
