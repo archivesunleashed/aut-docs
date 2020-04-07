@@ -6,7 +6,9 @@ DataFrame is most cases.
 
 The extration jobs have a basic outline of:
 
-`spark-submit --class io.archivesunleashed.app.CommandLinAppRunner PATH_TO_AUT_JAR --extractor EXTRACTOR --input INPUT DIRECTORY --output OUTPUT DIRECTORY`
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLinAppRunner PATH_TO_AUT_JAR --extractor EXTRACTOR --input INPUT DIRECTORY --output OUTPUT DIRECTORY
+```
 
 Additional flags include:
 
@@ -28,22 +30,29 @@ following columns: `domain`, and `count`.
 
 Directory of CSV files:
 
-* `spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainFrequencyExtractor --input /path/to/warcs/* --output output/path`
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainFrequencyExtractor --input /path/to/warcs/* --output output/path
+ ```
 
 A single CSV file:
 
-* `spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainFrequencyExtractor --input /path/to/warcs/* --output output/path --partition 1`
-
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainFrequencyExtractor --input /path/to/warcs/* --output output/path --partition 1
+```
 
 ### DataFrame
 
 Directory of CSV files:
 
-* `spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainFrequencyExtractor --input /path/to/warcs/* --output output/path --df`
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainFrequencyExtractor --input /path/to/warcs/* --output output/path --df
+```
 
 A single CSV file:
 
-* `spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainFrequencyExtractor --input /path/to/warcs/* --output output/path --df --partition 1`
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainFrequencyExtractor --input /path/to/warcs/* --output output/path --df --partition 1
+```
 
 ## Domain Graph
 
@@ -57,13 +66,18 @@ columns are an array:
 `((CrawlDate, SourceDomain, DestinationDomain), Frequency)`
 
 ### DataFrame
+
 Directory of CSV files:
 
-* `spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df`
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df
+```
 
 A single CSV file:
 
-* `spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df --partition 1`
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df --partition 1
+```
 
 ## Image Graph
 
@@ -76,12 +90,15 @@ following columns: `crawl_date`, `src`, `image_url`, and `alt_text`.
 
 Directory of CSV files:
 
-* `spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df`
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df
+```
 
 A single CSV file:
 
-* `spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df --partition 1`
-
+``` shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df --partition 1
+```
 
 ## Plain Text
 
@@ -92,22 +109,29 @@ following columns: `crawl_date`, `domain`, `url`, and `text`.
 
 Directory of CSV files:
 
-* `spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor PlainTextExtractor --input /path/to/warcs/* --output output/path`
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor PlainTextExtractor --input /path/to/warcs/* --output output/path
+```
 
 A single CSV file:
 
-* `spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor PlainTextExtractor --input /path/to/warcs/* --output output/path --partition 1`
-
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor PlainTextExtractor --input /path/to/warcs/* --output output/path --partition 1
+```
 
 ### DataFrame
 
 Directory of CSV files:
 
-* `spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df`
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df
+```
 
 A single CSV file:
 
-* `spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df --partition 1`
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df --partition 1
+```
 
 ## Web Pages
 
@@ -121,8 +145,12 @@ following columns: `crawl_date`, `url`, `mime_type_web_server`,
 
 Directory of CSV files:
 
-* `spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor WebPagesExtractor --input /path/to/warcs/* --output output/path --df`
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor WebPagesExtractor --input /path/to/warcs/* --output output/path --df
+```
 
 A single CSV file:
 
-* `spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor WebPagesExtractor --input /path/to/warcs/* --output output/path --df --partition 1`
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor WebPagesExtractor --input /path/to/warcs/* --output output/path --df --partition 1
+```
