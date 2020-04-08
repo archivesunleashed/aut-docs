@@ -66,18 +66,30 @@ following columns: `crawl_date`, `src_domain`, `dest_domain`, and `count`.
 columns are an array:
 `((CrawlDate, SourceDomain, DestinationDomain), Frequency)`
 
-### DataFrame
-
-Directory of CSV files:
+Text output:
 
 ```shell
-spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --output-format TEXT
 ```
 
-A single CSV file:
+GEXF output:
 
 ```shell
-spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df --partition 1
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --output-format GEXF
+```
+
+### DataFrame
+
+Text output:
+
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --df --output-format TEXT
+```
+
+GEXF output:
+
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --df --output-format GEXF
 ```
 
 ## Image Graph
