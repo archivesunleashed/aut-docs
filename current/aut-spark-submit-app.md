@@ -69,13 +69,13 @@ columns are an array:
 Text output:
 
 ```shell
-spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --output-format TEXT
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --output-format TEXT
 ```
 
 GEXF output:
 
 ```shell
-spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --output-format GEXF
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --output-format GEXF
 ```
 
 ### DataFrame
@@ -83,13 +83,13 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 Text output:
 
 ```shell
-spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df --output-format TEXT
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --df --output-format TEXT
 ```
 
 GEXF output:
 
 ```shell
-spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --df --output-format GEXF
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --df --output-format GEXF
 ```
 
 ## Image Graph
