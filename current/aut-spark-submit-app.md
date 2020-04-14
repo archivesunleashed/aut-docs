@@ -58,7 +58,10 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 ## Domain Graph
 
 This extractor outputs a directory of CSV files or a single CSV file with the
-following columns: `crawl_date`, `src_domain`, `dest_domain`, and `count`.
+following columns: `crawl_date`, `src_domain`, `dest_domain`, and `count`. In
+addition to the standard text output, an additional flag `--output-format` can
+output [GraphML](https://en.wikipedia.org/wiki/GraphML), or
+[GEXF](https://gephi.org/gexf/format/).
 
 ### RDD
 
@@ -78,6 +81,12 @@ GEXF output:
 spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --output-format GEXF
 ```
 
+GraphML output:
+
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --output-format GRAPHML
+```
+
 ### DataFrame
 
 Text output:
@@ -90,6 +99,12 @@ GEXF output:
 
 ```shell
 spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --df --output-format GEXF
+```
+
+GraphML output:
+
+```shell
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --df --output-format GRAPHML
 ```
 
 ## Image Graph
