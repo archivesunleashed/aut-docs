@@ -57,7 +57,7 @@ val links = warcs
   .countItems()
   .filter(r => r._2 > 5)
 
-WriteGraph.asGraphml(links, "/path/to/derivatives/auk/graph/example.graphml")
+WriteGraphml(links, "/path/to/derivatives/auk/graph/example.graphml")
 
 sys.exit
 ```
