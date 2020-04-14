@@ -1,0 +1,20 @@
+name: markdownlint
+
+on: [push, pull_request]
+
+jobs:
+  delivery:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install Ruby 2.6
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    - name: Install mdl
+      run: gem install mdl
+    - name: Check out code
+      uses: actions/checkout@master
+    - name: Run mdl
+      run: mdl -s ".github/workflows/mdl-config.rb" current

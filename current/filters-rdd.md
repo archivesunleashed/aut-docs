@@ -1,9 +1,10 @@
-# Filters
+# Filters RDD
 
-The following filters can be used on any `RecordLoader` DataFrames or RDDs.
+The following filters can be used on any `RecordLoader` RDDs.
 
 **How do I...**
 
+- [Keep Valid Pages](filters.md#keep-valid-pages)
 - [Keep Images](filters.md#keep-images)
 - [Keep MIME Types (web server)](filters.md#keep-mime-types-web-server)
 - [Keep MIME Types (Apache Tika)](filters.md#keep-mime-types-apache-tika)
@@ -24,26 +25,42 @@ The following filters can be used on any `RecordLoader` DataFrames or RDDs.
 - [Discard Languages](filters.md#discard-languages)
 - [Discard Content](filters.md#discard-content)
 
-## Keep Images
+## Keep Valid Pages
 
-Removes all data except images. 
+Removes all pages that do not have a crawl date and is a robots.txt file, and
+keeps pages that are of the MIME type `text/html`, `application/xhtml+xml`, or
+ends with `html` or `html`, and have a `200` HTTP response status code.
 
 ### Scala RDD
 
 ```scala
 import io.archivesunleashed._
 
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.keepImages()
+RecordLoader.loadArchives("/path/to/warcs",sc).keepValidPages()
 ```
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+RecordLoader.loadArchives("/path/to/warcs",sc).all().keepValidPagesDF()
+```
 
 ### Python DF
 
-TODO
+**To be implemented.**
+
+## Keep Images
+
+Removes all data except images.
+
+### Scala RDD
+
+```scala
+import io.archivesunleashed._
+
+RecordLoader.loadArchives("/path/to/warcs",sc).keepImages()
+```
 
 ## Keep MIME Types (web server)
 
@@ -54,18 +71,10 @@ Removes all data but selected MIME Types (identified by the web server).
 ```scala
 import io.archivesunleashed._
 
-val mimetypes = Set("text/html", "text/plain")
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.keepMimeTypes(mimetypes)
+val mimeTypes = Set("text/html", "text/plain")
+
+RecordLoader.loadArchives("/path/to/warcs",sc).keepMimeTypes(mimeTypes)
 ```
-
-### Scala DF
-
-TODO
-
-### Python DF
-
-TODO
 
 ## Keep MIME Types (Apache Tika)
 
@@ -77,17 +86,9 @@ Removes all data but selected MIME Types (identified by [Apache Tika](https://ti
 import io.archivesunleashed._
 
 val mimetypes = Set("text/html", "text/plain")
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.keepMimeTypesTika(mimetypes)
+
+RecordLoader.loadArchives("/path/to/warcs",sc).keepMimeTypesTika(mimetypes)
 ```
-
-### Scala DF
-
-TODO
-
-### Python DF
-
-TODO
 
 ## Keep HTTP Status
 
@@ -99,17 +100,9 @@ Removes all data that does not have selected status codes specified.
 import io.archivesunleashed._
 
 val statusCodes = Set("200", "404")
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.keepHttpStatus(statusCodes)
+
+RecordLoader.loadArchives("/path/to/warcs",sc).keepHttpStatus(statusCodes)
 ```
-
-### Scala DF
-
-TODO
-
-### Python DF
-
-TODO
 
 ## Keep Dates
 
@@ -121,17 +114,9 @@ Removes all data that does not have selected date.
 import io.archivesunleashed._
 
 val val dates = List("2008", "200908", "20070502")
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.keepDate(dates)
+
+RecordLoader.loadArchives("/path/to/warcs",sc).keepDate(dates)
 ```
-
-### Scala DF
-
-TODO
-
-### Python DF
-
-TODO
 
 ## Keep URLs
 
@@ -143,17 +128,9 @@ Removes all data but selected exact URLs.
 import io.archivesunleashed._
 
 val val urls = Set("archive.org", "uwaterloo.ca", "yorku.ca")
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.keepUrls(urls)
+
+RecordLoader.loadArchives("/path/to/warcs",sc).keepUrls(urls)
 ```
-
-### Scala DF
-
-TODO
-
-### Python DF
-
-TODO
 
 ## Keep URL Patterns
 
@@ -165,17 +142,9 @@ Removes all data but selected URL patterns (regex).
 import io.archivesunleashed._
 
 val val urls = Set(archive.r, sloan.r, "".r)
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.keepUrlPatterns(urls)
+
+RecordLoader.loadArchives("/path/to/warcs",sc).keepUrlPatterns(urls)
 ```
-
-### Scala DF
-
-TODO
-
-### Python DF
-
-TODO
 
 ## Keep Domains
 
@@ -187,17 +156,9 @@ Removes all data but selected source domains.
 import io.archivesunleashed._
 
 val val doamins = Set("www.archive.org", "www.sloan.org")
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.keepDomains(domains)
+
+RecordLoader.loadArchives("/path/to/warcs",sc).keepDomains(domains)
 ```
-
-### Scala DF
-
-TODO
-
-### Python DF
-
-TODO
 
 ## Keep Languages
 
@@ -209,17 +170,9 @@ Removes all data not in selected language ([ISO 639-2 codes](https://www.loc.gov
 import io.archivesunleashed._
 
 val val languages = Set("en", "fr")
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.keepLanguages(languages)
+
+RecordLoader.loadArchives("/path/to/warcs",sc).keepLanguages(languages)
 ```
-
-### Scala DF
-
-TODO
-
-### Python DF
-
-TODO
 
 ## Keep Content
 
@@ -231,17 +184,9 @@ Removes all content that does not pass Regular Expression test.
 import io.archivesunleashed._
 
 val val content = Set(regex, raw"UNINTELLIBLEDFSJKLS".r)
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.keepContent(content)
+
+RecordLoader.loadArchives("/path/to/warcs",sc).keepContent(content)
 ```
-
-### Scala DF
-
-TODO
-
-### Python DF
-
-TODO
 
 ## Discard MIME Types (web server)
 
@@ -252,25 +197,10 @@ Filters out detected MIME Types (identified by the web server).
 ```scala
 import io.archivesunleashed._
 
-val mimetypes = Set("text/html", "text/plain")
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.discardMimeTypes(mimetypes)
+val mimeTypes = Set("text/html", "text/plain")
+
+RecordLoader.loadArchives("/path/to/warcs",sc).discardMimeTypes(mimeTypes)
 ```
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-RecordLoader.loadArchives("example.warc.gz",sc)
-  .webpages()
-  .discardMimeTypesDF(Set("text/html"))
-```
-
-### Python DF
-
-TODO
 
 ## Discard MIME Types (Apache Tika)
 
@@ -281,18 +211,10 @@ Filters out detected MIME Types (identified by [Apache Tika](https://tika.apache
 ```scala
 import io.archivesunleashed._
 
-val mimetypes = Set("text/html", "text/plain")
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.discardMimeTypesTika(mimetypes)
+val mimeTypes = Set("text/html", "text/plain")
+
+RecordLoader.loadArchives("/path/to/warcs",sc).discardMimeTypesTika(mimeTypes)
 ```
-
-### Scala DF
-
-TODO
-
-### Python DF
-
-TODO
 
 ## Discard HTTP Status
 
@@ -304,17 +226,9 @@ Filters out detected HTTP status codes.
 import io.archivesunleashed._
 
 val statusCodes = Set("200", "404")
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.discardHttpStatus(statusCodes)
+
+RecordLoader.loadArchives("/path/to/warcs",sc).discardHttpStatus(statusCodes)
 ```
-
-### Scala DF
-
-TODO
-
-### Python DF
-
-TODO
 
 ## Discard Dates
 
@@ -326,24 +240,9 @@ Filters out detected dates.
 import io.archivesunleashed._
 
 val val dates = List("2008", "200908", "20070502")
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.discardDate(dates)
+
+RecordLoader.loadArchives("/path/to/warcs",sc).discardDate(dates)
 ```
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-RecordLoader.loadArchives("example.warc.gz",sc)
-  .webpages()
-  .discardDateDF("20080429")
-```
-
-### Python DF
-
-TODO
 
 ## Discard URLs
 
@@ -355,24 +254,9 @@ Filters out detected URLs.
 import io.archivesunleashed._
 
 val val urls = Set("archive.org", "uwaterloo.ca", "yorku.ca")
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.discardUrls(urls)
+
+RecordLoader.loadArchives("/path/to/warcs",sc).discardUrls(urls)
 ```
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-RecordLoader.loadArchives("example.warc.gz",sc)
-  .webpages()
-  .discardUrlsDF(Set("http://www.archive.org/"))
-```
-
-### Python DF
-
-TODO
 
 ## Discard URL Patterns
 
@@ -384,17 +268,9 @@ Filters out detected URL patterns (regex).
 import io.archivesunleashed._
 
 val val urls = Set(archive.r, sloan.r, "".r)
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.discardUrlPatterns(urls)
+
+RecordLoader.loadArchives("/path/to/warcs",sc).discardUrlPatterns(urls)
 ```
-
-### Scala DF
-
-TODO
-
-### Python DF
-
-TODO
 
 ## Discard Domains
 
@@ -406,24 +282,9 @@ Filters out detected source domains.
 import io.archivesunleashed._
 
 val val doamins = Set("www.archive.org", "www.sloan.org")
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.discardDomains(domains)
+
+RecordLoader.loadArchives("/path/to/warcs",sc).discardDomains(domains)
 ```
-
-### Scala DF
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.df._
-
-RecordLoader.loadArchives("example.warc.gz",sc)
-  .webpages()
-  .discardDomainsDF(Set("www.archive.org"))
-```
-
-### Python DF
-
-TODO
 
 ## Discard Languages
 
@@ -435,17 +296,9 @@ Filters out detected languages ([ISO 639-2 codes](https://www.loc.gov/standards/
 import io.archivesunleashed._
 
 val val languages = Set("en", "fr")
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.keepLanguages(languages)
+
+RecordLoader.loadArchives("/path/to/warcs",sc).keepLanguages(languages)
 ```
-
-### Scala DF
-
-TODO
-
-### Python DF
-
-TODO
 
 ## Discard Content
 
@@ -457,14 +310,6 @@ Filters out detected content that does pass Regular Expression test.
 import io.archivesunleashed._
 
 val val content = Set(regex, raw"UNINTELLIBLEDFSJKLS".r)
-val r = RecordLoader.loadArchives("example.warc.gz",sc)
-r.discardContent(content)
+
+RecordLoader.loadArchives("/path/to/warcs",sc).discardContent(content)
 ```
-
-### Scala DF
-
-TODO
-
-### Python DF
-
-TODO

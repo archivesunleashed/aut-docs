@@ -5,8 +5,7 @@
 - [Extract Most Frequent Images MD5 Hash](#Extract-Most-Frequent-Images-MD5-Hash)
 - [Find Images Shared Between Domains](#Find-Images-Shared-Between-Domains)
 
-The Archives Unleashed Toolkit supports image analysis, a growing area of
-interest within web archives.
+The Archives Unleashed Toolkit supports image analysis, a growing area of interest within web archives.
 
 ## Extract Image Information
 
@@ -29,20 +28,19 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
   .show()
 ```
 
-Will extract all following information from images in a web collection:
+Will extract all following information from images in a web colllection:
+  - image url
+  - filename
+  - extension
+  - MimeType as identified by the hosting web server
+  - MimeType as identified by [Apache Tika](https://tika.apache.org)
+  - Width
+  - Height
+  - md5 hash
+  - sha1 hash
+  - bytes
 
-- image url
-- filename
-- extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- Width
-- Height
-- md5 hash
-- sha1 hash
-- bytes
-
-```dataframe
+```
 +--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server|mime_type_tika|width|height|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+--------------------+
@@ -75,8 +73,7 @@ import io.archivesunleashed.df._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 7 more fields]
 ```
 
-If you wanted to work with all the images in a collection, you could extract
-them with the following script:
+If you wanted to work with all the images in a collection, you could extract them with the following script:
 
 ```scala
 import io.archivesunleashed._
@@ -101,20 +98,19 @@ df = archive.images()
 df.show()
 ```
 
-Will extract all following information from images in a web collection:
+Will extract all following information from images in a web colllection:
+  - image url
+  - filename
+  - extension
+  - MimeType as identified by the hosting web server
+  - MimeType as identified by [Apache Tika](https://tika.apache.org)
+  - Width
+  - Height
+  - md5 hash
+  - sha1 hash
+  - bytes
 
-- image url
-- filename
-- extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- Width
-- Height
-- md5 hash
-- sha1 hash
-- bytes
-
-```dataframe
+```
 +--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+--------------------+
 |                 url|            filename|extension|mime_type_web_server|mime_type_tika|width|height|                 md5|                sha1|               bytes|
 +--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+--------------------+
@@ -158,31 +154,21 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .countItems()
   .take(10)
 ```
+Will extract the top ten URLs of images found within a collection, in an array like so:
 
-Will extract the top ten URLs of images found within a collection, in an array
-like so:
-
-```scala
+```
 links: Array[(String, Int)] = Array((http://www.archive.org/images/star.png,408), (http://www.archive.org/images/no_star.png,122), (http://www.archive.org/images/logo.jpg,118), (http://www.archive.org/images/main-header.jpg,84), (http://www.archive.org/images/rss.png,20), (http://www.archive.org/images/mail.gif,13), (http://www.archive.org/images/half_star.png,10), (http://www.archive.org/images/arrow.gif,7), (http://ia300142.us.archive.org/3/items/americana/am_libraries.gif?cnt=0,3), (http://ia310121.us.archive.org/2/items/GratefulDead/gratefuldead.gif?cnt=0,3), (http://www.archive.org/images/wayback.gif,2), (http://www.archive.org/images/wayback-election2000.gif,2), (http://www.archive.org/images/wayback-wt...
 ```
 
-If you wanted to work with the images, you could download them from the
-Internet Archive.
+If you wanted to work with the images, you could download them from the Internet Archive.
 
-Let's use the top-ranked example. [This
-link](http://web.archive.org/web/*/http://archive.org/images/star.png), for
-example, will show you the temporal distribution of the image. For a snapshot
-from September 2007, this URL would work:
+Let's use the top-ranked example. [This link](http://web.archive.org/web/*/http://archive.org/images/star.png), for example, will show you the temporal distribution of the image. For a snapshot from September 2007, this URL would work:
 
 <http://web.archive.org/web/20070913051458/http://www.archive.org/images/star.png>
 
-To do analysis on all images, you could thus prepend
-`http://web.archive.org/web/20070913051458/` to each URL and `wget` them en
-masse.
+To do analysis on all images, you could thus prepend `http://web.archive.org/web/20070913051458/` to each URL and `wget` them en masse.
 
-For more information on `wget`, please consult [this lesson available on the
-Programming Historian
-website](http://programminghistorian.org/lessons/automated-downloading-with-wget).
+For more information on `wget`, please consult [this lesson available on the Programming Historian website](http://programminghistorian.org/lessons/automated-downloading-with-wget).
 
 ### Scala DF
 
@@ -200,10 +186,9 @@ df.groupBy($"image_url")
   .show(10)
 ```
 
-Will extract the top ten URLs of images found within a collection, in a
-DataFrame like so:
+Will extract the top ten URLs of images found within a collection, in a DataFrame like so:
 
-```dataframe
+```
 +--------------------+-----+
 |           image_url|count|
 +--------------------+-----+
@@ -242,10 +227,9 @@ df.groupBy("image_url")
   .show(10)
 ```
 
-Will extract the top ten URLs of images found within a collection, in a
-DataFrame like so:
+Will extract the top ten URLs of images found within a collection, in a DataFrame like so:
 
-```dataframe
+```
 +--------------------+-----+
 |           image_url|count|
 +--------------------+-----+
@@ -264,9 +248,7 @@ DataFrame like so:
 
 ## Extract Most Frequent Images MD5 Hash
 
-Some images may be the same, but have different URLs. This UDF finds the
-popular images by calculating the MD5 hash of each and presenting the most
-frequent images based on that metric. This script:
+Some images may be the same, but have different URLs. This UDF finds the popular images by calculating the MD5 hash of each and presenting the most frequent images based on that metric. This script:
 
 ```scala
 import io.archivesunleashed._
@@ -296,8 +278,7 @@ TODO
 
 ## Find Images Shared Between Domains
 
-How to find images shared between domains that appear more than once _in more
-than one domain_.
+How to find images shared between domains that appear more than once _in more than one domain_.
 
 ### Scala DF
 
