@@ -336,17 +336,17 @@ val links = RecordLoader.loadArchives("/path/to/warcs", sc)
   .countItems()
   .filter(r => r._2 > 5)
 
-WriteGraph(links, "links-for-gephi.gexf")
+WriteGEXF(links, "links-for-gephi.gexf")
 ```
 
 This file can then be directly opened by Gephi.
 
 We also support exporting to the
-[GraphML](https://en.wikipedia.org/wiki/GraphML) format. To do so, the
-following variation on `WriteGraph` will work:
+[GraphML](https://en.wikipedia.org/wiki/GraphML) format. To do so, use
+the `WriteGraphml` method:
 
 ```scala
-WriteGraph.asGraphml(links, "links-for-gephi.graphml")
+WriteGraphml(links, "links-for-gephi.graphml")
 ```
 
 ### Scala DF
