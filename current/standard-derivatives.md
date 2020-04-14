@@ -47,7 +47,7 @@ warcs.map(r => ExtractDomainRDD(r.getUrl))
 warcs.map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("/path/to/derivatives/auk/full-text/output")
 
-// Gephi GraphML.
+// GraphML.
 val links = warcs
   .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1,
@@ -57,7 +57,7 @@ val links = warcs
   .countItems()
   .filter(r => r._2 > 5)
 
-WriteGraph.asGraphml(links, "/path/to/derivatives/auk/graph/example.graphml")
+WriteGraphML(links, "/path/to/derivatives/auk/graph/example.graphml")
 
 sys.exit
 ```
@@ -67,30 +67,42 @@ sys.exit
 ```scala
 import io.archivesunleashed._
 import io.archivesunleashed.df._
+import io.archivesunleashed.app._
 
 sc.setLogLevel("INFO")
 
-// Web archive collection.
-val warcs = RecordLoader.loadArchives("/path/to/data", sc)
+// Web archive collection; web pages.
+val webpages = RecordLoader.loadArchives("/path/to/data", sc)
   .webpages()
 
+// Web archive collection; web graph.
+val webgraph = RecordLoader.loadArchives("/path/to/data", sc)
+  .webgraph()
+
 // Domains file.
-warcs.groupBy(ExtractDomainDF($"Url").alias("url"))
+webpages.groupBy(ExtractDomainDF($"Url").alias("url"))
   .count()
   .sort($"count".desc)
   .write.csv("/path/to/derivatives/auk/all-domains/output")
 
 // Full-text.
-warcs.select($"crawl_date", ExtractDomainDF(($"url").alias("domain")), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF(($"content"))))
+webpages.select($"crawl_date", ExtractDomainDF(($"url").alias("domain")), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF(($"content"))))
   .write.csv("/path/to/derivatives/auk/full-text/output")
 
-// TODO See: https://github.com/archivesunleashed/aut/issues/223
-//val links = validPages
-//  .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
-//  .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\\\s*www\\\\.", ""), ExtractDomain(f._2).replaceAll("^\\\\s*www\\\\.", ""))))
-//  .filter(r => r._2 != "" && r._3 != "")
-//  .countItems()
-//  .filter(r => r._2 > 5)
+// GraphML
+val graph = webgraph.groupBy(
+                       $"crawl_date",
+                       RemovePrefixWWWDF(ExtractDomainDF($"src")).as("src_domain"),
+                       RemovePrefixWWWDF(ExtractDomainDF($"dest")).as("dest_domain"))
+              .count()
+              .filter(!($"dest_domain"===""))
+              .filter(!($"src_domain"===""))
+              .filter($"count" > 5)
+              .orderBy(desc("count"))
+
+WriteGraphML(graph.collect(), "/path/to/derivatives/auk/graph/example.graphml")
+
+sys.exit
 ```
 
 ### Python DF
