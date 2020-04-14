@@ -47,24 +47,63 @@ warcs.map(r => ExtractDomainRDD(r.getUrl))
 warcs.map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
   .saveAsTextFile("/path/to/derivatives/auk/full-text/output")
 
-// Gephi GraphML.
+// GraphML.
 val links = warcs
   .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1,
-                               ExtractDomainRDD(f._1).replaceAll("^\\\\s*www\\\\.", ""),
-                               ExtractDomainRDD(f._2).replaceAll("^\\\\s*www\\\\.", ""))))
+                               ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""),
+                               ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)
 
-WriteGraphml(links, "/path/to/derivatives/auk/graph/example.graphml")
+WriteGraphML(links, "/path/to/derivatives/auk/graph/example.graphml")
 
 sys.exit
 ```
 
 ### Scala DF
 
-TODO
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.df._
+import io.archivesunleashed.app._
+
+sc.setLogLevel("INFO")
+
+// Web archive collection; web pages.
+val webpages = RecordLoader.loadArchives("/path/to/data", sc)
+  .webpages()
+
+// Web archive collection; web graph.
+val webgraph = RecordLoader.loadArchives("/path/to/data", sc)
+  .webgraph()
+
+// Domains file.
+webpages.groupBy(ExtractDomainDF($"Url").alias("url"))
+  .count()
+  .sort($"count".desc)
+  .write.csv("/path/to/derivatives/auk/all-domains/output")
+
+// Full-text.
+webpages.select($"crawl_date", ExtractDomainDF(($"url").alias("domain")), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF(($"content"))))
+  .write.csv("/path/to/derivatives/auk/full-text/output")
+
+// GraphML
+val graph = webgraph.groupBy(
+                       $"crawl_date",
+                       RemovePrefixWWWDF(ExtractDomainDF($"src")).as("src_domain"),
+                       RemovePrefixWWWDF(ExtractDomainDF($"dest")).as("dest_domain"))
+              .count()
+              .filter(!($"dest_domain"===""))
+              .filter(!($"src_domain"===""))
+              .filter($"count" > 5)
+              .orderBy(desc("count"))
+
+WriteGraphML(graph.collect(), "/path/to/derivatives/auk/graph/example.graphml")
+
+sys.exit
+```
 
 ### Python DF
 
