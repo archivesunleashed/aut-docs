@@ -3,7 +3,7 @@
 The Toolkit offers a variety of extraction jobs with
 [`spark-submit`](https://spark.apache.org/docs/latest/submitting-applications.html)
 . These extraction jobs have a few configuration options, and analysis can use
-RDD or DataFrame is most cases.
+RDD or DataFrame in most cases.
 
 The extraction jobs have a basic outline of:
 
