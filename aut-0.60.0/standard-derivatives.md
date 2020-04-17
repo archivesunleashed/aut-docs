@@ -86,7 +86,7 @@ webpages.groupBy(ExtractDomainDF($"Url").alias("url"))
   .write.csv("/path/to/derivatives/auk/all-domains/output")
 
 // Full-text.
-webpages.select($"crawl_date", ExtractDomainDF(($"url").alias("domain")), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF(($"content"))))
+webpages.select($"crawl_date", RemovePrefixWWWDF(ExtractDomainDF(($"url")).alias("domain")), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF(($"content"))))
   .write.csv("/path/to/derivatives/auk/full-text/output")
 
 // GraphML
