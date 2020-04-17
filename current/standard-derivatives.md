@@ -80,7 +80,7 @@ val webgraph = RecordLoader.loadArchives("/path/to/data", sc)
   .webgraph()
 
 // Domains file.
-webpages.groupBy(ExtractDomainDF($"Url").alias("url"))
+webpages.groupBy(RemovePrefixWWWDF(ExtractDomainDF($"Url")).alias("url"))
   .count()
   .sort($"count".desc)
   .write.csv("/path/to/derivatives/auk/all-domains/output")
