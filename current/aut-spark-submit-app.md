@@ -25,7 +25,6 @@ Additional flags include:
 This extractor outputs a directory of CSV files or a single CSV file with the
 following columns: `domain`, and `count`.
 
-
 Directory of CSV files:
 
 ```shell
