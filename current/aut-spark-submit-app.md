@@ -137,7 +137,7 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 ## Plain Text
 
 This extractor outputs a directory of CSV files or a single CSV file with the
-following columns: `crawl_date`, `domain`, `url`, and `text`.
+following columns: `content` (Boilerplate, HTTP headers, and HTML removed).
 
 Directory of CSV files:
 
