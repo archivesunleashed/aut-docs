@@ -13,7 +13,7 @@ spark-submit --class io.archivesunleashed.app.CommandLinAppRunner PATH_TO_AUT_JA
 Additional flags include:
 
 * `--output-format FORMAT` (Used only for the `DomainGraphExtractor`, and the
-  options are `CSV` (default) or `GEXF`.)
+  options are `csv` (default), `graphml`, or `gexf`.)
 * `--split` (The extractor will put results for each input file in its own
   directory. Each directory name will be the name of the ARC/WARC file parsed.)
 * `--partition N` (The extractor will partition the DataFrame according to N
@@ -66,19 +66,19 @@ output [GraphML](https://en.wikipedia.org/wiki/GraphML), or
 Text output:
 
 ```shell
-spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --output-format TEXT
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --output-format csv
 ```
 
 GEXF output:
 
 ```shell
-spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --output-format GEXF
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --output-format gexf
 ```
 
 GraphML output:
 
 ```shell
-spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --output-format GRAPHML
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor DomainGraphExtractor --input /path/to/warcs/* --output output/path --output-format graphml
 ```
 
 ## Image Graph
@@ -137,7 +137,7 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 ## Plain Text
 
 This extractor outputs a directory of CSV files or a single CSV file with the
-following columns: `crawl_date`, `domain`, `url`, and `text`.
+following columns: `content` (Boilerplate, HTTP headers, and HTML removed).
 
 Directory of CSV files:
 
@@ -276,5 +276,3 @@ A single CSV file:
 ```shell
 spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor WordProcessorInformationExtractor --input /path/to/warcs/* --output output/path --partition 1
 ```
-
-
