@@ -53,7 +53,7 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 
 ## Domain Frequency
 
-This extractor outputs a directory of CSV files or a single CSV file with the
+This extractor outputs a directory of files, or a single file with the
 following columns: `domain`, and `count`.
 
 Directory of CSV files:
@@ -82,7 +82,7 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 
 ## Domain Graph
 
-This extractor outputs a directory of CSV files or a single CSV file with the
+This extractor outputs a directory of files, or a single file with the
 following columns: `crawl_date`, `src_domain`, `dest_domain`, and `count`. In
 addition to the standard text output, an additional flag `--output-format` can
 output [GraphML](https://en.wikipedia.org/wiki/GraphML), or
@@ -114,7 +114,7 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 
 ## Image Graph
 
-This extractor outputs a directory of CSV files or a single CSV file with the
+This extractor outputs a directory of files, or a single file with the
 following columns: `crawl_date`, `src`, `image_url`, and `alt_text`.
 
 Directory of CSV files:
@@ -203,7 +203,7 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 
 ## Plain Text
 
-This extractor outputs a directory of CSV files or a single CSV file with the
+This extractor outputs a directory of files, or a single file with the
 following columns: `content` (Boilerplate, HTTP headers, and HTML removed).
 
 Directory of CSV files:
@@ -381,7 +381,7 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 
 ## Web Pages
 
-This extractor outputs a directory of CSV files or a single CSV file with the
+This extractor outputs a directory of files, or a single file with the
 following columns: `crawl_date`, `domain` (www prefix removed), `url`,
 `mime_type_web_server`, `mime_type_tika`, and `content`
 (HTTP headers, and HTML removed).
