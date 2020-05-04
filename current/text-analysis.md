@@ -275,7 +275,7 @@ would select just the lines beginning with `(201204`, or April 2012.
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val dates = Array("2008", "2015") 
+val dates = Array("2008", "2015")
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select($"crawl_date", ExtractDomainDF($"url").as("domain"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")).as("content"))
