@@ -82,9 +82,11 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
+val content = Array("radio")
+
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .keepContentDF(Set("apple".r))
+  .filter($"content", lit(content))
   .select(explode(ExtractLinksDF($"url", $"content")).as("links"))
   .select(RemovePrefixWWWDF(ExtractDomainDF(col("links._1"))).as("src"), RemovePrefixWWWDF(ExtractDomainDF(col("links._2"))).as("dest"))
   .groupBy("src", "dest")
@@ -179,9 +181,11 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
+val urlPattern = Array("(?i)http://www.archive.org/details/.*")
+
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .keepUrlPatternsDF(Set("(?i)http://www.archive.org/details/.*".r))
+  .filter($"url", lit(urlPattern))
   .select(explode(ExtractLinksDF($"url", $"content")).as("links")
   .select(RemovePrefixWWWDF(ExtractDomainDF(col("links._1"))).as("src"), RemovePrefixWWWDF(ExtractDomainDF(col("links._2"))).as("dest"))
   .groupBy("src", "dest")
@@ -298,9 +302,11 @@ val links = RecordLoader.loadArchives("/path/to/warcs", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
+val urlPattern = Array("http://www.archive.org/details/.*")
+
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .keepUrlPatternsDF(Set("http://www.archive.org/details/.*".r))
+  .filter($"url", lit(urlPattern))
   .select(explode(ExtractLinksDF($"url", $"content")).as("links"))
   .select(RemovePrefixWWWDF(ExtractDomainDF(col("links._1"))).as("src"), RemovePrefixWWWDF(ExtractDomainDF(col("links._2"))).as("dest"))
   .groupBy("src", "dest")
