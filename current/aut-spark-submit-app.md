@@ -7,7 +7,7 @@ The Toolkit offers a variety of extraction jobs with
 The extraction jobs have a basic outline of:
 
 ```shell
-spark-submit --class io.archivesunleashed.app.CommandLinAppRunner PATH_TO_AUT_JAR --extractor EXTRACTOR --input INPUT DIRECTORY --output OUTPUT DIRECTORY
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner PATH_TO_AUT_JAR --extractor EXTRACTOR --input INPUT DIRECTORY --output OUTPUT DIRECTORY
 ```
 
 Additional flags include:
