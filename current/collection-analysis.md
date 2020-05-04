@@ -131,12 +131,12 @@ What do I do with the results? See [this guide](rdd-results.md)!
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val urlPattern = Set("""http://[^/]+/[^/]+/""".r)
+val urlPattern = Array("""http://[^/]+/[^/]+/""".r)
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select($"url")
-  .keepUrlPatternsDF(urlPattern)
+  .filter(hasUrlPattern($"url", lit(urlPattern)))
   .show(10, false)
 ```
 

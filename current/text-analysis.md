@@ -115,10 +115,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
+val domains = Array("www.archive.org")
+
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .keepDomainsDF(Set("www.archive.org"))
-  .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
+  .select($"crawl_date", ExtractDomainDF($"url").alias("domains"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content").alias("content")))
+  .filter(hasDomains($"domain", lit(domains)))
   .write.csv("plain-text-domain-df/")
 ```
 
@@ -154,10 +156,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
+val urlPattern = Array("(?i)http://www.archive.org/details/.*")
+
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .keepUrlPatternsDF(Set("(?i)http://www.archive.org/details/.*".r))
-  .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
+  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content").alias("content")))
+  .filter(hasUrlPatterns($"url", lit(urlsPattern)))
   .write.csv("details-df/")
 ```
 
@@ -271,10 +275,11 @@ would select just the lines beginning with `(201204`, or April 2012.
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
+val dates = Array("2008", "2015")
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .keepDateDF(List("2008","2015"), "YYYY")
   .select($"crawl_date", ExtractDomainDF($"url").as("domain"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")).as("content"))
+  .filter(hasDate($"crawl_date", lit(dates)))
   .write.csv("plain-text-date-filtered-2008-2015-df/")
 ```
 
@@ -308,11 +313,16 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
+val domains = Array("www.archive.org")
+val languages = Array("fr")
+
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .keepDomainsDF(Set("www.archive.org"))
   .keepLanguagesDF(Set("fr"))
-  .select($"crawl_date", ExtractDomainDF($"url"), $"url", $"language", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
+  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", $"language", RemoveHTMLDF(RemoveHTTPHeaderDF($"content").alias("content")))
+  .filter(hasDomains($"domain", lit(domains)))
+  .filter(hasLanguages($"language", lit(languages)))
   .write.csv("plain-text-fr-df/")
 ```
 
@@ -320,11 +330,14 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
+val domains = Array("www.archive.org")
+val languages = Array("fr")
+
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .keepDomainsDF(Set("www.archive.org"))
-  .filter($"language" === "fr")
-  .select($"crawl_date", ExtractDomainDF($"url"), $"url", $"language", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
+  .filter(hasDomains(ExtractDomainDF($"url"), lit(domains)))
+  .filter(hasLanguages($"language", lit(languages)))
+  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", $"language", RemoveHTMLDF(RemoveHTTPHeaderDF($"content").alias("content")))
   .write.csv("plain-text-fr-df/")
 ```
 
@@ -363,10 +376,12 @@ in.
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
+val content = Array("radio")
+
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .keepContentDF(Set("radio".r))
-  .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
+  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content").alias("content")))
+  .filter(hasContent($"content", lit(content)))
   .write.csv("plain-text-radio-df/")
 ```
 

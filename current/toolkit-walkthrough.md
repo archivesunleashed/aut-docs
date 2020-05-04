@@ -202,8 +202,8 @@ val domains = Set("www.liberal.ca")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .keepDomainsDF(domains)
   .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF($"content").alias("content"))
+  .filter(hasDomains($"domain", lit(domains)))
   .write.csv("/data/liberal-party-text")
 ```
 
@@ -234,8 +234,8 @@ val domains = Set("www.liberal.ca")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .keepDomainsDF(domains)
   .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF($"content").alias("content"))
+  .filter(hasDomains($"domain", lit(domains)))
   .write.csv("/data/liberal-party-text")
 ```
 
@@ -256,21 +256,20 @@ Good luck!
 
 ## Other Text Analysis Filters
 
-Take some time to explore the various options and variables that you can swap
-in and around the `.keepDomainsDF` line. Check out the
-[documentation](https://github.com/archivesunleashed/aut-docs/blob/master/aut-0.50.0/text-analysis.md)
+Take some time to explore the various filters that you can use. Check out the
+[documentation](https://github.com/archivesunleashed/aut-docs/blob/master/aut-0.60.0/filters-df.md)
 for some ideas.
 
 Some options:
 
 - **Keep URL Patterns**: Instead of domains, what if you wanted to have text
-  relating to just a certain pattern? Substitute `.keepDomainsDF` for a command
+  relating to just a certain pattern? Substitute `hasDomains` for a command
   like:
-  `.keepUrlPatternsDF(Set("(?i)http://geocities.com/EnchantedForest/.*".r))`
+  `.filter(ExtractDomainDF($"url"), Array("(?i)http://geocities.com/EnchantedForest/.*"))`
 - **Filter by Date**: What if we just wanted data from 2006? You could add the
-  following command after `.webpages()`: `.keepDateDF(List("2006"), "YYYY")`
-- **Filter by Language**: What if you just want French-language pages? After
-  `.keepDomainsDF` add a new line: `.keepLanguagesDF(Set("fr"))`.
+  following command after `.webpages()`: `.filter(hasDates($"crawl_date", Array("2006")))`
+- **Filter by Language**: What if you just want French-language pages? Add
+  another filter: `.filter($"languages", Array("fr")))`.
 
 For example, if we just wanted the French-language Liberal pages, we would run:
 
@@ -283,8 +282,8 @@ val languages = Set("fr")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .keepDomainsDF(domains)
-  .keepLanguagesDF(languages)
+  .filter(hasDomains(ExtractDomainDF($"url"), lit(domains)))
+  .filter(hasLanguages($"language", lit(languages)))
   .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF($"content").alias("content"))
   .write.csv("/data/liberal-party-french-text")
 ```
@@ -295,9 +294,11 @@ Or if we wanted to just have pages from 2006, we would run:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
+val dates = Array("2006")
+
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .keepDateDF(List("2006"), "YYYY")
+  .filter(hasDate($"crawl_date", lit(dates)))
   .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF($"content").alias("content"))
   .write.csv("/data/2006-text")
 ```
@@ -362,18 +363,22 @@ format that the popular network analysis program Gephi can use.
 
 ```scala
 import io.archivesunleashed._
+import io.archivesunleashed.df._
 import io.archivesunleashed.app._
-import io.archivesunleashed.matchbox._
 
-val links = RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
-  .keepValidPages()
-  .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
-  .filter(r => r._2 != "" && r._3 != "")
-  .countItems()
-  .filter(r => r._2 > 5)
+val webgraph = RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc).webgraph()
 
-WriteGEXF(links, "/data/links-for-gephi.gexf")
+val graph = webgraph.groupBy(
+                            $"crawl_date",
+                            RemovePrefixWWWDF(ExtractDomainDF($"src")).as("src_domain"),
+                            RemovePrefixWWWDF(ExtractDomainDF($"dest")).as("dest_domain"))
+                    .count()
+                    .filter(!($"dest_domain"===""))
+                    .filter(!($"src_domain"===""))
+                    .filter($"count" > 5)
+                    .orderBy(desc("count"))
+
+WriteGEXF(graph.collect(), "/data/links-for-gephi.gexf")
 ```
 
 By now this should be seeming pretty straightforward! (remember to keep using
