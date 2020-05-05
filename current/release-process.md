@@ -18,7 +18,9 @@ To make sure the release goes smoothly, you should ensure that:
   if you haven't before and add it to the
   [contributor keys](https://github.com/archivesunleashed/aut/wiki/Release-Process#contributor-keys)
   list below
-* Your maven settings (`~/.m2/settings.xml`) includes the following:
+* Your maven settings (`~/.m2/settings.xml`) includes the following
+  ([there should **NOT** be a `username` element for `github`, and the
+  `password` value should be a configured token](https://github.com/github/maven-plugins#core-configuration)):
 
 ```xml
 <settings>
@@ -37,7 +39,6 @@ To make sure the release goes smoothly, you should ensure that:
     </server>
     <server>
       <id>github</id>
-      <username>your-github-id</username>
       <password>your-github-pwd</password>
     </server>
   </servers>
