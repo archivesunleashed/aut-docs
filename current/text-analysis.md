@@ -51,7 +51,14 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_html("content").alias("content"))
+  .write.csv("plain-text-df/")
+```
 
 ## Extract Plain Text Without HTTP Headers
 
@@ -87,7 +94,14 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select(Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .write.csv("plain-text-noheaders-df/")
+```
 
 ## Extract Plain Text By Domain
 
@@ -126,7 +140,14 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .write.csv("plain-text-domain-df/")
+```
 
 ## Extract Plain Text by URL Pattern
 
@@ -205,7 +226,14 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.extract_boilerplate(Udf.remove_http_header("content")).alias("content"))\
+  .write.csv("plain-text-no-boilerplate-df/")
+```
 
 ## Extract Plain Text Filtered by Date
 
@@ -424,7 +452,14 @@ RecordLoader.loadArchives("example.warc.gz", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_http_header("content").alias("content"))\
+  .write.csv("plain-html-df/")
+```
 
 ## Extract Named Entities
 
