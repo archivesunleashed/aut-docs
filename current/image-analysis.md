@@ -20,7 +20,7 @@ The following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).extractImageDetailsDF();
 
@@ -71,7 +71,7 @@ Will extract all following information from images in a web collection:
 only showing top 20 rows
 
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 7 more fields]
 ```
 
@@ -190,7 +190,7 @@ The following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).extractImageLinksDF();
 
@@ -221,7 +221,7 @@ DataFrame like so:
 only showing top 10 rows
 
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [src: string, image_url: string]
 ```
 
@@ -287,7 +287,7 @@ import io.archivesunleashed.app._
 
 val df = RecordLoader.loadArchives("/path/to/warcs",sc).images()
 
-ExtractPopularImagesDF(df,10,30,30).show()
+extractPopularImages(df,10,30,30).show()
 ```
 
 ### Python DF

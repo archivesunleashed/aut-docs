@@ -32,7 +32,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
   .select($"Url")
@@ -77,10 +77,10 @@ What do I do with the results? See [this guide](rdd-results.md)!
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
-  .select(ExtractDomainDF($"Url").as("Domain"))
+  .select(extractDomain($"Url").as("Domain"))
   .groupBy("Domain").count().orderBy(desc("count"))
   .show(20, false)
 ```
@@ -133,7 +133,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 ```scala
 
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val urlPattern = Array("""http://[^/]+/[^/]+/""".r)
 
@@ -171,7 +171,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .all()
@@ -226,7 +226,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .all()

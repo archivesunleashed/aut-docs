@@ -102,12 +102,12 @@ Now cut and paste the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .all()
   .keepValidPagesDF()
-  .groupBy(ExtractDomainDF($"url").alias("domain"))
+  .groupBy(extractDomain($"url").alias("domain"))
   .count()
   .sort($"count".desc)
   .show(10, false)
@@ -154,7 +154,7 @@ You should see:
 only showing top 10 rows
 
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 ```
 
 We like to use this example to do two things:
@@ -171,12 +171,12 @@ Remember to type `:paste`, paste the following command in, and then `ctrl` +
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/data/*.gz", sc)
   .all()
   .keepValidPagesDF()
-  .groupBy(ExtractDomainDF($"url").alias("domain"))
+  .groupBy(extractDomain($"url").alias("domain"))
   .count()
   .sort($"count".desc)
   .show(10, false)
@@ -196,13 +196,13 @@ and then press `ctrl` + `d`.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val domains = Set("www.liberal.ca")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF($"content").alias("content"))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML($"content").alias("content"))
   .filter(hasDomains($"domain", lit(domains)))
   .write.csv("/data/liberal-party-text")
 ```
@@ -228,13 +228,13 @@ Try running the **exact same script** that you did above.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val domains = Set("www.liberal.ca")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF($"content").alias("content"))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML($"content").alias("content"))
   .filter(hasDomains($"domain", lit(domains)))
   .write.csv("/data/liberal-party-text")
 ```
@@ -265,7 +265,7 @@ Some options:
 - **Keep URL Patterns**: Instead of domains, what if you wanted to have text
   relating to just a certain pattern? Substitute `hasDomains` for a command
   like:
-  `.filter(ExtractDomainDF($"url"), Array("(?i)http://geocities.com/EnchantedForest/.*"))`
+  `.filter(extractDomain($"url"), Array("(?i)http://geocities.com/EnchantedForest/.*"))`
 - **Filter by Date**: What if we just wanted data from 2006? You could add the
   following command after `.webpages()`: `.filter(hasDates($"crawl_date", Array("2006")))`
 - **Filter by Language**: What if you just want French-language pages? Add
@@ -275,16 +275,16 @@ For example, if we just wanted the French-language Liberal pages, we would run:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val domains = Set("www.liberal.ca")
 val languages = Set("fr")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .filter(hasDomains(ExtractDomainDF($"url"), lit(domains)))
+  .filter(hasDomains(extractDomain($"url"), lit(domains)))
   .filter(hasLanguages($"language", lit(languages)))
-  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF($"content").alias("content"))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML($"content").alias("content"))
   .write.csv("/data/liberal-party-french-text")
 ```
 
@@ -292,14 +292,14 @@ Or if we wanted to just have pages from 2006, we would run:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val dates = Array("2006")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
   .filter(hasDate($"crawl_date", lit(dates)))
-  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF($"content").alias("content"))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML($"content").alias("content"))
   .write.csv("/data/2006-text")
 ```
 
@@ -308,11 +308,11 @@ some nice word clouds – we can add a final command: `RemoveHttpHeader`.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTTPHeaderDF(RemoveHTMLDF($"content").alias("content")))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTTPHeader(removeHTML($"content").alias("content")))
   .write.csv("/data/text-no-headers")
 ```
 
@@ -363,15 +363,15 @@ format that the popular network analysis program Gephi can use.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 import io.archivesunleashed.app._
 
 val webgraph = RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc).webgraph()
 
 val graph = webgraph.groupBy(
                             $"crawl_date",
-                            RemovePrefixWWWDF(ExtractDomainDF($"src")).as("src_domain"),
-                            RemovePrefixWWWDF(ExtractDomainDF($"dest")).as("dest_domain"))
+                            removePrefixWWW(extractDomain($"src")).as("src_domain"),
+                            removePrefixWWW(extractDomain($"dest")).as("dest_domain"))
                     .count()
                     .filter(!($"dest_domain"===""))
                     .filter(!($"src_domain"===""))
