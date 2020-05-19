@@ -32,7 +32,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
   .select($"Url")
@@ -46,9 +46,10 @@ What do I do with the results? See [this guide](df-results.md)!
 ```python
 from aut import *
 
-WebArchive(sc, sqlContext, "/path/to/warcs").webpages() \
-    .select("url") \
-    .show(20, False)
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages() \
+  .select("url") \
+  .show(20, False)
 ```
 
 What do I do with the results? See [this guide](df-results.md)!
@@ -76,10 +77,10 @@ What do I do with the results? See [this guide](rdd-results.md)!
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
-  .select(ExtractDomainDF($"Url").as("Domain"))
+  .select(extractDomain($"Url").as("Domain"))
   .groupBy("Domain").count().orderBy(desc("count"))
   .show(20, false)
 ```
@@ -92,10 +93,13 @@ What do I do with the results? See [this guide](df-results.md)!
 from aut import *
 from pyspark.sql.functions import desc
 
-archive = WebArchive(sc, sqlContext, "/path/to/warcs")
-
-df = archive.webpages()
-df.select(extract_domain("url").alias("Domain")).groupBy("Domain").count().sort(desc("count")).show(n=10)
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select(Udf.extract_domain("url").alias("Domain"))\
+  .groupBy("Domain")\
+  .count()\
+  .sort(desc("count"))\
+  .show(10, False)
 ```
 
 What do I do with the results? See [this guide](df-results.md)!
@@ -129,7 +133,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 ```scala
 
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val urlPattern = Array("""http://[^/]+/[^/]+/""".r)
 
@@ -167,7 +171,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .all()
@@ -177,7 +181,14 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .all()\
+  .select("url", "http_status_code")\
+  .show(10, False)
+```
 
 ## Extract the Location of the Resource in ARCs and WARCs
 
@@ -215,7 +226,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .all()
@@ -225,4 +236,11 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .all()\
+  .select("url", "archive_filename")\
+  .show(10, False)
+```

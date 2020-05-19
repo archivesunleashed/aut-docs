@@ -23,7 +23,7 @@ The following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).audio();
 
@@ -75,7 +75,7 @@ extract them with the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).audio();
 
@@ -149,7 +149,7 @@ The following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).pdfs();
 
@@ -197,7 +197,7 @@ Will extract all following information from images in a web collection:
 only showing top 20 rows
 
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 6 more fields]
 ```
 
@@ -206,7 +206,7 @@ them with the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).pdfs();
 
@@ -280,7 +280,7 @@ The following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).presentationProgramFiles();
 
@@ -328,7 +328,7 @@ Will extract all following information from images in a web collection:
 only showing top 20 rows
 
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 6 more fields]
 ```
 
@@ -337,7 +337,7 @@ them with the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).presentationProgramFiles();
 
@@ -411,7 +411,7 @@ The following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).spreadsheets();
 
@@ -459,7 +459,7 @@ Will extract all following information from images in a web collection:
 only showing top 20 rows
 
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 6 more fields]
 ```
 
@@ -468,7 +468,7 @@ them with the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).spreadsheets();
 
@@ -542,7 +542,7 @@ The following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).textFiles();
 
@@ -590,7 +590,7 @@ Will extract all following information from images in a web collection:
 only showing top 20 rows
 
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 6 more fields]
 ```
 
@@ -599,7 +599,7 @@ them with the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).textFiles();
 
@@ -673,7 +673,7 @@ The following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).videos();
 
@@ -721,7 +721,7 @@ Will extract all following information from images in a web collection:
 only showing top 20 rows
 
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 6 more fields]
 ```
 
@@ -730,7 +730,7 @@ them with the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).videos();
 
@@ -804,7 +804,7 @@ The following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).wordProcessorFiles();
 
@@ -852,7 +852,7 @@ Will extract all following information from images in a web collection:
 only showing top 20 rows
 
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 6 more fields]
 ```
 
@@ -861,7 +861,7 @@ them with the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val df = RecordLoader.loadArchives("/path/to/warcs", sc).wordProcessorFiles();
 

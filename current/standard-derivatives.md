@@ -66,7 +66,7 @@ sys.exit
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 import io.archivesunleashed.app._
 
 sc.setLogLevel("INFO")
@@ -80,20 +80,20 @@ val webgraph = RecordLoader.loadArchives("/path/to/data", sc)
   .webgraph()
 
 // Domains file.
-webpages.groupBy(RemovePrefixWWWDF(ExtractDomainDF($"Url")).alias("url"))
+webpages.groupBy(removePrefixWWW(extractDomain($"Url")).alias("url"))
   .count()
   .sort($"count".desc)
   .write.csv("/path/to/derivatives/auk/all-domains/output")
 
 // Full-text.
-webpages.select($"crawl_date", RemovePrefixWWWDF(ExtractDomainDF(($"url")).alias("domain")), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF(($"content"))))
+webpages.select($"crawl_date", removePrefixWWW(extractDomain(($"url")).alias("domain")), $"url", removeHTML(removeHTTPHeader(($"content"))))
   .write.csv("/path/to/derivatives/auk/full-text/output")
 
 // GraphML
 val graph = webgraph.groupBy(
                        $"crawl_date",
-                       RemovePrefixWWWDF(ExtractDomainDF($"src")).as("src_domain"),
-                       RemovePrefixWWWDF(ExtractDomainDF($"dest")).as("dest_domain"))
+                       removePrefixWWW(extractDomain($"src")).as("src_domain"),
+                       removePrefixWWW(extractDomain($"dest")).as("dest_domain"))
               .count()
               .filter(!($"dest_domain"===""))
               .filter(!($"src_domain"===""))
@@ -127,7 +127,7 @@ using `s3a`.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 sc.setLogLevel("INFO")
 
@@ -259,7 +259,7 @@ files, spreadsheet files, presentation program files, and text files to disk?
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 // Web archive collection.
 warcs = RecordLoader.loadArchives("/path/to/warcs", sc)

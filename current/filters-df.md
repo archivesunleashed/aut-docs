@@ -26,7 +26,7 @@ expression test on content.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val content = Array("Content-Length: [0-9]{4}")
 
@@ -48,7 +48,7 @@ Filters or keeps all data that does or does not match the date(s) specified.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val dates = Array("2008", "200908", "20070502")
 
@@ -70,14 +70,14 @@ Filters or keeps all data that does or does not match the source domain(s) speci
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val domains = Array("www.archive.org", "www.sloan.org")
 
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .webpages()
   .select($"url")
-  .filter(!hasDomains(ExtractDomainDF($"url"), lit(domains)))
+  .filter(!hasDomains(extractDomain($"url"), lit(domains)))
 ```
 
 ### Python DF
@@ -92,7 +92,7 @@ Filters or keeps all data that does or does not match the status codes specified
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val statusCodes = Array("200","000")
 
@@ -133,14 +133,14 @@ specified.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val languages = Array("th","de","ht")
 
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .webpages()
   .select($"url", $"content")
-  .filter(hasLanguages(DetectLanguageDF(RemoveHTMLDF($"content")), lit(languages)))
+  .filter(hasLanguages(DetectLanguageDF(removeHTML($"content")), lit(languages)))
 ```
 
 ### Python DF
@@ -156,7 +156,7 @@ Filters or keeps all data that does or does not match the MIME type(s)
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val mimeTypes = Array("text/html", "text/plain")
 
@@ -179,7 +179,7 @@ Filters or keeps all data that does or does not match the MIME type(s)
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val mimeTypes = Array("text/html", "text/plain")
 
@@ -202,7 +202,7 @@ expression test on URL patterns.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val urlsPattern = Array(".*images.*")
 
@@ -224,7 +224,7 @@ Filters or keeps all data that does or does not match the URL(s) specified.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val urls = Array("www.archive.org")
 

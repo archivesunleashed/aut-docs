@@ -41,17 +41,24 @@ already exist.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTMLDF($"content"))
+  .select($"crawl_date", extractDomain($"url"), $"url", removeHTML($"content"))
   .write.csv("plain-text-df/")
 ```
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_html("content").alias("content"))
+  .write.csv("plain-text-df/")
+```
 
 ## Extract Plain Text Without HTTP Headers
 
@@ -77,17 +84,24 @@ we are removing headers in the following examples.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select(RemoveHTMLDF(RemoveHTTPHeaderDF($"content")))
+  .select(removeHTML(removeHTTPHeader($"content")))
   .write.csv("plain-text-noheaders-df/")
 ```
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select(Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .write.csv("plain-text-noheaders-df/")
+```
 
 ## Extract Plain Text By Domain
 
@@ -113,20 +127,27 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val domains = Array("www.archive.org")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", ExtractDomainDF($"url").alias("domains"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content").alias("content")))
+  .select($"crawl_date", extractDomain($"url").alias("domains"), $"url", removeHTML(removeHTTPHeader($"content").alias("content")))
   .filter(hasDomains($"domain", lit(domains)))
   .write.csv("plain-text-domain-df/")
 ```
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .write.csv("plain-text-domain-df/")
+```
 
 ## Extract Plain Text by URL Pattern
 
@@ -154,13 +175,13 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val urlPattern = Array("(?i)http://www.archive.org/details/.*")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content").alias("content")))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML(removeHTTPHeader($"content").alias("content")))
   .filter(hasUrlPatterns($"url", lit(urlsPattern)))
   .write.csv("details-df/")
 ```
@@ -194,18 +215,27 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
+
+val domains = Array("www.archive.org")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .keepDomainsDF(Set("www.archive.org"))
-  .select($"crawl_date", ExtractDomainDF($"url"), $"url", ExtractBoilerpipeTextDF(RemoveHTTPHeaderDF($"content")))
+  .select($"crawl_date", extractDomain($"url"), $"url", extractBoilerpipeText(removeHTTPHeader($"content")))
+  .filter(hasDomains($"domain", lit(domains)))
   .write.csv("plain-text-no-boilerplate-df/")
 ```
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.extract_boilerplate(Udf.remove_http_header("content")).alias("content"))\
+  .write.csv("plain-text-no-boilerplate-df/")
+```
 
 ## Extract Plain Text Filtered by Date
 
@@ -273,12 +303,12 @@ would select just the lines beginning with `(201204`, or April 2012.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val dates = Array("2008", "2015")
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", ExtractDomainDF($"url").as("domain"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content")).as("content"))
+  .select($"crawl_date", extractDomain($"url").as("domain"), $"url", removeHTML(removeHTTPHeader($"content")).as("content"))
   .filter(hasDate($"crawl_date", lit(dates)))
   .write.csv("plain-text-date-filtered-2008-2015-df/")
 ```
@@ -311,16 +341,14 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val domains = Array("www.archive.org")
 val languages = Array("fr")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .keepDomainsDF(Set("www.archive.org"))
-  .keepLanguagesDF(Set("fr"))
-  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", $"language", RemoveHTMLDF(RemoveHTTPHeaderDF($"content").alias("content")))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"language", removeHTML(removeHTTPHeader($"content").alias("content")))
   .filter(hasDomains($"domain", lit(domains)))
   .filter(hasLanguages($"language", lit(languages)))
   .write.csv("plain-text-fr-df/")
@@ -328,16 +356,16 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val domains = Array("www.archive.org")
 val languages = Array("fr")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .filter(hasDomains(ExtractDomainDF($"url"), lit(domains)))
+  .filter(hasDomains(extractDomain($"url"), lit(domains)))
   .filter(hasLanguages($"language", lit(languages)))
-  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", $"language", RemoveHTMLDF(RemoveHTTPHeaderDF($"content").alias("content")))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"language", removeHTML(removeHTTPHeader($"content").alias("content")))
   .write.csv("plain-text-fr-df/")
 ```
 
@@ -374,13 +402,13 @@ in.
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val content = Array("radio")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", ExtractDomainDF($"url").alias("domain"), $"url", RemoveHTMLDF(RemoveHTTPHeaderDF($"content").alias("content")))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML(removeHTTPHeader($"content").alias("content")))
   .filter(hasContent($"content", lit(content)))
   .write.csv("plain-text-radio-df/")
 ```
@@ -414,17 +442,24 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("example.warc.gz", sc)
   .webpages()
-  .select($"crawl_date", ExtractDomainDF($"url"), $"url", RemoveHTTPHeaderDF($"content"))
+  .select($"crawl_date", extractDomain($"url"), $"url", removeHTTPHeader($"content"))
   .write.csv("plain-html-df/")
 ```
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_http_header("content").alias("content"))\
+  .write.csv("plain-html-df/")
+```
 
 ## Extract Named Entities
 

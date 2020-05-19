@@ -46,10 +46,6 @@ import io.archivesunleashed._
 RecordLoader.loadArchives("/path/to/warcs",sc).all().keepValidPagesDF()
 ```
 
-### Python DF
-
-**To be implemented.**
-
 ## Keep Images
 
 Removes all data except images.

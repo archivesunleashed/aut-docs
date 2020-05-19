@@ -68,11 +68,11 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webgraph()
-  .groupBy(RemovePrefixWWWDF(ExtractDomainDF($"src")).as("src"), RemovePrefixWWWDF(ExtractDomainDF($"dest")).as("dest"))
+  .groupBy(removePrefixWWW(extractDomain($"src")).as("src"), removePrefixWWW(extractDomain($"dest")).as("dest"))
   .count()
   .filter($"count" > 5)
   .write.csv("links-all-df/")
@@ -80,15 +80,15 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val content = Array("radio")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .filter($"content", lit(content))
-  .select(explode(ExtractLinksDF($"url", $"content")).as("links"))
-  .select(RemovePrefixWWWDF(ExtractDomainDF(col("links._1"))).as("src"), RemovePrefixWWWDF(ExtractDomainDF(col("links._2"))).as("dest"))
+  .filter(hasContent($"content", lit(content)))
+  .select(explode(extractLinks($"url", $"content")).as("links"))
+  .select(removePrefixWWW(extractDomain(col("links._1"))).as("src"), removePrefixWWW(extractDomain(col("links._2"))).as("dest"))
   .groupBy("src", "dest")
   .count()
   .filter($"count" > 5)
@@ -137,11 +137,11 @@ five times. As you can imagine, raw URLs are very numerous!
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webgraph()
-  .groupBy(ExtractDomainDF($"src"), ExtractDomainDF($"dest"))
+  .groupBy(extractDomain($"src"), extractDomain($"dest"))
   .count()
   .filter($"count" > 5)
   .write.csv("full-links-all-df/")
@@ -179,15 +179,15 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val urlPattern = Array("(?i)http://www.archive.org/details/.*")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .filter($"url", lit(urlPattern))
-  .select(explode(ExtractLinksDF($"url", $"content")).as("links")
-  .select(RemovePrefixWWWDF(ExtractDomainDF(col("links._1"))).as("src"), RemovePrefixWWWDF(ExtractDomainDF(col("links._2"))).as("dest"))
+  .select(explode(extractLinks($"url", $"content")).as("links")
+  .select(removePrefixWWW(extractDomain(col("links._1"))).as("src"), removePrefixWWW(extractDomain(col("links._2"))).as("dest"))
   .groupBy("src", "dest")
   .count()
   .filter($"count" > 5)
@@ -253,11 +253,11 @@ Contact)`. It may be useful to have this absolute URL if you intend to call
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webgraph()
-  .groupBy($"crawl_date", RemovePrefixWWWDF(ExtractDomainDF($"src")), RemovePrefixWWWDF(ExtractDomainDF($"dest")))
+  .groupBy($"crawl_date", removePrefixWWW(extractDomain($"src")), removePrefixWWW(extractDomain($"dest")))
   .count()
   .filter($"count" > 5)
   .write.csv("sitelinks-by-date-df/")
@@ -300,15 +300,15 @@ val links = RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val urlPattern = Array("http://www.archive.org/details/.*")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .filter($"url", lit(urlPattern))
-  .select(explode(ExtractLinksDF($"url", $"content")).as("links"))
-  .select(RemovePrefixWWWDF(ExtractDomainDF(col("links._1"))).as("src"), RemovePrefixWWWDF(ExtractDomainDF(col("links._2"))).as("dest"))
+  .select(explode(extractLinks($"url", $"content")).as("links"))
+  .select(removePrefixWWW(extractDomain(col("links._1"))).as("src"), removePrefixWWW(extractDomain(col("links._2"))).as("dest"))
   .groupBy("src", "dest")
   .count()
   .filter($"count" > 5)
@@ -379,7 +379,7 @@ data in
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 
 val result = udf((vs: Seq[Any]) => vs(0)
                .toString
@@ -387,9 +387,9 @@ val result = udf((vs: Seq[Any]) => vs(0)
 
 val df = RecordLoader.loadArchives("Sample-Data/*gz", sc)
           .webpages()
-          .select(RemovePrefixWWWDF(ExtractDomainDF($"url"))
+          .select(removePrefixWWW(extractDomain($"url"))
             .as("Domain"), $"url"
-            .as("url"),$"crawl_date", explode_outer(ExtractLinksDF($"url", $"content"))
+            .as("url"),$"crawl_date", explode_outer(extractLinks($"url", $"content"))
             .as("link"))
           .filter($"content".contains("keystone"))
 
@@ -426,7 +426,7 @@ df.select($"url", $"Domain", $"crawl_date", result(array($"link"))
 only showing top 20 rows
 
 import io.archivesunleashed._
-import io.archivesunleashed.df._
+import io.archivesunleashed.udfs._
 result: org.apache.spark.sql.expressions.UserDefinedFunction = UserDefinedFunction(<function1>,StringType,None)
 df: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [Domain: string, url: string ... 2 more fields]
 ```
