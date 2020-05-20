@@ -142,10 +142,14 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ```python
 from aut import *
+from pyspark.sql.functions import col
+
+domains = ["www.archive.org"]
 
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webpages()\
   .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .filter(col("domain").isin(domains))\
   .write.csv("plain-text-domain-df/")
 ```
 
@@ -188,7 +192,18 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+url_pattern = "%http://www.archive.org/details/%"
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .filter(col("url").like(url_pattern))\
+  .write.csv("details-df/")
+```
 
 ## Extract Plain Text Minus Boilerplate
 
@@ -306,6 +321,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
 val dates = Array("2008", "2015")
+
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select($"crawl_date", extractDomain($"url").as("domain"), $"url", removeHTML(removeHTTPHeader($"content")).as("content"))
@@ -315,7 +331,18 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+dates = "2009[10][09]\d\d"
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .filter(col("crawl_date").rlike(dates))\
+  .write.csv("plain-text-date-filtered-2008-2015-df/")
+```
 
 ## Extract Plain Text Filtered by Language
 
@@ -371,7 +398,20 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+domains = ["www.geocities.com"]
+languages = ["fr"]
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .filter(col("domain").isin(domains))\
+  .filter(col("language").isin(languages))\
+  .write.csv("plain-text-fr-df/")
+```
 
 ## Extract Plain text Filtered by Keyword
 
@@ -415,7 +455,18 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+content = "%radio%"
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .filter(col("content").like(content))
+  .write.csv("plain-text-radio-df/")
+```
 
 ## Extract Raw HTML
 

@@ -146,7 +146,18 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+url_pattern = "http://[^/]+/[^/]+/"
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select("url")\
+  .filter(col("url").rlike(url_pattern))\
+  .show(10, False)
+```
 
 ## Extract HTTP Status Codes
 
