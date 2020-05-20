@@ -97,7 +97,22 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+from pyspark.sql.functions import col, explode
+
+content = "%radio%"
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .filter(col("content").like(content))\
+  .select(explode(Udf.extract_links("url", "content")).alias("links"))\
+  .select(Udf.remove_prefix_www(Udf.extract_domain(col("links._1"))).alias("src"), Udf.remove_prefix_www(Udf.extract_domain(col("links._2"))).alias("dest"))\
+  .groupBy("src", "dest")\
+  .count()\
+  .filter(col("count") > 5)\
+  .write.csv("links-all-apple-df/")
+```
 
 ## Extract Raw URL Link Structure
 
@@ -149,7 +164,17 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webgraph()\
+  .groupBy(Udf.extract_domain("src"), Udf.extract_domain("dest"))\
+  .count()\
+  .filter(col("count") > 5)\
+  .write.csv("full-links-all-df/")
+```
 
 ## Organize Links by URL Pattern
 
@@ -196,7 +221,22 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+from pyspark.sql.functions import col, explode
+
+url_pattern = "%http://www.archive.org/details/%"
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .filter(col("url").like(url_pattern))\
+  .select(explode(Udf.extract_links("url", "content").alias("links")))\
+  .select(Udf.remove_prefix_www(Udf.extract_domain(col("links._1"))).alias("src"), Udf.remove_prefix_www(Udf.extract_domain("links._2")).alias("dest"))\
+  .groupBy("src", "dest")\
+  .count()\
+  .filter(col("count") > 5)\
+  .write.csv("details-links-all-df/")
+```
 
 ## Organize Links by Crawl Date
 
@@ -267,11 +307,14 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ```python
 from aut import *
+from pyspark.sql.functions import col
 
-archive = WebArchive(sc, sqlContext, "/path/to/warcs")
-
-df = archive.webpages()
-df.select(extract_domain("crawl_date").alias("Crawl Date")).groupBy("Crawl Date").count().show()
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webgraph()\
+  .groupBy("crawl_date", Udf.remove_prefix_www(Udf.extract_domain("src")).alias("src"), Udf.remove_prefix_www(Udf.extract_domain("dest")).alias("dest"))\
+  .count()\
+  .filter(col("count") > 5)\
+  .write.csv("sitelinks-by-date-df/")
 ```
 
 ## Filter by URL
@@ -317,7 +360,22 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+from pyspark.sql.functions import col, explode
+
+url_pattern = "http://www.archive.org/details/.*"
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .filter(col("url").rlike(url_pattern))\
+  .select(explode(Udf.extract_links("url", "content")).alias("links"))\
+  .select(Udf.remove_prefix_www(Udf.extract_domain(col("links._1"))).alias("src"), Udf.remove_prefix_www(Udf.extract_domain(col("links._2"))).alias("dest"))\
+  .groupBy("src", "dest")\
+  .count()\
+  .filter(col("count") > 5)\
+  .write.csv("sitelinks-details-df/")
+```
 
 ## Export to Gephi
 
