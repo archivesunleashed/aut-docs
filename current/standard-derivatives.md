@@ -107,7 +107,37 @@ sys.exit
 
 ### Python DF
 
-[TODO](https://github.com/archivesunleashed/aut/issues/409)
+```python
+from aut import *
+from pyspark.sql.functions import col, desc
+
+# Web archive collection; web pages.
+webpages = WebArchive(sc, sqlContext, "/path/to/data").webpages()
+
+# Web archive collection; web graph.
+webgraph = WebArchive(sc, sqlContext, "/path/to/data").webgraph()
+
+# Domains file.
+webpages.groupBy(Udf.remove_prefix_www(Udf.extract_domain("url")).alias("url"))\
+  .count()\
+  .sort(col("count").desc())\
+  .write.csv("/path/to/derivatives/auk/all-domains/output"")
+
+# Full-text.
+webpages.select("crawl_date", Udf.remove_prefix_www(Udf.extract_domain("url")).alias("domain"), "url", Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .write.csv("/path/to/derivatives/auk/full-text/output")
+
+# Create DataFrame for GraphML output
+graph = webgraph.groupBy("crawl_date", Udf.remove_prefix_www(Udf.extract_domain("src")).alias("src_domain"), Udf.remove_prefix_www(Udf.extract_domain("dest")).alias("dest_domain"))\
+          .count()\
+          .filter((col("dest_domain").isNotNull()) & (col("dest_domain") !=""))\
+          .filter((col("src_domain").isNotNull()) & (col("src_domain") !=""))\
+          .filter(col("count") > 5)\
+          .orderBy(desc("count"))
+
+# Write the GraphML out to a file.
+Write_Graphml(graph.collect(), "/path/to/derivatives/auk/graph/example.graphml")
+```
 
 ## Extract Binary Info
 

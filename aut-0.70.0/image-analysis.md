@@ -22,7 +22,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).extractImageDetailsDF();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).images();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -82,7 +82,7 @@ them with the following script:
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).extractImageDetailsDF();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).images();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -192,7 +192,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).extractImageLinksDF();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).imagegraph();
 
 df.groupBy($"image_url")
   .count()
@@ -234,7 +234,7 @@ from aut import *
 
 archive = WebArchive(sc, sqlContext, "/path/to/warcs")
 
-df = archive.image_links()
+df = archive.image_graph()
 
 df.groupBy("image_url")
   .count()
