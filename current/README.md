@@ -56,7 +56,6 @@ and working with the results.
   - [Extract Raw URL Link Structure](link-analysis.md#Extract-Raw-URL-Link-Structure)
   - [Organize Links by URL Pattern](link-analysis.md#Organize-Links-by-URL-Pattern)
   - [Organize Links by Crawl Date](link-analysis.md#Organize-Links-by-Crawl-Date)
-  - [Export as TSV](link-analysis.md#Export-as-TSV)
   - [Filter by URL](link-analysis.md#Filter-by-URL)
   - [Export to Gephi](link-analysis.md#Export-to-Gephi)
 - **[Image Analysis](image-analysis.md)**: How do I...
