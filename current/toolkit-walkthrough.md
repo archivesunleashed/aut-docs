@@ -17,7 +17,6 @@ If you have any questions, let us know in [Slack](http://slack.archivesunleashed
 - [Extracting some Text](#extracting-some-text)
   - [Ouch: Our First Error](#ouch-our-first-error)
   - [Other Text Analysis Filters](#other-text-analysis-filters)
-- [People, Places, and Things: Entities Ahoy!](#people-places-and-things-entities-ahoy)
 - [Web of Links: Network Analysis](#web-of-links-network-analysis)
 - [Working with the Data](#working-with-the-data)
 - [Acknowledgements and Final Notes](#acknowledgements-and-final-notes)
@@ -318,40 +317,6 @@ RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
 
 You could now try uploading one of the plain text files using a website like
 [Voyant Tools](https://voyant-tools.org).
-
-## People, Places, and Things: Entities Ahoy
-
-One last thing we can do with text is to try to use [Named-entity
-recognition](https://en.wikipedia.org/wiki/Named-entity_recognition) (NER) to
-try to find people, organizations, and locations within the text.
-
-To do this, we need to have a classifier - luckily, we have included an
-English-language one from the [Stanford NER
-project](https://nlp.stanford.edu/software/CRF-NER.shtml) in this Docker image!
-
-The code is below. It looks a bit different than what you are used to:
-
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.app._
-import io.archivesunleashed.matchbox._
-
-ExtractEntities.extractFromRecords("/aut-resources/NER/english.all.3class.distsim.crf.ser.gz", "/aut-resources/Sample-Data/*.gz", "/data/ner-output/", sc)
-```
-
-This will take a fair amount of time, even on a small amount of data. It is
-very computationally intensive! I often use it as an excuse to go make a cup of
-coffee.
-
-When it is done, you will have results in the `/data` directory. The first line
-should look like:
-
-```scala
-{"timestamp":"20060622","url":"http://www.gca.ca/indexcms/?organizations&orgid=27","named_entities":{"persons":["Marie"],"organizations":["Green Communities Canada","Green Communities Canada News and Events Our Programs Join Green Communities Canada Downloads Privacy Policy Site Map GCA Clean North Kathie Brosemer"],"locations":["St. E. Sault","Canada"]},"digest":"sha1:3e3dc1e855b994d838564ac8d921451451a199d5"}
-```
-
-Here we can see that in this website, it was probably taking about Sault Ste.
-Marie, Ontario.
 
 ## Web of Links: Network Analysis
 

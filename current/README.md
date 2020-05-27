@@ -50,7 +50,6 @@ and working with the results.
   - [Extract Plain Text Filtered by Language](text-analysis.md#Extract-Plain-Text-Filtered-by-Language)
   - [Extract Plain Text Filtered by Keyword](text-analysis.md#Extract-Plain-Text-Filtered-by-Keyword)
   - [Extract Raw HTML](text-analysis.md#Extract-Raw-HTML)
-  - [Extract Named Entities](text-analysis.md#Extract-Named-Entities)
 - **[Link Analysis](https://github.com/archivesunleashed/aut-docs-new/blob/master/current/link-analysis.md)**
   : How do I...
   - [Extract Simple Site Link Structure](link-analysis.md#Extract-Simple-Site-Link-Structure)
