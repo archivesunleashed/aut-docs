@@ -136,7 +136,7 @@ graph = webgraph.groupBy("crawl_date", remove_prefix_www(extract_domain("src")).
           .orderBy(desc("count"))
 
 # Write the GraphML out to a file.
-Write_Graphml(graph.collect(), "/path/to/derivatives/auk/graph/example.graphml")
+WriteGraphml(graph.collect(), "/path/to/derivatives/auk/graph/example.graphml")
 ```
 
 ## Extract Binary Info

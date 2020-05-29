@@ -297,7 +297,7 @@ from aut import *
 
 images = WebArchive(sc, sqlContext, "/path/to/warcs").images()
 
-popular_images = Extract_Popular_Images(images, 20, 10, 10)
+popular_images = ExtractPopularImages(images, 20, 10, 10)
 
 popular_images.show()
 ```
