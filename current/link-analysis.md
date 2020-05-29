@@ -379,47 +379,69 @@ WebArchive(sc, sqlContext, "/path/to/warcs")\
 
 ## Export to Gephi
 
-### Scala RDD
-
 You may want to export your data directly to the [Gephi software
 suite](http://gephi.github.io/), an open-source network analysis project. The
 following code writes to the GEXF format:
 
+### Scala RDD
+
+**Will not be implemented.**
+
+### Scala DF
+
 ```scala
 import io.archivesunleashed._
+import io.archivesunleashed.udfs._
 import io.archivesunleashed.app._
-import io.archivesunleashed.matchbox._
 
-val links = RecordLoader.loadArchives("/path/to/warcs", sc)
-  .keepValidPages()
-  .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1,
-                               ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""),
-                               ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
-  .filter(r => r._2 != "" && r._3 != "")
-  .countItems()
-  .filter(r => r._2 > 5)
+val graph = webgraph.groupBy(
+                       $"crawl_date",
+                       removePrefixWWW(extractDomain($"src")).as("src_domain"),
+                       removePrefixWWW(extractDomain($"dest")).as("dest_domain"))
+              .count()
+              .filter(!($"dest_domain"===""))
+              .filter(!($"src_domain"===""))
+              .filter($"count" > 5)
+              .orderBy(desc("count"))
+              .collect()
 
-WriteGEXF(links, "links-for-gephi.gexf")
+WriteGEXF(graph, "links-for-gephi.gexf")
 ```
-
-This file can then be directly opened by Gephi.
 
 We also support exporting to the
 [GraphML](https://en.wikipedia.org/wiki/GraphML) format. To do so, use
 the `WriteGraphml` method:
 
 ```scala
-WriteGraphml(links, "links-for-gephi.graphml")
+WriteGraphML(graph, "links-for-gephi.graphml")
 ```
-
-### Scala DF
-
-**To be implemented.**
 
 ### Python DF
 
-**To be implemented.**
+```python
+from aut import *
+from pyspark.sql.functions import col, desc
+
+graph = WebArchive(sc, sqlContext, "/path/to/data")\
+          .webgraph()\
+          .groupBy("crawl_date", remove_prefix_www(extract_domain("src")).alias("src_domain"), remove_prefix_www(extract_domain("dest")).alias("dest_domain"))\
+          .count()\
+          .filter((col("dest_domain").isNotNull()) & (col("dest_domain") !=""))\
+          .filter((col("src_domain").isNotNull()) & (col("src_domain") !=""))\
+          .filter(col("count") > 5)\
+          .orderBy(desc("count"))\
+          .collect()
+
+WriteGEXF(graph, "links-for-gephi.gexf")
+```
+
+We also support exporting to the
+[GraphML](https://en.wikipedia.org/wiki/GraphML) format. To do so, use
+the `WriteGraphml` method:
+
+```python
+WriteGraphML(graph, "links-for-gephi.graphml")
+```
 
 ## Finding Hyperlinks within Collection on Pages with Certain Keyword
 
