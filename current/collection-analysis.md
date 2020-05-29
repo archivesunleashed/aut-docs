@@ -95,7 +95,7 @@ from pyspark.sql.functions import desc
 
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webpages()\
-  .select(Udf.extract_domain("url").alias("Domain"))\
+  .select(extract_domain("url").alias("Domain"))\
   .groupBy("Domain")\
   .count()\
   .sort(desc("count"))\

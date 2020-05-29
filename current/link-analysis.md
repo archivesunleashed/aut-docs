@@ -106,8 +106,8 @@ content = "%radio%"
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webpages()\
   .filter(col("content").like(content))\
-  .select(explode(Udf.extract_links("url", "content")).alias("links"))\
-  .select(Udf.remove_prefix_www(Udf.extract_domain(col("links._1"))).alias("src"), Udf.remove_prefix_www(Udf.extract_domain(col("links._2"))).alias("dest"))\
+  .select(explode(extract_links("url", "content")).alias("links"))\
+  .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain(col("links._2"))).alias("dest"))\
   .groupBy("src", "dest")\
   .count()\
   .filter(col("count") > 5)\
@@ -170,7 +170,7 @@ from pyspark.sql.functions import col
 
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webgraph()\
-  .groupBy(Udf.extract_domain("src"), Udf.extract_domain("dest"))\
+  .groupBy(extract_domain("src"), extract_domain("dest"))\
   .count()\
   .filter(col("count") > 5)\
   .write.csv("full-links-all-df/")
@@ -230,8 +230,8 @@ url_pattern = "%http://www.archive.org/details/%"
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webpages()\
   .filter(col("url").like(url_pattern))\
-  .select(explode(Udf.extract_links("url", "content").alias("links")))\
-  .select(Udf.remove_prefix_www(Udf.extract_domain(col("links._1"))).alias("src"), Udf.remove_prefix_www(Udf.extract_domain("links._2")).alias("dest"))\
+  .select(explode(extract_links("url", "content").alias("links")))\
+  .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain("links._2")).alias("dest"))\
   .groupBy("src", "dest")\
   .count()\
   .filter(col("count") > 5)\
@@ -311,7 +311,7 @@ from pyspark.sql.functions import col
 
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webgraph()\
-  .groupBy("crawl_date", Udf.remove_prefix_www(Udf.extract_domain("src")).alias("src"), Udf.remove_prefix_www(Udf.extract_domain("dest")).alias("dest"))\
+  .groupBy("crawl_date", remove_prefix_www(extract_domain("src")).alias("src"), remove_prefix_www(extract_domain("dest")).alias("dest"))\
   .count()\
   .filter(col("count") > 5)\
   .write.csv("sitelinks-by-date-df/")
@@ -369,8 +369,8 @@ url_pattern = "http://www.archive.org/details/.*"
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webpages()\
   .filter(col("url").rlike(url_pattern))\
-  .select(explode(Udf.extract_links("url", "content")).alias("links"))\
-  .select(Udf.remove_prefix_www(Udf.extract_domain(col("links._1"))).alias("src"), Udf.remove_prefix_www(Udf.extract_domain(col("links._2"))).alias("dest"))\
+  .select(explode(extract_links("url", "content")).alias("links"))\
+  .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain(col("links._2"))).alias("dest"))\
   .groupBy("src", "dest")\
   .count()\
   .filter(col("count") > 5)\
