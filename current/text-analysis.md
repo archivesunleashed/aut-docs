@@ -55,7 +55,7 @@ from aut import *
 
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webpages()\
-  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_html("content").alias("content"))
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html("content").alias("content"))
   .write.csv("plain-text-df/")
 ```
 
@@ -98,7 +98,7 @@ from aut import *
 
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webpages()\
-  .select(Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .select(remove_html(remove_http_header("content")).alias("content"))\
   .write.csv("plain-text-noheaders-df/")
 ```
 
@@ -147,7 +147,7 @@ domains = ["www.archive.org"]
 
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webpages()\
-  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content"))\
   .filter(col("domain").isin(domains))\
   .write.csv("plain-text-domain-df/")
 ```
@@ -199,7 +199,7 @@ url_pattern = "%http://www.archive.org/details/%"
 
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webpages()\
-  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content"))\
   .filter(col("url").like(url_pattern))\
   .write.csv("details-df/")
 ```
@@ -247,7 +247,7 @@ from aut import *
 
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webpages()\
-  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.extract_boilerplate(Udf.remove_http_header("content")).alias("content"))\
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", extract_boilerplate(remove_http_header("content")).alias("content"))\
   .write.csv("plain-text-no-boilerplate-df/")
 ```
 
@@ -338,7 +338,7 @@ dates = "2009[10][09]\d\d"
 
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webpages()\
-  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content"))\
   .filter(col("crawl_date").rlike(dates))\
   .write.csv("plain-text-date-filtered-2008-2015-df/")
 ```
@@ -406,7 +406,7 @@ languages = ["fr"]
 
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webpages()\
-  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content"))\
   .filter(col("domain").isin(domains))\
   .filter(col("language").isin(languages))\
   .write.csv("plain-text-fr-df/")
@@ -462,7 +462,7 @@ content = "%radio%"
 
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webpages()\
-  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_html(Udf.remove_http_header("content")).alias("content"))\
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content"))\
   .filter(col("content").like(content))
   .write.csv("plain-text-radio-df/")
 ```
@@ -507,6 +507,6 @@ from aut import *
 
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webpages()\
-  .select("crawl_date", Udf.extract_domain("url").alias("domain"), "url", Udf.remove_http_header("content").alias("content"))\
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_http_header("content").alias("content"))\
   .write.csv("plain-html-df/")
 ```
