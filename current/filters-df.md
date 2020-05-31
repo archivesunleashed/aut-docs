@@ -38,7 +38,17 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 
 ### Python DF
 
-**To be implemented.**
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+content = "Content-Length: [0-9]{4}"
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .all()\
+  .select("url", "content")\
+  .filter(col("content").rlike(content))
+```
 
 ## Has Dates
 
@@ -60,7 +70,17 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
 
 ### Python DF
 
-**To be implemented.**
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+dates = ["2008", "200908", "20070502"]
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .all()\
+  .select("url", "crawl_date")\
+  .filter(~col("crawl_date").isin(dates))
+```
 
 ## Has Domain(s)
 
@@ -82,7 +102,17 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
 
 ### Python DF
 
-**To be implemented.**
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+domains = ["www.archive.org", "www.sloan.org"]
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select("url")\
+  .filter(~(extract_domain("url").isin(domains)))
+```
 
 ## Has HTTP Status
 
@@ -104,7 +134,17 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
 
 ### Python DF
 
-**To be implemented.**
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+status_codes = ["200", "000"]
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .all()\
+  .select("url", "http_status_code")\
+  .filter(~col("http_status_code").isin(status_codes))
+```
 
 ## Has Images
 
@@ -121,7 +161,15 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
 
 ### Python DF
 
-**To be implemented.**
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .all()\
+  .select("mime_type_tika", "mime_type_web_server", "url")\
+  .filter(col("mime_type_tika").like("image/%") | col("mime_type_web_server").like("image/%"))
+```
 
 ## Has Languages
 
@@ -139,13 +187,23 @@ val languages = Array("th","de","ht")
 
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .webpages()
-  .select($"url", $"content")
-  .filter(hasLanguages(DetectLanguageDF(removeHTML($"content")), lit(languages)))
+  .select($"language", $"url", $"content")
+  .filter($"language".isin(languages))
 ```
 
 ### Python DF
 
-**To be implemented.**
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+languages = ["th","de","ht"]
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .webpages()\
+  .select("language", "url", "content")\
+  .filter(~col("language").isin(languages))
+```
 
 ## Keep MIME Types (Apache Tika)
 
@@ -168,7 +226,17 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
 
 ### Python DF
 
-**To be implemented.**
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+mime_types = ["text/html", "text/plain"]
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .all()\
+  .select("url", "mime_type_tika"))\
+  .filter(~col("mime_type_tika").isin(mime_types))
+```
 
 ## Keep MIME Types (web server)
 
@@ -186,12 +254,22 @@ val mimeTypes = Array("text/html", "text/plain")
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .all()
   .select($"url", $"mime_type_web_server")
-  .filter(!hasMIMETypesTika($"mime_type_web_server", lit(mimeTypes)))
+  .filter(!hasMIMETypes($"mime_type_web_server", lit(mimeTypes)))
 ```
 
 ### Python DF
 
-**To be implemented.**
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+mime_types = ["text/html", "text/plain"]
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .all()\
+  .select("url", "mime_type_web_server"))\
+  .filter(~col("mime_type_web_server").isin(mime_types))
+```
 
 ## Has URL Patterns
 
@@ -214,7 +292,17 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
 
 ### Python DF
 
-**To be implemented.**
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+url_pattern = ".*images.*"
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .all()\
+  .select("url", "content")
+  .filter(~col("url").rlike(url_pattern))
+```
 
 ## Has URLs
 
@@ -236,4 +324,16 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
 
 ### Python DF
 
-**To be implemented.**
+```python
+from aut import *
+from pyspark.sql.functions import col
+
+urls = ["www.archive.org"]
+
+WebArchive(sc, sqlContext, "/path/to/warcs")\
+  .all()\
+  .select("url", "content")
+  .filter(~col("url").isin(urls)
+```
+
+
