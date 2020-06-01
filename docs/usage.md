@@ -67,9 +67,9 @@ spark-shell --jars /path/to/aut/target/aut-0.70.1-SNAPSHOT-fatjar.jar
 ## Archives Unleashed Toolkit with PySpark
 
 To run PySpark with the Archives Unleashed Toolkit loaded, you will need to
-provide PySpark with the Java/Scala package, and the Python bindings. The
-Java/Scala packages can be provided with `--packages` or `--jars` as described
-above. The Python bindings can be
+provide PySpark with the Java/Scala package, as well as the Python bindings.
+The Java/Scala packages can be provided with `--packages` or `--jars` as
+described above. The Python bindings can be
 [downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-0.70.0/aut-0.70.0.zip)
 , or [built locally](#building-locally) (the zip file will be found in
 the `target` directory.

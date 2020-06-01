@@ -3,12 +3,12 @@ id: filters-df
 title: DataFrame Filters
 ---
 
-# Has Content
+## Has Content
 
 Filters or removes all data that does or does not pass a specified regular
 expression test on content.
 
-## Scala DF
+### Scala DF
 
 ```scala
 import io.archivesunleashed._
@@ -22,7 +22,7 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .filter(!hasContent($"content", lit(content)))
 ```
 
-## Python DF
+### Python DF
 
 ```python
 from aut import *
@@ -36,11 +36,11 @@ WebArchive(sc, sqlContext, "/path/to/warcs")\
   .filter(col("content").rlike(content))
 ```
 
-# Has Dates
+## Has Dates
 
 Filters or keeps all data that does or does not match the date(s) specified.
 
-## Scala DF
+### Scala DF
 
 ```scala
 import io.archivesunleashed._
@@ -54,7 +54,7 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
   .filter(!hasDate($"crawl_date", lit(dates)))
 ```
 
-## Python DF
+### Python DF
 
 ```python
 from aut import *
@@ -68,11 +68,11 @@ WebArchive(sc, sqlContext, "/path/to/warcs")\
   .filter(~col("crawl_date").isin(dates))
 ```
 
-# Has Domain(s)
+## Has Domain(s)
 
 Filters or keeps all data that does or does not match the source domain(s) specified.
 
-## Scala DF
+### Scala DF
 
 ```scala
 import io.archivesunleashed._
@@ -86,7 +86,7 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
   .filter(!hasDomains(extractDomain($"url"), lit(domains)))
 ```
 
-## Python DF
+### Python DF
 
 ```python
 from aut import *
@@ -100,11 +100,11 @@ WebArchive(sc, sqlContext, "/path/to/warcs")\
   .filter(~(extract_domain("url").isin(domains)))
 ```
 
-# Has HTTP Status
+## Has HTTP Status
 
 Filters or keeps all data that does or does not match the status codes specified.
 
-## Scala DF
+### Scala DF
 
 ```scala
 import io.archivesunleashed._
@@ -118,7 +118,7 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
   .filter(!hasHTTPStatus($"http_status_code", lit(statusCodes)))
 ```
 
-## Python DF
+### Python DF
 
 ```python
 from aut import *
@@ -132,11 +132,11 @@ WebArchive(sc, sqlContext, "/path/to/warcs")\
   .filter(~col("http_status_code").isin(status_codes))
 ```
 
-# Has Images
+## Has Images
 
 Filters or keeps all data except images.
 
-## Scala DF
+### Scala DF
 
 ```scala
 RecordLoader.loadArchives("/path/to/warcs",sc)
@@ -145,7 +145,7 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
   .filter(hasImages($"crawl_date", DetectMimeTypeTikaDF($"bytes")))
 ```
 
-## Python DF
+### Python DF
 
 ```python
 from aut import *
@@ -157,13 +157,13 @@ WebArchive(sc, sqlContext, "/path/to/warcs")\
   .filter(col("mime_type_tika").like("image/%") | col("mime_type_web_server").like("image/%"))
 ```
 
-# Has Languages
+## Has Languages
 
 Filters or keeps all data that does or does not match the language(s) ([ISO
 639-2 codes](https://www.loc.gov/standards/iso639-2/php/code_list.php))
 specified.
 
-## Scala DF
+### Scala DF
 
 ```scala
 import io.archivesunleashed._
@@ -177,7 +177,7 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
   .filter($"language".isin(languages))
 ```
 
-## Python DF
+### Python DF
 
 ```python
 from aut import *
@@ -191,12 +191,12 @@ WebArchive(sc, sqlContext, "/path/to/warcs")\
   .filter(~col("language").isin(languages))
 ```
 
-# Keep MIME Types (Apache Tika)
+## Keep MIME Types (Apache Tika)
 
 Filters or keeps all data that does or does not match the MIME type(s)
 (identified by [Apache Tika](https://tika.apache.org/)) specified.
 
-## Scala DF
+### Scala DF
 
 ```scala
 import io.archivesunleashed._
@@ -210,7 +210,7 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
   .filter(!hasMIMETypesTika($"mime_type_tika", lit(mimeTypes)))
 ```
 
-## Python DF
+### Python DF
 
 ```python
 from aut import *
@@ -224,12 +224,12 @@ WebArchive(sc, sqlContext, "/path/to/warcs")\
   .filter(~col("mime_type_tika").isin(mime_types))
 ```
 
-# Keep MIME Types (web server)
+## Keep MIME Types (web server)
 
 Filters or keeps all data that does or does not match the MIME type(s)
 (identified by the web server) specified.
 
-## Scala DF
+### Scala DF
 
 ```scala
 import io.archivesunleashed._
@@ -243,7 +243,7 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
   .filter(!hasMIMETypes($"mime_type_web_server", lit(mimeTypes)))
 ```
 
-## Python DF
+### Python DF
 
 ```python
 from aut import *
@@ -257,12 +257,12 @@ WebArchive(sc, sqlContext, "/path/to/warcs")\
   .filter(~col("mime_type_web_server").isin(mime_types))
 ```
 
-# Has URL Patterns
+## Has URL Patterns
 
 Filters or removes all data that does or does not pass a specified regular
 expression test on URL patterns.
 
-## Scala DF
+### Scala DF
 
 ```scala
 import io.archivesunleashed._
@@ -276,7 +276,7 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
   .filter(hasUrlPatterns($"url", lit(urlsPattern)))
 ```
 
-## Python DF
+### Python DF
 
 ```python
 from aut import *
@@ -290,11 +290,11 @@ WebArchive(sc, sqlContext, "/path/to/warcs")\
   .filter(~col("url").rlike(url_pattern))
 ```
 
-# Has URLs
+## Has URLs
 
 Filters or keeps all data that does or does not match the URL(s) specified.
 
-## Scala DF
+### Scala DF
 
 ```scala
 import io.archivesunleashed._
@@ -308,7 +308,7 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
   .filter(hasUrls($"url", lit(urls)))
 ```
 
-## Python DF
+### Python DF
 
 ```python
 from aut import *

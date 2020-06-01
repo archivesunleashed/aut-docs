@@ -4,7 +4,7 @@ title: The Toolkit at Scale
 ---
 
 As your collections grow, you may need to provide more resources, and adjust
-Apache Spark configuration options. Apache Spark has a great
+Apache Spark configuration options. Apache Spark has great
 [Configuration](https://spark.apache.org/docs/latest/configuration.html) and
 [Tuning](https://spark.apache.org/docs/latest/tuning.html) guides that are
 worth checking out. If you're not sure where to start with scaling, join us in

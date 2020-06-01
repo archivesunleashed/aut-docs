@@ -15,8 +15,8 @@ example, you discover how many times that `liberal.ca` linked to `twitter.com`,
 rather than learning that `http://liberal.ca/contact` linked to
 `http://twitter.com/liberal_party`. The reason we do that is that in general,
 if you are working with any data at scale, the sheer number of raw URLs can
-become overwhelming. Though, we do provide one example below that provides raw
-data.
+become overwhelming. That said,, we do provide one example below that provides
+raw data.
 
 ## Extract Simple Site Link Structure
 

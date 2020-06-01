@@ -39,22 +39,26 @@ class Footer extends React.Component {
             <h5>Docs</h5>
             <a
               href={`
-                docs/dependencies`}>
+                dependencies`}>
               Getting Started
             </a>
             <a
               href={`
-                docs/collection-analysis`}>
+                collection-analysis`}>
               Generating Results
             </a>
             <a
+              href={`filters-rdd`}>
+              Filtering results
+            </a>
+            <a
               href={`
-                docs/aut-spark-submit-app`}>
+                aut-spark-submit-app`}>
               Standard Derivatives
             </a>
             <a
               href={`
-                docs/df-results`}>
+                df-results`}>
               What to do with Results
             </a>
           </div>
@@ -86,9 +90,9 @@ class Footer extends React.Component {
           </div>
         </section>
         <section className="sitemap">
-          <img alt="Andrew W. Mellon Foundation" className="footer_img" src="img/mellon.svg" />
-          <img alt="University of Waterloo" className="footer_img" src="img/waterloo.png" />
-          <img alt="York University" className="footer_img" src="img/york.png" />
+          <img alt="Andrew W. Mellon Foundation" className="footer_img" alt="Andrew W. Mellon Foundation" src={`${baseUrl}img/mellon.svg`} />
+          <img alt="University of Waterloo" className="footer_img" alt="University of Waterloo" src={`${baseUrl}img/waterloo.png`} />
+          <img alt="York University" className="footer_img" alt="York University" src={`${baseUrl}img/york.png`} />
         </section>
         <section className="copyright">{this.props.config.copyright}</section>
       </footer>
