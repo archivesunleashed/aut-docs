@@ -34,13 +34,13 @@ install Docker
 
 Later in this lesson, we use the networking tool [Gephi](https://gephi.org/).
 
-Make sure that Docker is running! If it isn't you might see an error like
+Make sure that Docker is running! If it isn't, you might see an error like
 `docker: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is
 the docker daemon running?` – make sure to run it (on Mac, for example, you
 need to run the Docker application itself).
 
-Make a directory in your userspace, somewhere where you can find it: on your
-desktop, perhaps. Call it `data`. In my case, I will create it on my desktop
+Make a directory in your userspace, somewhere where you can find it, on your desktop
+perhaps. Call it `data`. In my case, I will create it on my desktop
 and it will have a path like `/Users/ianmilligan1/desktop/data`.
 
 Use the following command, replacing `/path/to/your/data` with the directory.
@@ -126,9 +126,9 @@ Let's take a moment to look at this script. It:
 - tells it to `ExtractDomain`, or find the base domain of each URL - i.e.
   `www.google.com/cats` we are interested just in the domain, or
   `www.google.com`;
-- count them - how many times does `www.google.com` appear in this collection,
+- counts them - how many times does `www.google.com` appear in this collection,
   for example;
-- and display a DataFrame the top ten!
+- and displays a DataFrame of the top ten!
 
 Once it is pasted in, let's run it.
 
@@ -159,7 +159,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 ```
 
-We like to use this example to do two things:
+We like to use this example for two reasons:
 
 - It is fairly simple and lets us know that AUT is working;
 - and it tells us what we can expect to find in the web archives! In this case,
@@ -193,7 +193,7 @@ for example.
 Above we learned that the Liberal Party of Canada's website has 1,968 captures
 in the sample files we provided. Let's try to just extract that text.
 
-To load this script, remember: type `:paste`, copy-and-paste it into the shell,
+To load this script, remember to type `:paste`, copy-and-paste it into the shell,
 and then press `ctrl` + `d`.
 
 ```scala
@@ -361,8 +361,8 @@ beautiful visualization yourself.
 
 First, let's use these instructions to [work with Gephi](https://cloud.archivesunleashed.org/derivatives/gephi).
 
-Secondly, if there is time, we can begin to think about how to work with the
-plain text file. See the following documents from our "learning guides":
+Secondly, we can begin to think about how” to work with the plain text file.
+See the following documents from our "learning guides":
 
 - [**Filtering the Full-Text Derivative
   File**](https://cloud.archivesunleashed.org/derivatives/text-filtering): This

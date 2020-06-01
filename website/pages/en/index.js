@@ -50,24 +50,11 @@ class HomeSplash extends React.Component {
       </div>
     );
 
-    const Button = props => (
-      <div className="pluginWrapper buttonWrapper">
-        <a className="button" href={props.href} target={props.target}>
-          {props.children}
-        </a>
-      </div>
-    );
-
     return (
       <SplashContainer>
         <Logo img_src={`${baseUrl}img/undraw_monitor.svg`} />
         <div className="inner">
           <ProjectTitle tagline={siteConfig.tagline} title={siteConfig.title} />
-          <PromoSection>
-            <Button href="#try">Try It Out</Button>
-            <Button href={docUrl('doc1.html')}>Example Link</Button>
-            <Button href={docUrl('doc2.html')}>Example Link 2</Button>
-          </PromoSection>
         </div>
       </SplashContainer>
     );
@@ -92,23 +79,21 @@ class Index extends React.Component {
       </Container>
     );
 
-    const FeatureCallout = () => (
-      <div
-        className="productShowcaseSection paddingBottom"
-        style={{textAlign: 'center'}}>
-        <h2>Feature Callout</h2>
-        <MarkdownBlock>These are features of this project</MarkdownBlock>
-      </div>
-    );
 
     const TryOut = () => (
       <Block id="try">
         {[
           {
             content:
-            'You can run the Archives Unleashed Toolkit ' +
-            'on your local machine, or in a large cluster, and ' +
-            'analyze a small web archive collection, or 100s of Terabytes of web archives.',
+            'Are you a researcher or web archivist looking to understand your web ' +
+            'archive collections better? No matter the size, gigabytes, terabytes, ' +
+            'or petabytes, the Archives Unleashed Toolkit can help!\n\n' +
+            'Our documentation, based on a cookbook approach, provides a series ' +
+            'of "recipes" for addressing a number of common analysis tasks to ' +
+            'provide inspiration for your own analysis. We generally provide examples ' +
+            'for resilient distributed datasets (RDD) in Scala, and DataFrames ' +
+            'in both Scala and Python. We leave it up to you to choose Scala or ' +
+            'Python flavours of Spark!',
             image: `${baseUrl}img/undraw_file_analysis_8k9b.svg`,
             imageAlign: 'left',
             title: 'Analyze Large Web Archives',
@@ -117,15 +102,54 @@ class Index extends React.Component {
       </Block>
     );
 
-    const Description = () => (
+    const ExtractText = () => (
       <Block background="dark">
         {[
           {
             content:
-              'This is another description of how this project is useful',
-            image: `${baseUrl}img/undraw_note_list.svg`,
+            'Do you have WARCs or ARCs? Want text? With the Archives Unleashed Toolkit, ' +
+            'you can run jobs to extract all the plain text from a web archive. You can ' +
+            'also use a variety of filters, including filtering by date, language, ' +
+            'keyword, domain, or URL pattern. Soon you\'ll be mining text to your heart\'s content.',
+            image: `${baseUrl}img/undraw_body_text_l3ld.svg`,
             imageAlign: 'right',
-            title: 'Description',
+            title: 'Extract text from your web archives',
+          },
+        ]}
+      </Block>
+    );
+
+    const Explore = () => (
+      <Block>
+        {[
+          {
+            content:
+            'Hyperlinking practice can tell us a lot about web archives: where did ' +
+            'people link to for their information? How did these links change over ' +
+            'time? Which websites, based on their hyperlinks, were the most ' +
+            'influential? The toolkit allows you to extract site link structures, ' +
+            'and organize them by URL pattern or crawl date. We also support ' +
+            'seamless exportation to Gephi.',
+            image: `${baseUrl}img/undraw_nakamoto_2iv6.svg`,
+            imageAlign: 'left',
+            title: 'Explore hyperlink networks within a web archive',
+          },
+        ]}
+      </Block>
+    );
+
+    const Learn = () => (
+      <Block background="dark">
+        {[
+          {
+            content:
+            'That\'s not all. We support collection analysis (what can you find within ' +
+            'the collection, from URLs to content type), image analysis, as well as ' +
+            'the extraction of binary files from PowerPoint files to spreadsheets to ' +
+            'PDFs. Don\'t see something that you wish we did? Let us know in a GitHub issue.',
+            image: `${baseUrl}img/undraw_instat_analysis_ajld.svg`,
+            imageAlign: 'right',
+            title: 'Learn about your collections in many other ways',
           },
         ]}
       </Block>
@@ -136,7 +160,9 @@ class Index extends React.Component {
         <HomeSplash siteConfig={siteConfig} language={language} />
         <div className="mainContainer">
           <TryOut />
-          <Description />
+          <ExtractText />
+          <Explore />
+          <Learn />
         </div>
       </div>
     );

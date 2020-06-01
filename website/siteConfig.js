@@ -13,7 +13,7 @@ const users = []
 
 const siteConfig = {
   title: 'Archives Unleashed Toolkit', // Title for your website.
-  tagline: 'An open-source toolkit for analyzing web archives with Apache Spark.',
+  tagline: 'An open-source platform for analyzing web archives with Apache Spark',
   url: 'https://user.docs.archivesunleashed.org', // Your website URL
   baseUrl: '/aut-docs-redux/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
