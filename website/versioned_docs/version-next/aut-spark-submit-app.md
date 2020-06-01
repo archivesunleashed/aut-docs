@@ -294,36 +294,6 @@ A single Parquet file:
 spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor SpreadsheetInformationExtractor --input /path/to/warcs/* --output output/path --output-format parquet --partition 1
 ```
 
-## Text Files Information
-
-This extractor outputs a directory of files, or a single file with the
-following columns: `crawl_date`, `url`, `filename`, `extension`,
-`mime_type_web_server`, `mime_type_tika`, `md5`, and `sha1`.
-
-Directory of CSV files:
-
-```shell
-spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor TextFilesInformationExtractor --input /path/to/warcs/* --output output/path
-```
-
-A single CSV file:
-
-```shell
-spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor TextFilesInformationExtractor --input /path/to/warcs/* --output output/path --partition 1
-```
-
-Directory of Parquet files:
-
-```shell
-spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor TextFilesInformationExtractor --input /path/to/warcs/* --output output/path --output-format parquet
-```
-
-A single Parquet file:
-
-```shell
-spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor TextFilesInformationExtractor --input /path/to/warcs/* --output output/path --output-format parquet --partition 1
-```
-
 ## Video Information
 
 This extractor outputs a directory of files, or a single file with the

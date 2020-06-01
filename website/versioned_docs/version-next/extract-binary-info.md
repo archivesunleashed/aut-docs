@@ -5,8 +5,8 @@ original_id: extract-binary-info
 ---
 
 How do I extract the binary information of PDFs, audio files, video files, word
-processor files, spreadsheet files, presentation program files, and text files
-to a CSV file, or into the [Apache Parquet](https://parquet.apache.org/) format
+processor files, spreadsheet files, and presentation program files to a CSV
+file, or into the [Apache Parquet](https://parquet.apache.org/) format
 to [work with later](df-results.md#what-to-do-with-dataframe-results)?
 
 You can also read and write to Amazon S3 by supplying your AWS credentials, and
@@ -73,12 +73,6 @@ warcs.spreadsheets()
   .orderBy(desc("md5"))
   .write.csv("/path/to/derivatives/csv/spreadsheet")
 
-// Text Files.
-warcs.textFiles()
-  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-  .orderBy(desc("md5"))
-  .write.parquet("/path/to/derivatives/parquet/text")
-
 // Videos.
 warcs.videos()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
@@ -128,9 +122,6 @@ warcs.spreadsheets().write.csv('/path/to/derivatives/csv/spreadsheets', header='
 
 # Presentation Program Files.
 warcs.presentation_program().write.parquet('/path/to/derivatives/csv/presentation_program')
-
-# Text Files.
-warcs.text_files().write.csv('/path/to/derivatives/csv/text_files', header='true')
 
 # Videos.
 warcs.video().write.parquet('/path/to/derivatives/csv/video')

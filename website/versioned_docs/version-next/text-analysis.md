@@ -18,7 +18,7 @@ import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(r.getContentString)))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(r.getContentString)))
   .saveAsTextFile("plain-text-rdd/")
 ```
 
@@ -61,7 +61,7 @@ import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeader(r.getContentString))))
   .saveAsTextFile("plain-text-noheaders-rdd/")
 ```
 
@@ -107,7 +107,7 @@ import io.archivesunleashed.matchbox._
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepDomains(Set("www.archive.org"))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeader(r.getContentString))))
   .saveAsTextFile("plain-text-domain-rdd/")
 ```
 
@@ -159,7 +159,7 @@ import io.archivesunleashed.matchbox._
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepUrlPatterns(Set("(?i)http://www.archive.org/details/.*".r))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeader(r.getContentString))))
   .saveAsTextFile("details-rdd/")
 ```
 
@@ -210,7 +210,7 @@ import io.archivesunleashed.matchbox._
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepDomains(Set("www.archive.org"))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, ExtractBoilerpipeTextRDD(RemoveHTTPHeaderRDD(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, ExtractBoilerpipeText(RemoveHTTPHeader(r.getContentString))))
   .saveAsTextFile("plain-text-no-boilerplate-rdd/")
 ```
 
@@ -259,7 +259,7 @@ import io.archivesunleashed.matchbox._
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepDate(List("200804"), ExtractDateRDD.DateComponent.YYYYMM)
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeader(r.getContentString))))
   .saveAsTextFile("plain-text-date-filtered-200804/")
 ```
 
@@ -273,7 +273,7 @@ import io.archivesunleashed.matchbox._
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepDate(List("2008"), ExtractDateRDD.DateComponent.YYYY)
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeader(r.getContentString))))
   .saveAsTextFile("plain-text-date-filtered-2008/")
 ```
 
@@ -287,7 +287,7 @@ import io.archivesunleashed.matchbox._
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepDate(List("2008","2015"), ExtractDateRDD.DateComponent.YYYY)
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeader(r.getContentString))))
   .saveAsTextFile("plain-text-date-filtered-2008-2015-rdd/")
 ```
 
@@ -348,7 +348,7 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepDomains(Set("www.archive.org"))
   .keepLanguages(Set("fr"))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeader(r.getContentString))))
   .saveAsTextFile("plain-text-fr-rdd/")
 ```
 
@@ -418,7 +418,7 @@ import io.archivesunleashed.matchbox._
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .keepValidPages()
   .keepContent(Set("radio".r))
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeader(r.getContentString))))
   .saveAsTextFile("plain-text-radio-rdd/")
 ```
 
@@ -473,7 +473,7 @@ import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTTPHeaderRDD(r.getContentString)))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTTPHeader(r.getContentString)))
   .saveAsTextFile("plain-html-rdd/")
 ```
 

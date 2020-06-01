@@ -5,7 +5,7 @@ original_id: extract-binary
 ---
 
 How do I all the binary files of PDFs, audio files, video files, word processor
-files, spreadsheet files, presentation program files, and text files to disk?
+files, spreadsheet files, and presentation program files to disk?
 
 ## Scala RDD
 
@@ -44,11 +44,6 @@ warcs.presentationProgramFiles()
 warcs.spreadsheets()
   .select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/derivatives/binaries/spreadsheet/your-prefix-spreadsheet", "extension")
-
-// Text Files.
-warcs.textFiles()
-  .select($"bytes", $"extension")
-  .saveToDisk("bytes", "/path/to/derivatives/binaries/text/your-prefix-text", "extension")
 
 // Videos.
 warcs.videos()

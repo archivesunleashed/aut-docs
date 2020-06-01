@@ -33,8 +33,8 @@ import io.archivesunleashed.util._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
-  .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
-  .map(r => (ExtractDomainRDD(r._1).removePrefixWWW(), ExtractDomainRDD(r._2).removePrefixWWW()))
+  .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
+  .map(r => (ExtractDomain(r._1).removePrefixWWW(), ExtractDomain(r._2).removePrefixWWW()))
   .filter(r => r._1 != "" && r._2 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -53,8 +53,8 @@ import io.archivesunleashed.util._
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepContent(Set("apple".r))
-  .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
-  .map(r => (ExtractDomainRDD(r._1).removePrefixWWW(), ExtractDomainRDD(r._2).removePrefixWWW()))
+  .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
+  .map(r => (ExtractDomain(r._1).removePrefixWWW(), ExtractDomain(r._2).removePrefixWWW()))
   .filter(r => r._1 != "" && r._2 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -124,7 +124,7 @@ import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
-  .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
+  .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
   .filter(r => r._1 != "" && r._2 != "")
   .countItems()
   .saveAsTextFile("full-links-all-rdd/")
@@ -133,7 +133,7 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 You can see that the above was achieved by removing the following line:
 
 ```scala
-  .map(r => (ExtractDomainRDD(r._1).removePrefixWWW(), ExtractDomainRDD(r._2).removePrefixWWW()))
+  .map(r => (ExtractDomain(r._1).removePrefixWWW(), ExtractDomain(r._2).removePrefixWWW()))
 ```
 
 In a larger collection, you might want to add the following line:
@@ -189,8 +189,8 @@ import io.archivesunleashed.util._
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepUrlPatterns(Set("(?i)http://www.archive.org/details/.*".r))
-  .flatMap(r => ExtractLinksRDD(r.getUrl, r.getContentString))
-  .map(r => (ExtractDomainRDD(r._1).removePrefixWWW(), ExtractDomainRDD(r._2).removePrefixWWW()))
+  .flatMap(r => ExtractLinks(r.getUrl, r.getContentString))
+  .map(r => (ExtractDomain(r._1).removePrefixWWW(), ExtractDomain(r._2).removePrefixWWW()))
   .filter(r => r._1 != "" && r._2 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -252,8 +252,8 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
-  .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
+  .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
+  .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -280,7 +280,7 @@ Note also that `ExtractLinksRDD` takes an optional third parameter of a base
 URL. If you set this – typically to the source URL – `ExtractLinksRDD` will
 resolve a relative path to its absolute location. For example, if `val url =
 "http://mysite.com/some/dirs/here/index.html"` and `val html = "... <a
-href='../contact/'>Contact</a> ..."`, and we call `ExtractLinksRDD(url, html,
+href='../contact/'>Contact</a> ..."`, and we call `ExtractLinks(url, html,
 url)`, the list it returns will include the item
 `(http://mysite.com/a/b/c/index.html, http://mysite.com/a/b/contact/,
 Contact)`. It may be useful to have this absolute URL if you intend to call
@@ -328,8 +328,8 @@ import io.archivesunleashed.matchbox._
 val links = RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepUrlPatterns(Set("http://www.archive.org/details/.*".r))
-  .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
-  .flatMap(r => r._2.map(f => (r._1, ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
+  .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
+  .flatMap(r => r._2.map(f => (r._1, ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""), ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)

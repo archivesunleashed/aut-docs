@@ -322,5 +322,3 @@ WebArchive(sc, sqlContext, "/path/to/warcs")\
   .select("url", "content")
   .filter(~col("url").isin(urls)
 ```
-
-

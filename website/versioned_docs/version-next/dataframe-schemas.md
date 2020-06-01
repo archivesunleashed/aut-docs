@@ -1,6 +1,6 @@
 ---
 id: version-next-dataframe-schemas
-title: DataFrames Schemas
+title: DataFrame Schemas
 original_id: dataframe-schemas
 ---
 
@@ -98,7 +98,7 @@ language); and `.webgraph()` which includes hyperlink information.
 
 ## Videos
 
-**`.videoss()`**
+**`.videos()`**
 
 - `crawl_date` (string)
 - `url` (string)
@@ -141,20 +141,6 @@ language); and `.webgraph()` which includes hyperlink information.
 ## Word Processor Files
 
 **`.wordProcessorFiles()`**
-
-- `crawl_date` (string)
-- `url` (string)
-- `filename` (string)
-- `extension` (string)
-- `mime_type_web_server` (string)
-- `mime_type_tika` (string)
-- `md5` (string)
-- `sha1` (string)
-- `bytes` (binary)
-
-## Text Files
-
-**`.textFiles()`**
 
 - `crawl_date` (string)
 - `url` (string)

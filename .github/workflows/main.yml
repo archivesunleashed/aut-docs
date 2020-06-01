@@ -17,4 +17,4 @@ jobs:
     - name: Check out code
       uses: actions/checkout@master
     - name: Run mdl
-      run: mdl -s ".github/workflows/mdl-config.rb" current
+      run: mdl -s ".github/workflows/mdl-config.rb" docs
