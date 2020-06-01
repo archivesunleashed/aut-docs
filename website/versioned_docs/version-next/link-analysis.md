@@ -16,8 +16,8 @@ example, you discover how many times that `liberal.ca` linked to `twitter.com`,
 rather than learning that `http://liberal.ca/contact` linked to
 `http://twitter.com/liberal_party`. The reason we do that is that in general,
 if you are working with any data at scale, the sheer number of raw URLs can
-become overwhelming. Though, we do provide one example below that provides raw
-data.
+become overwhelming. That said,, we do provide one example below that provides
+raw data.
 
 ## Extract Simple Site Link Structure
 
@@ -443,7 +443,7 @@ WriteGraphML(graph, "links-for-gephi.graphml")
 ## Finding Hyperlinks within Collection on Pages with Certain Keyword
 
 The following script will extract a DataFrame with the following columns,
-`domain`, `URL`, `crawl date`, `origin page`, and `destination page`, given a
+`domain`, `url`, `crawl date`, `origin page`, and `destination page`, given a
 search term `Keystone` of the content (full-text). The example uses the sample
 data in
 [`aut-resources`](https://github.com/archivesunleashed/aut-resources/tree/master/Sample-Data).

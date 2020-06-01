@@ -5,8 +5,8 @@ original_id: aut-at-scale
 ---
 
 As your collections grow, you may need to provide more resources, and adjust
-Apache Spark configuration options. Apache Spark has a great
-[Configuration](https://spark.apache.org/docs/latest/configuration.html), and
+Apache Spark configuration options. Apache Spark has great
+[Configuration](https://spark.apache.org/docs/latest/configuration.html) and
 [Tuning](https://spark.apache.org/docs/latest/tuning.html) guides that are
 worth checking out. If you're not sure where to start with scaling, join us in
 [Slack](slack.archivesunleashed.org) in the `#aut` channel, and we might be
@@ -37,7 +37,7 @@ number of cores in your machine.
 On a 16-core machine, you may want to drop to 12 cores if you are having memory
 issues. This will increase stability but decrease performance a bit.
 
-You can do so like this (example is using 12 threads on a 16-core machine):
+You can do so like this (the example is using 12 threads on a 16-core machine):
 
 ```shell
 spark-shell --master local[12] --driver-memory 4G --packages "io.archivesunleashed:aut:0.50.1-SNAPSHOT"
@@ -79,11 +79,11 @@ RecordLoader.loadArchives("s3a://<my-bucket>/*.gz", sc)
   .take(10)
 ```
 
-### Reading Data from a S3-like Endpoint
+### Reading Data from an S3-like Endpoint
 
 We also support loading data stored in an Amazon S3-like system such as [Ceph
 RADOS](https://docs.ceph.com/docs/master/rados/). Similar to the above example,
-you'll need an access key and secret, and additionally you'll need to define
+you'll need an access key and secret, and additionally, you'll need to define
 your endpoint.
 
 ```scala

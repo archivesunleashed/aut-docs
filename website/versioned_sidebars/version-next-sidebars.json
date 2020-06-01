@@ -18,8 +18,8 @@
       "version-next-binary-analysis"
     ],
     "Filtering Results": [
-      "version-next-rdd-filters",
-      "version-next-df-filters"
+      "version-next-filters-rdd",
+      "version-next-filters-df"
     ],
     "Standard Derivatives": [
       "version-next-aut-spark-submit-app",

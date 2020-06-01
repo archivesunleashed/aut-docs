@@ -27,7 +27,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
-  .select($"Url")
+  .select($"url")
   .show(20, false)
 ```
 
@@ -72,8 +72,8 @@ import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
-  .select(extractDomain($"Url").as("Domain"))
-  .groupBy("Domain").count().orderBy(desc("count"))
+  .select(extractDomain($"url").as("domain"))
+  .groupBy("domain").count().orderBy(desc("count"))
   .show(20, false)
 ```
 
@@ -87,8 +87,8 @@ from pyspark.sql.functions import desc
 
 WebArchive(sc, sqlContext, "/path/to/warcs")\
   .webpages()\
-  .select(extract_domain("url").alias("Domain"))\
-  .groupBy("Domain")\
+  .select(extract_domain("url").alias("domain"))\
+  .groupBy("domain")\
   .count()\
   .sort(desc("count"))\
   .show(10, False)

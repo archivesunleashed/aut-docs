@@ -30,6 +30,7 @@ const siteConfig = {
   // For no header links in the top nav bar -> headerLinks: [],
 
   headerLinks: [
+    {doc: 'home', label: 'Docs'},
     {
       href: 'https://archivesunleashed.org', label: 'Project'
     },
@@ -52,7 +53,7 @@ const siteConfig = {
   /* Colors for website */
   colors: {
     primaryColor: '#5B7C99',
-    secondaryColor: '#B9FF66',
+    secondaryColor: '#5B7C99',
   },
 
   /* Custom fonts for website */

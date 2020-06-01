@@ -36,8 +36,9 @@ installed. On Linux, this might be
 
 If you would like to use the Archives Unleashed Toolkit with PySpark and
 Jupyter Notebooks, you'll need to have a modern version of Python installed.
-We recommend using the [Anaconda Distribution](https://www.anaconda.com/distribution)
-. This _should_ install Jupyter Notebook, as well as the PySpark bindings. If
+We recommend using the
+[Anaconda Distribution](https://www.anaconda.com/distribution).
+This _should_ install Jupyter Notebook, as well as the PySpark bindings. If
 it doesn't, you can install either with `conda install` or `pip install`.
 
 ## Apache Spark

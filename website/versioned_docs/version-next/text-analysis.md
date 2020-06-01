@@ -53,7 +53,7 @@ WebArchive(sc, sqlContext, "/path/to/warcs")\
 ### Scala RDD
 
 If you want to remove HTTP headers, you can add one more command:
-`RemoveHttpHeader`. The script would then look like:
+`RemoveHTTPHeader`. The script would then look like:
 
 ```scala
 import io.archivesunleashed._

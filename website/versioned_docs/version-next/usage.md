@@ -21,9 +21,9 @@ More information on using the Toolkit with `spark-submit` can be found in
 
 ## Archives Unleashed Toolkit with Spark Shell
 
-There are a two options for loading the Archives Unleashed Toolkit. The
+There are two options for loading the Archives Unleashed Toolkit. The
 advantages and disadvantages of using either option are going to depend
-on your setup (single machine vs cluster):
+on your setup (single machine vs. cluster):
 
 ```shell
 spark-shell --help
@@ -68,9 +68,9 @@ spark-shell --jars /path/to/aut/target/aut-0.70.1-SNAPSHOT-fatjar.jar
 ## Archives Unleashed Toolkit with PySpark
 
 To run PySpark with the Archives Unleashed Toolkit loaded, you will need to
-provide PySpark with the Java/Scala package, and the Python bindings. The
-Java/Scala packages can be provided with `--packages` or `--jars` as described
-above. The Python bindings can be
+provide PySpark with the Java/Scala package, as well as the Python bindings.
+The Java/Scala packages can be provided with `--packages` or `--jars` as
+described above. The Python bindings can be
 [downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-0.70.0/aut-0.70.0.zip)
 , or [built locally](#building-locally) (the zip file will be found in
 the `target` directory.
@@ -166,7 +166,7 @@ will look something like this:
 ```
 
 Create a new notebook by clicking "New" (near the top right of the Jupyter
-homepage) and select "Python 3" from the drop down list.
+homepage) and select "Python 3" from the drop-down list.
 
 The notebook will open in a new window. In the first cell enter:
 

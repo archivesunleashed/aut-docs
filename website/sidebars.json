@@ -18,8 +18,8 @@
       "binary-analysis"
     ],
     "Filtering Results": [
-      "rdd-filters",
-      "df-filters"
+      "filters-rdd",
+      "filters-df"
     ],
     "Standard Derivatives": [
       "aut-spark-submit-app",

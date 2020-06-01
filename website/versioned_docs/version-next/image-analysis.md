@@ -319,23 +319,23 @@ val domain = udf((url: String) => ExtractDomain(url))
 val total = RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
               .select(
                 $"crawl_date".as("crawl_date"),
-                domain($"url").as("Domain"),
+                domain($"url").as("domain"),
                 explode_outer(imgLinks(($"url"),
-                ($"content"))).as("ImageUrl"),
+                ($"content"))).as("image_url"),
                 imgDetails(($"url"),
                 ($"mime_type_tika"),
-                ($"content")).as("MD5"))
+                ($"content")).as("md5"))
               .filter($"crawl_date" rlike "200910[0-9]{2}")
 
-val links = total.groupBy("MD5")
+val links = total.groupBy("md5")
               .count()
-              .where(countDistinct("Domain")>=2)
+              .where(countDistinct("domain")>=2)
 
-val result = total.join(links, "MD5")
-               .groupBy("Domain","MD5")
-               .agg(first("ImageUrl")
-               .as("ImageUrl"))
-               .orderBy(asc("MD5"))
+val result = total.join(links, "md5")
+               .groupBy("domain","md5")
+               .agg(first("image_url")
+               .as("image_url"))
+               .orderBy(asc("md5"))
                .write.csv("/path/to/output")
 ```
 

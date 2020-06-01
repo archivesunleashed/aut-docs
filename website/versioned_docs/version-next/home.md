@@ -20,7 +20,7 @@ flavours of Spark.
 
 If you want to learn more about [Apache Spark](https://spark.apache.org/), we
 highly recommend [Spark: The Definitive
-Guide](http://shop.oreilly.com/product/0636920034957.do)
+Guide](http://shop.oreilly.com/product/0636920034957.do).
 
 ## Table of Contents
 
@@ -44,8 +44,7 @@ and working with the results.
   - [Extract Different Subdomains](collection-analysis.md#extract-different-subdomains)
   - [Extract HTTP Status Codes](collection-analysis.md#extract-http-status-codes)
   - [Extract the Location of the Resource in ARCs and WARCs](collection-analysis.md#extract-the-location-of-the-resource-in-arcs-and-warCs)
-- [**Text Analysis**](text-analysis.md)
-  : How do I...
+- [**Text Analysis**](text-analysis.md): How do I...
   - [Extract All Plain Text](text-analysis.md#extract-all-plain-text)
   - [Extract Plain Text Without HTTP Headers](text-analysis.md#extract-plain-text-without-http-headers)
   - [Extract Plain Text By Domain](text-analysis.md#extract-plain-text-by-domain)
@@ -56,8 +55,7 @@ and working with the results.
   - [Extract Plain Text Filtered by Keyword](text-analysis.md#extract-plain-text-filtered-by-keyword)
   - [Extract Raw HTML](text-analysis.md#extract-raw-html)
   - [Extract Named Entities](text-analysis.md#extract-named-entities)
-- **[Link Analysis](link-analysis.md)**
-  : How do I...
+- **[Link Analysis](link-analysis.md)**: How do I...
   - [Extract Simple Site Link Structure](link-analysis.md#extract-simple-site-link-structure)
   - [Extract Raw URL Link Structure](link-analysis.md#extract-raw-url-link-structure)
   - [Organize Links by URL Pattern](link-analysis.md#organize-links-by-url-pattern)
