@@ -1,6 +1,6 @@
 ---
 id: dataframe-schemas
-title: DataFrames Schemas
+title: DataFrame Schemas
 ---
 
 Below you can find all of the DataFrame schemas available in the Toolkit. For

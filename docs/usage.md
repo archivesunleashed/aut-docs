@@ -2,7 +2,8 @@
 id: usage
 title: Usage
 ---
-### Archives Unleashed Toolkit with Spark Submit
+
+## Archives Unleashed Toolkit with Spark Submit
 
 The Toolkit offers a variety of extraction jobs with
 [`spark-submit`](https://spark.apache.org/docs/latest/submitting-applications.html)
@@ -15,7 +16,7 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner PATH_TO_AUT_J
 ```
 
 More information on using the Toolkit with `spark-submit` can be found in
-[The Toolkit with spark-submit](aut-spark-submit.md) section of the documentation.
+[The Toolkit with spark-submit](aut-spark-submit-app.md) section of the documentation.
 
 ## Archives Unleashed Toolkit with Spark Shell
 
