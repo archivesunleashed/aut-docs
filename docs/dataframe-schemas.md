@@ -125,7 +125,7 @@ language); and `.webgraph()` which includes hyperlink information.
 
 ## Presentation Program Files
 
-**`.presentationProgram()`**
+**`.presentationProgramFiles()`**
 
 - `crawl_date` (string)
 - `url` (string)
@@ -139,21 +139,7 @@ language); and `.webgraph()` which includes hyperlink information.
 
 ## Word Processor Files
 
-**`.wordProcessor()`**
-
-- `crawl_date` (string)
-- `url` (string)
-- `filename` (string)
-- `extension` (string)
-- `mime_type_web_server` (string)
-- `mime_type_tika` (string)
-- `md5` (string)
-- `sha1` (string)
-- `bytes` (binary)
-
-## Text Files
-
-**`.textfiles()`**
+**`.wordProcessorFiles()`**
 
 - `crawl_date` (string)
 - `url` (string)
