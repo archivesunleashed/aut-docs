@@ -2,4 +2,4 @@
   uses: actionshub/markdownlint@v1.1.1
   with:
     # Path to scan for markdown files within the directory (and nested directories)
-    path: ./
+    path: ./docs
