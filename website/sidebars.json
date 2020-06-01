@@ -1,0 +1,35 @@
+{
+  "docs": {
+    "Home": [
+      "home"
+    ],
+    "Getting Started": [
+      "dependencies",
+      "usage",
+      "aut-at-scale",
+      "dataframe-schemas",
+      "toolkit-walkthrough"
+    ],
+    "Generating Results": [
+      "collection-analysis",
+      "text-analysis",
+      "link-analysis",
+      "image-analysis",
+      "binary-analysis"
+    ],
+    "Filtering Results": [
+      "rdd-filters",
+      "df-filters"
+    ],
+    "Standard Derivatives": [
+      "aut-spark-submit-app",
+      "auk-derivatives",
+      "extract-binary-info",
+      "extract-binary"
+    ],
+    "What to do with Results": [
+      "df-results",
+      "rdd-results"
+    ]
+  }
+}

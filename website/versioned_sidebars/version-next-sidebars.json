@@ -1,0 +1,35 @@
+{
+  "version-next-docs": {
+    "Home": [
+      "version-next-home"
+    ],
+    "Getting Started": [
+      "version-next-dependencies",
+      "version-next-usage",
+      "version-next-aut-at-scale",
+      "version-next-dataframe-schemas",
+      "version-next-toolkit-walkthrough"
+    ],
+    "Generating Results": [
+      "version-next-collection-analysis",
+      "version-next-text-analysis",
+      "version-next-link-analysis",
+      "version-next-image-analysis",
+      "version-next-binary-analysis"
+    ],
+    "Filtering Results": [
+      "version-next-rdd-filters",
+      "version-next-df-filters"
+    ],
+    "Standard Derivatives": [
+      "version-next-aut-spark-submit-app",
+      "version-next-auk-derivatives",
+      "version-next-extract-binary-info",
+      "version-next-extract-binary"
+    ],
+    "What to do with Results": [
+      "version-next-df-results",
+      "version-next-rdd-results"
+    ]
+  }
+}
