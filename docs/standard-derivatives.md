@@ -39,20 +39,20 @@ val warcs = RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
 
 // Domains file.
-warcs.map(r => ExtractDomainRDD(r.getUrl))
+warcs.map(r => ExtractDomain(r.getUrl))
   .countItems()
   .saveAsTextFile("/path/to/derivatives/auk/all-domains/output")
 
 // Full-text.
-warcs.map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
+warcs.map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeader(r.getContentString))))
   .saveAsTextFile("/path/to/derivatives/auk/full-text/output")
 
 // GraphML.
 val links = warcs
-  .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
+  .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1,
-                               ExtractDomainRDD(f._1).replaceAll("^\\s*www\\.", ""),
-                               ExtractDomainRDD(f._2).replaceAll("^\\s*www\\.", ""))))
+                               ExtractDomain(f._1).replaceAll("^\\s*www\\.", ""),
+                               ExtractDomain(f._2).replaceAll("^\\s*www\\.", ""))))
   .filter(r => r._2 != "" && r._3 != "")
   .countItems()
   .filter(r => r._2 > 5)
@@ -199,7 +199,7 @@ warcs.pdfs()
   .write.csv("s3a://your-derivatives-bucket/csv/pdf")
 
 // Presentation Program Files.
-warcs.presentationProgramFiles()
+warcs.presentationProgram()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
   .write.parquet("s3a://your-derivatives-bucket/parquet/presentation-program")
@@ -211,7 +211,7 @@ warcs.spreadsheets()
   .write.csv("/path/to/derivatives/csv/spreadsheet")
 
 // Text Files.
-warcs.textFiles()
+warcs.textfiles()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
   .write.parquet("/path/to/derivatives/parquet/text")
@@ -223,7 +223,7 @@ warcs.videos()
   .write.csv("/path/to/derivatives/csv/video")
 
 // Word Processor Files.
-warcs.wordProcessorFiles()
+warcs.wordProcessor()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
   .write.parquet("/path/to/derivatives/parquet/word-processor")
@@ -267,7 +267,7 @@ warcs.spreadsheets().write.csv('/path/to/derivatives/csv/spreadsheets', header='
 warcs.presentation_program().write.parquet('/path/to/derivatives/csv/presentation_program')
 
 # Text Files.
-warcs.text_files().write.csv('/path/to/derivatives/csv/text_files', header='true')
+warcs.textfiles().write.csv('/path/to/derivatives/csv/textfiles', header='true')
 
 # Videos.
 warcs.video().write.parquet('/path/to/derivatives/csv/video')
@@ -310,7 +310,7 @@ warcs.pdfs()
   .saveToDisk("bytes", "/path/to/derivatives/binaries/pdf/your-prefix-pdf", "extension")
 
 // Presentation Program Files.
-warcs.presentationProgramFiles()
+warcs.presentationProgram()
   .select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/derivatives/binaries/presentation-program/your-prefix-presentation-program", "extension")
 
@@ -320,7 +320,7 @@ warcs.spreadsheets()
   .saveToDisk("bytes", "/path/to/derivatives/binaries/spreadsheet/your-prefix-spreadsheet", "extension")
 
 // Text Files.
-warcs.textFiles()
+warcs.textfiles()
   .select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/derivatives/binaries/text/your-prefix-text", "extension")
 
@@ -330,7 +330,7 @@ warcs.videos()
   .saveToDisk("bytes", "/path/to/derivatives/binaries/text/your-prefix-video", "extension")
 
 // Word Processor Files.
-warcs.wordProcessorFiles()
+warcs.wordProcessor()
   .select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/derivatives/binaries/word-processor/your-prefix-word-processor", "extension")
 

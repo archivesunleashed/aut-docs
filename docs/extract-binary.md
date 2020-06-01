@@ -35,7 +35,7 @@ warcs.pdfs()
   .saveToDisk("bytes", "/path/to/derivatives/binaries/pdf/your-prefix-pdf", "extension")
 
 // Presentation Program Files.
-warcs.presentationProgramFiles()
+warcs.presentationProgram()
   .select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/derivatives/binaries/presentation-program/your-prefix-presentation-program", "extension")
 
@@ -45,7 +45,7 @@ warcs.spreadsheets()
   .saveToDisk("bytes", "/path/to/derivatives/binaries/spreadsheet/your-prefix-spreadsheet", "extension")
 
 // Text Files.
-warcs.textFiles()
+warcs.textfiles()
   .select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/derivatives/binaries/text/your-prefix-text", "extension")
 
@@ -55,7 +55,7 @@ warcs.videos()
   .saveToDisk("bytes", "/path/to/derivatives/binaries/text/your-prefix-video", "extension")
 
 // Word Processor Files.
-warcs.wordProcessorFiles()
+warcs.wordProcessor()
   .select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/derivatives/binaries/word-processor/your-prefix-word-processor", "extension")
 

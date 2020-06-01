@@ -61,7 +61,7 @@ warcs.pdfs()
   .write.csv("s3a://your-derivatives-bucket/csv/pdf")
 
 // Presentation Program Files.
-warcs.presentationProgramFiles()
+warcs.presentationProgram()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
   .write.parquet("s3a://your-derivatives-bucket/parquet/presentation-program")
@@ -73,7 +73,7 @@ warcs.spreadsheets()
   .write.csv("/path/to/derivatives/csv/spreadsheet")
 
 // Text Files.
-warcs.textFiles()
+warcs.textfiles()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
   .write.parquet("/path/to/derivatives/parquet/text")
@@ -85,7 +85,7 @@ warcs.videos()
   .write.csv("/path/to/derivatives/csv/video")
 
 // Word Processor Files.
-warcs.wordProcessorFiles()
+warcs.wordProcessor()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
   .write.parquet("/path/to/derivatives/parquet/word-processor")
@@ -129,7 +129,7 @@ warcs.spreadsheets().write.csv('/path/to/derivatives/csv/spreadsheets', header='
 warcs.presentation_program().write.parquet('/path/to/derivatives/csv/presentation_program')
 
 # Text Files.
-warcs.text_files().write.csv('/path/to/derivatives/csv/text_files', header='true')
+warcs.textfiles().write.csv('/path/to/derivatives/csv/textfiles', header='true')
 
 # Videos.
 warcs.video().write.parquet('/path/to/derivatives/csv/video')

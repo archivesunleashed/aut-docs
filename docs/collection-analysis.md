@@ -57,7 +57,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
-  .map(r => ExtractDomainRDD(r.getUrl))
+  .map(r => ExtractDomain(r.getUrl))
   .countItems()
   .take(10)
 ```

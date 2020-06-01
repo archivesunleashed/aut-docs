@@ -152,7 +152,7 @@ import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
-  .flatMap(r => ExtractImageLinksRDD(r.getUrl, r.getContentString))
+  .flatMap(r => ExtractImageLinks(r.getUrl, r.getContentString))
   .countItems()
   .take(10)
 ```
@@ -232,7 +232,7 @@ from aut import *
 
 archive = WebArchive(sc, sqlContext, "/path/to/warcs")
 
-df = archive.image_graph()
+df = archive.imagegraph()
 
 df.groupBy("image_url")
   .count()
@@ -272,7 +272,7 @@ import io.archivesunleashed.app._
 import io.archivesunleashed.matchbox._
 
 val r = RecordLoader.loadArchives("/path/to/warcs",sc).persist()
-ExtractPopularImagesRDD(r, 500, sc).saveAsTextFile("500-Popular-Images")
+ExtractPopularImages(r, 500, sc).saveAsTextFile("500-Popular-Images")
 ```
 
 Will save the 500 most popular URLs to an output directory.
@@ -312,8 +312,8 @@ import io.archivesunleashed.matchbox._
 import io.archivesunleashed._
 
 val imgDetails = udf((url: String, MimeTypeTika: String, content: String) => ExtractImageDetails(url,MimeTypeTika,content.getBytes()).md5Hash)
-val imgLinks = udf((url: String, content: String) => ExtractImageLinksRDD(url, content))
-val domain = udf((url: String) => ExtractDomainRDD(url))
+val imgLinks = udf((url: String, content: String) => ExtractImageLinks(url, content))
+val domain = udf((url: String) => ExtractDomain(url))
 
 val total = RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
               .select(

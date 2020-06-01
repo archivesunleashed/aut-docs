@@ -97,7 +97,7 @@ language); and `.webgraph()` which includes hyperlink information.
 
 ## Videos
 
-**`.videoss()`**
+**`.videos()`**
 
 - `crawl_date` (string)
 - `url` (string)
@@ -125,7 +125,7 @@ language); and `.webgraph()` which includes hyperlink information.
 
 ## Presentation Program Files
 
-**`.presentationProgramFiles()`**
+**`.presentationProgram()`**
 
 - `crawl_date` (string)
 - `url` (string)
@@ -139,7 +139,7 @@ language); and `.webgraph()` which includes hyperlink information.
 
 ## Word Processor Files
 
-**`.wordProcessorFiles()`**
+**`.wordProcessor()`**
 
 - `crawl_date` (string)
 - `url` (string)
@@ -153,7 +153,7 @@ language); and `.webgraph()` which includes hyperlink information.
 
 ## Text Files
 
-**`.textFiles()`**
+**`.textfiles()`**
 
 - `crawl_date` (string)
 - `url` (string)

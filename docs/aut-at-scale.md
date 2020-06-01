@@ -73,7 +73,7 @@ sc.hadoopConfiguration.set("fs.s3a.secret.key", "<my-secret-key>")
 
 RecordLoader.loadArchives("s3a://<my-bucket>/*.gz", sc)
   .keepValidPages()
-  .map(r => ExtractDomainRDD(r.getUrl))
+  .map(r => ExtractDomain(r.getUrl))
   .countItems()
   .take(10)
 ```
@@ -95,7 +95,7 @@ sc.hadoopConfiguration.set("fs.s3a.endpoint", "<my-end-point>")
 
 RecordLoader.loadArchives("s3a://<my-bucket>/*.gz", sc)
   .keepValidPages()
-  .map(r => ExtractDomainRDD(r.getUrl))
+  .map(r => ExtractDomain(r.getUrl))
   .countItems()
   .take(10)
 ```

@@ -274,7 +274,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).presentationProgramFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).presentationProgram();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -331,7 +331,7 @@ them with the following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).presentationProgramFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).presentationProgram();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -536,7 +536,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).textFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).textfiles();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -593,7 +593,7 @@ them with the following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).textFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).textfiles();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
@@ -608,7 +608,7 @@ from aut import *
 
 archive = WebArchive(sc, sqlContext, "/path/to/warcs")
 
-df = archive.text_files()
+df = archive.textfiles()
 df.show()
 ```
 
@@ -798,7 +798,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).wordProcessorFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).wordProcessor();
 
 df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1", $"bytes")
   .orderBy(desc("md5"))
@@ -855,7 +855,7 @@ them with the following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).wordProcessorFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).wordProcessor();
 
 df.select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
