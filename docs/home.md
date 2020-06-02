@@ -32,7 +32,7 @@ and working with the results.
 - [Dependencies](dependencies.md)
 - [Usage](usage.md)
 - [Using the Archives Unleashed Toolkit at Scale](aut-at-scale.md)
-- [Archives Unleashed Toolkit Walkthrough](toolkit-walkthrough.md)
+- [Toolkit Walkthrough](toolkit-walkthrough.md)
 - [DataFrame Schemas](dataframe-schemas.md)
 
 ### Generating Results
@@ -71,7 +71,6 @@ and working with the results.
   - [Extract PDF Information](binary-analysis.md#extract-pdf-information)
   - [Extract Presentation Program File Information](binary-analysis.md#extract-presentation-program-files-information)
   - [Extract Spreadsheet Information](binary-analysis.md#extract-spreadsheet-information)
-  - [Extract Text File Information](binary-analysis.md#extract-text-files-information)
   - [Extract Video Information](binary-analysis.md#extract-video-information)
   - [Extract Word Processor File Information](binary-analysis.md#extract-word-processor-files-information)
 
@@ -104,7 +103,9 @@ The following two articles provide an overview of the project:
   Computing and Cultural Heritage_, 10(4), Article 22, 2017.
 - Nick Ruest, Jimmy Lin, Ian Milligan, Samantha Fritz. [The Archives Unleashed
   Project: Technology, Process, and Community to Improve Scholarly Access to
-  Web Archives](https://arxiv.org/abs/2001.05399). 2020.
+  Web Archives](https://yorkspace.library.yorku.ca/xmlui/handle/10315/37506).
+  Proceedings of the 2020 IEEE/ACM Joint Conference on Digital Libraries 
+  (JCDL 2020), Wuhan, China.
 
 ## Acknowledgments
 
