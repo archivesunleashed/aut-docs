@@ -99,14 +99,14 @@ from pyspark.sql.functions import col, explode
 
 content = "%radio%"
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webpages()\
-  .filter(col("content").like(content))\
-  .select(explode(extract_links("url", "content")).alias("links"))\
-  .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain(col("links._2"))).alias("dest"))\
-  .groupBy("src", "dest")\
-  .count()\
-  .filter(col("count") > 5)\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .filter(col("content").like(content)) \
+  .select(explode(extract_links("url", "content")).alias("links")) \
+  .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain(col("links._2"))).alias("dest")) \
+  .groupBy("src", "dest") \
+  .count() \
+  .filter(col("count") > 5) \
   .write.csv("links-all-apple-df/")
 ```
 
@@ -164,11 +164,11 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 from aut import *
 from pyspark.sql.functions import col
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webgraph()\
-  .groupBy(extract_domain("src"), extract_domain("dest"))\
-  .count()\
-  .filter(col("count") > 5)\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webgraph() \
+  .groupBy(extract_domain("src"), extract_domain("dest")) \
+  .count() \
+  .filter(col("count") > 5) \
   .write.csv("full-links-all-df/")
 ```
 
@@ -223,14 +223,14 @@ from pyspark.sql.functions import col, explode
 
 url_pattern = "%http://www.archive.org/details/%"
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webpages()\
-  .filter(col("url").like(url_pattern))\
-  .select(explode(extract_links("url", "content").alias("links")))\
-  .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain("links._2")).alias("dest"))\
-  .groupBy("src", "dest")\
-  .count()\
-  .filter(col("count") > 5)\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .filter(col("url").like(url_pattern)) \
+  .select(explode(extract_links("url", "content").alias("links"))) \
+  .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain("links._2")).alias("dest")) \
+  .groupBy("src", "dest") \
+  .count() \
+  .filter(col("count") > 5) \
   .write.csv("details-links-all-df/")
 ```
 
@@ -305,11 +305,11 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 from aut import *
 from pyspark.sql.functions import col
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webgraph()\
-  .groupBy("crawl_date", remove_prefix_www(extract_domain("src")).alias("src"), remove_prefix_www(extract_domain("dest")).alias("dest"))\
-  .count()\
-  .filter(col("count") > 5)\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webgraph() \
+  .groupBy("crawl_date", remove_prefix_www(extract_domain("src")).alias("src"), remove_prefix_www(extract_domain("dest")).alias("dest")) \
+  .count() \
+  .filter(col("count") > 5) \
   .write.csv("sitelinks-by-date-df/")
 ```
 
@@ -362,14 +362,14 @@ from pyspark.sql.functions import col, explode
 
 url_pattern = "http://www.archive.org/details/.*"
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webpages()\
-  .filter(col("url").rlike(url_pattern))\
-  .select(explode(extract_links("url", "content")).alias("links"))\
-  .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain(col("links._2"))).alias("dest"))\
-  .groupBy("src", "dest")\
-  .count()\
-  .filter(col("count") > 5)\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .filter(col("url").rlike(url_pattern)) \
+  .select(explode(extract_links("url", "content")).alias("links")) \
+  .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain(col("links._2"))).alias("dest")) \
+  .groupBy("src", "dest") \
+  .count() \
+  .filter(col("count") > 5) \
   .write.csv("sitelinks-details-df/")
 ```
 
@@ -418,14 +418,14 @@ WriteGraphML(graph, "links-for-gephi.graphml")
 from aut import *
 from pyspark.sql.functions import col, desc
 
-graph = WebArchive(sc, sqlContext, "/path/to/data")\
-          .webgraph()\
-          .groupBy("crawl_date", remove_prefix_www(extract_domain("src")).alias("src_domain"), remove_prefix_www(extract_domain("dest")).alias("dest_domain"))\
-          .count()\
-          .filter((col("dest_domain").isNotNull()) & (col("dest_domain") !=""))\
-          .filter((col("src_domain").isNotNull()) & (col("src_domain") !=""))\
-          .filter(col("count") > 5)\
-          .orderBy(desc("count"))\
+graph = WebArchive(sc, sqlContext, "/path/to/data") \
+          .webgraph() \
+          .groupBy("crawl_date", remove_prefix_www(extract_domain("src")).alias("src_domain"), remove_prefix_www(extract_domain("dest")).alias("dest_domain")) \
+          .count() \
+          .filter((col("dest_domain").isNotNull()) & (col("dest_domain") !="")) \
+          .filter((col("src_domain").isNotNull()) & (col("src_domain") !="")) \
+          .filter(col("count") > 5) \
+          .orderBy(desc("count")) \
           .collect()
 
 WriteGEXF(graph, "links-for-gephi.gexf")
