@@ -69,7 +69,7 @@ class Footer extends React.Component {
               target="_blank">
               Newsletter
             </a>
-            <a href="http://slack.archivesunleashed.org/">Project Slack</a>
+            <a href="http://slack.archivesunleashed.org/">Slack</a>
             <a href="https://archivesunleashed.org/events/">Events</a>
             <a href="https://zenodo.org/communities/wahr/">Datasets</a>
           </div>
