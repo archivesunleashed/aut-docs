@@ -42,7 +42,7 @@
      id="namedview267"
      showgrid="false"
      inkscape:zoom="1.2016605"
-     inkscape:cx="68.176799"
+     inkscape:cx="-108.24574"
      inkscape:cy="459.54843"
      inkscape:window-x="0"
      inkscape:window-y="152"
@@ -136,7 +136,7 @@
      r="6.81334"
      fill="#b9ff66"
      id="circle30"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <circle
      cx="144.76881"
      cy="41.73599"
@@ -305,7 +305,7 @@
      r="6.81334"
      fill="#b9ff66"
      id="circle86"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <circle
      cx="75.79073"
      cy="146.50183"
@@ -432,7 +432,7 @@
      r="6.81334"
      fill="#b9ff66"
      id="circle128"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <circle
      cx="110.27977"
      cy="216.34573"
@@ -680,7 +680,7 @@
      transform="translate(-208.80496 -132.93873)"
      fill="#b9ff66"
      id="path212"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <path
      d="M553.64892,307.10073a1.72279,1.72279,0,0,1,1.72279,1.72279v3.4456a1.72279,1.72279,0,0,1-1.72279,1.72279H417.548a1.72278,1.72278,0,0,1-1.72279-1.72279v-3.4456a1.72278,1.72278,0,0,1,1.72279-1.72279h136.101"
      transform="translate(-208.80496 -132.93873)"
@@ -701,7 +701,7 @@
      transform="translate(-208.80496 -132.93873)"
      fill="#b9ff66"
      id="path220"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1;opacity:1" />
   <polygon
      points="277.241 161.182 275.833 160.808 306.56 45.221 484.785 45.221 484.785 46.678 307.679 46.678 277.241 161.182"
      fill="#3f3d56"
@@ -717,7 +717,7 @@
      r="5.82511"
      fill="#b9ff66"
      id="circle226"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <polygon
      points="272.477 356.941 273.884 357.317 242.937 472.845 64.712 472.504 64.715 471.047 241.82 471.387 272.477 356.941"
      fill="#3f3d56"
@@ -733,7 +733,7 @@
      r="5.82511"
      fill="#b9ff66"
      id="circle232"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <polygon
      points="616.828 600.594 606.551 600.594 608.386 543.702 635.548 545.17 616.828 600.594"
      fill="#ffb8b8"
@@ -778,7 +778,7 @@
      transform="translate(-208.80496 -132.93873)"
      fill="#b9ff66"
      id="path248"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <path
      d="M888.40086,464.51318l-59.4611-6.60679-4.40452-19.08628c-9.763-14.73785-5.50172-28.23741,5.8727-41.1089,20.73295,13.306,39.9782,19.05585,67.536,14.68175C890.61535,430.21634,883.847,447.73282,888.40086,464.51318Z"
      transform="translate(-208.80496 -132.93873)"
@@ -818,7 +818,7 @@
      transform="translate(-208.80496 -132.93873)"
      fill="#b9ff66"
      id="path262"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <path
      d="M828.93976,537.92193l1.43732,24.91342a10.8188,10.8188,0,0,1-12.37492,11.3268h0c-6.32954-.93081-6.47336-7.121-4.92171-13.32762l5.91167-23.64668c14.50235-51.99824,18.41745-103.03575,17.68369-152.8119A12.4975,12.4975,0,0,1,849.50966,371.662h0A12.4912,12.4912,0,0,1,861.631,384.58919C859.57812,443.03942,851.05293,496.1186,828.93976,537.92193Z"
      transform="translate(-208.80496 -132.93873)"

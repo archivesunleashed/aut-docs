@@ -37,12 +37,12 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="2259"
-     inkscape:window-height="1360"
+     inkscape:window-width="2289"
+     inkscape:window-height="1378"
      id="namedview101"
      showgrid="false"
      inkscape:zoom="1.2587992"
-     inkscape:cx="492.53289"
+     inkscape:cx="323.32401"
      inkscape:cy="309.30557"
      inkscape:window-x="0"
      inkscape:window-y="0"
@@ -84,7 +84,7 @@
      r="14.94537"
      fill="#b9ff66"
      id="circle14"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <circle
      cx="558.54792"
      cy="360.23506"
@@ -97,14 +97,14 @@
      r="14.94537"
      fill="#b9ff66"
      id="circle18"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <circle
      cx="565.44579"
      cy="428.06404"
      r="14.94537"
      fill="#b9ff66"
      id="circle20"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <circle
      cx="514.86146"
      cy="476.34907"
@@ -126,13 +126,13 @@
      transform="translate(-117 -140.69444)"
      fill="#b9ff66"
      id="path28"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <path
      d="M339.02747,550.53866A105.9872,105.9872,0,0,1,360.006,513.33242l-9.2428-9.2428a118.816,118.816,0,0,0-24.3305,43.07428Z"
      transform="translate(-117 -140.69444)"
      fill="#b9ff66"
      id="path30"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <path
      d="M534.64783,510.67855l-9.3169,9.31689a105.72766,105.72766,0,0,1,16.16455,32.22614l12.58051-3.37091A118.60685,118.60685,0,0,0,534.64783,510.67855Z"
      transform="translate(-117 -140.69444)"
@@ -143,13 +143,13 @@
      transform="translate(-117 -140.69444)"
      fill="#b9ff66"
      id="path34"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <path
      d="M334,582.80556a106.39567,106.39567,0,0,1,1.16479-15.70221L322.531,563.7181a119.83923,119.83923,0,0,0,2.204,48.78046l12.57464-3.36939A105.83469,105.83469,0,0,1,334,582.80556Z"
      transform="translate(-117 -140.69444)"
      fill="#b9ff66"
      id="path36"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <path
      d="M466.12152,685.54537A105.83539,105.83539,0,0,1,440,688.80556c-3.26331,0-6.4903-.15637-9.67926-.44647l-3.4101,12.72669a119.69008,119.69008,0,0,0,42.5802-2.96589Z"
      transform="translate(-117 -140.69444)"
@@ -160,7 +160,7 @@
      transform="translate(-117 -140.69444)"
      fill="#b9ff66"
      id="path40"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <path
      d="M557.73883,565.46895l-12.657,3.39142a106.27449,106.27449,0,0,1-1.07129,34.40717l12.59955,3.376a119.95675,119.95675,0,0,0,1.12878-41.17463Z"
      transform="translate(-117 -140.69444)"
@@ -171,7 +171,7 @@
      transform="translate(-117 -140.69444)"
      fill="#b9ff66"
      id="path44"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <path
      d="M413.5,685.45174A105.58742,105.58742,0,0,1,378.92938,669.397l-9.34167,9.34168a118.49819,118.49819,0,0,0,40.54352,19.28558Z"
      transform="translate(-117 -140.69444)"
@@ -194,7 +194,7 @@
      height="23"
      fill="#e6e6e6"
      id="rect52"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <rect
      x="60"
      y="321.61113"
@@ -202,7 +202,7 @@
      height="23"
      fill="#b9ff66"
      id="rect54"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <path
      d="M527.9685,196.43021s6.53214,21.46274,2.79949,27.99488,6.53213,20.52958,23.32906,13.99744,17.73009-13.99744,17.73009-13.99744-6.53214-10.26479-8.39847-31.72753Z"
      transform="translate(-117 -140.69444)"
@@ -286,7 +286,7 @@
      height="3.57317"
      fill="#b9ff66"
      id="rect86"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <rect
      x="769.59146"
      y="229.31311"
@@ -294,7 +294,7 @@
      height="3.57317"
      fill="#b9ff66"
      id="rect88"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <rect
      x="769.59146"
      y="244.49908"
@@ -302,7 +302,7 @@
      height="3.57317"
      fill="#b9ff66"
      id="rect90"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <rect
      x="758.59146"
      y="505.12713"
@@ -310,7 +310,7 @@
      height="3.57317"
      fill="#b9ff66"
      id="rect92"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <rect
      x="758.59146"
      y="520.31311"
@@ -318,7 +318,7 @@
      height="3.57317"
      fill="#b9ff66"
      id="rect94"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <rect
      x="758.59146"
      y="535.49908"
@@ -326,7 +326,7 @@
      height="3.57317"
      fill="#b9ff66"
      id="rect96"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <polygon
      points="819 487.199 713.475 487.199 713.177 486.766 631.177 367.766 632.823 366.632 714.525 485.199 819 485.199 819 487.199"
      fill="#3f3d56"

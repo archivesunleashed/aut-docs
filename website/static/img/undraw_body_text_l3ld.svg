@@ -42,9 +42,9 @@
      id="namedview87"
      showgrid="false"
      inkscape:zoom="0.58971872"
-     inkscape:cx="274.58359"
+     inkscape:cx="649.87998"
      inkscape:cy="324.98651"
-     inkscape:window-x="517"
+     inkscape:window-x="518"
      inkscape:window-y="335"
      inkscape:window-maximized="0"
      inkscape:current-layer="a52ce8ac-7708-4c6b-8f08-fc4d288bf8bf" />
@@ -63,7 +63,7 @@
      height="368"
      fill="#b9ff66"
      id="rect6"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <rect
      x="522"
      y="590.29864"
@@ -72,12 +72,12 @@
      fill="#3f3d56"
      id="rect8" />
   <rect
-     x="665.81687"
-     y="359.98831"
-     width="110.15278"
+     x="666.88629"
+     y="358.91885"
+     width="132.19719"
      height="128.33333"
-     fill="#f2f2f2"
-     id="rect10" />
+     id="rect10"
+     style="fill:#f2f2f2;stroke-width:1.0955025" />
   <path
      d="M903.24743,614.40457h-154v-154h154Zm-151.86111-2.13889H901.10854V462.54346H751.38632Z"
      transform="translate(-84.5 -125.01348)"
@@ -126,7 +126,7 @@
      height="223"
      fill="#b9ff66"
      id="rect24"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <rect
      x="61"
      y="225.13322"
@@ -249,13 +249,13 @@
      transform="translate(-84.5 -125.01348)"
      fill="#b9ff66"
      id="path70"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <path
      d="M294.14859,610.08626c5.68507,21.01543,25.15771,34.03082,25.15771,34.03082s10.25533-21.05736,4.57026-42.07279-25.15771-34.03081-25.15771-34.03081S288.46352,589.07083,294.14859,610.08626Z"
      transform="translate(-84.5 -125.01348)"
      fill="#b9ff66"
      id="path72"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <path
      d="M302.5024,605.56982c15.59991,15.18589,17.50533,38.53012,17.50533,38.53012s-23.387-1.27694-38.98695-16.46282S263.51545,589.107,263.51545,589.107,286.90249,590.38394,302.5024,605.56982Z"
      transform="translate(-84.5 -125.01348)"
@@ -271,13 +271,13 @@
      transform="translate(-84.5 -125.01348)"
      fill="#b9ff66"
      id="path78"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <path
      d="M723.14859,167.08626c5.68507,21.01543,25.15771,34.03082,25.15771,34.03082s10.25533-21.05736,4.57026-42.07279-25.15771-34.03081-25.15771-34.03081S717.46352,146.07083,723.14859,167.08626Z"
      transform="translate(-84.5 -125.01348)"
      fill="#b9ff66"
      id="path80"
-     style="fill:#0b4f6c;fill-opacity:1" />
+     style="fill:#01baef;fill-opacity:1" />
   <path
      d="M731.5024,162.56982c15.59991,15.18589,17.50533,38.53012,17.50533,38.53012s-23.387-1.27694-38.987-16.46282S692.51545,146.107,692.51545,146.107,715.90249,147.38394,731.5024,162.56982Z"
      transform="translate(-84.5 -125.01348)"
