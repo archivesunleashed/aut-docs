@@ -1,5 +1,5 @@
 ---
-id: version-next-binary-analysis
+id: version-0.80.0-binary-analysis
 title: Binary Analysis
 original_id: binary-analysis
 ---

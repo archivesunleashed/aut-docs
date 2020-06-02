@@ -73,6 +73,35 @@ function Versions(props) {
               </tr>
             </tbody>
           </table>
+          <h3 id="archive">Past Versions</h3>
+          <p>
+            Here you can find documentation for previous versions of Docusaurus.
+          </p>
+          <table className="versions">
+            <tbody>
+              {versions.map(
+                (version) =>
+                  version !== latestVersion && (
+                    <tr key={version}>
+                      <th>
+                        {version === versions[versions.length - 1] ? '<=' : ''}
+                        {version}
+                      </th>
+                      <td>
+                        <a
+                          href={`${siteConfig.baseUrl}${siteConfig.docsUrl}/${version}/home`}>
+                          Documentation
+                        </a>
+                      </td>
+                    </tr>
+                  ),
+              )}
+            </tbody>
+          </table>
+          <p>
+            You can find past versions of this project on{' '}
+            <a href="http://github.com/archivesunleashed/aut/releases">GitHub</a>.
+          </p>
         </div>
       </Container>
     </div>

@@ -1,5 +1,5 @@
 ---
-id: version-next-df-results
+id: version-0.80.0-df-results
 title: DataFrame Results
 original_id: df-results
 ---
@@ -108,7 +108,7 @@ RDDs is `.head(10)`.
 So, something like (in Python):
 
 ```python
-WebArchive(sc, sqlContext, "/path/to/warcs").webpages()\
+WebArchive(sc, sqlContext, "/path/to/warcs").webpages() \
   # more transformations here...
   .select("http_status_code")
   .head(10)

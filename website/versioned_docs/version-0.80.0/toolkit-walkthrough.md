@@ -1,5 +1,5 @@
 ---
-id: version-next-toolkit-walkthrough
+id: version-0.80.0-toolkit-walkthrough
 title: Toolkit Walkthrough
 original_id: toolkit-walkthrough
 ---

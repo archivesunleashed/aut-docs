@@ -1,5 +1,5 @@
 ---
-id: version-next-collection-analysis
+id: version-0.80.0-collection-analysis
 title: Collection Analysis
 original_id: collection-analysis
 ---
@@ -38,7 +38,7 @@ What do I do with the results? See [this guide](df-results.md)!
 ```python
 from aut import *
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
   .select("url") \
   .show(20, False)
@@ -85,12 +85,12 @@ What do I do with the results? See [this guide](df-results.md)!
 from aut import *
 from pyspark.sql.functions import desc
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webpages()\
-  .select(extract_domain("url").alias("domain"))\
-  .groupBy("domain")\
-  .count()\
-  .sort(desc("count"))\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .select(extract_domain("url").alias("domain")) \
+  .groupBy("domain") \
+  .count() \
+  .sort(desc("count")) \
   .show(10, False)
 ```
 
@@ -144,10 +144,10 @@ from pyspark.sql.functions import col
 
 url_pattern = "http://[^/]+/[^/]+/"
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webpages()\
-  .select("url")\
-  .filter(col("url").rlike(url_pattern))\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .select("url") \
+  .filter(col("url").rlike(url_pattern)) \
   .show(10, False)
 ```
 
@@ -187,9 +187,9 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 ```python
 from aut import *
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .all()\
-  .select("url", "http_status_code")\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .all() \
+  .select("url", "http_status_code") \
   .show(10, False)
 ```
 
@@ -242,8 +242,8 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 ```python
 from aut import *
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .all()\
-  .select("url", "archive_filename")\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .all() \
+  .select("url", "archive_filename") \
   .show(10, False)
 ```

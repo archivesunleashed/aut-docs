@@ -1,5 +1,5 @@
 ---
-id: version-next-extract-binary-info
+id: version-0.80.0-extract-binary-info
 title: Extract Binary Info
 original_id: extract-binary-info
 ---

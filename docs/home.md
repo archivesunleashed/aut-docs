@@ -104,7 +104,7 @@ The following two articles provide an overview of the project:
 - Nick Ruest, Jimmy Lin, Ian Milligan, Samantha Fritz. [The Archives Unleashed
   Project: Technology, Process, and Community to Improve Scholarly Access to
   Web Archives](https://yorkspace.library.yorku.ca/xmlui/handle/10315/37506).
-  Proceedings of the 2020 IEEE/ACM Joint Conference on Digital Libraries 
+  Proceedings of the 2020 IEEE/ACM Joint Conference on Digital Libraries
   (JCDL 2020), Wuhan, China.
 
 ## Acknowledgments

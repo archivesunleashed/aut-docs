@@ -1,5 +1,5 @@
 ---
-id: version-next-extract-binary
+id: version-0.80.0-extract-binary
 title: Extract Binaries to Disk
 original_id: extract-binary
 ---

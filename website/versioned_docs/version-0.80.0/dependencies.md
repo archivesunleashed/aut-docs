@@ -1,5 +1,5 @@
 ---
-id: version-next-dependencies
+id: version-0.80.0-dependencies
 title: Dependencies
 original_id: dependencies
 ---

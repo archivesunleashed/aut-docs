@@ -1,5 +1,5 @@
 ---
-id: version-next-dataframe-schemas
+id: version-0.80.0-dataframe-schemas
 title: DataFrame Schemas
 original_id: dataframe-schemas
 ---
