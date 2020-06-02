@@ -18,7 +18,7 @@ const versions = require(`${CWD}/versions.json`);
 function Versions(props) {
   const {config: siteConfig} = props;
   const latestVersion = versions[0];
-  const repoUrl = `https://github.com/${siteConfig.organizationName}/${siteConfig.projectName}`;
+  const repoUrl = `https://github.com/archivesunleashed/aut`;
   return (
     <div className="docMainWrapper wrapper">
       <Container className="mainContainer versionsContainer">
@@ -43,7 +43,7 @@ function Versions(props) {
                   </a>
                 </td>
                 <td>
-                  <a href={`https://github.com/${siteConfig.organizationName}/${siteConfig.projectName}/releases/tag/aut-${latestVersion}`} target="_blank">Release Notes</a>
+                  <a href={`${repoUrl}/releases/tag/aut-${latestVersion}`} target="_blank">Release Notes</a>
                 </td>
               </tr>
             </tbody>
@@ -68,7 +68,7 @@ function Versions(props) {
                   </a>
                 </td>
                 <td>
-                  <a href={repoUrl}>Source Code</a>
+                  <a href={`${repoUrl}`}>Source Code</a>
                 </td>
               </tr>
             </tbody>
