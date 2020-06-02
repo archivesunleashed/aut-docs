@@ -84,9 +84,9 @@ class Index extends React.Component {
         {[
           {
             content:
-            'Are you a researcher or web archivist looking to understand your web ' +
-            'archive collections better? No matter the size, gigabytes, terabytes, ' +
-            'or petabytes, the Archives Unleashed Toolkit can help!\n\n' +
+            'Are you a researcher or web archivist looking to better understand ' +
+            'your web archive collections? No matter the size -- gigabytes, terabytes, ' +
+            'or petabytes -- the Archives Unleashed Toolkit can help!\n\n' +
             'Our documentation, based on a cookbook approach, provides a series ' +
             'of "recipes" for addressing a number of common analysis tasks to ' +
             'provide inspiration for your own analysis. We generally provide examples ' +
@@ -95,7 +95,7 @@ class Index extends React.Component {
             'Python flavours of Spark!',
             image: `${baseUrl}img/undraw_file_analysis_8k9b.svg`,
             imageAlign: 'left',
-            title: 'Analyze Large Web Archives',
+            title: 'Gain Insights on Your Web Archives',
           },
         ]}
       </Block>
@@ -112,7 +112,7 @@ class Index extends React.Component {
             'keyword, domain, or URL pattern. Soon you\'ll be mining text to your heart\'s content.',
             image: `${baseUrl}img/undraw_body_text_l3ld.svg`,
             imageAlign: 'right',
-            title: 'Extract text from your web archives',
+            title: 'Extract Text From Your Web Archives',
           },
         ]}
       </Block>
@@ -131,7 +131,7 @@ class Index extends React.Component {
             'seamless exportation to Gephi.',
             image: `${baseUrl}img/undraw_nakamoto_2iv6.svg`,
             imageAlign: 'left',
-            title: 'Explore hyperlink networks within a web archive',
+            title: 'Explore Hyperlink Networks Within a Web Archive',
           },
         ]}
       </Block>
@@ -144,11 +144,12 @@ class Index extends React.Component {
             content:
             'That\'s not all. We support collection analysis (what can you find within ' +
             'the collection, from URLs to content type), image analysis, as well as ' +
-            'the extraction of binary files from PowerPoint files to spreadsheets to ' +
-            'PDFs. Don\'t see something that you wish we did? Let us know in a GitHub issue.',
+            'the extraction of binary files. From audio, images, videos, and PowerPoint ' +
+            'files to spreadsheets and PDFs.\n\n Don\'t see something that you wish we ' +
+            'did? Let us know in a GitHub issue.',
             image: `${baseUrl}img/undraw_instat_analysis_ajld.svg`,
             imageAlign: 'right',
-            title: 'Learn about your collections in many other ways',
+            title: 'Learn About Your Collections in Many Other Ways',
           },
         ]}
       </Block>
