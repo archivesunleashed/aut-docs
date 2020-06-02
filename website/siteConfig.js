@@ -14,14 +14,14 @@ const users = []
 const siteConfig = {
   title: 'Archives Unleashed Toolkit', // Title for your website.
   tagline: 'An open-source platform for analyzing web archives with Apache Spark',
-  url: 'https://docs.archivesunleashed.org', // Your website URL
+  url: 'https://archivesunleashed.github.io', // Your website URL
   baseUrl: '/aut-docs/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
 
   // Used for publishing and more
-  projectName: 'aut-docs',
+  projectName: 'archivesunleashed.github.io',
   organizationName: 'archivesunleashed',
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
