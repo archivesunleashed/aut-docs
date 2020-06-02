@@ -41,9 +41,9 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 ```python
 from aut import *
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webpages()\
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html("content").alias("content"))
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html("content").alias("content")) \
   .write.csv("plain-text-df/")
 ```
 
@@ -84,9 +84,9 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 ```python
 from aut import *
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webpages()\
-  .select(remove_html(remove_http_header("content")).alias("content"))\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .select(remove_html(remove_http_header("content")).alias("content")) \
   .write.csv("plain-text-noheaders-df/")
 ```
 
@@ -133,10 +133,10 @@ from pyspark.sql.functions import col
 
 domains = ["www.archive.org"]
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webpages()\
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content"))\
-  .filter(col("domain").isin(domains))\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content")) \
+  .filter(col("domain").isin(domains)) \
   .write.csv("plain-text-domain-df/")
 ```
 
@@ -185,10 +185,10 @@ from pyspark.sql.functions import col
 
 url_pattern = "%http://www.archive.org/details/%"
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webpages()\
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content"))\
-  .filter(col("url").like(url_pattern))\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content")) \
+  .filter(col("url").like(url_pattern)) \
   .write.csv("details-df/")
 ```
 
@@ -233,9 +233,9 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 ```python
 from aut import *
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webpages()\
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", extract_boilerplate(remove_http_header("content")).alias("content"))\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", extract_boilerplate(remove_http_header("content")).alias("content")) \
   .write.csv("plain-text-no-boilerplate-df/")
 ```
 
@@ -324,10 +324,10 @@ from pyspark.sql.functions import col
 
 dates = "2009[10][09]\d\d"
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webpages()\
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content"))\
-  .filter(col("crawl_date").rlike(dates))\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content")) \
+  .filter(col("crawl_date").rlike(dates)) \
   .write.csv("plain-text-date-filtered-2008-2015-df/")
 ```
 
@@ -392,11 +392,11 @@ from pyspark.sql.functions import col
 domains = ["www.geocities.com"]
 languages = ["fr"]
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webpages()\
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content"))\
-  .filter(col("domain").isin(domains))\
-  .filter(col("language").isin(languages))\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content")) \
+  .filter(col("domain").isin(domains)) \
+  .filter(col("language").isin(languages)) \
   .write.csv("plain-text-fr-df/")
 ```
 
@@ -448,10 +448,10 @@ from pyspark.sql.functions import col
 
 content = "%radio%"
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webpages()\
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content"))\
-  .filter(col("content").like(content))
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content")) \
+  .filter(col("content").like(content)) \
   .write.csv("plain-text-radio-df/")
 ```
 
@@ -493,8 +493,8 @@ RecordLoader.loadArchives("example.warc.gz", sc)
 ```python
 from aut import *
 
-WebArchive(sc, sqlContext, "/path/to/warcs")\
-  .webpages()\
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_http_header("content").alias("content"))\
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_http_header("content").alias("content")) \
   .write.csv("plain-html-df/")
 ```

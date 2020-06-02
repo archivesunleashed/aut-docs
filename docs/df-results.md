@@ -107,7 +107,7 @@ RDDs is `.head(10)`.
 So, something like (in Python):
 
 ```python
-WebArchive(sc, sqlContext, "/path/to/warcs").webpages()\
+WebArchive(sc, sqlContext, "/path/to/warcs").webpages() \
   # more transformations here...
   .select("http_status_code")
   .head(10)

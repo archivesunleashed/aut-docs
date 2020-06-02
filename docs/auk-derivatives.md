@@ -77,9 +77,9 @@ webpages = WebArchive(sc, sqlContext, "/path/to/data").webpages()
 webgraph = WebArchive(sc, sqlContext, "/path/to/data").webgraph()
 
 # Domains file.
-webpages.groupBy(remove_prefix_www(extract_domain("url")).alias("url"))\
-  .count()\
-  .sort(col("count").desc())\
+webpages.groupBy(remove_prefix_www(extract_domain("url")).alias("url")) \
+  .count() \
+  .sort(col("count").desc()) \
   .write.csv("/path/to/derivatives/auk/all-domains/output"")
 
 # Full-text.
