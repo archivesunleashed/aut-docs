@@ -80,7 +80,7 @@ webgraph = WebArchive(sc, sqlContext, "/path/to/data").webgraph()
 webpages.groupBy(remove_prefix_www(extract_domain("url")).alias("url")) \
   .count() \
   .sort(col("count").desc()) \
-  .write.csv("/path/to/derivatives/auk/all-domains/output"")
+  .write.csv("/path/to/derivatives/auk/all-domains/output")
 
 # Full-text.
 webpages.select("crawl_date", remove_prefix_www(extract_domain("url")).alias("domain"), "url", remove_html(remove_http_header("content")).alias("content"))\

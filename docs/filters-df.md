@@ -220,7 +220,7 @@ mime_types = ["text/html", "text/plain"]
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .all() \
-  .select("url", "mime_type_tika")) \
+  .select("url", "mime_type_tika") \
   .filter(~col("mime_type_tika").isin(mime_types))
 ```
 
@@ -253,7 +253,7 @@ mime_types = ["text/html", "text/plain"]
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .all() \
-  .select("url", "mime_type_web_server")) \
+  .select("url", "mime_type_web_server") \
   .filter(~col("mime_type_web_server").isin(mime_types))
 ```
 
