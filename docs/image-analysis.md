@@ -308,36 +308,39 @@ than one domain_.
 ### Scala DF
 
 ```scala
-import io.archivesunleashed.matchbox._
 import io.archivesunleashed._
+import io.archivesunleashed.udfs._
 
-val imgDetails = udf((url: String, MimeTypeTika: String, content: String) => ExtractImageDetails(url,MimeTypeTika,content.getBytes()).md5Hash)
-val imgLinks = udf((url: String, content: String) => ExtractImageLinks(url, content))
-val domain = udf((url: String) => ExtractDomain(url))
+val images = RecordLoader.loadArchives("/path/to/warcs", sc)
+                        .images()
+                        .select(iremovePrefixWWW(extractDomain($"url")).as("domain"), $"url", $"md5")
 
-val total = RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
-              .select(
-                $"crawl_date".as("crawl_date"),
-                domain($"url").as("domain"),
-                explode_outer(imgLinks(($"url"),
-                ($"content"))).as("image_url"),
-                imgDetails(($"url"),
-                ($"mime_type_tika"),
-                ($"content")).as("md5"))
-              .filter($"crawl_date" rlike "200910[0-9]{2}")
+val links = images.groupBy("md5").count().where(countDistinct("domain")>=2)
 
-val links = total.groupBy("md5")
-              .count()
-              .where(countDistinct("domain")>=2)
-
-val result = total.join(links, "md5")
-               .groupBy("domain","md5")
-               .agg(first("image_url")
-               .as("image_url"))
-               .orderBy(asc("md5"))
-               .write.csv("/path/to/output")
+val result = images.join(links, "md5")
+                   .groupBy("domain", "md5")
+                   .agg(first("url").as("image_url"))
+                   .orderBy(asc("md5"))
+                   .write.csv("/path/to/output")
 ```
 
 ### PythonDF
 
-TODO
+```python
+from aut import *
+from pyspark.sql.functions import asc, countDistinct, first
+
+images = WebArchive(sc, sqlContext, "/home/nruest/Projects/au/sample-data/geocities") \
+  .images() \
+  .select(remove_prefix_www(extract_domain("url")).alias("domain"), "url", "md5")
+
+links = images.groupBy("md5") \
+              .count() \
+              .where(countDistinct("domain")>=2)
+
+result = images.join(links, "md5") \
+               .groupBy("domain", "md5") \
+               .agg(first("url").alias("image_url")) \
+               .orderBy(asc("md5")) \
+               .write.csv("/path/to/output")
+```
