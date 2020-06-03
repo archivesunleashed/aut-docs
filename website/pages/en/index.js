@@ -86,13 +86,12 @@ class Index extends React.Component {
             content:
             'Are you a researcher or web archivist looking to better understand ' +
             'your web archive collections? No matter the size -- gigabytes, terabytes, ' +
-            'or petabytes -- the Archives Unleashed Toolkit can help!\n\n' +
-            'Our documentation, based on a cookbook approach, provides a series ' +
+            'or petabytes -- the Archives Unleashed Toolkit can help!\n\n ' +
+            '[Our documentation](docs/home), based on a cookbook approach, provides a series ' +
             'of "recipes" for addressing a number of common analysis tasks to ' +
-            'provide inspiration for your own analysis. We generally provide examples ' +
-            'for resilient distributed datasets (RDD) in Scala, and DataFrames ' +
-            'in both Scala and Python. We leave it up to you to choose Scala or ' +
-            'Python flavours of Spark!',
+            'provide inspiration for your own analysis. We provide examples ' +
+            'in [Scala](https://www.scala-lang.org/) and [Python](https://www.python.org/)' +
+            ', and we leave it up to you to choose [Spark](https://spark.apache.org/) or PySpark!',
             image: `${baseUrl}img/undraw_file_analysis_8k9b.svg`,
             imageAlign: 'left',
             title: 'Gain Insights on Your Web Archives',
@@ -106,10 +105,11 @@ class Index extends React.Component {
         {[
           {
             content:
-            'Do you have WARCs or ARCs? Want text? With the Archives Unleashed Toolkit, ' +
-            'you can run jobs to extract all the plain text from a web archive. You can ' +
-            'also use a variety of filters, including filtering by date, language, ' +
-            'keyword, domain, or URL pattern. Soon you\'ll be mining text to your heart\'s content.',
+            'Do you have WARCs or ARCs and want just the text? With the Toolkit, ' +
+            'you can [extract all the text](docs/text-analysis) from a web archive. Combine that with ' +
+            'a variety of filters, like filtering by date, language, keyword, ' +
+            'domain, or URL pattern, and soon you\'ll be mining text to your ' +
+            'heart\'s content.',
             image: `${baseUrl}img/undraw_body_text_l3ld.svg`,
             imageAlign: 'right',
             title: 'Extract Text From Your Web Archives',
@@ -126,12 +126,12 @@ class Index extends React.Component {
             'Hyperlinking practice can tell us a lot about web archives: where did ' +
             'people link to for their information? How did these links change over ' +
             'time? Which websites, based on their hyperlinks, were the most ' +
-            'influential? The toolkit allows you to extract site link structures, ' +
+            'influential? The Toolkit allows you to [extract web graphs](docs/link-analysis), ' +
             'and organize them by URL pattern or crawl date. We also support ' +
-            'seamless exportation to Gephi.',
+            'GraphML and GEXF, for use with [Gephi](https://gephi.org/).',
             image: `${baseUrl}img/undraw_nakamoto_2iv6.svg`,
             imageAlign: 'left',
-            title: 'Explore Hyperlink Networks Within a Web Archive',
+            title: 'Explore Hyperlink Networks in a Web Archive',
           },
         ]}
       </Block>
@@ -142,14 +142,15 @@ class Index extends React.Component {
         {[
           {
             content:
-            'That\'s not all. We support collection analysis (what can you find within ' +
-            'the collection, from URLs to content type), image analysis, as well as ' +
-            'the extraction of binary files. From audio, images, videos, and PowerPoint ' +
-            'files to spreadsheets and PDFs.\n\n Don\'t see something that you wish we ' +
-            'did? Let us know in a GitHub issue.',
+            'That\'s not all! You can use the Toolkit for ' +
+            '[collection analysis](docs/collection-analysis) to understand ' +
+            'top level domain, domain, and subdomain frequency, or understand the ' +
+            'distribution of [binary content](docs/binary-analysis) like audio, ' +
+            '[images](docs/image-analysis), videos, and documents. You can even extract all those ' +
+            'PowerPoint presentations, spreadsheets, and PDFs in your web archive collections!',
             image: `${baseUrl}img/undraw_instat_analysis_ajld.svg`,
             imageAlign: 'right',
-            title: 'Learn About Your Collections in Many Other Ways',
+            title: 'Learn About the Content in Your Collections',
           },
         ]}
       </Block>

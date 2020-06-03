@@ -30,3 +30,7 @@
 .nav-footer {
   background: #3d3d3e;
 }
+
+.container .gridBlock .blockContent p {
+	text-align: right;
+}
