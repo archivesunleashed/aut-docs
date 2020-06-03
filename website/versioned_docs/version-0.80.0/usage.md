@@ -4,7 +4,7 @@ title: Usage
 original_id: usage
 ---
 
-## Archives Unleashed Toolkit with Spark Submit
+## The Toolkit with Spark Submit
 
 The Toolkit offers a variety of extraction jobs with
 [`spark-submit`](https://spark.apache.org/docs/latest/submitting-applications.html)
@@ -19,9 +19,9 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner PATH_TO_AUT_J
 More information on using the Toolkit with `spark-submit` can be found in
 [The Toolkit with spark-submit](aut-spark-submit-app.md) section of the documentation.
 
-## Archives Unleashed Toolkit with Spark Shell
+## The Toolkit with Spark Shell
 
-There are two options for loading the Archives Unleashed Toolkit. The
+There are two options for loading the Toolkit. The
 advantages and disadvantages of using either option are going to depend
 on your setup (single machine vs. cluster):
 
@@ -42,13 +42,13 @@ spark-shell --help
 Release version:
 
 ```shell
-spark-shell --packages "io.archivesunleashed:aut:0.70.0"
+spark-shell --packages "io.archivesunleashed:aut:0.80.0"
 ```
 
 HEAD (built locally):
 
 ```shell
-spark-shell --packages "io.archivesunleashed:aut:0.70.1-SNAPSHOT"
+spark-shell --packages "io.archivesunleashed:aut:0.80.1-SNAPSHOT"
 ```
 
 ### With an UberJar
@@ -56,22 +56,22 @@ spark-shell --packages "io.archivesunleashed:aut:0.70.1-SNAPSHOT"
 Release version:
 
 ```shell
-spark-shell --jars /path/to/aut-0.70.0-fatjar.jar
+spark-shell --jars /path/to/aut-0.80.0-fatjar.jar
 ```
 
 HEAD (built locally):
 
 ```shell
-spark-shell --jars /path/to/aut/target/aut-0.70.1-SNAPSHOT-fatjar.jar
+spark-shell --jars /path/to/aut/target/aut-0.80.1-SNAPSHOT-fatjar.jar
 ```
 
-## Archives Unleashed Toolkit with PySpark
+## The Toolkit with PySpark
 
-To run PySpark with the Archives Unleashed Toolkit loaded, you will need to
+To run PySpark with the Toolkit loaded, you will need to
 provide PySpark with the Java/Scala package, as well as the Python bindings.
 The Java/Scala packages can be provided with `--packages` or `--jars` as
 described above. The Python bindings can be
-[downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-0.70.0/aut-0.70.0.zip)
+[downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-0.80.0/aut-0.80.0.zip)
 , or [built locally](#building-locally) (the zip file will be found in
 the `target` directory.
 
@@ -83,13 +83,13 @@ where your Python is, it can be found with `which python`.
 Release version:
 
 ```shell
-export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files aut-0.70.0.zip --packages "io.archivesunleashed:aut:0.70.0"
+export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files aut-0.80.0.zip --packages "io.archivesunleashed:aut:0.80.0"
 ```
 
 HEAD (built locally):
 
 ```shell
-export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files /home/nruest/Projects/au/aut/target/aut.zip --packages "io.archivesunleashed:aut:0.70.1-SNAPSHOT"
+export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files /home/nruest/Projects/au/aut/target/aut.zip --packages "io.archivesunleashed:aut:0.80.1-SNAPSHOT"
 ```
 
 ### With an UberJar
@@ -97,22 +97,22 @@ export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/pyt
 Release version:
 
 ```shell
-export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files aut-0.70.0.zip --jars /path/to/aut-0.70.0-fatjar.jar
+export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files aut-0.80.0.zip --jars /path/to/aut-0.80.0-fatjar.jar
 ```
 
 HEAD (built locally):
 
 ```shell
-export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files /home/nruest/Projects/au/aut/target/aut.zip --jars /path/to/aut-0.70.1-SNAPSHOT-fatjar.jar
+export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files /home/nruest/Projects/au/aut/target/aut.zip --jars /path/to/aut-0.80.1-SNAPSHOT-fatjar.jar
 ```
 
-## Archives Unleashed Toolkit with Jupyter
+## The Toolkit with Jupyter
 
 To run a [Jupyter Notebook](https://jupyter.org/install) with the Archives
 Unleashed Toolkit loaded, you will need to provide PySpark the Java/Scala
 package, and the Python bindings. The Java/Scala packages can be provided
 with `--packages` or `--jars` as described above. The Python bindings can be
-[downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-0.70.0/aut-0.70.0.zip)
+[downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-0.80.0/aut-0.80.0.zip)
 , or [built locally](#Introduction) (the zip file will be found in
 the `target` directory.
 
@@ -121,13 +121,13 @@ the `target` directory.
 Release version:
 
 ```shell
-export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files aut-0.70.0.zip --packages "io.archivesunleashed:aut:0.70.0"
+export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files aut-0.80.0.zip --packages "io.archivesunleashed:aut:0.80.0"
 ```
 
 HEAD (built locally):
 
 ```shell
-export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files /home/nruest/Projects/au/aut/target/aut.zip --packages "io.archivesunleashed:aut:0.70.1-SNAPSHOT"
+export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files /home/nruest/Projects/au/aut/target/aut.zip --packages "io.archivesunleashed:aut:0.80.1-SNAPSHOT"
 ```
 
 ### With an UberJar
@@ -135,13 +135,13 @@ export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook
 Release version:
 
 ```shell
-export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files aut-0.70.0.zip --jars /path/to/aut-0.70.0-fatjar.jar
+export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files aut-0.80.0.zip --jars /path/to/aut-0.80.0-fatjar.jar
 ```
 
 HEAD (built locally):
 
 ```shell
-export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files /home/nruest/Projects/au/aut/target/aut.zip --jars /path/to/aut-0.70.1-SNAPSHOT-fatjar.jar
+export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files /home/nruest/Projects/au/aut/target/aut.zip --jars /path/to/aut-0.80.1-SNAPSHOT-fatjar.jar
 ```
 
 A Jupyter Notebook _should_ automatically load in your browser at
@@ -185,3 +185,20 @@ If you receive no errors, and see the following, you are ready to begin working
 with your web archives!
 
 ![](https://user-images.githubusercontent.com/218561/63203995-42684080-c061-11e9-9361-f5e6177705ff.png)
+
+## The Toolkit with Docker
+
+The Toolkit offers a [Docker image](https://hub.docker.com/r/archivesunleashed/docker-aut)
+that can be used with Spark and PySpark. These images are great for learning
+how the Toolkit works, and quick prototyping. Images are available for [each
+release](https://hub.docker.com/r/archivesunleashed/docker-aut/tags),
+and `latest` corresponds to the `master` branch.
+
+To run the latest verion of the Toolkit with `spark-shell`:
+
+```shell
+docker run --rm -it archivesunleashed/docker-aut
+```
+
+More information on using the `docker-aut` can be found
+[here](https://github.com/archivesunleashed/docker-aut).

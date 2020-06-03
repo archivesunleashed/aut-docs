@@ -23,7 +23,7 @@ You can add a
 for adjusting available memory like so:
 
 ```shell
-spark-shell --driver-memory 4G --packages "io.archivesunleashed:aut:0.50.1-SNAPSHOT"
+spark-shell --driver-memory 4G --packages "io.archivesunleashed:aut:0.0.80.0"
 ```
 
 In the above case, you give Apache Spark 4GB of memory to execute the program.
@@ -40,7 +40,7 @@ issues. This will increase stability but decrease performance a bit.
 You can do so like this (the example is using 12 threads on a 16-core machine):
 
 ```shell
-spark-shell --master local[12] --driver-memory 4G --packages "io.archivesunleashed:aut:0.50.1-SNAPSHOT"
+spark-shell --master local[12] --driver-memory 4G --packages "io.archivesunleashed:aut:0.0.80.0"
 ```
 
 If you continue to have errors, look at your output and logs. They will usually
@@ -51,7 +51,7 @@ spark.network.timeout=10000000` will ensure that AUT continues to work on
 material, although it may take a while to process. This command then works:
 
 ```shell
-spark-shell --master local[12] --driver-memory 90G --conf spark.network.timeout=10000000 --packages "io.archivesunleashed:aut:0.50.1-SNAPSHOT"
+spark-shell --master local[12] --driver-memory 90G --conf spark.network.timeout=10000000 --packages "io.archivesunleashed:aut:0.0.80.0"
 ```
 
 ## Reading Data from AWS S3

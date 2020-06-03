@@ -462,22 +462,22 @@ val result = udf((vs: Seq[Any]) => vs(0)
                .toString
                .split(",")(1))
 
-val df = RecordLoader.loadArchives("Sample-Data/*gz", sc)
+val df = RecordLoader.loadArchives("/path/to/warcs", sc)
           .webpages()
           .select(removePrefixWWW(extractDomain($"url"))
-            .as("Domain"), $"url"
-            .as("url"),$"crawl_date", explode_outer(extractLinks($"url", $"content"))
+            .as("domain"), $"url"
+            .as("url"), $"crawl_date", explode_outer(extractLinks($"url", $"content"))
             .as("link"))
           .filter($"content".contains("keystone"))
 
-df.select($"url", $"Domain", $"crawl_date", result(array($"link"))
+df.select($"url", $"domain", $"crawl_date", result(array($"link"))
     .as("destination_page"))
   .show()
 
 // Exiting paste mode, now interpreting.
 
 +--------------------+---------------+----------+--------------------+
-|                 url|         Domain|crawl_date|    destination_page|
+|                 url|         domain|crawl_date|    destination_page|
 +--------------------+---------------+----------+--------------------+
 |http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
 |http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
@@ -510,4 +510,14 @@ df: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [Domain: string, ur
 
 ### Python DF
 
-TODO
+```python
+from aut import *
+from pyspark.sql.functions import col, explode_outer
+
+webpages = WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .select(remove_prefix_www(extract_domain("url")).alias("domain"), "url", "crawl_date", explode_outer(extract_links("url", "content")).alias("link")) \
+  .filter(col("content").like("%food%")) \
+  .select("url", "domain", "crawl_date", col("link._1").alias("destination_page")) \
+  .show()
+```

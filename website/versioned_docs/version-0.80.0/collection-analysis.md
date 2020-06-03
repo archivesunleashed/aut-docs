@@ -221,8 +221,6 @@ RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
   .take(10)
 ```
 
-TODO: Add script for the case where I only want to know the location of _one_ resource.
-
 What do I do with the results? See [this guide](rdd-results.md)!
 
 ### Scala DF
