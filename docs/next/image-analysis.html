@@ -298,35 +298,37 @@ popular_images.show()
 <p>How to find images shared between domains that appear more than once <em>in more
 than one domain</em>.</p>
 <h3><a class="anchor" aria-hidden="true" id="scala-df-3"></a><a href="#scala-df-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed.matchbox._
-<span class="hljs-keyword">import</span> io.archivesunleashed._
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> imgDetails = udf((url: <span class="hljs-type">String</span>, <span class="hljs-type">MimeTypeTika</span>: <span class="hljs-type">String</span>, content: <span class="hljs-type">String</span>) =&gt; <span class="hljs-type">ExtractImageDetails</span>(url,<span class="hljs-type">MimeTypeTika</span>,content.getBytes()).md5Hash)
-<span class="hljs-keyword">val</span> imgLinks = udf((url: <span class="hljs-type">String</span>, content: <span class="hljs-type">String</span>) =&gt; <span class="hljs-type">ExtractImageLinks</span>(url, content))
-<span class="hljs-keyword">val</span> domain = udf((url: <span class="hljs-type">String</span>) =&gt; <span class="hljs-type">ExtractDomain</span>(url))
+<span class="hljs-keyword">val</span> images = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
+                        .images()
+                        .select(iremovePrefixWWW(extractDomain($<span class="hljs-string">"url"</span>)).as(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"md5"</span>)
 
-<span class="hljs-keyword">val</span> total = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).webpages()
-              .select(
-                $<span class="hljs-string">"crawl_date"</span>.as(<span class="hljs-string">"crawl_date"</span>),
-                domain($<span class="hljs-string">"url"</span>).as(<span class="hljs-string">"domain"</span>),
-                explode_outer(imgLinks(($<span class="hljs-string">"url"</span>),
-                ($<span class="hljs-string">"content"</span>))).as(<span class="hljs-string">"image_url"</span>),
-                imgDetails(($<span class="hljs-string">"url"</span>),
-                ($<span class="hljs-string">"mime_type_tika"</span>),
-                ($<span class="hljs-string">"content"</span>)).as(<span class="hljs-string">"md5"</span>))
-              .filter($<span class="hljs-string">"crawl_date"</span> rlike <span class="hljs-string">"200910[0-9]{2}"</span>)
+<span class="hljs-keyword">val</span> links = images.groupBy(<span class="hljs-string">"md5"</span>).count().where(countDistinct(<span class="hljs-string">"domain"</span>)&gt;=<span class="hljs-number">2</span>)
 
-<span class="hljs-keyword">val</span> links = total.groupBy(<span class="hljs-string">"md5"</span>)
-              .count()
-              .where(countDistinct(<span class="hljs-string">"domain"</span>)&gt;=<span class="hljs-number">2</span>)
-
-<span class="hljs-keyword">val</span> result = total.join(links, <span class="hljs-string">"md5"</span>)
-               .groupBy(<span class="hljs-string">"domain"</span>,<span class="hljs-string">"md5"</span>)
-               .agg(first(<span class="hljs-string">"image_url"</span>)
-               .as(<span class="hljs-string">"image_url"</span>))
-               .orderBy(asc(<span class="hljs-string">"md5"</span>))
-               .write.csv(<span class="hljs-string">"/path/to/output"</span>)
+<span class="hljs-keyword">val</span> result = images.join(links, <span class="hljs-string">"md5"</span>)
+                   .groupBy(<span class="hljs-string">"domain"</span>, <span class="hljs-string">"md5"</span>)
+                   .agg(first(<span class="hljs-string">"url"</span>).as(<span class="hljs-string">"image_url"</span>))
+                   .orderBy(asc(<span class="hljs-string">"md5"</span>))
+                   .write.csv(<span class="hljs-string">"/path/to/output"</span>)
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="pythondf"></a><a href="#pythondf" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PythonDF</h3>
-<p>TODO</p>
+<pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> asc, countDistinct, first
+
+images = WebArchive(sc, sqlContext, <span class="hljs-string">"/home/nruest/Projects/au/sample-data/geocities"</span>) \
+  .images() \
+  .select(remove_prefix_www(extract_domain(<span class="hljs-string">"url"</span>)).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, <span class="hljs-string">"md5"</span>)
+
+links = images.groupBy(<span class="hljs-string">"md5"</span>) \
+              .count() \
+              .where(countDistinct(<span class="hljs-string">"domain"</span>)&gt;=<span class="hljs-number">2</span>)
+
+result = images.join(links, <span class="hljs-string">"md5"</span>) \
+               .groupBy(<span class="hljs-string">"domain"</span>, <span class="hljs-string">"md5"</span>) \
+               .agg(first(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"image_url"</span>)) \
+               .orderBy(asc(<span class="hljs-string">"md5"</span>)) \
+               .write.csv(<span class="hljs-string">"/path/to/output"</span>)
+</code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/aut-docs/docs/next/link-analysis"><span class="arrow-prev">← </span><span>Link Analysis</span></a><a class="docs-next button" href="/aut-docs/docs/next/binary-analysis"><span>Binary Analysis</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#extract-image-information">Extract Image Information</a><ul class="toc-headings"><li><a href="#scala-rdd">Scala RDD</a></li><li><a href="#scala-df">Scala DF</a></li><li><a href="#python-df">Python DF</a></li></ul></li><li><a href="#extract-most-frequent-image-urls">Extract Most Frequent Image URLs</a><ul class="toc-headings"><li><a href="#scala-rdd-1">Scala RDD</a></li><li><a href="#scala-df-1">Scala DF</a></li><li><a href="#python-df-1">Python DF</a></li></ul></li><li><a href="#extract-most-frequent-images-md5-hash">Extract Most Frequent Images MD5 Hash</a><ul class="toc-headings"><li><a href="#scala-df-2">Scala DF</a></li><li><a href="#python-df-2">Python DF</a></li></ul></li><li><a href="#find-images-shared-between-domains">Find Images Shared Between Domains</a><ul class="toc-headings"><li><a href="#scala-df-3">Scala DF</a></li><li><a href="#pythondf">PythonDF</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/aut-docs/" class="nav-home"><img src="/aut-docs/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="docs/dependencies">Getting Started</a><a href="docs/collection-analysis">Generating Results</a><a href="docs/filters-rdd">Filtering results</a><a href="docs/aut-spark-submit-app">Standard Derivatives</a><a href="docs/df-results">What to do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/aut-docs/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/aut-docs/img/waterloo.png"/><img alt="York University" class="footer_img" src="/aut-docs/img/york.png"/></section><section class="copyright">CC BY 2.0 2020 Archives Unleashed Project</section></footer></div></body></html>
