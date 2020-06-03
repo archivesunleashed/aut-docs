@@ -10,7 +10,7 @@
 @media only screen and (min-device-width: 360px) and (max-device-width: 740px) {
   .footer_img {
     display: none;
-+ }
+  }
 }
 
 @media only screen and (min-width: 1024px) {
