@@ -38,23 +38,23 @@ class Footer extends React.Component {
           <div>
             <h5>Docs</h5>
             <a
-              href={`${this.props.config.docsUrl}/dependencies`}>
+              href={`${this.props.config.baseUrl}docs/dependencies`}>
               Getting Started
             </a>
             <a
-              href={`${this.props.config.docsUrl}/collection-analysis`}>
+              href={`${this.props.config.baseUrl}docs/collection-analysis`}>
               Generating Results
             </a>
             <a
-              href={`${this.props.config.docsUrl}/filters-rdd`}>
+              href={`${this.props.config.baseUrl}docs/filters-rdd`}>
               Filtering results
             </a>
             <a
-              href={`${this.props.config.docsUrl}/aut-spark-submit-app`}>
+              href={`${this.props.config.baseUrl}docs/aut-spark-submit-app`}>
               Standard Derivatives
             </a>
             <a
-              href={`${this.props.config.docsUrl}/df-results`}>
+              href={`${this.props.config.baseUrl}docs/df-results`}>
               What to do with Results
             </a>
           </div>
