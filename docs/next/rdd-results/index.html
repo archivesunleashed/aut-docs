@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>RDD Results · Archives Unleashed Toolkit</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This page answers to question of what to do with Scala RDD results."/><meta name="docsearch:version" content="next"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="RDD Results · Archives Unleashed Toolkit"/><meta property="og:type" content="website"/><meta property="og:url" content="https://archivesunleashed.github.io/aut-docs/"/><meta property="og:description" content="This page answers to question of what to do with Scala RDD results."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/aut-docs/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/aut-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/aut-docs/css/main.css"/><script src="/aut-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/aut-docs/"><img class="logo" src="/aut-docs/img/favicon.ico" alt="Archives Unleashed Toolkit"/><h2 class="headerTitleWithLogo">Archives Unleashed Toolkit</h2></a><a href="/aut-docs/versions"><h3>next</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/aut-docs/docs/next/home" target="_self">Docs</a></li><li class=""><a href="https://archivesunleashed.org" target="_self">Project</a></li><li class=""><a href="https://github.com/archivesunleashed/aut" target="_self">GitHub</a></li><li class=""><a href="https://news.archivesunleashed.org/" target="_self">News</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>What to do with Results</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Home</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/home">The Toolkit</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/dependencies">Dependencies</a></li><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/usage">Usage</a></li><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/aut-at-scale">The Toolkit at Scale</a></li><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/dataframe-schemas">DataFrame Schemas</a></li><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/toolkit-walkthrough">Toolkit Walkthrough</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Generating Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/collection-analysis">Collection Analysis</a></li><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/text-analysis">Text Analysis</a></li><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/link-analysis">Link Analysis</a></li><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/image-analysis">Image Analysis</a></li><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/binary-analysis">Binary Analysis</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Filtering Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/filters-rdd">RDD Filters</a></li><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/filters-df">DataFrame Filters</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Standard Derivatives</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/aut-spark-submit-app">The Toolkit with spark-submit</a></li><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/auk-derivatives">AU Cloud Scholarly Derivatives</a></li><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/extract-binary-info">Extract Binary Info</a></li><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/extract-binary">Extract Binaries to Disk</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">What to do with Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aut-docs/docs/next/df-results">DataFrame Results</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/aut-docs/docs/next/rdd-results">RDD Results</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">RDD Results</h1></header><article><div><span><p>This page answers to question of what to do with Scala RDD results.</p>
+<p>Most script snippets in the documentation begin start with <code>RecordLoader</code> and
+end with <code>take</code>, as in:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).keepValidPages()
+  <span class="hljs-comment">// more transformations here...</span>
+  .take(<span class="hljs-number">10</span>)
+</code></pre>
+<p>This &quot;takes&quot; the first 10 results and results it as an array (in the console).
+In the console, you'll see the array contents printed out.
+If you want more or fewer results, just change the number.</p>
+<p>In the Scala console, the results are automatically assigned to a variable,
+like the following:</p>
+<pre><code class="hljs css language-scala">res0: <span class="hljs-type">Array</span>[...] = <span class="hljs-type">Array</span>(...)
+</code></pre>
+<p>Scala automatically numbers the variables, starting at 0, so that the number
+will increment with each statement.
+You can then manipulate the variable, for example <code>res0(0)</code> to access the first
+element in the array.</p>
+<p>Don't like the variable name Scala gives you?
+You can do something like this:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> r = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).keepValidPages()
+  <span class="hljs-comment">// more transformations here...</span>
+  .take(<span class="hljs-number">10</span>)
+</code></pre>
+<p>Scala assigns the results to <code>r</code> is this case, which you can then subsequently
+manipulate, like <code>r(0)</code> to access the first element.</p>
+<p>If you want <em>all</em> results, replace <code>.take(10)</code> with <code>.collect()</code>.
+This will return <em>all</em> results to the console.</p>
+<p><strong>WARNING</strong>: Be careful with <code>.collect()</code>! If your results contain ten million
+records, AUT will try to return <em>all of them</em>  to your console (on your
+physical machine).
+Most likely, your machine won't have enough memory!</p>
+<p>Alternatively, if you want to save the results to disk, replace the <code>.take(10)</code>
+line above with:</p>
+<pre><code class="hljs css language-scala">  .saveAsTextFile(<span class="hljs-string">"/path/to/export/directory/"</span>)
+</code></pre>
+<p>Replace <code>/path/to/export/directory/</code> with your desired location.
+Note that this is a <em>directory</em>, not a <em>file</em>.</p>
+<p>You can also format your results to a format of your choice before passing them
+to <code>saveAsTextFile()</code>.</p>
+<p>For example, archive records are represented in Spark as
+<a href="https://en.wikipedia.org/wiki/Tuple">tuples</a>, and this is the standard format
+of results produced by most of the scripts presented here (e.g., see above). It
+may be useful, however, to have this data in TSV (tab-separated value) format,
+for further processing outside AUT. The following script uses <code>tabDelimit</code>
+(from <code>TupleFormatter</code>) to transform tuples to tab-delimited strings; it also
+flattens any nested tuples. (This is the same script as at the top of the page,
+with the addition of the
+third and the second-last lines.)</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.matchbox._
+<span class="hljs-keyword">import</span> io.archivesunleashed.matchbox.<span class="hljs-type">TupleFormatter</span>._
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/arc"</span>, sc)
+  .keepValidPages()
+  .map(r =&gt; (r.getCrawlDate, <span class="hljs-type">ExtractLinks</span>(r.getUrl, r.getContentString)))
+  .flatMap(r =&gt; r._2.map(f =&gt; (r._1,
+                               <span class="hljs-type">ExtractDomain</span>(f._1).replaceAll(<span class="hljs-string">"^\\s*www\\."</span>, <span class="hljs-string">""</span>),
+                               <span class="hljs-type">ExtractDomain</span>(f._2).replaceAll(<span class="hljs-string">"^\\s*www\\."</span>, <span class="hljs-string">""</span>))))
+  .filter(r =&gt; r._2 != <span class="hljs-string">""</span> &amp;&amp; r._3 != <span class="hljs-string">""</span>)
+  .countItems()
+  .filter(r =&gt; r._2 &gt; <span class="hljs-number">5</span>)
+  .map(tabDelimit(_))
+  .saveAsTextFile(<span class="hljs-string">"sitelinks-tsv/"</span>)
+</code></pre>
+<p>Its output looks like:</p>
+<pre><code class="hljs css language-tsv"><span class="hljs-symbol">20151107 </span>       liberal.ca      youtube.<span class="hljs-keyword">com</span>     <span class="hljs-number">16334</span>
+<span class="hljs-symbol">20151108 </span>       socialist.ca    youtube.<span class="hljs-keyword">com</span>     <span class="hljs-number">11690</span>
+<span class="hljs-symbol">20151108 </span>       socialist.ca    ustream.tv      <span class="hljs-number">11584</span>
+<span class="hljs-symbol">20151107 </span>       canadians.org   canadians.org   <span class="hljs-number">11426</span>
+<span class="hljs-symbol">20151108 </span>       canadians.org   canadians.org   <span class="hljs-number">11403</span>
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/aut-docs/docs/next/df-results"><span class="arrow-prev">← </span><span class="function-name-prevnext">DataFrame Results</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/aut-docs/" class="nav-home"><img src="/aut-docs/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="docs/dependencies">Getting Started</a><a href="docs/collection-analysis">Generating Results</a><a href="docs/filters-rdd">Filtering results</a><a href="docs/aut-spark-submit-app">Standard Derivatives</a><a href="docs/df-results">What to do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/aut-docs/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/aut-docs/img/waterloo.png"/><img alt="York University" class="footer_img" src="/aut-docs/img/york.png"/></section><section class="copyright">CC BY 2.0 2020 Archives Unleashed Project</section></footer></div></body></html>
