@@ -16,6 +16,8 @@ const siteConfig = {
   tagline: 'An open-source platform for analyzing web archives with Apache Spark',
   url: 'https://archivesunleashed.github.io', // Your website URL
   baseUrl: '/aut-docs/', // Base URL for your project */
+  cname: 'aut.docs.archivesunleashed.org',
+  gaTrackingId: 'UA-2879197-28',
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
