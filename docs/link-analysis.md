@@ -28,7 +28,6 @@ script will generate the site-level link structure.
 ```scala
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
-import io.archivesunleashed.util._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
@@ -47,7 +46,6 @@ can be applied immediately after `.keepValidPages()`.
 ```scala
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
-import io.archivesunleashed.util._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
