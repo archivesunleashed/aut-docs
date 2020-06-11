@@ -313,7 +313,7 @@ import io.archivesunleashed.udfs._
 
 val images = RecordLoader.loadArchives("/path/to/warcs", sc)
                         .images()
-                        .select(iremovePrefixWWW(extractDomain($"url")).as("domain"), $"url", $"md5")
+                        .select(removePrefixWWW(extractDomain($"url")).as("domain"), $"url", $"md5")
 
 val links = images.groupBy("md5").count().where(countDistinct("domain")>=2)
 

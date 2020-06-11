@@ -181,7 +181,6 @@ using the `keepUrlPatterns` command.
 ```scala
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
-import io.archivesunleashed.util._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
