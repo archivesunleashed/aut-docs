@@ -116,12 +116,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val domain = Array("www.archive.org")
+val domains = Array("www.archive.org", "geocities.org")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML(removeHTTPHeader($"content").alias("content")))
-  .filter(hasDomains($"domain", lit(domain)))
+  .filter(hasDomains($"domain", lit(domains)))
   .write.csv("plain-text-domain-df/")
 ```
 
