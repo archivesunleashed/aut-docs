@@ -144,12 +144,12 @@ it will go through the collection and find all of the URLs within the
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Array</span>(<span class="hljs-string">"www.archive.org"</span>)
+<span class="hljs-keyword">val</span> domain = <span class="hljs-type">Array</span>(<span class="hljs-string">"www.archive.org"</span>)
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domains"</span>), $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>)))
-  .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
+  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>)))
+  .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domain)))
   .write.csv(<span class="hljs-string">"plain-text-domain-df/"</span>)
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="python-df-2"></a><a href="#python-df-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
@@ -189,7 +189,7 @@ with <code>http://archive.org/details/</code>, and save the text of those URLs.<
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
   .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>)))
-  .filter(hasUrlPatterns($<span class="hljs-string">"url"</span>, lit(urlsPattern)))
+  .filter(hasUrlPatterns($<span class="hljs-string">"url"</span>, lit(urlPattern)))
   .write.csv(<span class="hljs-string">"details-df/"</span>)
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="python-df-3"></a><a href="#python-df-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
@@ -253,7 +253,7 @@ particular year-month-day (<code>YYYYMMDD</code>).</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .keepValidPages()
-  .keepDate(<span class="hljs-type">List</span>(<span class="hljs-string">"200804"</span>), <span class="hljs-type">ExtractDateRDD</span>.<span class="hljs-type">DateComponent</span>.<span class="hljs-type">YYYYMM</span>)
+  .keepDate(<span class="hljs-type">List</span>(<span class="hljs-string">"200804"</span>), <span class="hljs-type">ExtractDate</span>.<span class="hljs-type">DateComponent</span>.<span class="hljs-type">YYYYMM</span>)
   .map(r =&gt; (r.getCrawlDate, r.getDomain, r.getUrl, <span class="hljs-type">RemoveHTML</span>(<span class="hljs-type">RemoveHTTPHeader</span>(r.getContentString))))
   .saveAsTextFile(<span class="hljs-string">"plain-text-date-filtered-200804/"</span>)
 </code></pre>
@@ -264,7 +264,7 @@ this case, 2008).</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .keepValidPages()
-  .keepDate(<span class="hljs-type">List</span>(<span class="hljs-string">"2008"</span>), <span class="hljs-type">ExtractDateRDD</span>.<span class="hljs-type">DateComponent</span>.<span class="hljs-type">YYYY</span>)
+  .keepDate(<span class="hljs-type">List</span>(<span class="hljs-string">"2008"</span>), <span class="hljs-type">ExtractDate</span>.<span class="hljs-type">DateComponent</span>.<span class="hljs-type">YYYY</span>)
   .map(r =&gt; (r.getCrawlDate, r.getDomain, r.getUrl, <span class="hljs-type">RemoveHTML</span>(<span class="hljs-type">RemoveHTTPHeader</span>(r.getContentString))))
   .saveAsTextFile(<span class="hljs-string">"plain-text-date-filtered-2008/"</span>)
 </code></pre>
@@ -275,7 +275,7 @@ extract pages from both 2008 and 2015.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .keepValidPages()
-  .keepDate(<span class="hljs-type">List</span>(<span class="hljs-string">"2008"</span>,<span class="hljs-string">"2015"</span>), <span class="hljs-type">ExtractDateRDD</span>.<span class="hljs-type">DateComponent</span>.<span class="hljs-type">YYYY</span>)
+  .keepDate(<span class="hljs-type">List</span>(<span class="hljs-string">"2008"</span>,<span class="hljs-string">"2015"</span>), <span class="hljs-type">ExtractDate</span>.<span class="hljs-type">DateComponent</span>.<span class="hljs-type">YYYY</span>)
   .map(r =&gt; (r.getCrawlDate, r.getDomain, r.getUrl, <span class="hljs-type">RemoveHTML</span>(<span class="hljs-type">RemoveHTTPHeader</span>(r.getContentString))))
   .saveAsTextFile(<span class="hljs-string">"plain-text-date-filtered-2008-2015-rdd/"</span>)
 </code></pre>
