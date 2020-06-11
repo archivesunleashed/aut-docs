@@ -82,6 +82,7 @@ raw data.</p>
 script will generate the site-level link structure.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.matchbox._
+<span class="hljs-keyword">import</span> io.archivesunleashed.util._
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .keepValidPages()
@@ -97,6 +98,7 @@ will result in a network graph of pages containing the phrase &quot;apple.&quot;
 can be applied immediately after <code>.keepValidPages()</code>.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.matchbox._
+<span class="hljs-keyword">import</span> io.archivesunleashed.util._
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .keepValidPages()
@@ -201,6 +203,7 @@ from URLs matching the pattern <code>http://www.archive.org/details/*</code>. We
 using the <code>keepUrlPatterns</code> command.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.matchbox._
+<span class="hljs-keyword">import</span> io.archivesunleashed.util._
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .keepValidPages()
