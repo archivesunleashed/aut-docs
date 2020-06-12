@@ -311,7 +311,7 @@ than one domain</em>.</p>
 
 <span class="hljs-keyword">val</span> images = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
                         .images()
-                        .select(removePrefixWWW(extractDomain($<span class="hljs-string">"url"</span>)).as(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"md5"</span>)
+                        .select(iremovePrefixWWW(extractDomain($<span class="hljs-string">"url"</span>)).as(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"md5"</span>)
 
 <span class="hljs-keyword">val</span> links = images.groupBy(<span class="hljs-string">"md5"</span>).count().where(countDistinct(<span class="hljs-string">"domain"</span>)&gt;=<span class="hljs-number">2</span>)
 
