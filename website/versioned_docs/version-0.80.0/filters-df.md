@@ -140,10 +140,13 @@ Filters or keeps all data except images.
 ### Scala DF
 
 ```scala
+import io.archivesunleashed._
+import io.archivesunleashed.udfs._
+
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .all()
   .select($"mime_type_tika", $"mime_type_web_server", $"url")
-  .filter(hasImages($"crawl_date", DetectMimeTypeTikaDF($"bytes")))
+  .filter(hasImages($"crawl_date", detectMimeTypeTika($"bytes")))
 ```
 
 ### Python DF

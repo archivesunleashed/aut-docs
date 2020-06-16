@@ -117,11 +117,11 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val domains = Array("www.archive.org")
+val domains = Array("www.archive.org", "geocities.org")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").alias("domains"), $"url", removeHTML(removeHTTPHeader($"content").alias("content")))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML(removeHTTPHeader($"content").alias("content")))
   .filter(hasDomains($"domain", lit(domains)))
   .write.csv("plain-text-domain-df/")
 ```
@@ -174,7 +174,7 @@ val urlPattern = Array("(?i)http://www.archive.org/details/.*")
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML(removeHTTPHeader($"content").alias("content")))
-  .filter(hasUrlPatterns($"url", lit(urlsPattern)))
+  .filter(hasUrlPatterns($"url", lit(urlPattern)))
   .write.csv("details-df/")
 ```
 
@@ -258,7 +258,7 @@ import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
-  .keepDate(List("200804"), ExtractDateRDD.DateComponent.YYYYMM)
+  .keepDate(List("200804"), ExtractDate.DateComponent.YYYYMM)
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeader(r.getContentString))))
   .saveAsTextFile("plain-text-date-filtered-200804/")
 ```
@@ -272,7 +272,7 @@ import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
-  .keepDate(List("2008"), ExtractDateRDD.DateComponent.YYYY)
+  .keepDate(List("2008"), ExtractDate.DateComponent.YYYY)
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeader(r.getContentString))))
   .saveAsTextFile("plain-text-date-filtered-2008/")
 ```
@@ -286,7 +286,7 @@ import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
-  .keepDate(List("2008","2015"), ExtractDateRDD.DateComponent.YYYY)
+  .keepDate(List("2008","2015"), ExtractDate.DateComponent.YYYY)
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeader(r.getContentString))))
   .saveAsTextFile("plain-text-date-filtered-2008-2015-rdd/")
 ```

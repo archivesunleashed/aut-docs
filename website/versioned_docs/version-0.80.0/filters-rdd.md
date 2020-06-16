@@ -90,7 +90,7 @@ Removes all data that does not have selected date.
 ```scala
 import io.archivesunleashed._
 
-val val dates = List("2008", "200908", "20070502")
+val dates = List("2008", "200908", "20070502")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepDate(dates)
 ```
@@ -104,7 +104,7 @@ Removes all data but selected exact URLs.
 ```scala
 import io.archivesunleashed._
 
-val val urls = Set("archive.org", "uwaterloo.ca", "yorku.ca")
+val urls = Set("archive.org", "uwaterloo.ca", "yorku.ca")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepUrls(urls)
 ```
@@ -118,7 +118,7 @@ Removes all data but selected URL patterns (regex).
 ```scala
 import io.archivesunleashed._
 
-val val urls = Set(archive.r, sloan.r, "".r)
+val urls = Set(archive.r, sloan.r, "".r)
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepUrlPatterns(urls)
 ```
@@ -132,7 +132,7 @@ Removes all data but selected source domains.
 ```scala
 import io.archivesunleashed._
 
-val val doamins = Set("www.archive.org", "www.sloan.org")
+val domains = Set("www.archive.org", "www.sloan.org")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepDomains(domains)
 ```
@@ -146,7 +146,7 @@ Removes all data not in selected language ([ISO 639-2 codes](https://www.loc.gov
 ```scala
 import io.archivesunleashed._
 
-val val languages = Set("en", "fr")
+val languages = Set("en", "fr")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepLanguages(languages)
 ```
@@ -160,7 +160,7 @@ Removes all content that does not pass Regular Expression test.
 ```scala
 import io.archivesunleashed._
 
-val val content = Set(regex, raw"UNINTELLIBLEDFSJKLS".r)
+val content = Set(regex, raw"UNINTELLIBLEDFSJKLS".r)
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepContent(content)
 ```
@@ -216,7 +216,7 @@ Filters out detected dates.
 ```scala
 import io.archivesunleashed._
 
-val val dates = List("2008", "200908", "20070502")
+val dates = List("2008", "200908", "20070502")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).discardDate(dates)
 ```
@@ -230,7 +230,7 @@ Filters out detected URLs.
 ```scala
 import io.archivesunleashed._
 
-val val urls = Set("archive.org", "uwaterloo.ca", "yorku.ca")
+val urls = Set("archive.org", "uwaterloo.ca", "yorku.ca")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).discardUrls(urls)
 ```
@@ -244,7 +244,7 @@ Filters out detected URL patterns (regex).
 ```scala
 import io.archivesunleashed._
 
-val val urls = Set(archive.r, sloan.r, "".r)
+val urls = Set(archive.r, sloan.r, "".r)
 
 RecordLoader.loadArchives("/path/to/warcs",sc).discardUrlPatterns(urls)
 ```
@@ -258,7 +258,7 @@ Filters out detected source domains.
 ```scala
 import io.archivesunleashed._
 
-val val doamins = Set("www.archive.org", "www.sloan.org")
+val domains = Set("www.archive.org", "www.sloan.org")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).discardDomains(domains)
 ```
@@ -272,7 +272,7 @@ Filters out detected languages ([ISO 639-2 codes](https://www.loc.gov/standards/
 ```scala
 import io.archivesunleashed._
 
-val val languages = Set("en", "fr")
+val languages = Set("en", "fr")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepLanguages(languages)
 ```
@@ -286,7 +286,7 @@ Filters out detected content that does pass Regular Expression test.
 ```scala
 import io.archivesunleashed._
 
-val val content = Set(regex, raw"UNINTELLIBLEDFSJKLS".r)
+val content = Set(regex, raw"UNINTELLIBLEDFSJKLS".r)
 
 RecordLoader.loadArchives("/path/to/warcs",sc).discardContent(content)
 ```
