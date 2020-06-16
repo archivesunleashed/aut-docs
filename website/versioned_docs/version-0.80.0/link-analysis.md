@@ -1,7 +1,6 @@
 ---
-id: version-0.80.0-link-analysis
+id: link-analysis
 title: Link Analysis
-original_id: link-analysis
 ---
 
 Site link structures can be very useful, allowing you to learn such things as:
@@ -29,7 +28,6 @@ script will generate the site-level link structure.
 ```scala
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
-import io.archivesunleashed.util._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
@@ -48,7 +46,6 @@ can be applied immediately after `.keepValidPages()`.
 ```scala
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
-import io.archivesunleashed.util._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
@@ -184,7 +181,6 @@ using the `keepUrlPatterns` command.
 ```scala
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
-import io.archivesunleashed.util._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
@@ -207,8 +203,8 @@ val urlPattern = Array("(?i)http://www.archive.org/details/.*")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .filter($"url", lit(urlPattern))
-  .select(explode(extractLinks($"url", $"content")).as("links")
+  .filter(hasUrlPatterns($"url", lit(urlPattern)))
+  .select(explode(extractLinks($"url", $"content")).as("links"))
   .select(removePrefixWWW(extractDomain(col("links._1"))).as("src"), removePrefixWWW(extractDomain(col("links._2"))).as("dest"))
   .groupBy("src", "dest")
   .count()
@@ -346,7 +342,7 @@ val urlPattern = Array("http://www.archive.org/details/.*")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .filter($"url", lit(urlPattern))
+  .filter(hasUrlPatterns($"url", lit(urlPattern)))
   .select(explode(extractLinks($"url", $"content")).as("links"))
   .select(removePrefixWWW(extractDomain(col("links._1"))).as("src"), removePrefixWWW(extractDomain(col("links._2"))).as("dest"))
   .groupBy("src", "dest")
