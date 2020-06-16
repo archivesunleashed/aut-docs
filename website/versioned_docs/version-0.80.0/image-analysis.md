@@ -1,5 +1,5 @@
 ---
-id: image-analysis
+id: version-0.80.0-image-analysis
 title: Image Analysis
 ---
 

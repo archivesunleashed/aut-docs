@@ -1,5 +1,5 @@
 ---
-id: link-analysis
+id: version-0.80.0-link-analysis
 title: Link Analysis
 ---
 

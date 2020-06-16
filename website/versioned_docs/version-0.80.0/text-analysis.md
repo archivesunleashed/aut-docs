@@ -1,5 +1,5 @@
 ---
-id: text-analysis
+id: version-0.80.0-text-analysis
 title: Text Analysis
 ---
 
