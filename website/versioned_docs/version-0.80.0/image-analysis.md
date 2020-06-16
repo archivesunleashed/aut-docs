@@ -1,6 +1,7 @@
 ---
 id: version-0.80.0-image-analysis
 title: Image Analysis
+original_id: image-analysis
 ---
 
 The Archives Unleashed Toolkit supports image analysis, a growing area of

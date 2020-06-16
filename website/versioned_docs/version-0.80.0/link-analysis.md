@@ -1,6 +1,7 @@
 ---
 id: version-0.80.0-link-analysis
 title: Link Analysis
+original_id: link-analysis
 ---
 
 Site link structures can be very useful, allowing you to learn such things as:

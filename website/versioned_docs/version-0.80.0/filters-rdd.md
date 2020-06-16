@@ -1,6 +1,7 @@
 ---
 id: version-0.80.0-filters-rdd
 title: RDD Filters
+original_id: filters-rdd
 ---
 
 The following filters can be used on any `RecordLoader` RDDs.
