@@ -1,15 +1,8 @@
 # Archives Unleashed Toolkit: Documentation
 
-This repository contains the documentation for the Archives Unleashed Toolkit.
-You're most likely looking for the [most recent documentation](current/README.md).
+This repository contains the documentation for the Archives Unleashed Toolkit which is built with [Docusaurus](https://docusaurus.io/).
 
-Documentation from previous releases are also available:
-
-- [aut-0.70.0](aut-0.70.0/README.md)
-- [aut-0.60.0](aut-0.60.0/README.md)
-- [aut-0.50.0](aut-0.50.0/README.md)
-- [aut-0.18.0](aut-0.18.0/README.md)
-- [aut-0.17.0](aut-0.17.0/README.md)
+The built documentation can be found [here](https://aut.docs.archivesunleashed.org/).
 
 ## Acknowledgments
 
