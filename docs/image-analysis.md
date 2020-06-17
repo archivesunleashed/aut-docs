@@ -330,7 +330,7 @@ val result = images.join(links, "md5")
 from aut import *
 from pyspark.sql.functions import asc, countDistinct, first
 
-images = WebArchive(sc, sqlContext, "/home/nruest/Projects/au/sample-data/geocities") \
+images = WebArchive(sc, sqlContext, "/path/to/warcs") \
   .images() \
   .select(remove_prefix_www(extract_domain("url")).alias("domain"), "url", "md5")
 
