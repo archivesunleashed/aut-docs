@@ -131,7 +131,7 @@ val urlPattern = Array("""http://[^/]+/[^/]+/""".r)
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select($"url")
-  .filter(hasUrlPattern($"url", lit(urlPattern)))
+  .filter(hasUrlPatterns($"url", lit(urlPattern)))
   .show(10, false)
 ```
 
