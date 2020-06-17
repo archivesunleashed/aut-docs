@@ -177,7 +177,7 @@ val languages = Array("th","de","ht")
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .webpages()
   .select($"language", $"url", $"content")
-  .filter($"language".isin(languages))
+  .filter(!hasContent($"language", lit(languages)))
 ```
 
 ### Python DF
@@ -322,5 +322,5 @@ urls = ["www.archive.org"]
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .all() \
   .select("url", "content") \
-  .filter(~col("url").isin(urls)
+  .filter(~col("url").isin(urls))
 ```
