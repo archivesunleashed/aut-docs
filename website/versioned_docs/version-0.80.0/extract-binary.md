@@ -30,7 +30,7 @@ warcs.images()
   .select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/derivatives/binaries/image/your-prefix-image", "extension")
 
- // PDFs
+// PDFs
 warcs.pdfs()
   .select($"bytes", $"extension")
   .saveToDisk("bytes", "/path/to/derivatives/binaries/pdf/your-prefix-pdf", "extension")
@@ -48,7 +48,7 @@ warcs.spreadsheets()
 // Videos.
 warcs.videos()
   .select($"bytes", $"extension")
-  .saveToDisk("bytes", "/path/to/derivatives/binaries/text/your-prefix-video", "extension")
+  .saveToDisk("bytes", "/path/to/derivatives/binaries/video/your-prefix-video", "extension")
 
 // Word Processor Files.
 warcs.wordProcessorFiles()
