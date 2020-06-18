@@ -48,4 +48,4 @@ jobs:
         git config --global user.email "ruestn@gmail.com"
         git config --global user.name "ruebot"
         cd website
-        yarn run publish-gh-pages
+        npm run publish-gh-pages
