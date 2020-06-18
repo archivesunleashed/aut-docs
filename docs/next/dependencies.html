@@ -63,7 +63,7 @@
               }
             });
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Dependencies</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="java"></a><a href="#java" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Java</h2>
-<p>The Toolkit requires Java 11.</p>
+<p>The Archives Unleashed Toolkit requires Java 8.</p>
 <p>For macOS: You can find information on Java
 <a href="https://java.com/en/download/help/mac_install.xml">here</a>. We recommend
 <a href="https://adoptopenjdk.net/">OpenJDK</a>. The easiest way is to install
@@ -73,15 +73,14 @@ with <a href="https://brew.sh">homebrew</a> and then:</p>
 <p>If you run into difficulties with homebrew, installation instructions can be
 found <a href="https://adoptopenjdk.net/">here</a>.</p>
 <p>On Debian based system you can install Java using <code>apt</code>:</p>
-<pre><code class="hljs css language-bash">apt install openjdk-11-jdk
+<pre><code class="hljs css language-bash">apt install openjdk-8-jdk
 </code></pre>
 <p>Before <code>spark-shell</code> can launch, <code>JAVA_HOME</code> must be set. If you receive an
 error that <code>JAVA_HOME</code> is not set, you need to point it to where Java is
 installed. On Linux, this might be
-<code>export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64</code> or on macOS it might be
-<code>export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.5.jdk/Contents/Home</code>.</p>
+<code>export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64</code> or on macOS it might be
+<code>export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home</code>.</p>
 <h2><a class="anchor" aria-hidden="true" id="python"></a><a href="#python" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python</h2>
-<p>The Toolkit requires Python 3.7.3+</p>
 <p>If you would like to use the Archives Unleashed Toolkit with PySpark and
 Jupyter Notebooks, you'll need to have a modern version of Python installed.
 We recommend using the
@@ -89,10 +88,9 @@ We recommend using the
 This <em>should</em> install Jupyter Notebook, as well as the PySpark bindings. If
 it doesn't, you can install either with <code>conda install</code> or <code>pip install</code>.</p>
 <h2><a class="anchor" aria-hidden="true" id="apache-spark"></a><a href="#apache-spark" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Apache Spark</h2>
-<p>The Toolkit requires Apache Spark 3.0.0+</p>
 <p>Download and unzip <a href="https://spark.apache.org">Apache Spark</a> to a location of
 your choice.</p>
-<pre><code class="hljs css language-bash">curl -L <span class="hljs-string">"https://archive.apache.org/dist/spark/spark-3.0.0/spark-3.0.0-bin-hadoop2.7.tgz"</span> &gt; spark-3.0.0-bin-hadoop2.7.tgz
-tar -xvf spark-3.0.0-bin-hadoop2.7.tgz
+<pre><code class="hljs css language-bash">curl -L <span class="hljs-string">"https://archive.apache.org/dist/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz"</span> &gt; spark-2.4.5-bin-hadoop2.7.tgz
+tar -xvf spark-2.4.5-bin-hadoop2.7.tgz
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/next/home"><span class="arrow-prev">← </span><span>The Toolkit</span></a><a class="docs-next button" href="/docs/next/usage"><span>Usage</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#java">Java</a></li><li><a href="#python">Python</a></li><li><a href="#apache-spark">Apache Spark</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/dependencies">Getting Started</a><a href="/docs/collection-analysis">Generating Results</a><a href="/docs/filters-rdd">Filtering results</a><a href="/docs/aut-spark-submit-app">Standard Derivatives</a><a href="/docs/df-results">What to do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/img/waterloo.png"/><img alt="York University" class="footer_img" src="/img/york.png"/></section><section class="copyright">CC BY 2.0 2020 Archives Unleashed Project</section></footer></div></body></html>
