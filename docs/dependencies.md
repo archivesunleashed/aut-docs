@@ -29,7 +29,7 @@ Before `spark-shell` can launch, `JAVA_HOME` must be set. If you receive an
 error that `JAVA_HOME` is not set, you need to point it to where Java is
 installed. On Linux, this might be
 `export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64` or on macOS it might be
-`export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.11.0_74.jdk/Contents/Home`.
+`export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.5.jdk/Contents/Home`.
 
 ## Python
 
