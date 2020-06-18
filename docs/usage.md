@@ -88,7 +88,7 @@ export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/pyt
 HEAD (built locally):
 
 ```shell
-export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files /home/nruest/Projects/au/aut/target/aut.zip --packages "io.archivesunleashed:aut:0.80.1-SNAPSHOT"
+export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files aut.zip --packages "io.archivesunleashed:aut:0.80.1-SNAPSHOT"
 ```
 
 ### With an UberJar
@@ -102,7 +102,7 @@ export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/pyt
 HEAD (built locally):
 
 ```shell
-export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files /home/nruest/Projects/au/aut/target/aut.zip --jars /path/to/aut-0.80.1-SNAPSHOT-fatjar.jar
+export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files aut.zip --jars /path/to/aut-0.80.1-SNAPSHOT-fatjar.jar
 ```
 
 ## The Toolkit with Jupyter
@@ -126,7 +126,7 @@ export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook
 HEAD (built locally):
 
 ```shell
-export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files /home/nruest/Projects/au/aut/target/aut.zip --packages "io.archivesunleashed:aut:0.80.1-SNAPSHOT"
+export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files aut.zip --packages "io.archivesunleashed:aut:0.80.1-SNAPSHOT"
 ```
 
 ### With an UberJar
@@ -140,7 +140,7 @@ export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook
 HEAD (built locally):
 
 ```shell
-export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files /home/nruest/Projects/au/aut/target/aut.zip --jars /path/to/aut-0.80.1-SNAPSHOT-fatjar.jar
+export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files aut.zip --jars /path/to/aut-0.80.1-SNAPSHOT-fatjar.jar
 ```
 
 A Jupyter Notebook _should_ automatically load in your browser at
