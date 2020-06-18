@@ -148,7 +148,7 @@ you can <code>flatMap</code>.</p>
 <span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> urlPattern = <span class="hljs-type">Array</span>(<span class="hljs-string">""</span><span class="hljs-string">"http://[^/]+/[^/]+/"</span><span class="hljs-string">""</span>.r)
+<span class="hljs-keyword">val</span> urlPattern = <span class="hljs-type">Array</span>(<span class="hljs-string">""</span><span class="hljs-string">"http://[^/]+/[^/]+/"</span><span class="hljs-string">""</span>)
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()

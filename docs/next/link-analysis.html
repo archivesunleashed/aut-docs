@@ -363,10 +363,11 @@ following code writes to the GEXF format:</p>
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 <span class="hljs-keyword">import</span> io.archivesunleashed.app._
 
-<span class="hljs-keyword">val</span> graph = webgraph.groupBy(
-                       $<span class="hljs-string">"crawl_date"</span>,
-                       removePrefixWWW(extractDomain($<span class="hljs-string">"src"</span>)).as(<span class="hljs-string">"src_domain"</span>),
-                       removePrefixWWW(extractDomain($<span class="hljs-string">"dest"</span>)).as(<span class="hljs-string">"dest_domain"</span>))
+<span class="hljs-keyword">val</span> graph = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>,sc)
+              .webgraph.groupBy(
+                          $<span class="hljs-string">"crawl_date"</span>,
+                          removePrefixWWW(extractDomain($<span class="hljs-string">"src"</span>)).as(<span class="hljs-string">"src_domain"</span>),
+                          removePrefixWWW(extractDomain($<span class="hljs-string">"dest"</span>)).as(<span class="hljs-string">"dest_domain"</span>))
               .count()
               .filter(!($<span class="hljs-string">"dest_domain"</span>===<span class="hljs-string">""</span>))
               .filter(!($<span class="hljs-string">"src_domain"</span>===<span class="hljs-string">""</span>))
