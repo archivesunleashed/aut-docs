@@ -126,7 +126,7 @@ What do I do with the results? See [this guide](rdd-results.md)!
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val urlPattern = Array("""http://[^/]+/[^/]+/""".r)
+val urlPattern = Array("""http://[^/]+/[^/]+/""")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()

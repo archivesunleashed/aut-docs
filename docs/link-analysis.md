@@ -387,10 +387,11 @@ import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 import io.archivesunleashed.app._
 
-val graph = webgraph.groupBy(
-                       $"crawl_date",
-                       removePrefixWWW(extractDomain($"src")).as("src_domain"),
-                       removePrefixWWW(extractDomain($"dest")).as("dest_domain"))
+val graph = RecordLoader.loadArchives("/path/to/warcs",sc)
+              .webgraph.groupBy(
+                          $"crawl_date",
+                          removePrefixWWW(extractDomain($"src")).as("src_domain"),
+                          removePrefixWWW(extractDomain($"dest")).as("dest_domain"))
               .count()
               .filter(!($"dest_domain"===""))
               .filter(!($"src_domain"===""))
