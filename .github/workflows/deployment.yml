@@ -49,4 +49,4 @@ jobs:
         git config --global user.name "ruebot"
         cd website
         npm ci
-        npx docusaurus deploy
+        npx docusaurus run publish-gh-pages
