@@ -15,9 +15,13 @@ jobs:
      - uses: actions/setup-node@v1
        with:
          node-version: '12.x'
-         run: |
-          npm ci
-          npm run build
+    - name: install
+      working-directory: ./website
+      run: npm install
+    - name: build
+      working-directory: ./website
+      run: npm run build
+
  gh-release:
    if: github.event_name != 'pull_request'
    runs-on: ubuntu-latest
@@ -29,14 +33,11 @@ jobs:
     - name: install
       working-directory: ./website
       run: npm install
-
     - name: build
       working-directory: ./website
       run: npm run build
-
     - name: deploy
       uses: peaceiris/actions-gh-pages@v3
-      env:
+      with:
         deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        publish_branch: gh-pages
         publish_dir: ./website/build/aut-docs
