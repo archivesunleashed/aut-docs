@@ -5,7 +5,7 @@ title: Dependencies
 
 ## Java
 
-The Archives Unleashed Toolkit requires Java 8.
+The Toolkit requires Java 11.
 
 For macOS: You can find information on Java
 [here](https://java.com/en/download/help/mac_install.xml). We recommend
@@ -22,16 +22,18 @@ found [here](https://adoptopenjdk.net/).
 On Debian based system you can install Java using `apt`:
 
 ```bash
-apt install openjdk-8-jdk
+apt install openjdk-11-jdk
 ```
 
 Before `spark-shell` can launch, `JAVA_HOME` must be set. If you receive an
 error that `JAVA_HOME` is not set, you need to point it to where Java is
 installed. On Linux, this might be
-`export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64` or on macOS it might be
-`export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home`.
+`export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64` or on macOS it might be
+`export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.11.0_74.jdk/Contents/Home`.
 
 ## Python
+
+The Toolkit requires Python 3.7.3+
 
 If you would like to use the Archives Unleashed Toolkit with PySpark and
 Jupyter Notebooks, you'll need to have a modern version of Python installed.
@@ -42,10 +44,12 @@ it doesn't, you can install either with `conda install` or `pip install`.
 
 ## Apache Spark
 
+The Toolkit requires Apache Spark 3.0.0+
+
 Download and unzip [Apache Spark](https://spark.apache.org) to a location of
 your choice.
 
 ```bash
-curl -L "https://archive.apache.org/dist/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz" > spark-2.4.5-bin-hadoop2.7.tgz
-tar -xvf spark-2.4.5-bin-hadoop2.7.tgz
+curl -L "https://archive.apache.org/dist/spark/spark-3.0.0/spark-3.0.0-bin-hadoop2.7.tgz" > spark-3.0.0-bin-hadoop2.7.tgz
+tar -xvf spark-3.0.0-bin-hadoop2.7.tgz
 ```
