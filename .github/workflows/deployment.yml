@@ -11,10 +11,10 @@ jobs:
    if: github.event_name != 'push'
    runs-on: ubuntu-latest
    steps:
-     - uses: actions/checkout@v1
-     - uses: actions/setup-node@v1
-       with:
-         node-version: '12.x'
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
     - name: install
       working-directory: ./website
       run: npm install
