@@ -26,8 +26,6 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-        run: |
-          npm install --global docusaurus-init
     - name: Add key to allow access to repository
       env:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock
@@ -49,5 +47,5 @@ jobs:
       run: |
         git config --global user.email "ruestn@gmail.com"
         git config --global user.name "ruebot"
-        cd website
-        npm run publish-gh-pages
+        npm ci
+        npx docusaurus deploy
