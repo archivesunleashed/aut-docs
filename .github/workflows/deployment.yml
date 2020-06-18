@@ -46,4 +46,5 @@ jobs:
       run: |
         git config --global user.email "ruestn@gmail.com"
         git config --global user.name "ruebot"
-        cd website && yarn install && GIT_USER=ruebot && CURRENT_BRANCH=docusaurus && yarn run publish-gh-pages
+        cd website
+        GIT_USER=ruebot CURRENT_BRANCH=docusaurus USE_SSH=true yarn run publish-gh-pages
