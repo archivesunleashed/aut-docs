@@ -26,6 +26,8 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
+        run: |
+          npm install --global docusaurus-init
     - name: Add key to allow access to repository
       env:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock
