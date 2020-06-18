@@ -389,9 +389,9 @@ import io.archivesunleashed.app._
 
 val graph = RecordLoader.loadArchives("/path/to/warcs",sc)
               .webgraph.groupBy(
-                       $"crawl_date",
-                       removePrefixWWW(extractDomain($"src")).as("src_domain"),
-                       removePrefixWWW(extractDomain($"dest")).as("dest_domain"))
+                          $"crawl_date",
+                          removePrefixWWW(extractDomain($"src")).as("src_domain"),
+                          removePrefixWWW(extractDomain($"dest")).as("dest_domain"))
               .count()
               .filter(!($"dest_domain"===""))
               .filter(!($"src_domain"===""))
