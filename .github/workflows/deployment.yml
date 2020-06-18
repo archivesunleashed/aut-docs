@@ -49,4 +49,4 @@ jobs:
         git config --global user.name "ruebot"
         cd website
         npm ci
-        npx docusaurus run publish-gh-pages
+        GIT_USER=ruebot && CURRENT_BRANCH=docusaurus && USE_SSH=true && npx docusaurus run publish-gh-pages
