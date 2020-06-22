@@ -4,7 +4,7 @@ title: Extract Binaries to Disk
 original_id: extract-binary
 ---
 
-How do I all the binary files of PDFs, audio files, video files, word processor
+How do I extract all the binary files of PDFs, audio files, video files, word processor
 files, spreadsheet files, and presentation program files to disk?
 
 ## Scala RDD

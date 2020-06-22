@@ -26,7 +26,7 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
 
 Will extract all following information from images in a web collection:
 
-- image url
+- audio url
 - filename
 - extension
 - MimeType as identified by the hosting web server
@@ -88,15 +88,13 @@ df = archive.audio()
 df.show()
 ```
 
-Will extract all following information from images in a web collection:
+Will extract all following information from audio in a web collection:
 
-- image url
+- audio url
 - filename
 - extension
 - MimeType as identified by the hosting web server
 - MimeType as identified by [Apache Tika](https://tika.apache.org)
-- Width
-- Height
 - md5 hash
 - sha1 hash
 - bytes
@@ -150,9 +148,9 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
   .show()
 ```
 
-Will extract all following information from images in a web collection:
+Will extract all following information from PDF files in a web collection:
 
-- image url
+- file url
 - filename
 - extension
 - MimeType as identified by the hosting web server
@@ -219,15 +217,13 @@ df = archive.pdfs()
 df.show()
 ```
 
-Will extract all following information from images in a web collection:
+Will extract all following information from PDF files in a web collection:
 
-- image url
+- file url
 - filename
 - extension
 - MimeType as identified by the hosting web server
 - MimeType as identified by [Apache Tika](https://tika.apache.org)
-- Width
-- Height
 - md5 hash
 - sha1 hash
 - bytes
@@ -281,9 +277,9 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
   .show()
 ```
 
-Will extract all following information from images in a web collection:
+Will extract all following information from presentation program files in a web collection:
 
-- image url
+- file url
 - filename
 - extension
 - MimeType as identified by the hosting web server
@@ -324,7 +320,7 @@ import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 6 more fields]
 ```
 
-If you wanted to work with all the PDF files in a collection, you could extract
+If you wanted to work with all the presentation program files in a collection, you could extract
 them with the following script:
 
 ```scala
@@ -350,15 +346,13 @@ df = archive.presentation_program()
 df.show()
 ```
 
-Will extract all following information from images in a web collection:
+Will extract all following information from presentation program files in a web collection:
 
-- image url
+- file url
 - filename
 - extension
 - MimeType as identified by the hosting web server
 - MimeType as identified by [Apache Tika](https://tika.apache.org)
-- Width
-- Height
 - md5 hash
 - sha1 hash
 - bytes
@@ -412,9 +406,9 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
   .show()
 ```
 
-Will extract all following information from images in a web collection:
+Will extract all following information from spreadsheet files in a web collection:
 
-- image url
+- file url
 - filename
 - extension
 - MimeType as identified by the hosting web server
@@ -455,7 +449,7 @@ import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 6 more fields]
 ```
 
-If you wanted to work with all the PDF files in a collection, you could extract
+If you wanted to work with all the spreadsheet files in a collection, you could extract
 them with the following script:
 
 ```scala
@@ -481,15 +475,13 @@ df = archive.spreadsheets()
 df.show()
 ```
 
-Will extract all following information from images in a web collection:
+Will extract all following information from spreadsheet files in a web collection:
 
-- image url
+- file url
 - filename
 - extension
 - MimeType as identified by the hosting web server
 - MimeType as identified by [Apache Tika](https://tika.apache.org)
-- Width
-- Height
 - md5 hash
 - sha1 hash
 - bytes
@@ -543,9 +535,9 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
   .show()
 ```
 
-Will extract all following information from images in a web collection:
+Will extract all following information from videos in a web collection:
 
-- image url
+- file url
 - filename
 - extension
 - MimeType as identified by the hosting web server
@@ -586,7 +578,7 @@ import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 6 more fields]
 ```
 
-If you wanted to work with all the PDF files in a collection, you could extract
+If you wanted to work with all the video files in a collection, you could extract
 them with the following script:
 
 ```scala
@@ -612,15 +604,13 @@ df = archive.video()
 df.show()
 ```
 
-Will extract all following information from images in a web collection:
+Will extract all following information from videos in a web collection:
 
-- image url
+- file url
 - filename
 - extension
 - MimeType as identified by the hosting web server
 - MimeType as identified by [Apache Tika](https://tika.apache.org)
-- Width
-- Height
 - md5 hash
 - sha1 hash
 - bytes
@@ -674,9 +664,9 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
   .show()
 ```
 
-Will extract all following information from images in a web collection:
+Will extract all following information from word processor files in a web collection:
 
-- image url
+- file url
 - filename
 - extension
 - MimeType as identified by the hosting web server
@@ -717,7 +707,7 @@ import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 6 more fields]
 ```
 
-If you wanted to work with all the PDF files in a collection, you could extract
+If you wanted to work with all the word processor files in a collection, you could extract
 them with the following script:
 
 ```scala
@@ -743,15 +733,13 @@ df = archive.word_processor()
 df.show()
 ```
 
-Will extract all following information from images in a web collection:
+Will extract all following information from word processor files in a web collection:
 
-- image url
+- file url
 - filename
 - extension
 - MimeType as identified by the hosting web server
 - MimeType as identified by [Apache Tika](https://tika.apache.org)
-- Width
-- Height
 - md5 hash
 - sha1 hash
 - bytes

@@ -263,7 +263,7 @@ DataFrame like so:
 ## Extract Most Frequent Images MD5 Hash
 
 Some images may be the same, but have different URLs. This UDF finds the
-popular images by calculating the MD5 hash of each and presenting the most
+popular images by calculating the MD5 hash of each and presents the most
 frequent images based on that metric. This script:
 
 ```scala
