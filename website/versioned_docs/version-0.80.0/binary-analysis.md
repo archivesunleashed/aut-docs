@@ -321,8 +321,8 @@ import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 6 more fields]
 ```
 
-If you wanted to work with all the presentation program files in a collection, you could extract
-them with the following script:
+If you wanted to work with all the presentation program files in a collection, 
+you could extract them with the following script:
 
 ```scala
 import io.archivesunleashed._
