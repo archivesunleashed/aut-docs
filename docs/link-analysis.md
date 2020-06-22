@@ -15,7 +15,7 @@ example, you discover how many times that `liberal.ca` linked to `twitter.com`,
 rather than learning that `http://liberal.ca/contact` linked to
 `http://twitter.com/liberal_party`. The reason we do that is that in general,
 if you are working with any data at scale, the sheer number of raw URLs can
-become overwhelming. That said,, we do provide one example below that provides
+become overwhelming. That said, we do provide one example below that provides
 raw data.
 
 ## Extract Simple Site Link Structure
@@ -39,7 +39,7 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .saveAsTextFile("links-all-rdd/")
 ```
 
-Note how you can add filters are added. In this case, we add a filter which
+Note how you can add filters. In this case, we add a filter which
 will result in a network graph of pages containing the phrase "apple." Filters
 can be applied immediately after `.keepValidPages()`.
 
