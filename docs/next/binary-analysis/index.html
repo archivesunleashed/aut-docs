@@ -76,9 +76,9 @@ df.select($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"f
   .orderBy(desc(<span class="hljs-string">"md5"</span>))
   .show()
 </code></pre>
-<p>Will extract all following information from images in a web collection:</p>
+<p>Will extract all following information from audio files in a web collection:</p>
 <ul>
-<li>image url</li>
+<li>audio url</li>
 <li>filename</li>
 <li>extension</li>
 <li>MimeType as identified by the hosting web server</li>
@@ -131,15 +131,13 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.audio()
 df.show()
 </code></pre>
-<p>Will extract all following information from images in a web collection:</p>
+<p>Will extract all following information from audio files in a web collection:</p>
 <ul>
-<li>image url</li>
+<li>audio url</li>
 <li>filename</li>
 <li>extension</li>
 <li>MimeType as identified by the hosting web server</li>
 <li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>Width</li>
-<li>Height</li>
 <li>md5 hash</li>
 <li>sha1 hash</li>
 <li>bytes</li>
@@ -184,9 +182,9 @@ df.select($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"f
   .orderBy(desc(<span class="hljs-string">"md5"</span>))
   .show()
 </code></pre>
-<p>Will extract all following information from images in a web collection:</p>
+<p>Will extract all following information from PDF files in a web collection:</p>
 <ul>
-<li>image url</li>
+<li>file url</li>
 <li>filename</li>
 <li>extension</li>
 <li>MimeType as identified by the hosting web server</li>
@@ -244,15 +242,13 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.pdfs()
 df.show()
 </code></pre>
-<p>Will extract all following information from images in a web collection:</p>
+<p>Will extract all following information from PDF files in a web collection:</p>
 <ul>
-<li>image url</li>
+<li>file url</li>
 <li>filename</li>
 <li>extension</li>
 <li>MimeType as identified by the hosting web server</li>
 <li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>Width</li>
-<li>Height</li>
 <li>md5 hash</li>
 <li>sha1 hash</li>
 <li>bytes</li>
@@ -297,9 +293,9 @@ df.select($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"f
   .orderBy(desc(<span class="hljs-string">"md5"</span>))
   .show()
 </code></pre>
-<p>Will extract all following information from images in a web collection:</p>
+<p>Will extract all following information from presentation program files in a web collection:</p>
 <ul>
-<li>image url</li>
+<li>file url</li>
 <li>filename</li>
 <li>extension</li>
 <li>MimeType as identified by the hosting web server</li>
@@ -338,8 +334,8 @@ import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 6 more fields]
 </code></pre>
-<p>If you wanted to work with all the PDF files in a collection, you could extract
-them with the following script:</p>
+<p>If you wanted to work with all the presentation program files in a collection,
+you could extract them with the following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
@@ -357,15 +353,13 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.presentation_program()
 df.show()
 </code></pre>
-<p>Will extract all following information from images in a web collection:</p>
+<p>Will extract all following information from presentation program files in a web collection:</p>
 <ul>
-<li>image url</li>
+<li>file url</li>
 <li>filename</li>
 <li>extension</li>
 <li>MimeType as identified by the hosting web server</li>
 <li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>Width</li>
-<li>Height</li>
 <li>md5 hash</li>
 <li>sha1 hash</li>
 <li>bytes</li>
@@ -410,9 +404,9 @@ df.select($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"f
   .orderBy(desc(<span class="hljs-string">"md5"</span>))
   .show()
 </code></pre>
-<p>Will extract all following information from images in a web collection:</p>
+<p>Will extract all following information from spreadsheet files in a web collection:</p>
 <ul>
-<li>image url</li>
+<li>file url</li>
 <li>filename</li>
 <li>extension</li>
 <li>MimeType as identified by the hosting web server</li>
@@ -451,7 +445,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 6 more fields]
 </code></pre>
-<p>If you wanted to work with all the PDF files in a collection, you could extract
+<p>If you wanted to work with all the spreadsheet files in a collection, you could extract
 them with the following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
@@ -470,15 +464,13 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.spreadsheets()
 df.show()
 </code></pre>
-<p>Will extract all following information from images in a web collection:</p>
+<p>Will extract all following information from spreadsheet files in a web collection:</p>
 <ul>
-<li>image url</li>
+<li>file url</li>
 <li>filename</li>
 <li>extension</li>
 <li>MimeType as identified by the hosting web server</li>
 <li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>Width</li>
-<li>Height</li>
 <li>md5 hash</li>
 <li>sha1 hash</li>
 <li>bytes</li>
@@ -523,9 +515,9 @@ df.select($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"f
   .orderBy(desc(<span class="hljs-string">"md5"</span>))
   .show()
 </code></pre>
-<p>Will extract all following information from images in a web collection:</p>
+<p>Will extract all following information from videos in a web collection:</p>
 <ul>
-<li>image url</li>
+<li>file url</li>
 <li>filename</li>
 <li>extension</li>
 <li>MimeType as identified by the hosting web server</li>
@@ -564,7 +556,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 6 more fields]
 </code></pre>
-<p>If you wanted to work with all the PDF files in a collection, you could extract
+<p>If you wanted to work with all the video files in a collection, you could extract
 them with the following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
@@ -583,15 +575,13 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.video()
 df.show()
 </code></pre>
-<p>Will extract all following information from images in a web collection:</p>
+<p>Will extract all following information from videos in a web collection:</p>
 <ul>
-<li>image url</li>
+<li>file url</li>
 <li>filename</li>
 <li>extension</li>
 <li>MimeType as identified by the hosting web server</li>
 <li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>Width</li>
-<li>Height</li>
 <li>md5 hash</li>
 <li>sha1 hash</li>
 <li>bytes</li>
@@ -636,9 +626,9 @@ df.select($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"f
   .orderBy(desc(<span class="hljs-string">"md5"</span>))
   .show()
 </code></pre>
-<p>Will extract all following information from images in a web collection:</p>
+<p>Will extract all following information from word processor files in a web collection:</p>
 <ul>
-<li>image url</li>
+<li>file url</li>
 <li>filename</li>
 <li>extension</li>
 <li>MimeType as identified by the hosting web server</li>
@@ -677,8 +667,8 @@ import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 df: org.apache.spark.sql.DataFrame = [url: string, filename: string ... 6 more fields]
 </code></pre>
-<p>If you wanted to work with all the PDF files in a collection, you could extract
-them with the following script:</p>
+<p>If you wanted to work with all the word processor files in a collection,
+you could extract them with the following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
@@ -696,15 +686,13 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.word_processor()
 df.show()
 </code></pre>
-<p>Will extract all following information from images in a web collection:</p>
+<p>Will extract all following information from word processor files in a web collection:</p>
 <ul>
-<li>image url</li>
+<li>file url</li>
 <li>filename</li>
 <li>extension</li>
 <li>MimeType as identified by the hosting web server</li>
 <li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>Width</li>
-<li>Height</li>
 <li>md5 hash</li>
 <li>sha1 hash</li>
 <li>bytes</li>
