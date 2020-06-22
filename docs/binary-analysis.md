@@ -24,7 +24,7 @@ df.select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_typ
   .show()
 ```
 
-Will extract all following information from images in a web collection:
+Will extract all following information from audio files in a web collection:
 
 - audio url
 - filename
@@ -88,7 +88,7 @@ df = archive.audio()
 df.show()
 ```
 
-Will extract all following information from audio in a web collection:
+Will extract all following information from audio files in a web collection:
 
 - audio url
 - filename
