@@ -20,34 +20,13 @@ More information on using the Toolkit with `spark-submit` can be found in
 
 ## The Toolkit with Spark Shell
 
-There are two options for loading the Toolkit. The
-advantages and disadvantages of using either option are going to depend
-on your setup (single machine vs. cluster):
+The Toolkit only supports the `--jar` option.
 
 ```shell
 spark-shell --help
 
   --jars JARS                 Comma-separated list of jars to include on the driver
                               and executor classpaths.
-  --packages                  Comma-separated list of maven coordinates of jars to include
-                              on the driver and executor classpaths. Will search the local
-                              maven repo, then maven central and any additional remote
-                              repositories given by --repositories. The format for the
-                              coordinates should be groupId:artifactId:version.
-```
-
-### As a package
-
-Release version:
-
-```shell
-spark-shell --packages "io.archivesunleashed:aut:0.80.0"
-```
-
-HEAD (built locally):
-
-```shell
-spark-shell --packages "io.archivesunleashed:aut:0.80.1-SNAPSHOT"
 ```
 
 ### With an UberJar
@@ -67,8 +46,8 @@ spark-shell --jars /path/to/aut/target/aut-0.80.1-SNAPSHOT-fatjar.jar
 ## The Toolkit with PySpark
 
 To run PySpark with the Toolkit loaded, you will need to
-provide PySpark with the Java/Scala package, as well as the Python bindings.
-The Java/Scala packages can be provided with `--packages` or `--jars` as
+provide PySpark with the Java/Scala artifact, as well as the Python bindings.
+The Java/Scala artifact can be provided with `--jars` as
 described above. The Python bindings can be
 [downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-0.80.0/aut-0.80.0.zip)
 , or [built locally](#building-locally) (the zip file will be found in
@@ -76,20 +55,6 @@ the `target` directory.
 
 In each of the examples below, `/path/to/python` is listed. If you are unsure
 where your Python is, it can be found with `which python`.
-
-### As a package
-
-Release version:
-
-```shell
-export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files aut-0.80.0.zip --packages "io.archivesunleashed:aut:0.80.0"
-```
-
-HEAD (built locally):
-
-```shell
-export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files aut.zip --packages "io.archivesunleashed:aut:0.80.1-SNAPSHOT"
-```
 
 ### With an UberJar
 
@@ -109,25 +74,11 @@ export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/pyt
 
 To run a [Jupyter Notebook](https://jupyter.org/install) with the Archives
 Unleashed Toolkit loaded, you will need to provide PySpark the Java/Scala
-package, and the Python bindings. The Java/Scala packages can be provided
-with `--packages` or `--jars` as described above. The Python bindings can be
+artifact, and the Python bindings. The Java/Scala artifact can be provided
+with `--jars` as described above. The Python bindings can be
 [downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-0.80.0/aut-0.80.0.zip)
 , or [built locally](#Introduction) (the zip file will be found in
 the `target` directory.
-
-### As a package
-
-Release version:
-
-```shell
-export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files aut-0.80.0.zip --packages "io.archivesunleashed:aut:0.80.0"
-```
-
-HEAD (built locally):
-
-```shell
-export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files aut.zip --packages "io.archivesunleashed:aut:0.80.1-SNAPSHOT"
-```
 
 ### With an UberJar
 
