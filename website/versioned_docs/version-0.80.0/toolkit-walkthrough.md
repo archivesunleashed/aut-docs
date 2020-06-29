@@ -122,7 +122,7 @@ Let's take a moment to look at this script. It:
 - tells the program where it can find the data (in this case, the sample data
   that we have included in this Docker image);
 - tells it only to keep the
-  "[valid](https://github.com/archivesunleashed/aut-docs/blob/master/aut-0.50.0/filters.md#keep-valid-pages)"
+  "[valid](https://aut.docs.archivesunleashed.org/docs/filters-rdd#scala-df)"
   pages, in this case HTML data
 - tells it to `ExtractDomain`, or find the base domain of each URL - i.e.
   `www.google.com/cats` we are interested just in the domain, or
@@ -260,7 +260,7 @@ Good luck!
 ## Other Text Analysis Filters
 
 Take some time to explore the various filters that you can use. Check out the
-[documentation](https://github.com/archivesunleashed/aut-docs/blob/master/aut-0.60.0/filters-df.md)
+[documentation](https://aut.docs.archivesunleashed.org/docs/filters-df)
 for some ideas.
 
 Some options:
