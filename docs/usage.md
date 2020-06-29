@@ -142,7 +142,7 @@ The Toolkit offers a [Docker image](https://hub.docker.com/r/archivesunleashed/d
 that can be used with Spark and PySpark. These images are great for learning
 how the Toolkit works, and quick prototyping. Images are available for [each
 release](https://hub.docker.com/r/archivesunleashed/docker-aut/tags),
-and `latest` corresponds to the `master` branch.
+and `latest` corresponds to the `main` branch.
 
 To run the latest verion of the Toolkit with `spark-shell`:
 
