@@ -45,7 +45,7 @@ webpages.groupBy(removePrefixWWW(extractDomain($"Url")).alias("url"))
   .write.csv("/path/to/derivatives/auk/all-domains/output")
 
 // Full-text.
-webpages.select($"crawl_date", removePrefixWWW(extractDomain(($"url")).alias("domain")), $"url", removeHTML(removeHTTPHeader(($"content"))))
+webpages.select($"crawl_date", removePrefixWWW(extractDomain(($"url")).alias("domain")), $"url", $"content")
   .write.csv("/path/to/derivatives/auk/full-text/output")
 
 // GraphML
@@ -83,7 +83,7 @@ webpages.groupBy(remove_prefix_www(extract_domain("url")).alias("url")) \
   .write.csv("/path/to/derivatives/auk/all-domains/output")
 
 # Full-text.
-webpages.select("crawl_date", remove_prefix_www(extract_domain("url")).alias("domain"), "url", remove_html(remove_http_header("content")).alias("content"))\
+webpages.select("crawl_date", remove_prefix_www(extract_domain("url")).alias("domain"), "url", "content")\
   .write.csv("/path/to/derivatives/auk/full-text/output")
 
 # Create DataFrame for GraphML output

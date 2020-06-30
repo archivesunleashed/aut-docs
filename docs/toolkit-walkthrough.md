@@ -204,7 +204,7 @@ val domains = Set("www.liberal.ca")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML($"content").alias("content"))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
   .filter(hasDomains($"domain", lit(domains)))
   .write.csv("/data/liberal-party-text")
 ```
@@ -236,7 +236,7 @@ val domains = Set("www.liberal.ca")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML($"content").alias("content"))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
   .filter(hasDomains($"domain", lit(domains)))
   .write.csv("/data/liberal-party-text")
 ```
@@ -286,7 +286,7 @@ RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
   .filter(hasDomains(extractDomain($"url"), lit(domains)))
   .filter(hasLanguages($"language", lit(languages)))
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML($"content").alias("content"))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
   .write.csv("/data/liberal-party-french-text")
 ```
 
@@ -301,7 +301,7 @@ val dates = Array("2006")
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
   .filter(hasDate($"crawl_date", lit(dates)))
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML($"content").alias("content"))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
   .write.csv("/data/2006-text")
 ```
 
@@ -314,7 +314,7 @@ import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTTPHeader(removeHTML($"content").alias("content")))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
   .write.csv("/data/text-no-headers")
 ```
 

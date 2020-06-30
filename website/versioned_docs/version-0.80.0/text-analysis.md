@@ -33,7 +33,7 @@ import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url"), $"url", removeHTML($"content"))
+  .select($"crawl_date", extractDomain($"url"), $"url", $"content")
   .write.csv("plain-text-df/")
 ```
 
@@ -44,7 +44,7 @@ from aut import *
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html("content").alias("content")) \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", "content") \
   .write.csv("plain-text-df/")
 ```
 
@@ -76,7 +76,7 @@ import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select(removeHTML(removeHTTPHeader($"content")))
+  .select($"content")
   .write.csv("plain-text-noheaders-df/")
 ```
 
@@ -87,7 +87,7 @@ from aut import *
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select(remove_html(remove_http_header("content")).alias("content")) \
+  .select("content")) \
   .write.csv("plain-text-noheaders-df/")
 ```
 
@@ -121,7 +121,7 @@ val domains = Array("www.archive.org", "geocities.org")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML(removeHTTPHeader($"content").alias("content")))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
   .filter(hasDomains($"domain", lit(domains)))
   .write.csv("plain-text-domain-df/")
 ```
@@ -136,7 +136,7 @@ domains = ["www.archive.org"]
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content")) \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", "content") \
   .filter(col("domain").isin(domains)) \
   .write.csv("plain-text-domain-df/")
 ```
@@ -173,7 +173,7 @@ val urlPattern = Array("(?i)http://www.archive.org/details/.*")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML(removeHTTPHeader($"content").alias("content")))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
   .filter(hasUrlPatterns($"url", lit(urlPattern)))
   .write.csv("details-df/")
 ```
@@ -188,7 +188,7 @@ url_pattern = "%http://www.archive.org/details/%"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content")) \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", "content") \
   .filter(col("url").like(url_pattern)) \
   .write.csv("details-df/")
 ```
@@ -224,7 +224,7 @@ val domains = Array("www.archive.org")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url"), $"url", extractBoilerpipeText(removeHTTPHeader($"content")))
+  .select($"crawl_date", extractDomain($"url"), $"url", extractBoilerpipeText($"content"))
   .filter(hasDomains($"domain", lit(domains)))
   .write.csv("plain-text-no-boilerplate-df/")
 ```
@@ -236,7 +236,7 @@ from aut import *
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", extract_boilerplate(remove_http_header("content")).alias("content")) \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", extract_boilerplate("content").alias("content")) \
   .write.csv("plain-text-no-boilerplate-df/")
 ```
 
@@ -312,7 +312,7 @@ val dates = Array("2008", "2015")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").as("domain"), $"url", removeHTML(removeHTTPHeader($"content")).as("content"))
+  .select($"crawl_date", extractDomain($"url").as("domain"), $"url", $"content")
   .filter(hasDate($"crawl_date", lit(dates)))
   .write.csv("plain-text-date-filtered-2008-2015-df/")
 ```
@@ -327,7 +327,7 @@ dates = "2009[10][09]\d\d"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content")) \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", "content") \
   .filter(col("crawl_date").rlike(dates)) \
   .write.csv("plain-text-date-filtered-2008-2015-df/")
 ```
@@ -363,7 +363,7 @@ val languages = Array("fr")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"language", removeHTML(removeHTTPHeader($"content").alias("content")))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"language", $"content")
   .filter(hasDomains($"domain", lit(domains)))
   .filter(hasLanguages($"language", lit(languages)))
   .write.csv("plain-text-fr-df/")
@@ -380,7 +380,7 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .filter(hasDomains(extractDomain($"url"), lit(domains)))
   .filter(hasLanguages($"language", lit(languages)))
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"language", removeHTML(removeHTTPHeader($"content").alias("content")))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"language", $"content")
   .write.csv("plain-text-fr-df/")
 ```
 
@@ -395,7 +395,7 @@ languages = ["fr"]
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content")) \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", "content") \
   .filter(col("domain").isin(domains)) \
   .filter(col("language").isin(languages)) \
   .write.csv("plain-text-fr-df/")
@@ -436,7 +436,7 @@ val content = Array("radio")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML(removeHTTPHeader($"content").alias("content")))
+  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
   .filter(hasContent($"content", lit(content)))
   .write.csv("plain-text-radio-df/")
 ```
@@ -451,7 +451,7 @@ content = "%radio%"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content")).alias("content")) \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", "content")) \
   .filter(col("content").like(content)) \
   .write.csv("plain-text-radio-df/")
 ```
@@ -485,7 +485,7 @@ import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("example.warc.gz", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url"), $"url", removeHTTPHeader($"content"))
+  .select($"crawl_date", extractDomain($"url"), $"url", $"content")
   .write.csv("plain-html-df/")
 ```
 
@@ -496,6 +496,6 @@ from aut import *
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_http_header("content").alias("content")) \
+  .select("crawl_date", extract_domain("url").alias("domain"), "url", "content") \
   .write.csv("plain-html-df/")
 ```
