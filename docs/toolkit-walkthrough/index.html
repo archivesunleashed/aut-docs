@@ -223,7 +223,7 @@ and then press <code>ctrl</code> + <code>d</code>.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, removeHTML($<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>))
+  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
   .write.csv(<span class="hljs-string">"/data/liberal-party-text"</span>)
 </code></pre>
@@ -247,7 +247,7 @@ get around it.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, removeHTML($<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>))
+  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
   .write.csv(<span class="hljs-string">"/data/liberal-party-text"</span>)
 </code></pre>
@@ -288,7 +288,7 @@ another filter: <code>.filter($&quot;languages&quot;, Array(&quot;fr&quot;)))</c
   .webpages()
   .filter(hasDomains(extractDomain($<span class="hljs-string">"url"</span>), lit(domains)))
   .filter(hasLanguages($<span class="hljs-string">"language"</span>, lit(languages)))
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, removeHTML($<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>))
+  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .write.csv(<span class="hljs-string">"/data/liberal-party-french-text"</span>)
 </code></pre>
 <p>Or if we wanted to just have pages from 2006, we would run:</p>
@@ -300,7 +300,7 @@ another filter: <code>.filter($&quot;languages&quot;, Array(&quot;fr&quot;)))</c
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .webpages()
   .filter(hasDate($<span class="hljs-string">"crawl_date"</span>, lit(dates)))
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, removeHTML($<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>))
+  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .write.csv(<span class="hljs-string">"/data/2006-text"</span>)
 </code></pre>
 <p>Finally, if we want to remove the HTTP headers – let's say if we want to create
@@ -310,7 +310,7 @@ some nice word clouds – we can add a final command: <code>RemoveHttpHeader</co
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, removeHTTPHeader(removeHTML($<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .write.csv(<span class="hljs-string">"/data/text-no-headers"</span>)
 </code></pre>
 <p>You could now try uploading one of the plain text files using a website like

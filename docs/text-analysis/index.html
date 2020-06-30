@@ -83,7 +83,7 @@ already exist.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>), $<span class="hljs-string">"url"</span>, removeHTML($<span class="hljs-string">"content"</span>))
+  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .write.csv(<span class="hljs-string">"plain-text-df/"</span>)
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="python-df"></a><a href="#python-df" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
@@ -91,7 +91,7 @@ already exist.</p>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, remove_html(<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>)) \
+  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>) \
   .write.csv(<span class="hljs-string">"plain-text-df/"</span>)
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="extract-plain-text-without-http-headers"></a><a href="#extract-plain-text-without-http-headers" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extract Plain Text Without HTTP Headers</h2>
@@ -114,7 +114,7 @@ we are removing headers in the following examples.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select(removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"content"</span>)
   .write.csv(<span class="hljs-string">"plain-text-noheaders-df/"</span>)
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="python-df-1"></a><a href="#python-df-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
@@ -122,7 +122,7 @@ we are removing headers in the following examples.</p>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(remove_html(remove_http_header(<span class="hljs-string">"content"</span>)).alias(<span class="hljs-string">"content"</span>)) \
+  .select(<span class="hljs-string">"content"</span>)) \
   .write.csv(<span class="hljs-string">"plain-text-noheaders-df/"</span>)
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="extract-plain-text-by-domain"></a><a href="#extract-plain-text-by-domain" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extract Plain Text By Domain</h2>
@@ -148,7 +148,7 @@ it will go through the collection and find all of the URLs within the
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
   .write.csv(<span class="hljs-string">"plain-text-domain-df/"</span>)
 </code></pre>
@@ -160,7 +160,7 @@ domains = [<span class="hljs-string">"www.archive.org"</span>]
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>)).alias(<span class="hljs-string">"content"</span>)) \
+  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>) \
   .filter(col(<span class="hljs-string">"domain"</span>).isin(domains)) \
   .write.csv(<span class="hljs-string">"plain-text-domain-df/"</span>)
 </code></pre>
@@ -188,7 +188,7 @@ with <code>http://archive.org/details/</code>, and save the text of those URLs.<
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .filter(hasUrlPatterns($<span class="hljs-string">"url"</span>, lit(urlPattern)))
   .write.csv(<span class="hljs-string">"details-df/"</span>)
 </code></pre>
@@ -200,7 +200,7 @@ url_pattern = <span class="hljs-string">"%http://www.archive.org/details/%"</spa
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>)).alias(<span class="hljs-string">"content"</span>)) \
+  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>) \
   .filter(col(<span class="hljs-string">"url"</span>).like(url_pattern)) \
   .write.csv(<span class="hljs-string">"details-df/"</span>)
 </code></pre>
@@ -228,7 +228,7 @@ website and paper</a>.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>), $<span class="hljs-string">"url"</span>, extractBoilerpipeText(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>), $<span class="hljs-string">"url"</span>, extractBoilerpipeText($<span class="hljs-string">"content"</span>))
   .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
   .write.csv(<span class="hljs-string">"plain-text-no-boilerplate-df/"</span>)
 </code></pre>
@@ -237,7 +237,7 @@ website and paper</a>.</p>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, extract_boilerplate(remove_http_header(<span class="hljs-string">"content"</span>)).alias(<span class="hljs-string">"content"</span>)) \
+  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, extract_boilerplate(<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>)) \
   .write.csv(<span class="hljs-string">"plain-text-no-boilerplate-df/"</span>)
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="extract-plain-text-filtered-by-date"></a><a href="#extract-plain-text-filtered-by-date" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extract Plain Text Filtered by Date</h2>
@@ -294,7 +294,7 @@ plain text stored in <code>alberta_education_curriculum.txt</code>:</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).as(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)).as(<span class="hljs-string">"content"</span>))
+  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).as(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .filter(hasDate($<span class="hljs-string">"crawl_date"</span>, lit(dates)))
   .write.csv(<span class="hljs-string">"plain-text-date-filtered-2008-2015-df/"</span>)
 </code></pre>
@@ -306,7 +306,7 @@ dates = <span class="hljs-string">"2009[10][09]\d\d"</span>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>)).alias(<span class="hljs-string">"content"</span>)) \
+  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>) \
   .filter(col(<span class="hljs-string">"crawl_date"</span>).rlike(dates)) \
   .write.csv(<span class="hljs-string">"plain-text-date-filtered-2008-2015-df/"</span>)
 </code></pre>
@@ -334,7 +334,7 @@ codes</a>.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"language"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"language"</span>, $<span class="hljs-string">"content"</span>)
   .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
   .filter(hasLanguages($<span class="hljs-string">"language"</span>, lit(languages)))
   .write.csv(<span class="hljs-string">"plain-text-fr-df/"</span>)
@@ -349,7 +349,7 @@ codes</a>.</p>
   .webpages()
   .filter(hasDomains(extractDomain($<span class="hljs-string">"url"</span>), lit(domains)))
   .filter(hasLanguages($<span class="hljs-string">"language"</span>, lit(languages)))
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"language"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"language"</span>, $<span class="hljs-string">"content"</span>)
   .write.csv(<span class="hljs-string">"plain-text-fr-df/"</span>)
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="python-df-6"></a><a href="#python-df-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
@@ -361,7 +361,7 @@ languages = [<span class="hljs-string">"fr"</span>]
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>)).alias(<span class="hljs-string">"content"</span>)) \
+  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>) \
   .filter(col(<span class="hljs-string">"domain"</span>).isin(domains)) \
   .filter(col(<span class="hljs-string">"language"</span>).isin(languages)) \
   .write.csv(<span class="hljs-string">"plain-text-fr-df/"</span>)
@@ -392,7 +392,7 @@ in.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .filter(hasContent($<span class="hljs-string">"content"</span>, lit(content)))
   .write.csv(<span class="hljs-string">"plain-text-radio-df/"</span>)
 </code></pre>
@@ -404,7 +404,7 @@ content = <span class="hljs-string">"%radio%"</span>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>)).alias(<span class="hljs-string">"content"</span>)) \
+  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>)) \
   .filter(col(<span class="hljs-string">"content"</span>).like(content)) \
   .write.csv(<span class="hljs-string">"plain-text-radio-df/"</span>)
 </code></pre>
@@ -429,7 +429,7 @@ filters from above to filter it down accordingly by domain, language, etc.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"example.warc.gz"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>), $<span class="hljs-string">"url"</span>, removeHTTPHeader($<span class="hljs-string">"content"</span>))
+  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .write.csv(<span class="hljs-string">"plain-html-df/"</span>)
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="python-df-8"></a><a href="#python-df-8" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
@@ -437,7 +437,7 @@ filters from above to filter it down accordingly by domain, language, etc.</p>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, remove_http_header(<span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"content"</span>)) \
+  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>) \
   .write.csv(<span class="hljs-string">"plain-html-df/"</span>)
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/collection-analysis"><span class="arrow-prev">← </span><span>Collection Analysis</span></a><a class="docs-next button" href="/docs/link-analysis"><span>Link Analysis</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#extract-all-plain-text">Extract All Plain Text</a><ul class="toc-headings"><li><a href="#scala-rdd">Scala RDD</a></li><li><a href="#scala-df">Scala DF</a></li><li><a href="#python-df">Python DF</a></li></ul></li><li><a href="#extract-plain-text-without-http-headers">Extract Plain Text Without HTTP Headers</a><ul class="toc-headings"><li><a href="#scala-rdd-1">Scala RDD</a></li><li><a href="#scala-df-1">Scala DF</a></li><li><a href="#python-df-1">Python DF</a></li></ul></li><li><a href="#extract-plain-text-by-domain">Extract Plain Text By Domain</a><ul class="toc-headings"><li><a href="#scala-rdd-2">Scala RDD</a></li><li><a href="#scala-df-2">Scala DF</a></li><li><a href="#python-df-2">Python DF</a></li></ul></li><li><a href="#extract-plain-text-by-url-pattern">Extract Plain Text by URL Pattern</a><ul class="toc-headings"><li><a href="#scala-rdd-3">Scala RDD</a></li><li><a href="#scala-df-3">Scala DF</a></li><li><a href="#python-df-3">Python DF</a></li></ul></li><li><a href="#extract-plain-text-minus-boilerplate">Extract Plain Text Minus Boilerplate</a><ul class="toc-headings"><li><a href="#scala-rdd-4">Scala RDD</a></li><li><a href="#scala-df-4">Scala DF</a></li><li><a href="#python-df-4">Python DF</a></li></ul></li><li><a href="#extract-plain-text-filtered-by-date">Extract Plain Text Filtered by Date</a><ul class="toc-headings"><li><a href="#scala-rdd-5">Scala RDD</a></li><li><a href="#scala-df-5">Scala DF</a></li><li><a href="#python-df-5">Python DF</a></li></ul></li><li><a href="#extract-plain-text-filtered-by-language">Extract Plain Text Filtered by Language</a><ul class="toc-headings"><li><a href="#scala-rdd-6">Scala RDD</a></li><li><a href="#scala-df-6">Scala DF</a></li><li><a href="#python-df-6">Python DF</a></li></ul></li><li><a href="#extract-plain-text-filtered-by-keyword">Extract Plain text Filtered by Keyword</a><ul class="toc-headings"><li><a href="#scala-rdd-7">Scala RDD</a></li><li><a href="#scala-df-7">Scala DF</a></li><li><a href="#python-df-7">Python DF</a></li></ul></li><li><a href="#extract-raw-html">Extract Raw HTML</a><ul class="toc-headings"><li><a href="#scala-rdd-8">Scala RDD</a></li><li><a href="#scala-df-8">Scala DF</a></li><li><a href="#python-df-8">Python DF</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/dependencies">Getting Started</a><a href="/docs/collection-analysis">Generating Results</a><a href="/docs/filters-rdd">Filtering results</a><a href="/docs/aut-spark-submit-app">Standard Derivatives</a><a href="/docs/df-results">What to do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/img/waterloo.png"/><img alt="York University" class="footer_img" src="/img/york.png"/></section><section class="copyright">CC BY 2.0 2020 Archives Unleashed Project</section></footer></div></body></html>

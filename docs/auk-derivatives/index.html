@@ -96,7 +96,7 @@ webpages.groupBy(removePrefixWWW(extractDomain($<span class="hljs-string">"Url"<
   .write.csv(<span class="hljs-string">"/path/to/derivatives/auk/all-domains/output"</span>)
 
 <span class="hljs-comment">// Full-text.</span>
-webpages.select($<span class="hljs-string">"crawl_date"</span>, removePrefixWWW(extractDomain(($<span class="hljs-string">"url"</span>)).alias(<span class="hljs-string">"domain"</span>)), $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader(($<span class="hljs-string">"content"</span>))))
+webpages.select($<span class="hljs-string">"crawl_date"</span>, removePrefixWWW(extractDomain(($<span class="hljs-string">"url"</span>)).alias(<span class="hljs-string">"domain"</span>)), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .write.csv(<span class="hljs-string">"/path/to/derivatives/auk/full-text/output"</span>)
 
 <span class="hljs-comment">// GraphML</span>
