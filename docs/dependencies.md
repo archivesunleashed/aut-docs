@@ -13,7 +13,7 @@ For macOS: You can find information on Java
 with [homebrew](https://brew.sh) and then:
 
 ```bash
-brew cask install adoptopenjdk/openjdk/adoptopenjdk8
+brew cask install adoptopenjdk/openjdk/adoptopenjdk11
 ```
 
 If you run into difficulties with homebrew, installation instructions can be
