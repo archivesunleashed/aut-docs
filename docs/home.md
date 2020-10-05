@@ -108,9 +108,9 @@ Association for Computing Machinery, New York,
 NY, USA, 157–166. DOI: [https://doi.org/10.1145/3383583.3398513](https://doi.org/10.1145/3383583.3398513).
 
 Your citations help to further the recognition
-of using open-source tools for scientific 
-inquiry, assists in growing the web archiving 
-community, and acknowledges the efforts of 
+of using open-source tools for scientific
+inquiry, assists in growing the web archiving
+community, and acknowledges the efforts of
 contributors to this project.
 
 ## Further Reading
