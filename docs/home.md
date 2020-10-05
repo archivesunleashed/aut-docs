@@ -95,16 +95,6 @@ and working with the results.
 
 ### Citing Archives Unleashed
 
-This documentation is based on a cookbook approach, providing a series of
-"recipes" for addressing a number of common analytics tasks to provide
-inspiration for your own analysis. We generally provide examples for [resilient
-distributed datasets
-(RDD)](https://spark.apache.org/docs/latest/rdd-programming-guide.html) in
-Scala, and
-[DataFrames](https://spark.apache.org/docs/latest/sql-programming-guide.html#datasets-and-dataframes)
-in both Scala and Python. We leave it up to you to choose Scala or Python
-flavours of Spark.
-
 How to cite the Archives Unleashed Toolkit or 
 Cloud in your research:
 
