@@ -95,11 +95,32 @@ and working with the results.
 
 ### Citing Archives Unleashed
 
-How to cite the Archives Unleashed Toolkit or Cloud in your research:
+This documentation is based on a cookbook approach, providing a series of
+"recipes" for addressing a number of common analytics tasks to provide
+inspiration for your own analysis. We generally provide examples for [resilient
+distributed datasets
+(RDD)](https://spark.apache.org/docs/latest/rdd-programming-guide.html) in
+Scala, and
+[DataFrames](https://spark.apache.org/docs/latest/sql-programming-guide.html#datasets-and-dataframes)
+in both Scala and Python. We leave it up to you to choose Scala or Python
+flavours of Spark.
 
-> Nick Ruest, Jimmy Lin, Ian Milligan, and Samantha Fritz. 2020. The Archives Unleashed Project: Technology, Process, and Community to Improve Scholarly Access to Web Archives. In _Proceedings of the ACM/IEEE Joint Conference on Digital Libraries in 2020 (JCDL '20)_. Association for Computing Machinery, New York, NY, USA, 157–166. DOI: [https://doi.org/10.1145/3383583.3398513](https://doi.org/10.1145/3383583.3398513).
+How to cite the Archives Unleashed Toolkit or 
+Cloud in your research:
 
-Your citations help to further the recognition of using open-source tools for scientific inquiry, assists in growing the web archiving community, and acknowledges the efforts of contributors to this project.
+> Nick Ruest, Jimmy Lin, Ian Milligan, and 
+Samantha Fritz. 2020. The Archives Unleashed 
+Project: Technology, Process, and Community 
+to Improve Scholarly Access to Web Archives. 
+In _Proceedings of the ACM/IEEE Joint Conference 
+on Digital Libraries in 2020 (JCDL '20)_. 
+Association for Computing Machinery, New York, 
+NY, USA, 157–166. DOI: [https://doi.org/10.1145/3383583.3398513](https://doi.org/10.1145/3383583.3398513).
+
+Your citations help to further the recognition
+of using open-source tools for scientific inquiry, assists in growing the web archiving 
+community, and acknowledges the efforts of 
+contributors to this project.
 
 ## Further Reading
 
