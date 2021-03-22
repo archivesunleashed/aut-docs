@@ -1,6 +1,7 @@
 ---
-id: home
+id: version-0.90.0-home
 title: The Toolkit
+original_id: home
 ---
 
 The Archives Unleashed Toolkit is an open-source platform for analyzing web

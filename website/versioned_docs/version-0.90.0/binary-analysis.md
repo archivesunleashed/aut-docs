@@ -1,6 +1,7 @@
 ---
-id: binary-analysis
+id: version-0.90.0-binary-analysis
 title: Binary Analysis
+original_id: binary-analysis
 ---
 
 ## Extract Audio Information
