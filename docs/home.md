@@ -61,13 +61,11 @@ and working with the results.
   - [Organize Links by Crawl Date](link-analysis.md#organize-links-by-crawl-date)
   - [Filter by URL](link-analysis.md#filter-by-url)
   - [Export to Gephi](link-analysis.md#export-to-gephi)
-- **[Image Analysis](image-analysis.md)**: How do I...
-  - [Extract Image Information](image-analysis.md#extract-image-information)
-  - [Extract Most Frequent Image URLs](image-analysis.md#most-frequent-image-urls)
-  - [Extract Most Frequent Images MD5 Hash](image-analysis.md#most-frequent-images-md5-hash)
 - **[Binary Analysis](binary-analysis.md)**: How do I...
+  - [Extract Image Information](binary-analysis.md#extract-image-information)
+  - [Extract Most Frequent Image URLs](binary-analysis.md#most-frequent-image-urls)
+  - [Extract Most Frequent Images MD5 Hash](binary-analysis.md#most-frequent-images-md5-hash)
   - [Extract Audio Information](binary-analysis.md#extract-audio-information)
-  - [Extract Image Information](image-analysis.md#extract-image-information)
   - [Extract PDF Information](binary-analysis.md#extract-pdf-information)
   - [Extract Presentation Program File Information](binary-analysis.md#extract-presentation-program-files-information)
   - [Extract Spreadsheet Information](binary-analysis.md#extract-spreadsheet-information)
