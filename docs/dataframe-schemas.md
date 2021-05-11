@@ -31,7 +31,7 @@ language); and `.webgraph()` which includes hyperlink information.
 - `mime_type_web_server` (string)
 - `mime_type_tika` (string)
 - `language` (string)
-- `content` (string) [Note: HTTP Headers, and HTML is removed.]
+- `content`
 
 ## Web Graph
 
