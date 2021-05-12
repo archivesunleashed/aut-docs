@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Usage · Archives Unleashed Toolkit</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## The Toolkit with Spark Submit"/><meta name="docsearch:version" content="0.90.1"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Usage · Archives Unleashed Toolkit"/><meta property="og:type" content="website"/><meta property="og:url" content="https://archivesunleashed.github.io/"/><meta property="og:description" content="## The Toolkit with Spark Submit"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-2879197-28', 'auto');
+              ga('send', 'pageview');
+            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/favicon.ico" alt="Archives Unleashed Toolkit"/><h2 class="headerTitleWithLogo">Archives Unleashed Toolkit</h2></a><a href="/versions"><h3>0.90.1</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/0.90.1/home" target="_self">Docs</a></li><li class=""><a href="https://archivesunleashed.org" target="_self">Project</a></li><li class=""><a href="https://github.com/archivesunleashed/aut" target="_self">GitHub</a></li><li class=""><a href="https://news.archivesunleashed.org/" target="_self">News</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Getting Started</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Home</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/0.90.1/home">The Toolkit</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/0.90.1/dependencies">Dependencies</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0.90.1/usage">Usage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.90.1/aut-at-scale">The Toolkit at Scale</a></li><li class="navListItem"><a class="navItem" href="/docs/0.90.1/dataframe-schemas">DataFrame Schemas</a></li><li class="navListItem"><a class="navItem" href="/docs/0.90.1/toolkit-walkthrough">Toolkit Walkthrough</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Generating Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/0.90.1/collection-analysis">Collection Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.90.1/text-analysis">Text Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.90.1/link-analysis">Link Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.90.1/image-analysis">Image Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.90.1/binary-analysis">Binary Analysis</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Filtering Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/0.90.1/filters-rdd">RDD Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/0.90.1/filters-df">DataFrame Filters</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Standard Derivatives</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/0.90.1/aut-spark-submit-app">The Toolkit with spark-submit</a></li><li class="navListItem"><a class="navItem" href="/docs/0.90.1/auk-derivatives">AU Cloud Scholarly Derivatives</a></li><li class="navListItem"><a class="navItem" href="/docs/0.90.1/extract-binary-info">Extract Binary Info</a></li><li class="navListItem"><a class="navItem" href="/docs/0.90.1/extract-binary">Extract Binaries to Disk</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">What to do with Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/0.90.1/df-results">DataFrame Results</a></li><li class="navListItem"><a class="navItem" href="/docs/0.90.1/rdd-results">RDD Results</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Usage</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="the-toolkit-with-spark-submit"></a><a href="#the-toolkit-with-spark-submit" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Toolkit with Spark Submit</h2>
+<p>The Toolkit offers a variety of extraction jobs with
+<a href="https://spark.apache.org/docs/latest/submitting-applications.html"><code>spark-submit</code></a>
+. These extraction jobs have a few configuration options.</p>
+<p>The extraction jobs have a basic outline of:</p>
+<pre><code class="hljs css language-shell">spark-submit --class io.archivesunleashed.app.CommandLineAppRunner PATH_TO_AUT_JAR --extractor EXTRACTOR --input INPUT DIRECTORY --output OUTPUT DIRECTORY
+</code></pre>
+<p>More information on using the Toolkit with <code>spark-submit</code> can be found in
+<a href="/docs/0.90.1/aut-spark-submit-app">The Toolkit with spark-submit</a> section of the documentation.</p>
+<h2><a class="anchor" aria-hidden="true" id="the-toolkit-with-spark-shell"></a><a href="#the-toolkit-with-spark-shell" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Toolkit with Spark Shell</h2>
+<p>The Toolkit only supports the <code>--jar</code> option.</p>
+<pre><code class="hljs css language-shell">spark-shell --help
+
+  --jars JARS                 Comma-separated list of jars to include on the driver
+                              and executor classpaths.
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="with-an-uberjar"></a><a href="#with-an-uberjar" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>With an UberJar</h3>
+<p>Release version:</p>
+<pre><code class="hljs css language-shell">spark-shell --jars /path/to/aut-0.90.0-fatjar.jar
+</code></pre>
+<p>HEAD (built locally):</p>
+<pre><code class="hljs css language-shell">spark-shell --jars /path/to/aut/target/aut-0.90.1-SNAPSHOT-fatjar.jar
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="the-toolkit-with-pyspark"></a><a href="#the-toolkit-with-pyspark" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Toolkit with PySpark</h2>
+<p>To run PySpark with the Toolkit loaded, you will need to
+provide PySpark with the Java/Scala artifact, as well as the Python bindings.
+The Java/Scala artifact can be provided with <code>--jars</code> as
+described above. The Python bindings can be
+<a href="https://github.com/archivesunleashed/aut/releases/download/aut-0.90.0/aut-0.90.0.zip">downloaded</a>
+, or <a href="#building-locally">built locally</a> (the zip file will be found in
+the <code>target</code> directory.</p>
+<p>In each of the examples below, <code>/path/to/python</code> is listed. If you are unsure
+where your Python is, it can be found with <code>which python</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="with-an-uberjar-1"></a><a href="#with-an-uberjar-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>With an UberJar</h3>
+<p>Release version:</p>
+<pre><code class="hljs css language-shell">export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files aut-0.90.0.zip --jars /path/to/aut-0.90.0-fatjar.jar
+</code></pre>
+<p>HEAD (built locally):</p>
+<pre><code class="hljs css language-shell">export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files aut.zip --jars /path/to/aut-0.90.1-SNAPSHOT-fatjar.jar
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="the-toolkit-with-jupyter"></a><a href="#the-toolkit-with-jupyter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Toolkit with Jupyter</h2>
+<p>To run a <a href="https://jupyter.org/install">Jupyter Notebook</a> with the Archives
+Unleashed Toolkit loaded, you will need to provide PySpark the Java/Scala
+artifact, and the Python bindings. The Java/Scala artifact can be provided
+with <code>--jars</code> as described above. The Python bindings can be
+<a href="https://github.com/archivesunleashed/aut/releases/download/aut-0.90.0/aut-0.90.0.zip">downloaded</a>
+, or <a href="#Introduction">built locally</a> (the zip file will be found in
+the <code>target</code> directory.</p>
+<h3><a class="anchor" aria-hidden="true" id="with-an-uberjar-2"></a><a href="#with-an-uberjar-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>With an UberJar</h3>
+<p>Release version:</p>
+<pre><code class="hljs css language-shell">export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files aut-0.90.0.zip --jars /path/to/aut-0.90.0-fatjar.jar
+</code></pre>
+<p>HEAD (built locally):</p>
+<pre><code class="hljs css language-shell">export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files aut.zip --jars /path/to/aut-0.90.1-SNAPSHOT-fatjar.jar
+</code></pre>
+<p>A Jupyter Notebook <em>should</em> automatically load in your browser at
+<a href="http://localhost:8888">http://localhost:8888</a>. You may be asked for a token upon first launch, which
+just offers a bit of security. The token is available in the load screen and
+will look something like this:</p>
+<pre><code class="hljs css language-shell">[I 19:18:30.893 NotebookApp] Writing notebook server cookie secret to /run/user/1001/jupyter/notebook_cookie_secret
+[I 19:18:31.111 NotebookApp] JupyterLab extension loaded from /home/nruest/bin/anaconda3/lib/python3.7/site-packages/jupyterlab
+[I 19:18:31.111 NotebookApp] JupyterLab application directory is /home/nruest/bin/anaconda3/share/jupyter/lab
+[I 19:18:31.112 NotebookApp] Serving notebooks from local directory: /home/nruest/Projects/au/aut
+[I 19:18:31.112 NotebookApp] The Jupyter Notebook is running at:
+[I 19:18:31.112 NotebookApp] http://localhost:8888/?token=87e7a47c5a015cb2b846c368722ec05c1100988fd9dcfe04
+[I 19:18:31.112 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 19:18:31.140 NotebookApp]
+
+    To access the notebook, open this file in a browser:
+        file:///run/user/1001/jupyter/nbserver-9702-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:8888/?token=87e7a47c5a015cb2b846c368722ec05c1100988fd9dcfe04
+</code></pre>
+<p>Create a new notebook by clicking &quot;New&quot; (near the top right of the Jupyter
+homepage) and select &quot;Python 3&quot; from the drop-down list.</p>
+<p>The notebook will open in a new window. In the first cell enter:</p>
+<pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
+
+archive = WebArchive(sc, sqlContext, <span class="hljs-string">"src/test/resources/warc/"</span>)
+
+webpages = archive.webpages()
+webpages.printSchema()
+</code></pre>
+<p>Then hit <kbd>Shift</kbd>+<kbd>Enter</kbd>, or press the play button.</p>
+<p>If you receive no errors, and see the following, you are ready to begin working
+with your web archives!</p>
+<p><img src="https://user-images.githubusercontent.com/218561/63203995-42684080-c061-11e9-9361-f5e6177705ff.png" alt=""></p>
+<h2><a class="anchor" aria-hidden="true" id="the-toolkit-with-docker"></a><a href="#the-toolkit-with-docker" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Toolkit with Docker</h2>
+<p>The Toolkit offers a <a href="https://hub.docker.com/r/archivesunleashed/docker-aut">Docker image</a>
+that can be used with Spark and PySpark. These images are great for learning
+how the Toolkit works, and quick prototyping. Images are available for <a href="https://hub.docker.com/r/archivesunleashed/docker-aut/tags">each
+release</a>,
+and <code>latest</code> corresponds to the <code>main</code> branch.</p>
+<p>To run the latest verion of the Toolkit with <code>spark-shell</code>:</p>
+<pre><code class="hljs css language-shell">docker run --rm -it archivesunleashed/docker-aut
+</code></pre>
+<p>More information on using the <code>docker-aut</code> can be found
+<a href="https://github.com/archivesunleashed/docker-aut">here</a>.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/0.90.1/dependencies"><span class="arrow-prev">← </span><span>Dependencies</span></a><a class="docs-next button" href="/docs/0.90.1/aut-at-scale"><span>The Toolkit at Scale</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#the-toolkit-with-spark-submit">The Toolkit with Spark Submit</a></li><li><a href="#the-toolkit-with-spark-shell">The Toolkit with Spark Shell</a><ul class="toc-headings"><li><a href="#with-an-uberjar">With an UberJar</a></li></ul></li><li><a href="#the-toolkit-with-pyspark">The Toolkit with PySpark</a><ul class="toc-headings"><li><a href="#with-an-uberjar-1">With an UberJar</a></li></ul></li><li><a href="#the-toolkit-with-jupyter">The Toolkit with Jupyter</a><ul class="toc-headings"><li><a href="#with-an-uberjar-2">With an UberJar</a></li></ul></li><li><a href="#the-toolkit-with-docker">The Toolkit with Docker</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/dependencies">Getting Started</a><a href="/docs/collection-analysis">Generating Results</a><a href="/docs/filters-rdd">Filtering results</a><a href="/docs/aut-spark-submit-app">Standard Derivatives</a><a href="/docs/df-results">What to do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/img/waterloo.png"/><img alt="York University" class="footer_img" src="/img/york.png"/></section><section class="copyright">CC BY 2.0 2021 Archives Unleashed Project</section></footer></div></body></html>
