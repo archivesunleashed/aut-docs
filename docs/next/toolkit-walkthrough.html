@@ -157,8 +157,8 @@ that we have included in this Docker image);</li>
 pages, in this case HTML data</li>
 <li>tells it to <code>ExtractDomain</code>, or find the base domain of each URL - i.e.
 <code>www.google.com/cats</code> we are interested just in the domain, or
-<code>www.google.com</code>;</li>
-<li>counts them - how many times does <code>www.google.com</code> appear in this collection,
+<code>google.com</code>;</li>
+<li>counts them - how many times does <code>google.com</code> appear in this collection,
 for example;</li>
 <li>and displays a DataFrame of the top ten!</li>
 </ul>
@@ -170,16 +170,16 @@ for example;</li>
 +-------------------------+-----+
 |<span class="hljs-string">domain                   </span>|<span class="hljs-string">count</span>|
 +-------------------------+-----+
-|<span class="hljs-string">www.equalvoice.ca        </span>|<span class="hljs-string">4274 </span>|
-|<span class="hljs-string">www.liberal.ca           </span>|<span class="hljs-string">1968 </span>|
-|<span class="hljs-string">www.policyalternatives.ca</span>|<span class="hljs-string">588  </span>|
+|<span class="hljs-string">equalvoice.ca            </span>|<span class="hljs-string">4274 </span>|
+|<span class="hljs-string">liberal.ca               </span>|<span class="hljs-string">1968 </span>|
+|<span class="hljs-string">policyalternatives.ca    </span>|<span class="hljs-string">588  </span>|
 |<span class="hljs-string">greenparty.ca            </span>|<span class="hljs-string">535  </span>|
-|<span class="hljs-string">www.fairvote.ca          </span>|<span class="hljs-string">442  </span>|
-|<span class="hljs-string">www.ndp.ca               </span>|<span class="hljs-string">416  </span>|
-|<span class="hljs-string">www.davidsuzuki.org      </span>|<span class="hljs-string">348  </span>|
-|<span class="hljs-string">www.canadiancrc.com      </span>|<span class="hljs-string">88   </span>|
+|<span class="hljs-string">fairvote.ca              </span>|<span class="hljs-string">442  </span>|
+|<span class="hljs-string">ndp.ca                   </span>|<span class="hljs-string">416  </span>|
+|<span class="hljs-string">davidsuzuki.org          </span>|<span class="hljs-string">348  </span>|
+|<span class="hljs-string">canadiancrc.com          </span>|<span class="hljs-string">88   </span>|
 |<span class="hljs-string">communist-party.ca       </span>|<span class="hljs-string">39   </span>|
-|<span class="hljs-string">www.ccsd.ca              </span>|<span class="hljs-string">22   </span>|
+|<span class="hljs-string">ccsd.ca                  </span>|<span class="hljs-string">22   </span>|
 +-------------------------+-----+
 only showing top 10 rows
 
@@ -219,7 +219,7 @@ and then press <code>ctrl</code> + <code>d</code>.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Set</span>(<span class="hljs-string">"www.liberal.ca"</span>)
+<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Set</span>(<span class="hljs-string">"liberal.ca"</span>)
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .webpages()
@@ -243,7 +243,7 @@ get around it.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Set</span>(<span class="hljs-string">"www.liberal.ca"</span>)
+<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Set</span>(<span class="hljs-string">"liberal.ca"</span>)
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .webpages()
@@ -281,7 +281,7 @@ another filter: <code>.filter($&quot;languages&quot;, Array(&quot;fr&quot;)))</c
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Set</span>(<span class="hljs-string">"www.liberal.ca"</span>)
+<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Set</span>(<span class="hljs-string">"liberal.ca"</span>)
 <span class="hljs-keyword">val</span> languages = <span class="hljs-type">Set</span>(<span class="hljs-string">"fr"</span>)
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
