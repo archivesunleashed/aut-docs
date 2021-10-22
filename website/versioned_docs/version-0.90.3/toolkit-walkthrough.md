@@ -1,6 +1,7 @@
 ---
-id: toolkit-walkthrough
+id: version-0.90.3-toolkit-walkthrough
 title: Toolkit Walkthrough
+original_id: toolkit-walkthrough
 ---
 
 Welcome to the Archives Unleashed Toolkit hands-on walkthrough!

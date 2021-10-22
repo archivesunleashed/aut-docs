@@ -1,6 +1,7 @@
 ---
-id: text-analysis
+id: version-0.90.3-text-analysis
 title: Text Analysis
+original_id: text-analysis
 ---
 
 ## Extract All Plain Text
