@@ -38,7 +38,7 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
 
 ## Has Dates
 
-Filters or keeps all data that does or does not match the date(s) specified.
+Filters or keeps all data that does or does not match the timestamps or date patterns specified.
 
 ### Scala DF
 
@@ -46,7 +46,7 @@ Filters or keeps all data that does or does not match the date(s) specified.
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val dates = Array("2008", "200908", "20070502")
+val dates = Array("2008.*", "200908.*", "20070502231159")
 
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .all()
@@ -60,7 +60,7 @@ RecordLoader.loadArchives("/path/to/warcs",sc)
 from aut import *
 from pyspark.sql.functions import col
 
-dates = ["2008", "200908", "20070502"]
+dates = ["2008.*", "200908.*", "20070502231159"]
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .all() \
