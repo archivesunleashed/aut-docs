@@ -38,7 +38,8 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
 
 ## Has Dates
 
-Filters or keeps all data that does or does not match the timestamps or date patterns specified.
+Filters or keeps all data that does or does not match the timestamps or
+date patterns specified.
 
 ### Scala DF
 
