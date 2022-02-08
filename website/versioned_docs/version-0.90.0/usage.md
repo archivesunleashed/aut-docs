@@ -139,17 +139,11 @@ with your web archives!
 
 ## The Toolkit with Docker
 
-The Toolkit offers a [Docker image](https://hub.docker.com/r/archivesunleashed/docker-aut)
-that can be used with Spark and PySpark. These images are great for learning
-how the Toolkit works, and quick prototyping. Images are available for [each
-release](https://hub.docker.com/r/archivesunleashed/docker-aut/tags),
-and `latest` corresponds to the `main` branch.
-
-To run the latest verion of the Toolkit with `spark-shell`:
-
-```shell
-docker run --rm -it archivesunleashed/docker-aut
-```
+The Toolkit offers a Docker container that can be used with Spark and PySpark.
+The container is great for learning how the Toolkit works, and quick prototyping.
+Containers are available for [each
+release](https://github.com/archivesunleashed/docker-aut/branches), as well as
+the `main` branch.
 
 More information on using the `docker-aut` can be found
 [here](https://github.com/archivesunleashed/docker-aut).

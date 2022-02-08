@@ -28,9 +28,11 @@ If you have any questions, let us know in [Slack](http://slack.archivesunleashed
 
 **Got Docker?**
 This lesson requires that you install
-[Docker](https://www.docker.com/get-docker). We have instructions on how to
-install Docker
-[here](https://github.com/archivesunleashed/docker-aut/wiki/Docker-Install-Instructions).
+[Docker](https://www.docker.com/get-docker), and use `docker-aut`. We have
+instructions on how to install Docker
+[here](https://github.com/archivesunleashed/docker-aut/wiki/Docker-Install-Instructions)
+, as well as instructions on how to build and use `docker-aut`
+[here](https://github.com/archivesunleashed/docker-aut#build-and-run).
 
 Later in this lesson, we use the networking tool [Gephi](https://gephi.org/).
 
@@ -47,12 +49,12 @@ Use the following command, replacing `/path/to/your/data` with the directory.
 **If you want to use your own ARC or WARC files, please put them in this
 directory**.
 
-`docker run --rm -it -v "/path/to/your/data:/data" archivesunleashed/docker-aut:latest`
+`docker run --rm -it -v "/path/to/your/data:/data" aut`
 
 For example, if your files are in `/Users/ianmilligan1/desktop/data` you would
 run the above command like:
 
-`docker run --rm -it -v "/Users/ianmilligan1/desktop/data:/data" archivesunleashed/docker-aut:latest`
+`docker run --rm -it -v "/Users/ianmilligan1/desktop/data:/data" aut`
 
 <hr />
 
