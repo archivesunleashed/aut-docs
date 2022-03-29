@@ -221,7 +221,7 @@ and then press <code>ctrl</code> + <code>d</code>.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Set</span>(<span class="hljs-string">"liberal.ca"</span>)
+<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Array</span>(<span class="hljs-string">"liberal.ca"</span>)
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .webpages()
@@ -245,7 +245,7 @@ get around it.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Set</span>(<span class="hljs-string">"liberal.ca"</span>)
+<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Array</span>(<span class="hljs-string">"liberal.ca"</span>)
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .webpages()
@@ -283,8 +283,8 @@ another filter: <code>.filter($&quot;languages&quot;, Array(&quot;fr&quot;)))</c
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Set</span>(<span class="hljs-string">"liberal.ca"</span>)
-<span class="hljs-keyword">val</span> languages = <span class="hljs-type">Set</span>(<span class="hljs-string">"fr"</span>)
+<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Array</span>(<span class="hljs-string">"liberal.ca"</span>)
+<span class="hljs-keyword">val</span> languages = <span class="hljs-type">Array</span>(<span class="hljs-string">"fr"</span>)
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .webpages()
