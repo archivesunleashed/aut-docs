@@ -48,7 +48,7 @@ Removes all data but selected MIME Types (identified by the web server).
 ```scala
 import io.archivesunleashed._
 
-val mimeTypes = Set("text/html", "text/plain")
+val mimeTypes = Array("text/html", "text/plain")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepMimeTypes(mimeTypes)
 ```
@@ -62,7 +62,7 @@ Removes all data but selected MIME Types (identified by [Apache Tika](https://ti
 ```scala
 import io.archivesunleashed._
 
-val mimetypes = Set("text/html", "text/plain")
+val mimetypes = Array("text/html", "text/plain")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepMimeTypesTika(mimetypes)
 ```
@@ -76,7 +76,7 @@ Removes all data that does not have selected status codes specified.
 ```scala
 import io.archivesunleashed._
 
-val statusCodes = Set("200", "404")
+val statusCodes = Array("200", "404")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepHttpStatus(statusCodes)
 ```
@@ -104,7 +104,7 @@ Removes all data but selected exact URLs.
 ```scala
 import io.archivesunleashed._
 
-val urls = Set("archive.org", "uwaterloo.ca", "yorku.ca")
+val urls = Array("archive.org", "uwaterloo.ca", "yorku.ca")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepUrls(urls)
 ```
@@ -118,7 +118,7 @@ Removes all data but selected URL patterns (regex).
 ```scala
 import io.archivesunleashed._
 
-val urls = Set(archive.r, sloan.r, "".r)
+val urls = Array(archive.r, sloan.r, "".r)
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepUrlPatterns(urls)
 ```
@@ -132,7 +132,7 @@ Removes all data but selected source domains.
 ```scala
 import io.archivesunleashed._
 
-val domains = Set("archive.org", "sloan.org")
+val domains = Array("archive.org", "sloan.org")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepDomains(domains)
 ```
@@ -146,7 +146,7 @@ Removes all data not in selected language ([ISO 639-2 codes](https://www.loc.gov
 ```scala
 import io.archivesunleashed._
 
-val languages = Set("en", "fr")
+val languages = Array("en", "fr")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepLanguages(languages)
 ```
@@ -160,7 +160,7 @@ Removes all content that does not pass Regular Expression test.
 ```scala
 import io.archivesunleashed._
 
-val content = Set(regex, raw"UNINTELLIBLEDFSJKLS".r)
+val content = Array(regex, raw"UNINTELLIBLEDFSJKLS".r)
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepContent(content)
 ```
@@ -174,7 +174,7 @@ Filters out detected MIME Types (identified by the web server).
 ```scala
 import io.archivesunleashed._
 
-val mimeTypes = Set("text/html", "text/plain")
+val mimeTypes = Array("text/html", "text/plain")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).discardMimeTypes(mimeTypes)
 ```
@@ -188,7 +188,7 @@ Filters out detected MIME Types (identified by [Apache Tika](https://tika.apache
 ```scala
 import io.archivesunleashed._
 
-val mimeTypes = Set("text/html", "text/plain")
+val mimeTypes = Array("text/html", "text/plain")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).discardMimeTypesTika(mimeTypes)
 ```
@@ -202,7 +202,7 @@ Filters out detected HTTP status codes.
 ```scala
 import io.archivesunleashed._
 
-val statusCodes = Set("200", "404")
+val statusCodes = Array("200", "404")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).discardHttpStatus(statusCodes)
 ```
@@ -230,7 +230,7 @@ Filters out detected URLs.
 ```scala
 import io.archivesunleashed._
 
-val urls = Set("archive.org", "uwaterloo.ca", "yorku.ca")
+val urls = Array("archive.org", "uwaterloo.ca", "yorku.ca")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).discardUrls(urls)
 ```
@@ -244,7 +244,7 @@ Filters out detected URL patterns (regex).
 ```scala
 import io.archivesunleashed._
 
-val urls = Set(archive.r, sloan.r, "".r)
+val urls = Array(archive.r, sloan.r, "".r)
 
 RecordLoader.loadArchives("/path/to/warcs",sc).discardUrlPatterns(urls)
 ```
@@ -258,7 +258,7 @@ Filters out detected source domains.
 ```scala
 import io.archivesunleashed._
 
-val domains = Set("archive.org", "sloan.org")
+val domains = Array("archive.org", "sloan.org")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).discardDomains(domains)
 ```
@@ -272,7 +272,7 @@ Filters out detected languages ([ISO 639-2 codes](https://www.loc.gov/standards/
 ```scala
 import io.archivesunleashed._
 
-val languages = Set("en", "fr")
+val languages = Array("en", "fr")
 
 RecordLoader.loadArchives("/path/to/warcs",sc).keepLanguages(languages)
 ```
@@ -286,7 +286,7 @@ Filters out detected content that does pass Regular Expression test.
 ```scala
 import io.archivesunleashed._
 
-val content = Set(regex, raw"UNINTELLIBLEDFSJKLS".r)
+val content = Array(regex, raw"UNINTELLIBLEDFSJKLS".r)
 
 RecordLoader.loadArchives("/path/to/warcs",sc).discardContent(content)
 ```

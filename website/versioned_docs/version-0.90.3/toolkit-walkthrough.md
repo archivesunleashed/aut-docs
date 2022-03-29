@@ -203,7 +203,7 @@ and then press `ctrl` + `d`.
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val domains = Set("liberal.ca")
+val domains = Array("liberal.ca")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
@@ -235,7 +235,7 @@ Try running the **exact same script** that you did above.
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val domains = Set("liberal.ca")
+val domains = Array("liberal.ca")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
@@ -282,8 +282,8 @@ For example, if we just wanted the French-language Liberal pages, we would run:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val domains = Set("liberal.ca")
-val languages = Set("fr")
+val domains = Array("liberal.ca")
+val languages = Array("fr")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
