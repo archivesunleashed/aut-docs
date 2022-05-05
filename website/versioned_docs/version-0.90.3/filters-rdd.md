@@ -274,7 +274,7 @@ import io.archivesunleashed._
 
 val languages = Array("en", "fr")
 
-RecordLoader.loadArchives("/path/to/warcs",sc).keepLanguages(languages)
+RecordLoader.loadArchives("/path/to/warcs",sc).discardLanguages(languages)
 ```
 
 ## Discard Content
