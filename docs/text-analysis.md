@@ -33,7 +33,12 @@ import io.archivesunleashed.udfs._
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select($"crawl_date", extractDomain($"url"), $"url", removeHTML($"content"))
-  .write.csv("plain-text-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("plain-text-df/")
 ```
 
 ### Python DF
@@ -44,7 +49,12 @@ from aut import *
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
   .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html("content")) \
-  .write.csv("plain-text-df/")
+  .write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save("plain-text-df/")
 ```
 
 ## Extract Plain Text Without HTTP Headers
@@ -76,7 +86,12 @@ import io.archivesunleashed.udfs._
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select(removeHTML(removeHTTPHeader($"content")))
-  .write.csv("plain-text-noheaders-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("plain-text-noheaders-df/")
 ```
 
 ### Python DF
@@ -87,7 +102,12 @@ from aut import *
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
   .select(remove_html(remove_http_header("content"))) \
-  .write.csv("plain-text-noheaders-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save("plain-text-noheaders-df/")
 ```
 
 ## Extract Plain Text By Domain
@@ -122,7 +142,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML(removeHTTPHeader($"content")))
   .filter(hasDomains($"domain", lit(domains)))
-  .write.csv("plain-text-domain-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("plain-text-domain-df/")
 ```
 
 ### Python DF
@@ -137,7 +162,12 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
   .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content"))) \
   .filter(col("domain").isin(domains)) \
-  .write.csv("plain-text-domain-df/")
+  .write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save("plain-text-domain-df/")
 ```
 
 ## Extract Plain Text by URL Pattern
@@ -174,7 +204,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML(removeHTTPHeader($"content")))
   .filter(hasUrlPatterns($"url", lit(urlPattern)))
-  .write.csv("details-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("details-df/")
 ```
 
 ### Python DF
@@ -189,7 +224,12 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
   .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content"))) \
   .filter(col("url").like(url_pattern)) \
-  .write.csv("details-df/")
+  .write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save("details-df/")
 ```
 
 ## Extract Plain Text Minus Boilerplate
@@ -225,7 +265,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select($"crawl_date", extractDomain($"url"), $"url", extractBoilerpipeText(removeHTTPHeader($"content")))
   .filter(hasDomains($"domain", lit(domains)))
-  .write.csv("plain-text-no-boilerplate-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("plain-text-no-boilerplate-df/")
 ```
 
 ### Python DF
@@ -236,7 +281,12 @@ from aut import *
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
   .select("crawl_date", extract_domain("url").alias("domain"), "url", extract_boilerplate(remove_http_header("content")).alias("content")) \
-  .write.csv("plain-text-no-boilerplate-df/")
+  .write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save("plain-text-no-boilerplate-df/")
 ```
 
 ## Extract Plain Text Filtered by Date
@@ -313,7 +363,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select($"crawl_date", extractDomain($"url").as("domain"), $"url", removeHTML(removeHTTPHeader($"content")))
   .filter(hasDate($"crawl_date", lit(dates)))
-  .write.csv("plain-text-date-filtered-2008-2015-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("plain-text-date-filtered-2008-2015-df/")
 ```
 
 ### Python DF
@@ -328,7 +383,12 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
   .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content"))) \
   .filter(col("crawl_date").rlike(dates)) \
-  .write.csv("plain-text-date-filtered-2008-2015-df/")
+  .write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save("plain-text-date-filtered-2008-2015-df/")
 ```
 
 ## Extract Plain Text Filtered by Language
@@ -365,7 +425,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"language", removeHTML(removeHTTPHeader($"content")))
   .filter(hasDomains($"domain", lit(domains)))
   .filter(hasLanguages($"language", lit(languages)))
-  .write.csv("plain-text-fr-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("plain-text-fr-df/")
 ```
 
 ```scala
@@ -380,7 +445,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .filter(hasDomains(extractDomain($"url"), lit(domains)))
   .filter(hasLanguages($"language", lit(languages)))
   .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"language", removeHTML(removeHTTPHeader($"content")))
-  .write.csv("plain-text-fr-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("plain-text-fr-df/")
 ```
 
 ### Python DF
@@ -397,7 +467,12 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content"))) \
   .filter(col("domain").isin(domains)) \
   .filter(col("language").isin(languages)) \
-  .write.csv("plain-text-fr-df/")
+  .write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save("plain-text-fr-df/")
 ```
 
 ## Extract Plain text Filtered by Keyword
@@ -437,7 +512,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML(removeHTTPHeader($"content")))
   .filter(hasContent($"content", lit(content)))
-  .write.csv("plain-text-radio-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("plain-text-radio-df/")
 ```
 
 ### Python DF
@@ -452,7 +532,12 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
   .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content"))) \
   .filter(col("content").like(content)) \
-  .write.csv("plain-text-radio-df/")
+  .write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save("plain-text-radio-df/")
 ```
 
 ## Extract Raw HTML
@@ -485,7 +570,12 @@ import io.archivesunleashed.udfs._
 RecordLoader.loadArchives("example.warc.gz", sc)
   .webpages()
   .select($"crawl_date", extractDomain($"url"), $"url", removeHTTPHeader($"content"))
-  .write.csv("plain-html-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("plain-html-df/")
 ```
 
 ### Python DF
@@ -496,5 +586,10 @@ from aut import *
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
   .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_http_header("content")) \
-  .write.csv("plain-html-df/")
+  .write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save("plain-html-df/")
 ```

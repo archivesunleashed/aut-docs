@@ -46,7 +46,12 @@ val warcsS3 = RecordLoader.loadArchives("s3a://your-data-bucket/", sc)
 warcs.audio()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
-  .write.csv("/path/to/derivatives/csv/audio")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("/path/to/derivatives/csv/audio")
 
 // Images.
 warcsS3.images()
@@ -58,7 +63,12 @@ warcsS3.images()
 warcs.pdfs()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
-  .write.csv("s3a://your-derivatives-bucket/csv/pdf")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("s3a://your-derivatives-bucket/csv/pdf")
 
 // Presentation Program Files.
 warcs.presentationProgramFiles()
@@ -70,13 +80,23 @@ warcs.presentationProgramFiles()
 warcs.spreadsheets()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
-  .write.csv("/path/to/derivatives/csv/spreadsheet")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("/path/to/derivatives/csv/spreadsheet")
 
 // Videos.
 warcs.videos()
   .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
   .orderBy(desc("md5"))
-  .write.csv("/path/to/derivatives/csv/video")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("/path/to/derivatives/csv/video")
 
 // Word Processor Files.
 warcs.wordProcessorFiles()
@@ -98,26 +118,41 @@ warcs = WebArchive(sc, sqlContext, "/path/to/aut-resources-master/Sample-Data/*g
 # Choose your format: CSV or Parquet.
 
 # For CSV:
-# .write.csv('/path/to/derivatives/csv/audio', header='true')
+# .write.csv('/path/to/derivatives/csv/audio')
 # Include header='true' if you want headers.
 
 # For Parquet:
 # .write.parquet("/path/to/derivatives/parquet/pages/")
 
 # Audio Files.
-warcs.audio().write.csv('/path/to/derivatives/csv/audio', header='true')
+warcs.audio().write \
+ .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save('/path/to/derivatives/csv/audio')
 
 # Images.
 warcs.images().write.parquet('/path/to/derivatives/parquet/images')
 
 # Image Links.
-warcs.image_links().write.csv('/path/to/derivatives/csv/images-links', header='true')
+warcs.image_links().write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save('/path/to/derivatives/csv/images-links')
 
 # PDFs.
 warcs.pdfs().write.parquet('/path/to/derivatives/csv/pdfs')
 
 # Spreadsheets.
-warcs.spreadsheets().write.csv('/path/to/derivatives/csv/spreadsheets', header='true')
+warcs.spreadsheets().write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save('/path/to/derivatives/csv/spreadsheets')
 
 # Presentation Program Files.
 warcs.presentation_program().write.parquet('/path/to/derivatives/csv/presentation_program')
@@ -126,5 +161,10 @@ warcs.presentation_program().write.parquet('/path/to/derivatives/csv/presentatio
 warcs.video().write.parquet('/path/to/derivatives/csv/video')
 
 # Word Processor Files.
-warcs.word_processor().write.csv('/path/to/derivatives/csv/word_processor', header='true')
+warcs.word_processor().write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save('/path/to/derivatives/csv/word_processor')
 ```

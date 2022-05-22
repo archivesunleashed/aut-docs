@@ -321,7 +321,12 @@ val result = images.join(links, "md5")
                    .groupBy("domain", "md5")
                    .agg(first("url").as("image_url"))
                    .orderBy(asc("md5"))
-                   .write.csv("/path/to/output")
+                   .write
+                   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+                   .format("csv")
+                   .option("escape", "\"")
+                   .option("encoding", "utf-8")
+                   .save("/path/to/output")
 ```
 
 ### PythonDF
@@ -342,5 +347,10 @@ result = images.join(links, "md5") \
                .groupBy("domain", "md5") \
                .agg(first("url").alias("image_url")) \
                .orderBy(asc("md5")) \
-               .write.csv("/path/to/output")
+               .write \
+               .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+               .format("csv") \
+               .option("escape", "\"") \
+               .option("encoding", "utf-8") \
+               .save("/path/to/output")
 ```

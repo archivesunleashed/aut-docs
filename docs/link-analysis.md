@@ -69,7 +69,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .groupBy(removePrefixWWW(extractDomain($"src")).as("src"), removePrefixWWW(extractDomain($"dest")).as("dest"))
   .count()
   .filter($"count" > 5)
-  .write.csv("links-all-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("links-all-df/")
 ```
 
 ```scala
@@ -86,7 +91,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .groupBy("src", "dest")
   .count()
   .filter($"count" > 5)
-  .write.csv("links-all-apple-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("links-all-apple-df/")
 ```
 
 ### Python DF
@@ -105,7 +115,12 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .groupBy("src", "dest") \
   .count() \
   .filter(col("count") > 5) \
-  .write.csv("links-all-apple-df/")
+  .write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save("links-all-apple-df/")
 ```
 
 ## Extract Raw URL Link Structure
@@ -153,7 +168,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .groupBy(extractDomain($"src"), extractDomain($"dest"))
   .count()
   .filter($"count" > 5)
-  .write.csv("full-links-all-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("full-links-all-df/")
 ```
 
 ### Python DF
@@ -167,7 +187,12 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .groupBy(extract_domain("src"), extract_domain("dest")) \
   .count() \
   .filter(col("count") > 5) \
-  .write.csv("full-links-all-df/")
+  .write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save("full-links-all-df/")
 ```
 
 ## Organize Links by URL Pattern
@@ -209,7 +234,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .groupBy("src", "dest")
   .count()
   .filter($"count" > 5)
-  .write.csv("details-links-all-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("details-links-all-df/")
 ```
 
 ### Python DF
@@ -228,7 +258,12 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .groupBy("src", "dest") \
   .count() \
   .filter(col("count") > 5) \
-  .write.csv("details-links-all-df/")
+  .write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save("details-links-all-df/")
 ```
 
 ## Organize Links by Crawl Date
@@ -293,7 +328,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .groupBy($"crawl_date", removePrefixWWW(extractDomain($"src")), removePrefixWWW(extractDomain($"dest")))
   .count()
   .filter($"count" > 5)
-  .write.csv("sitelinks-by-date-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("sitelinks-by-date-df/")
 ```
 
 ### Python DF
@@ -307,7 +347,12 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .groupBy("crawl_date", remove_prefix_www(extract_domain("src")).alias("src"), remove_prefix_www(extract_domain("dest")).alias("dest")) \
   .count() \
   .filter(col("count") > 5) \
-  .write.csv("sitelinks-by-date-df/")
+  .write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save("sitelinks-by-date-df/")
 ```
 
 ## Filter by URL
@@ -348,7 +393,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .groupBy("src", "dest")
   .count()
   .filter($"count" > 5)
-  .write.csv("sitelinks-details-df/")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("sitelinks-details-df/")
 ```
 
 ### Python DF
@@ -367,7 +417,12 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .groupBy("src", "dest") \
   .count() \
   .filter(col("count") > 5) \
-  .write.csv("sitelinks-details-df/")
+  .write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+  .format("csv") \
+  .option("escape", "\"") \
+  .option("encoding", "utf-8") \
+  .save("sitelinks-details-df/")
 ```
 
 ## Export to Gephi

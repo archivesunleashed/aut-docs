@@ -208,7 +208,12 @@ RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
   .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
   .filter(hasDomains($"domain", lit(domains)))
-  .write.csv("/data/liberal-party-text")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("/data/liberal-party-text")
 ```
 
 **If you're using your own data, that's why the domain count was key!** Swap
@@ -240,7 +245,12 @@ RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
   .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
   .filter(hasDomains($"domain", lit(domains)))
-  .write.csv("/data/liberal-party-text")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("/data/liberal-party-text")
 ```
 
 Instead of a nice crisp feeling of success, you will see a long dump of text
@@ -289,7 +299,12 @@ RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .filter(hasDomains(extractDomain($"url"), lit(domains)))
   .filter(hasLanguages($"language", lit(languages)))
   .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
-  .write.csv("/data/liberal-party-french-text")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("/data/liberal-party-french-text")
 ```
 
 Or if we wanted to just have pages from 2006, we would run:
@@ -304,7 +319,12 @@ RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
   .filter(hasDate($"crawl_date", lit(dates)))
   .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
-  .write.csv("/data/2006-text")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("/data/2006-text")
 ```
 
 Finally, if we want to remove the HTTP headers – let's say if we want to create
@@ -317,7 +337,12 @@ import io.archivesunleashed.udfs._
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
   .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
-  .write.csv("/data/text-no-headers")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("/data/text-no-headers")
 ```
 
 You could now try uploading one of the plain text files using a website like

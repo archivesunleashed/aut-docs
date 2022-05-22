@@ -38,15 +38,24 @@ val webpages = RecordLoader.loadArchives("/path/to/data", sc)
 val webgraph = RecordLoader.loadArchives("/path/to/data", sc)
   .webgraph()
 
-// Domains file.
-webpages.groupBy(removePrefixWWW(extractDomain($"Url")).alias("url"))
+// Domains frequency file.
+webpages.groupBy($"domain")
   .count()
   .sort($"count".desc)
-  .write.csv("/path/to/derivatives/auk/all-domains/output")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("/path/to/derivatives/auk/all-domains/output")
 
 // Full-text.
-webpages.select($"crawl_date", removePrefixWWW(extractDomain(($"url")).alias("domain")), $"url", $"content")
-  .write.csv("/path/to/derivatives/auk/full-text/output")
+webpages.write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save("/path/to/derivatives/auk/full-text/output")
 
 // GraphML
 val graph = webgraph.groupBy(
@@ -77,14 +86,24 @@ webpages = WebArchive(sc, sqlContext, "/path/to/data").webpages()
 webgraph = WebArchive(sc, sqlContext, "/path/to/data").webgraph()
 
 # Domains file.
-webpages.groupBy(remove_prefix_www(extract_domain("url")).alias("url")) \
+webpages.groupBy("domain") \
   .count() \
-  .sort(col("count").desc()) \
-  .write.csv("/path/to/derivatives/auk/all-domains/output")
+  .sort(col("count")\
+  .desc()) \
+  .write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save("/path/to/derivatives/auk/all-domains/output")
 
 # Full-text.
-webpages.select("crawl_date", remove_prefix_www(extract_domain("url")).alias("domain"), "url", "content")\
-  .write.csv("/path/to/derivatives/auk/full-text/output")
+webpages.write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save("/path/to/derivatives/auk/full-text/output")
 
 # Create DataFrame for GraphML output
 graph = webgraph.groupBy("crawl_date", remove_prefix_www(extract_domain("src")).alias("src_domain"), remove_prefix_www(extract_domain("dest")).alias("dest_domain"))\
