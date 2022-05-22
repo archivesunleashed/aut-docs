@@ -93,7 +93,7 @@ sc.setLogLevel(<span class="hljs-string">"INFO"</span>)
 webpages.groupBy($<span class="hljs-string">"domain"</span>)
   .count()
   .sort($<span class="hljs-string">"count"</span>.desc)
-  .write 
+  .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
   .format(<span class="hljs-string">"csv"</span>)
   .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
