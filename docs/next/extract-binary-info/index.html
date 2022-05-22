@@ -99,7 +99,12 @@ sc.hadoopConfiguration.set(<span class="hljs-string">"fs.s3a.secret.key"</span>,
 warcs.audio()
   .select($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"filename"</span>, $<span class="hljs-string">"extension"</span>, $<span class="hljs-string">"mime_type_web_server"</span>, $<span class="hljs-string">"mime_type_tika"</span>, $<span class="hljs-string">"md5"</span>)
   .orderBy(desc(<span class="hljs-string">"md5"</span>))
-  .write.csv(<span class="hljs-string">"/path/to/derivatives/csv/audio"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(<span class="hljs-string">"/path/to/derivatives/csv/audio"</span>)
 
 <span class="hljs-comment">// Images.</span>
 warcsS3.images()
@@ -111,7 +116,12 @@ warcsS3.images()
 warcs.pdfs()
   .select($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"filename"</span>, $<span class="hljs-string">"extension"</span>, $<span class="hljs-string">"mime_type_web_server"</span>, $<span class="hljs-string">"mime_type_tika"</span>, $<span class="hljs-string">"md5"</span>)
   .orderBy(desc(<span class="hljs-string">"md5"</span>))
-  .write.csv(<span class="hljs-string">"s3a://your-derivatives-bucket/csv/pdf"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(<span class="hljs-string">"s3a://your-derivatives-bucket/csv/pdf"</span>)
 
 <span class="hljs-comment">// Presentation Program Files.</span>
 warcs.presentationProgramFiles()
@@ -123,13 +133,23 @@ warcs.presentationProgramFiles()
 warcs.spreadsheets()
   .select($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"filename"</span>, $<span class="hljs-string">"extension"</span>, $<span class="hljs-string">"mime_type_web_server"</span>, $<span class="hljs-string">"mime_type_tika"</span>, $<span class="hljs-string">"md5"</span>)
   .orderBy(desc(<span class="hljs-string">"md5"</span>))
-  .write.csv(<span class="hljs-string">"/path/to/derivatives/csv/spreadsheet"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(<span class="hljs-string">"/path/to/derivatives/csv/spreadsheet"</span>)
 
 <span class="hljs-comment">// Videos.</span>
 warcs.videos()
   .select($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"filename"</span>, $<span class="hljs-string">"extension"</span>, $<span class="hljs-string">"mime_type_web_server"</span>, $<span class="hljs-string">"mime_type_tika"</span>, $<span class="hljs-string">"md5"</span>)
   .orderBy(desc(<span class="hljs-string">"md5"</span>))
-  .write.csv(<span class="hljs-string">"/path/to/derivatives/csv/video"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(<span class="hljs-string">"/path/to/derivatives/csv/video"</span>)
 
 <span class="hljs-comment">// Word Processor Files.</span>
 warcs.wordProcessorFiles()
@@ -148,26 +168,41 @@ warcs = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/aut-resou
 <span class="hljs-comment"># Choose your format: CSV or Parquet.</span>
 
 <span class="hljs-comment"># For CSV:</span>
-<span class="hljs-comment"># .write.csv('/path/to/derivatives/csv/audio', header='true')</span>
+<span class="hljs-comment"># .write.csv('/path/to/derivatives/csv/audio')</span>
 <span class="hljs-comment"># Include header='true' if you want headers.</span>
 
 <span class="hljs-comment"># For Parquet:</span>
 <span class="hljs-comment"># .write.parquet("/path/to/derivatives/parquet/pages/")</span>
 
 <span class="hljs-comment"># Audio Files.</span>
-warcs.audio().write.csv(<span class="hljs-string">'/path/to/derivatives/csv/audio'</span>, header=<span class="hljs-string">'true'</span>)
+warcs.audio().write \
+ .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>) \
+  .format(<span class="hljs-string">"csv"</span>) \
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>) \
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>) \
+  .save(<span class="hljs-string">'/path/to/derivatives/csv/audio'</span>)
 
 <span class="hljs-comment"># Images.</span>
 warcs.images().write.parquet(<span class="hljs-string">'/path/to/derivatives/parquet/images'</span>)
 
 <span class="hljs-comment"># Image Links.</span>
-warcs.image_links().write.csv(<span class="hljs-string">'/path/to/derivatives/csv/images-links'</span>, header=<span class="hljs-string">'true'</span>)
+warcs.image_links().write \
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>) \
+  .format(<span class="hljs-string">"csv"</span>) \
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>) \
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>) \
+  .save(<span class="hljs-string">'/path/to/derivatives/csv/images-links'</span>)
 
 <span class="hljs-comment"># PDFs.</span>
 warcs.pdfs().write.parquet(<span class="hljs-string">'/path/to/derivatives/csv/pdfs'</span>)
 
 <span class="hljs-comment"># Spreadsheets.</span>
-warcs.spreadsheets().write.csv(<span class="hljs-string">'/path/to/derivatives/csv/spreadsheets'</span>, header=<span class="hljs-string">'true'</span>)
+warcs.spreadsheets().write \
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>) \
+  .format(<span class="hljs-string">"csv"</span>) \
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>) \
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>) \
+  .save(<span class="hljs-string">'/path/to/derivatives/csv/spreadsheets'</span>)
 
 <span class="hljs-comment"># Presentation Program Files.</span>
 warcs.presentation_program().write.parquet(<span class="hljs-string">'/path/to/derivatives/csv/presentation_program'</span>)
@@ -176,6 +211,11 @@ warcs.presentation_program().write.parquet(<span class="hljs-string">'/path/to/d
 warcs.video().write.parquet(<span class="hljs-string">'/path/to/derivatives/csv/video'</span>)
 
 <span class="hljs-comment"># Word Processor Files.</span>
-warcs.word_processor().write.csv(<span class="hljs-string">'/path/to/derivatives/csv/word_processor'</span>, header=<span class="hljs-string">'true'</span>)
+warcs.word_processor().write \
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>) \
+  .format(<span class="hljs-string">"csv"</span>) \
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>) \
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>) \
+  .save(<span class="hljs-string">'/path/to/derivatives/csv/word_processor'</span>)
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/next/auk-derivatives"><span class="arrow-prev">← </span><span>AU Cloud Scholarly Derivatives</span></a><a class="docs-next button" href="/docs/next/extract-binary"><span>Extract Binaries to Disk</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#scala-rdd">Scala RDD</a></li><li><a href="#scala-df">Scala DF</a></li><li><a href="#python-df">Python DF</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/dependencies">Getting Started</a><a href="/docs/collection-analysis">Generating Results</a><a href="/docs/filters-rdd">Filtering results</a><a href="/docs/aut-spark-submit-app">Standard Derivatives</a><a href="/docs/df-results">What to do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/img/waterloo.png"/><img alt="York University" class="footer_img" src="/img/york.png"/></section><section class="copyright">CC BY 2.0 2022 Archives Unleashed Project</section></footer></div></body></html>

@@ -227,7 +227,12 @@ and then press <code>ctrl</code> + <code>d</code>.</p>
   .webpages()
   .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
-  .write.csv(<span class="hljs-string">"/data/liberal-party-text"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(<span class="hljs-string">"/data/liberal-party-text"</span>)
 </code></pre>
 <p><strong>If you're using your own data, that's why the domain count was key!</strong> Swap
 out the &quot;liberal.ca&quot; command above with the domain that you want to look at
@@ -251,7 +256,12 @@ get around it.</p>
   .webpages()
   .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
-  .write.csv(<span class="hljs-string">"/data/liberal-party-text"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(<span class="hljs-string">"/data/liberal-party-text"</span>)
 </code></pre>
 <p>Instead of a nice crisp feeling of success, you will see a long dump of text
 beginning with:</p>
@@ -291,7 +301,12 @@ another filter: <code>.filter($&quot;languages&quot;, Array(&quot;fr&quot;)))</c
   .filter(hasDomains(extractDomain($<span class="hljs-string">"url"</span>), lit(domains)))
   .filter(hasLanguages($<span class="hljs-string">"language"</span>, lit(languages)))
   .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
-  .write.csv(<span class="hljs-string">"/data/liberal-party-french-text"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(<span class="hljs-string">"/data/liberal-party-french-text"</span>)
 </code></pre>
 <p>Or if we wanted to just have pages from 2006, we would run:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
@@ -303,7 +318,12 @@ another filter: <code>.filter($&quot;languages&quot;, Array(&quot;fr&quot;)))</c
   .webpages()
   .filter(hasDate($<span class="hljs-string">"crawl_date"</span>, lit(dates)))
   .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
-  .write.csv(<span class="hljs-string">"/data/2006-text"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(<span class="hljs-string">"/data/2006-text"</span>)
 </code></pre>
 <p>Finally, if we want to remove the HTTP headers – let's say if we want to create
 some nice word clouds – we can add a final command: <code>RemoveHttpHeader</code>.</p>
@@ -313,7 +333,12 @@ some nice word clouds – we can add a final command: <code>RemoveHttpHeader</co
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .webpages()
   .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
-  .write.csv(<span class="hljs-string">"/data/text-no-headers"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(<span class="hljs-string">"/data/text-no-headers"</span>)
 </code></pre>
 <p>You could now try uploading one of the plain text files using a website like
 <a href="https://voyant-tools.org">Voyant Tools</a>.</p>
