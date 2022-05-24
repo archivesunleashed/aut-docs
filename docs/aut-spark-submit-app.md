@@ -355,7 +355,7 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 ## Web Pages
 
 This extractor outputs a directory of files, or a single file with the
-following columns: `crawl_date`, `domain` (www prefix removed), `url`,
+following columns: `crawl_date`, `domain`, `url`,
 `mime_type_web_server`, `mime_type_tika`, and `content`
 (HTTP headers, and HTML removed).
 
