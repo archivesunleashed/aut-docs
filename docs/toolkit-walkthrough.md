@@ -111,7 +111,7 @@ import io.archivesunleashed.udfs._
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .all()
   .keepValidPagesDF()
-  .groupBy(extractDomain($"url").alias("domain"))
+  .groupBy($"domain"))
   .count()
   .sort($"count".desc)
   .show(10, false)
@@ -180,7 +180,7 @@ import io.archivesunleashed.udfs._
 RecordLoader.loadArchives("/data/*.gz", sc)
   .all()
   .keepValidPagesDF()
-  .groupBy(extractDomain($"url").alias("domain"))
+  .groupBy($"domain")
   .count()
   .sort($"count".desc)
   .show(10, false)
@@ -206,7 +206,7 @@ val domains = Array("liberal.ca")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
+  .select($"crawl_date", $"domain", $"url", $"content")
   .filter(hasDomains($"domain", lit(domains)))
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
@@ -243,7 +243,7 @@ val domains = Array("liberal.ca")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
+  .select($"crawl_date", $"domain", $"url", $"content")
   .filter(hasDomains($"domain", lit(domains)))
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
@@ -279,7 +279,7 @@ Some options:
 - **Keep URL Patterns**: Instead of domains, what if you wanted to have text
   relating to just a certain pattern? Substitute `hasDomains` for a command
   like:
-  `.filter(extractDomain($"url"), Array("(?i)http://geocities.com/EnchantedForest/.*"))`
+  `.filter($"domain"), Array("liberal.ca", "ndp.ca"))`
 - **Filter by Date**: What if we just wanted data from 2006? You could add the
   following command after `.webpages()`: `.filter(hasDates($"crawl_date", Array("2006")))`
 - **Filter by Language**: What if you just want French-language pages? Add
@@ -296,9 +296,9 @@ val languages = Array("fr")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .filter(hasDomains(extractDomain($"url"), lit(domains)))
+  .filter(hasDomains($"domain"), lit(domains)))
   .filter(hasLanguages($"language", lit(languages)))
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
+  .select($"crawl_date", $"domain", $"url", $"content")
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
   .format("csv")
@@ -318,7 +318,7 @@ val dates = Array("2006")
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
   .filter(hasDate($"crawl_date", lit(dates)))
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
+  .select($"crawl_date", $"domain", $"url", $"content")
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
   .format("csv")
@@ -336,7 +336,7 @@ import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"content")
+  .select($"crawl_date", $"domain", $"url", $"content")
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
   .format("csv")

@@ -14,6 +14,7 @@ language); and `.webgraph()` which includes hyperlink information.
 **`.all()`**
 
 - `crawl_date` (string)
+- `domain` (string)
 - `url` (string)
 - `mime_type_web_server` (string)
 - `mime_type_tika` (string)

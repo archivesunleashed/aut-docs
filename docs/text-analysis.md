@@ -32,7 +32,7 @@ import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url"), $"url", removeHTML($"content"))
+  .select($"crawl_date", $"domain", $"url", removeHTML($"content"))
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
   .format("csv")
@@ -48,7 +48,7 @@ from aut import *
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html("content")) \
+  .select("crawl_date", "domain", "url", remove_html("content")) \
   .write \
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
   .format("csv") \
@@ -140,7 +140,7 @@ val domains = Array("archive.org", "geocities.org")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML(removeHTTPHeader($"content")))
+  .select($"crawl_date", $"domain", $"url", removeHTML(removeHTTPHeader($"content")))
   .filter(hasDomains($"domain", lit(domains)))
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
@@ -160,7 +160,7 @@ domains = ["archive.org"]
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content"))) \
+  .select("crawl_date", "domain", "url", remove_html(remove_http_header("content"))) \
   .filter(col("domain").isin(domains)) \
   .write \
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
@@ -202,7 +202,7 @@ val urlPattern = Array("(?i)http://www.archive.org/details/.*")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML(removeHTTPHeader($"content")))
+  .select($"crawl_date", $"domain", $"url", removeHTML(removeHTTPHeader($"content")))
   .filter(hasUrlPatterns($"url", lit(urlPattern)))
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
@@ -222,7 +222,7 @@ url_pattern = "%http://www.archive.org/details/%"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content"))) \
+  .select("crawl_date", "domain", "url", remove_html(remove_http_header("content"))) \
   .filter(col("url").like(url_pattern)) \
   .write \
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
@@ -262,8 +262,8 @@ import io.archivesunleashed.udfs._
 val domains = Array("archive.org")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
-  .webpages()
-  .select($"crawl_date", extractDomain($"url"), $"url", extractBoilerpipeText(removeHTTPHeader($"content")))
+  .all()
+  .select($"crawl_date", $"domain", $"url", extractBoilerpipeText(removeHTTPHeader($"content")))
   .filter(hasDomains($"domain", lit(domains)))
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
@@ -280,7 +280,7 @@ from aut import *
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", extract_boilerplate(remove_http_header("content")).alias("content")) \
+  .select("crawl_date", "domain", "url", extract_boilerplate(remove_http_header("content")).alias("content")) \
   .write \
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
   .format("csv") \
@@ -361,7 +361,7 @@ val dates = Array("2008", "2015")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").as("domain"), $"url", removeHTML(removeHTTPHeader($"content")))
+  .select($"crawl_date", $"domain", $"url", removeHTML(removeHTTPHeader($"content")))
   .filter(hasDate($"crawl_date", lit(dates)))
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
@@ -381,7 +381,7 @@ dates = "2009[10][09]\d\d"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content"))) \
+  .select("crawl_date", "domain", "url", remove_html(remove_http_header("content"))) \
   .filter(col("crawl_date").rlike(dates)) \
   .write \
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
@@ -422,7 +422,7 @@ val languages = Array("fr")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"language", removeHTML(removeHTTPHeader($"content")))
+  .select($"crawl_date", $"domain", $"url", $"language", removeHTML(removeHTTPHeader($"content")))
   .filter(hasDomains($"domain", lit(domains)))
   .filter(hasLanguages($"language", lit(languages)))
   .write
@@ -442,9 +442,9 @@ val languages = Array("fr")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .filter(hasDomains(extractDomain($"url"), lit(domains)))
+  .filter(hasDomains($"domain", lit(domains)))
   .filter(hasLanguages($"language", lit(languages)))
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", $"language", removeHTML(removeHTTPHeader($"content")))
+  .select($"crawl_date", $"domain", $"url", $"language", removeHTML(removeHTTPHeader($"content")))
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
   .format("csv")
@@ -464,7 +464,7 @@ languages = ["fr"]
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content"))) \
+  .select("crawl_date", "domain", "url", remove_html(remove_http_header("content"))) \
   .filter(col("domain").isin(domains)) \
   .filter(col("language").isin(languages)) \
   .write \
@@ -510,7 +510,7 @@ val content = Array("radio")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", extractDomain($"url").alias("domain"), $"url", removeHTML(removeHTTPHeader($"content")))
+  .select($"crawl_date", $"domain", $"url", removeHTML(removeHTTPHeader($"content")))
   .filter(hasContent($"content", lit(content)))
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
@@ -530,7 +530,7 @@ content = "%radio%"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_html(remove_http_header("content"))) \
+  .select("crawl_date", "domain", "url", remove_html(remove_http_header("content"))) \
   .filter(col("content").like(content)) \
   .write \
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
@@ -585,7 +585,7 @@ from aut import *
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", extract_domain("url").alias("domain"), "url", remove_http_header("content")) \
+  .select("crawl_date", "domain", "url", remove_http_header("content")) \
   .write \
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
   .format("csv") \
