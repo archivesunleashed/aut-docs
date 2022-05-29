@@ -86,8 +86,8 @@ val content = Array("radio")
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .all()
   .keepValidPagesDF()
-  .filter(hasContent($"content", lit(content)))
-  .select(explode(extractLinks($"url", $"content")).as("links"))
+  .filter(hasContent($"raw_content", lit(content)))
+  .select(explode(extractLinks($"url", $"raw_content")).as("links"))
   .select(removePrefixWWW(extractDomain(col("links._1"))).as("src"), removePrefixWWW(extractDomain(col("links._2"))).as("dest"))
   .groupBy("src", "dest")
   .count()
@@ -113,8 +113,8 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .filter("crawl_date is not NULL")\
   .filter(~(col("url").rlike(".*robots\\.txt$")) & (col("mime_type_web_server").rlike("text/html") | col("mime_type_web_server").rlike("application/xhtml+xml") | col("url").rlike("(?i).*htm$") | col("url").rlike("(?i).*html$")))\
   .filter(col("http_status_code") == 200)
-  .filter(col("content").like(content)) \
-  .select(explode(extract_links("url", "content")).alias("links")) \
+  .filter(col("raw_content").like(content)) \
+  .select(explode(extract_links("url", "raw_content")).alias("links")) \
   .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain(col("links._2"))).alias("dest")) \
   .groupBy("src", "dest") \
   .count() \
@@ -234,7 +234,7 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .all()
   .keepValidPagesDF()
   .filter(hasUrlPatterns($"url", lit(urlPattern)))
-  .select(explode(extractLinks($"url", $"content")).as("links"))
+  .select(explode(extractLinks($"url", $"raw_content")).as("links"))
   .select(removePrefixWWW(extractDomain(col("links._1"))).as("src"), removePrefixWWW(extractDomain(col("links._2"))).as("dest"))
   .groupBy("src", "dest")
   .count()
@@ -261,7 +261,7 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .filter(~(col("url").rlike(".*robots\\.txt$")) & (col("mime_type_web_server").rlike("text/html") | col("mime_type_web_server").rlike("application/xhtml+xml") | col("url").rlike("(?i).*htm$") | col("url").rlike("(?i).*html$")))\
   .filter(col("http_status_code") == 200)
   .filter(col("url").like(url_pattern)) \
-  .select(explode(extract_links("url", "content").alias("links"))) \
+  .select(explode(extract_links("url", "raw_content").alias("links"))) \
   .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain("links._2")).alias("dest")) \
   .groupBy("src", "dest") \
   .count() \
@@ -397,7 +397,7 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .all()
   .keepValidPagesDF()
   .filter(hasUrlPatterns($"url", lit(urlPattern)))
-  .select(explode(extractLinks($"url", $"content")).as("links"))
+  .select(explode(extractLinks($"url", $"raw_content")).as("links"))
   .select(removePrefixWWW(extractDomain(col("links._1"))).as("src"), removePrefixWWW(extractDomain(col("links._2"))).as("dest"))
   .groupBy("src", "dest")
   .count()
@@ -424,7 +424,7 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .filter(~(col("url").rlike(".*robots\\.txt$")) & (col("mime_type_web_server").rlike("text/html") | col("mime_type_web_server").rlike("application/xhtml+xml") | col("url").rlike("(?i).*htm$") | col("url").rlike("(?i).*html$")))\
   .filter(col("http_status_code") == 200)
   .filter(col("url").rlike(url_pattern)) \
-  .select(explode(extract_links("url", "content")).alias("links")) \
+  .select(explode(extract_links("url", "raw_content")).alias("links")) \
   .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain(col("links._2"))).alias("dest")) \
   .groupBy("src", "dest") \
   .count() \
@@ -532,9 +532,9 @@ val df = RecordLoader.loadArchives("/path/to/warcs", sc)
           .select($"domain",
                   $"url",
                   $"crawl_date",
-                  explode_outer(extractLinks($"url", $"content"))
+                  explode_outer(extractLinks($"url", $"raw_content"))
                     .as("link"))
-          .filter($"content".contains("keystone"))
+          .filter($"raw_content".contains("keystone"))
 
 df.select($"url", $"domain", $"crawl_date", result(array($"link"))
     .as("destination_page"))
@@ -585,8 +585,8 @@ webpages = WebArchive(sc, sqlContext, "/path/to/warcs") \
   .filter("crawl_date is not NULL")\
   .filter(~(col("url").rlike(".*robots\\.txt$")) & (col("mime_type_web_server").rlike("text/html") | col("mime_type_web_server").rlike("application/xhtml+xml") | col("url").rlike("(?i).*htm$") | col("url").rlike("(?i).*html$")))\
   .filter(col("http_status_code") == 200)
-  .select("domain", "url", "crawl_date", explode_outer(extract_links("url", "content")).alias("link")) \
-  .filter(col("content").like("%food%")) \
+  .select("domain", "url", "crawl_date", explode_outer(extract_links("url", "raw_content")).alias("link")) \
+  .filter(col("raw_content").like("%food%")) \
   .select("url", "domain", "crawl_date", col("link._1").alias("destination_page")) \
   .show()
 ```
