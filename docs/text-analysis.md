@@ -239,9 +239,9 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
 The following Spark script generates plain text renderings for all the web
 pages in a collection, minus "boilerplate" content: advertisements,
 navigational elements, and elements of the website template. Boilerplate requires
-HTML, so it needs to run on `.all()` raw content. Not `.webpages()` content. For more
-information on the boilerplate removal library we are using, [please see this
-website and paper](http://www.l3s.de/~kohlschuetter/boilerplate/).
+HTML, so it needs to run on `.all()` raw content. Not `.webpages()` content. For
+more information on the boilerplate removal library we are using, [please see
+this website and paper](http://www.l3s.de/~kohlschuetter/boilerplate/).
 
 ```scala
 import io.archivesunleashed._
