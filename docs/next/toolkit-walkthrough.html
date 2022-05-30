@@ -144,7 +144,7 @@ somewhere else in.</p>
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .all()
   .keepValidPagesDF()
-  .groupBy(extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>))
+  .groupBy($<span class="hljs-string">"domain"</span>))
   .count()
   .sort($<span class="hljs-string">"count"</span>.desc)
   .show(<span class="hljs-number">10</span>, <span class="hljs-literal">false</span>)
@@ -205,7 +205,7 @@ Remember to type <code>:paste</code>, paste the following command in, and then <
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/data/*.gz"</span>, sc)
   .all()
   .keepValidPagesDF()
-  .groupBy(extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>))
+  .groupBy($<span class="hljs-string">"domain"</span>)
   .count()
   .sort($<span class="hljs-string">"count"</span>.desc)
   .show(<span class="hljs-number">10</span>, <span class="hljs-literal">false</span>)
@@ -225,7 +225,7 @@ and then press <code>ctrl</code> + <code>d</code>.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
   .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
@@ -254,7 +254,7 @@ get around it.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
   .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
@@ -283,7 +283,7 @@ for some ideas.</p>
 <li><strong>Keep URL Patterns</strong>: Instead of domains, what if you wanted to have text
 relating to just a certain pattern? Substitute <code>hasDomains</code> for a command
 like:
-<code>.filter(extractDomain($&quot;url&quot;), Array(&quot;(?i)http://geocities.com/EnchantedForest/.*&quot;))</code></li>
+<code>.filter($&quot;domain&quot;), Array(&quot;liberal.ca&quot;, &quot;ndp.ca&quot;))</code></li>
 <li><strong>Filter by Date</strong>: What if we just wanted data from 2006? You could add the
 following command after <code>.webpages()</code>: <code>.filter(hasDates($&quot;crawl_date&quot;, Array(&quot;2006&quot;)))</code></li>
 <li><strong>Filter by Language</strong>: What if you just want French-language pages? Add
@@ -298,9 +298,9 @@ another filter: <code>.filter($&quot;languages&quot;, Array(&quot;fr&quot;)))</c
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .webpages()
-  .filter(hasDomains(extractDomain($<span class="hljs-string">"url"</span>), lit(domains)))
+  .filter(hasDomains($<span class="hljs-string">"domain"</span>), lit(domains)))
   .filter(hasLanguages($<span class="hljs-string">"language"</span>, lit(languages)))
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
   .format(<span class="hljs-string">"csv"</span>)
@@ -317,7 +317,7 @@ another filter: <code>.filter($&quot;languages&quot;, Array(&quot;fr&quot;)))</c
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .webpages()
   .filter(hasDate($<span class="hljs-string">"crawl_date"</span>, lit(dates)))
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
   .format(<span class="hljs-string">"csv"</span>)
@@ -332,7 +332,7 @@ some nice word clouds – we can add a final command: <code>RemoveHttpHeader</co
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
   .format(<span class="hljs-string">"csv"</span>)

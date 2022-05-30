@@ -130,9 +130,10 @@ can be applied immediately after <code>.keepValidPages()</code>.</p>
 <span class="hljs-keyword">val</span> content = <span class="hljs-type">Array</span>(<span class="hljs-string">"radio"</span>)
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
-  .webpages()
-  .filter(hasContent($<span class="hljs-string">"content"</span>, lit(content)))
-  .select(explode(extractLinks($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)).as(<span class="hljs-string">"links"</span>))
+  .all()
+  .keepValidPagesDF()
+  .filter(hasContent($<span class="hljs-string">"raw_content"</span>, lit(content)))
+  .select(explode(extractLinks($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"raw_content"</span>)).as(<span class="hljs-string">"links"</span>))
   .select(removePrefixWWW(extractDomain(col(<span class="hljs-string">"links._1"</span>))).as(<span class="hljs-string">"src"</span>), removePrefixWWW(extractDomain(col(<span class="hljs-string">"links._2"</span>))).as(<span class="hljs-string">"dest"</span>))
   .groupBy(<span class="hljs-string">"src"</span>, <span class="hljs-string">"dest"</span>)
   .count()
@@ -151,9 +152,12 @@ can be applied immediately after <code>.keepValidPages()</code>.</p>
 content = <span class="hljs-string">"%radio%"</span>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
-  .webpages() \
-  .filter(col(<span class="hljs-string">"content"</span>).like(content)) \
-  .select(explode(extract_links(<span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>)).alias(<span class="hljs-string">"links"</span>)) \
+  .all() \
+  .filter(<span class="hljs-string">"crawl_date is not NULL"</span>)\
+  .filter(~(col(<span class="hljs-string">"url"</span>).rlike(<span class="hljs-string">".*robots\\.txt$"</span>)) &amp; (col(<span class="hljs-string">"mime_type_web_server"</span>).rlike(<span class="hljs-string">"text/html"</span>) | col(<span class="hljs-string">"mime_type_web_server"</span>).rlike(<span class="hljs-string">"application/xhtml+xml"</span>) | col(<span class="hljs-string">"url"</span>).rlike(<span class="hljs-string">"(?i).*htm$"</span>) | col(<span class="hljs-string">"url"</span>).rlike(<span class="hljs-string">"(?i).*html$"</span>)))\
+  .filter(col(<span class="hljs-string">"http_status_code"</span>) == <span class="hljs-number">200</span>)
+  .filter(col(<span class="hljs-string">"raw_content"</span>).like(content)) \
+  .select(explode(extract_links(<span class="hljs-string">"url"</span>, <span class="hljs-string">"raw_content"</span>)).alias(<span class="hljs-string">"links"</span>)) \
   .select(remove_prefix_www(extract_domain(col(<span class="hljs-string">"links._1"</span>))).alias(<span class="hljs-string">"src"</span>), remove_prefix_www(extract_domain(col(<span class="hljs-string">"links._2"</span>))).alias(<span class="hljs-string">"dest"</span>)) \
   .groupBy(<span class="hljs-string">"src"</span>, <span class="hljs-string">"dest"</span>) \
   .count() \
@@ -244,9 +248,10 @@ using the <code>keepUrlPatterns</code> command.</p>
 <span class="hljs-keyword">val</span> urlPattern = <span class="hljs-type">Array</span>(<span class="hljs-string">"(?i)http://www.archive.org/details/.*"</span>)
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
-  .webpages()
+  .all()
+  .keepValidPagesDF()
   .filter(hasUrlPatterns($<span class="hljs-string">"url"</span>, lit(urlPattern)))
-  .select(explode(extractLinks($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)).as(<span class="hljs-string">"links"</span>))
+  .select(explode(extractLinks($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"raw_content"</span>)).as(<span class="hljs-string">"links"</span>))
   .select(removePrefixWWW(extractDomain(col(<span class="hljs-string">"links._1"</span>))).as(<span class="hljs-string">"src"</span>), removePrefixWWW(extractDomain(col(<span class="hljs-string">"links._2"</span>))).as(<span class="hljs-string">"dest"</span>))
   .groupBy(<span class="hljs-string">"src"</span>, <span class="hljs-string">"dest"</span>)
   .count()
@@ -265,9 +270,12 @@ using the <code>keepUrlPatterns</code> command.</p>
 url_pattern = <span class="hljs-string">"%http://www.archive.org/details/%"</span>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
-  .webpages() \
+  .all() \
+  .filter(<span class="hljs-string">"crawl_date is not NULL"</span>)\
+  .filter(~(col(<span class="hljs-string">"url"</span>).rlike(<span class="hljs-string">".*robots\\.txt$"</span>)) &amp; (col(<span class="hljs-string">"mime_type_web_server"</span>).rlike(<span class="hljs-string">"text/html"</span>) | col(<span class="hljs-string">"mime_type_web_server"</span>).rlike(<span class="hljs-string">"application/xhtml+xml"</span>) | col(<span class="hljs-string">"url"</span>).rlike(<span class="hljs-string">"(?i).*htm$"</span>) | col(<span class="hljs-string">"url"</span>).rlike(<span class="hljs-string">"(?i).*html$"</span>)))\
+  .filter(col(<span class="hljs-string">"http_status_code"</span>) == <span class="hljs-number">200</span>)
   .filter(col(<span class="hljs-string">"url"</span>).like(url_pattern)) \
-  .select(explode(extract_links(<span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"links"</span>))) \
+  .select(explode(extract_links(<span class="hljs-string">"url"</span>, <span class="hljs-string">"raw_content"</span>).alias(<span class="hljs-string">"links"</span>))) \
   .select(remove_prefix_www(extract_domain(col(<span class="hljs-string">"links._1"</span>))).alias(<span class="hljs-string">"src"</span>), remove_prefix_www(extract_domain(<span class="hljs-string">"links._2"</span>)).alias(<span class="hljs-string">"dest"</span>)) \
   .groupBy(<span class="hljs-string">"src"</span>, <span class="hljs-string">"dest"</span>) \
   .count() \
@@ -372,9 +380,10 @@ URL pattern listed under <code>keepUrlPatterns</code>.</p>
 <span class="hljs-keyword">val</span> urlPattern = <span class="hljs-type">Array</span>(<span class="hljs-string">"http://www.archive.org/details/.*"</span>)
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
-  .webpages()
+  .all()
+  .keepValidPagesDF()
   .filter(hasUrlPatterns($<span class="hljs-string">"url"</span>, lit(urlPattern)))
-  .select(explode(extractLinks($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)).as(<span class="hljs-string">"links"</span>))
+  .select(explode(extractLinks($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"raw_content"</span>)).as(<span class="hljs-string">"links"</span>))
   .select(removePrefixWWW(extractDomain(col(<span class="hljs-string">"links._1"</span>))).as(<span class="hljs-string">"src"</span>), removePrefixWWW(extractDomain(col(<span class="hljs-string">"links._2"</span>))).as(<span class="hljs-string">"dest"</span>))
   .groupBy(<span class="hljs-string">"src"</span>, <span class="hljs-string">"dest"</span>)
   .count()
@@ -393,9 +402,12 @@ URL pattern listed under <code>keepUrlPatterns</code>.</p>
 url_pattern = <span class="hljs-string">"http://www.archive.org/details/.*"</span>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
-  .webpages() \
+  .all() \
+  .filter(<span class="hljs-string">"crawl_date is not NULL"</span>)\
+  .filter(~(col(<span class="hljs-string">"url"</span>).rlike(<span class="hljs-string">".*robots\\.txt$"</span>)) &amp; (col(<span class="hljs-string">"mime_type_web_server"</span>).rlike(<span class="hljs-string">"text/html"</span>) | col(<span class="hljs-string">"mime_type_web_server"</span>).rlike(<span class="hljs-string">"application/xhtml+xml"</span>) | col(<span class="hljs-string">"url"</span>).rlike(<span class="hljs-string">"(?i).*htm$"</span>) | col(<span class="hljs-string">"url"</span>).rlike(<span class="hljs-string">"(?i).*html$"</span>)))\
+  .filter(col(<span class="hljs-string">"http_status_code"</span>) == <span class="hljs-number">200</span>)
   .filter(col(<span class="hljs-string">"url"</span>).rlike(url_pattern)) \
-  .select(explode(extract_links(<span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>)).alias(<span class="hljs-string">"links"</span>)) \
+  .select(explode(extract_links(<span class="hljs-string">"url"</span>, <span class="hljs-string">"raw_content"</span>)).alias(<span class="hljs-string">"links"</span>)) \
   .select(remove_prefix_www(extract_domain(col(<span class="hljs-string">"links._1"</span>))).alias(<span class="hljs-string">"src"</span>), remove_prefix_www(extract_domain(col(<span class="hljs-string">"links._2"</span>))).alias(<span class="hljs-string">"dest"</span>)) \
   .groupBy(<span class="hljs-string">"src"</span>, <span class="hljs-string">"dest"</span>) \
   .count() \
@@ -475,12 +487,14 @@ data in
                .split(<span class="hljs-string">","</span>)(<span class="hljs-number">1</span>))
 
 <span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
-          .webpages()
-          .select(removePrefixWWW(extractDomain($<span class="hljs-string">"url"</span>))
-            .as(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>
-            .as(<span class="hljs-string">"url"</span>), $<span class="hljs-string">"crawl_date"</span>, explode_outer(extractLinks($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>))
-            .as(<span class="hljs-string">"link"</span>))
-          .filter($<span class="hljs-string">"content"</span>.contains(<span class="hljs-string">"keystone"</span>))
+          .all()
+          .keepValidPagesDF()
+          .select($<span class="hljs-string">"domain"</span>,
+                  $<span class="hljs-string">"url"</span>,
+                  $<span class="hljs-string">"crawl_date"</span>,
+                  explode_outer(extractLinks($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"raw_content"</span>))
+                    .as(<span class="hljs-string">"link"</span>))
+          .filter($<span class="hljs-string">"raw_content"</span>.contains(<span class="hljs-string">"keystone"</span>))
 
 df.select($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"crawl_date"</span>, result(array($<span class="hljs-string">"link"</span>))
     .as(<span class="hljs-string">"destination_page"</span>))
@@ -524,9 +538,12 @@ df: org.apache.spark.sql.<span class="hljs-type">Dataset</span>[org.apache.spark
 <span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> col, explode_outer
 
 webpages = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
-  .webpages() \
-  .select(remove_prefix_www(extract_domain(<span class="hljs-string">"url"</span>)).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, <span class="hljs-string">"crawl_date"</span>, explode_outer(extract_links(<span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>)).alias(<span class="hljs-string">"link"</span>)) \
-  .filter(col(<span class="hljs-string">"content"</span>).like(<span class="hljs-string">"%food%"</span>)) \
+  .all() \
+  .filter(<span class="hljs-string">"crawl_date is not NULL"</span>)\
+  .filter(~(col(<span class="hljs-string">"url"</span>).rlike(<span class="hljs-string">".*robots\\.txt$"</span>)) &amp; (col(<span class="hljs-string">"mime_type_web_server"</span>).rlike(<span class="hljs-string">"text/html"</span>) | col(<span class="hljs-string">"mime_type_web_server"</span>).rlike(<span class="hljs-string">"application/xhtml+xml"</span>) | col(<span class="hljs-string">"url"</span>).rlike(<span class="hljs-string">"(?i).*htm$"</span>) | col(<span class="hljs-string">"url"</span>).rlike(<span class="hljs-string">"(?i).*html$"</span>)))\
+  .filter(col(<span class="hljs-string">"http_status_code"</span>) == <span class="hljs-number">200</span>)
+  .select(<span class="hljs-string">"domain"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"crawl_date"</span>, explode_outer(extract_links(<span class="hljs-string">"url"</span>, <span class="hljs-string">"raw_content"</span>)).alias(<span class="hljs-string">"link"</span>)) \
+  .filter(col(<span class="hljs-string">"raw_content"</span>).like(<span class="hljs-string">"%food%"</span>)) \
   .select(<span class="hljs-string">"url"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"crawl_date"</span>, col(<span class="hljs-string">"link._1"</span>).alias(<span class="hljs-string">"destination_page"</span>)) \
   .show()
 </code></pre>

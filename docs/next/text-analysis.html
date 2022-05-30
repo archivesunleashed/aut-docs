@@ -83,7 +83,7 @@ already exist.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>), $<span class="hljs-string">"url"</span>, removeHTML($<span class="hljs-string">"content"</span>))
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, removeHTML($<span class="hljs-string">"content"</span>))
   .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
   .format(<span class="hljs-string">"csv"</span>)
@@ -96,7 +96,7 @@ already exist.</p>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, remove_html(<span class="hljs-string">"content"</span>)) \
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"url"</span>, remove_html(<span class="hljs-string">"content"</span>)) \
   .write \
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>) \
   .format(<span class="hljs-string">"csv"</span>) \
@@ -168,7 +168,7 @@ it will go through the collection and find all of the URLs within the
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
   .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
   .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
@@ -185,7 +185,7 @@ domains = [<span class="hljs-string">"archive.org"</span>]
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>))) \
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>))) \
   .filter(col(<span class="hljs-string">"domain"</span>).isin(domains)) \
   .write \
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>) \
@@ -218,7 +218,7 @@ with <code>http://archive.org/details/</code>, and save the text of those URLs.<
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
   .filter(hasUrlPatterns($<span class="hljs-string">"url"</span>, lit(urlPattern)))
   .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
@@ -235,7 +235,7 @@ url_pattern = <span class="hljs-string">"%http://www.archive.org/details/%"</spa
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>))) \
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>))) \
   .filter(col(<span class="hljs-string">"url"</span>).like(url_pattern)) \
   .write \
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>) \
@@ -248,9 +248,10 @@ WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
 <h3><a class="anchor" aria-hidden="true" id="scala-rdd-4"></a><a href="#scala-rdd-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
 <p>The following Spark script generates plain text renderings for all the web
 pages in a collection, minus &quot;boilerplate&quot; content: advertisements,
-navigational elements, and elements of the website template. For more
-information on the boilerplate removal library we are using, <a href="http://www.l3s.de/~kohlschuetter/boilerplate/">please see this
-website and paper</a>.</p>
+navigational elements, and elements of the website template. Boilerplate requires
+HTML, so it needs to run on <code>.all()</code> raw content. Not <code>.webpages()</code> content. For
+more information on the boilerplate removal library we are using, <a href="http://www.l3s.de/~kohlschuetter/boilerplate/">please see
+this website and paper</a>.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.matchbox._
 
@@ -267,8 +268,8 @@ website and paper</a>.</p>
 <span class="hljs-keyword">val</span> domains = <span class="hljs-type">Array</span>(<span class="hljs-string">"archive.org"</span>)
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
-  .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>), $<span class="hljs-string">"url"</span>, extractBoilerpipeText(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
+  .all()
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, extractBoilerpipeText(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
   .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
   .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
@@ -282,7 +283,7 @@ website and paper</a>.</p>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, extract_boilerplate(remove_http_header(<span class="hljs-string">"content"</span>)).alias(<span class="hljs-string">"content"</span>)) \
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"url"</span>, extract_boilerplate(remove_http_header(<span class="hljs-string">"content"</span>)).alias(<span class="hljs-string">"content"</span>)) \
   .write \
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>) \
   .format(<span class="hljs-string">"csv"</span>) \
@@ -344,7 +345,7 @@ plain text stored in <code>alberta_education_curriculum.txt</code>:</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).as(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
   .filter(hasDate($<span class="hljs-string">"crawl_date"</span>, lit(dates)))
   .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
@@ -361,7 +362,7 @@ dates = <span class="hljs-string">"2009[10][09]\d\d"</span>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>))) \
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>))) \
   .filter(col(<span class="hljs-string">"crawl_date"</span>).rlike(dates)) \
   .write \
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>) \
@@ -394,7 +395,7 @@ codes</a>.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"language"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"language"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
   .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
   .filter(hasLanguages($<span class="hljs-string">"language"</span>, lit(languages)))
   .write
@@ -412,9 +413,9 @@ codes</a>.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .filter(hasDomains(extractDomain($<span class="hljs-string">"url"</span>), lit(domains)))
+  .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
   .filter(hasLanguages($<span class="hljs-string">"language"</span>, lit(languages)))
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"language"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"language"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
   .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
   .format(<span class="hljs-string">"csv"</span>)
@@ -431,7 +432,7 @@ languages = [<span class="hljs-string">"fr"</span>]
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>))) \
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>))) \
   .filter(col(<span class="hljs-string">"domain"</span>).isin(domains)) \
   .filter(col(<span class="hljs-string">"language"</span>).isin(languages)) \
   .write \
@@ -467,7 +468,7 @@ in.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, extractDomain($<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
   .filter(hasContent($<span class="hljs-string">"content"</span>, lit(content)))
   .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
@@ -484,7 +485,7 @@ content = <span class="hljs-string">"%radio%"</span>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>))) \
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>))) \
   .filter(col(<span class="hljs-string">"content"</span>).like(content)) \
   .write \
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>) \
@@ -527,7 +528,7 @@ filters from above to filter it down accordingly by domain, language, etc.</p>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, extract_domain(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, remove_http_header(<span class="hljs-string">"content"</span>)) \
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"url"</span>, remove_http_header(<span class="hljs-string">"content"</span>)) \
   .write \
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>) \
   .format(<span class="hljs-string">"csv"</span>) \
