@@ -5,19 +5,21 @@ title: DataFrame Schemas
 
 Below you can find all of the DataFrame schemas available in the Toolkit. For
 example, you can use `.all()` to extract the overall content from a web archive
-record. Some of the most popular ones include `.all()` (which includes content,
-URLs, and file types); `.webpages()` (which includes full-text content and
-language); and `.webgraph()` which includes hyperlink information.
+record. Some of the most popular ones include `.all()` (which includes raw
+content (HTTP headers & HTML), URLs, and file types); `.webpages()` (which
+includes full-text content and language); and `.webgraph()` which includes
+hyperlink information.
 
 ## All
 
 **`.all()`**
 
 - `crawl_date` (string)
+- `domain` (string)
 - `url` (string)
 - `mime_type_web_server` (string)
 - `mime_type_tika` (string)
-- `content` (string)
+- `raw_content` (string)
 - `bytes` (binary)
 - `http_status_code` (string)
 - `archive_filename` (string)

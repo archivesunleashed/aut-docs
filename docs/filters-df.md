@@ -18,8 +18,8 @@ val content = Array("Content-Length: [0-9]{4}")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .all()
-  .select("url", "content")
-  .filter(!hasContent($"content", lit(content)))
+  .select("url", "raw_content")
+  .filter(!hasContent($"raw_content", lit(content)))
 ```
 
 ### Python DF
@@ -32,8 +32,8 @@ content = "Content-Length: [0-9]{4}"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .all() \
-  .select("url", "content") \
-  .filter(col("content").rlike(content))
+  .select("url", "raw_content") \
+  .filter(col("raw_content").rlike(content))
 ```
 
 ## Has Dates
@@ -276,7 +276,7 @@ val urlsPattern = Array(".*images.*")
 
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .all()
-  .select($"url", $"content")
+  .select($"url", $"raw_content")
   .filter(hasUrlPatterns($"url", lit(urlsPattern)))
 ```
 
@@ -290,7 +290,7 @@ url_pattern = ".*images.*"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .all() \
-  .select("url", "content") \
+  .select("url", "raw_content") \
   .filter(~col("url").rlike(url_pattern))
 ```
 
@@ -308,7 +308,7 @@ val urls = Array("archive.org")
 
 RecordLoader.loadArchives("/path/to/warcs",sc)
   .all()
-  .select($"url", $"content")
+  .select($"url", $"raw_content")
   .filter(hasUrls($"url", lit(urls)))
 ```
 
@@ -322,6 +322,6 @@ urls = ["archive.org"]
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .all() \
-  .select("url", "content") \
+  .select("url", "raw_content") \
   .filter(~col("url").isin(urls))
 ```
