@@ -1,0 +1,478 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Link Analysis · Archives Unleashed Toolkit</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Site link structures can be very useful, allowing you to learn such things as:"/><meta name="docsearch:version" content="0.91.0"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Link Analysis · Archives Unleashed Toolkit"/><meta property="og:type" content="website"/><meta property="og:url" content="https://archivesunleashed.github.io/"/><meta property="og:description" content="Site link structures can be very useful, allowing you to learn such things as:"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-2879197-28', 'auto');
+              ga('send', 'pageview');
+            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/favicon.ico" alt="Archives Unleashed Toolkit"/><h2 class="headerTitleWithLogo">Archives Unleashed Toolkit</h2></a><a href="/versions"><h3>0.91.0</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/0.91.0/home" target="_self">Docs</a></li><li class=""><a href="https://archivesunleashed.org" target="_self">Project</a></li><li class=""><a href="https://github.com/archivesunleashed/aut" target="_self">GitHub</a></li><li class=""><a href="https://news.archivesunleashed.org/" target="_self">News</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Generating Results</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Home</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/0.91.0/home">The Toolkit</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/0.91.0/dependencies">Dependencies</a></li><li class="navListItem"><a class="navItem" href="/docs/0.91.0/usage">Usage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.91.0/aut-at-scale">The Toolkit at Scale</a></li><li class="navListItem"><a class="navItem" href="/docs/0.91.0/dataframe-schemas">DataFrame Schemas</a></li><li class="navListItem"><a class="navItem" href="/docs/0.91.0/toolkit-walkthrough">Toolkit Walkthrough</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Generating Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/0.91.0/collection-analysis">Collection Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.91.0/text-analysis">Text Analysis</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0.91.0/link-analysis">Link Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.91.0/image-analysis">Image Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.91.0/binary-analysis">Binary Analysis</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Filtering Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/0.91.0/filters-rdd">RDD Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/0.91.0/filters-df">DataFrame Filters</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Standard Derivatives</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/0.91.0/aut-spark-submit-app">The Toolkit with spark-submit</a></li><li class="navListItem"><a class="navItem" href="/docs/0.91.0/auk-derivatives">AU Cloud Scholarly Derivatives</a></li><li class="navListItem"><a class="navItem" href="/docs/0.91.0/extract-binary-info">Extract Binary Info</a></li><li class="navListItem"><a class="navItem" href="/docs/0.91.0/extract-binary">Extract Binaries to Disk</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">What to do with Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/0.91.0/df-results">DataFrame Results</a></li><li class="navListItem"><a class="navItem" href="/docs/0.91.0/rdd-results">RDD Results</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Link Analysis</h1></header><article><div><span><p>Site link structures can be very useful, allowing you to learn such things as:</p>
+<ul>
+<li>what websites were the most linked to;</li>
+<li>what websites had the most outbound links;</li>
+<li>what paths could be taken through the network to connect pages;</li>
+<li>what communities existed within the link structure?</li>
+</ul>
+<p>Most of the following examples show the <strong>domain</strong> to <strong>domain</strong> links. For
+example, you discover how many times that <code>liberal.ca</code> linked to <code>twitter.com</code>,
+rather than learning that <code>http://liberal.ca/contact</code> linked to
+<code>http://twitter.com/liberal_party</code>. The reason we do that is that in general,
+if you are working with any data at scale, the sheer number of raw URLs can
+become overwhelming. That said, we do provide one example below that provides
+raw data.</p>
+<h2><a class="anchor" aria-hidden="true" id="extract-simple-site-link-structure"></a><a href="#extract-simple-site-link-structure" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extract Simple Site Link Structure</h2>
+<h3><a class="anchor" aria-hidden="true" id="scala-rdd"></a><a href="#scala-rdd" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
+<p>If your web archive does not have a temporal component, the following Spark
+script will generate the site-level link structure.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.matchbox._
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
+  .keepValidPages()
+  .flatMap(r =&gt; <span class="hljs-type">ExtractLinks</span>(r.getUrl, r.getContentString))
+  .map(r =&gt; (<span class="hljs-type">ExtractDomain</span>(r._1).removePrefixWWW(), <span class="hljs-type">ExtractDomain</span>(r._2).removePrefixWWW()))
+  .filter(r =&gt; r._1 != <span class="hljs-string">""</span> &amp;&amp; r._2 != <span class="hljs-string">""</span>)
+  .countItems()
+  .filter(r =&gt; r._2 &gt; <span class="hljs-number">5</span>)
+  .saveAsTextFile(<span class="hljs-string">"links-all-rdd/"</span>)
+</code></pre>
+<p>Note how you can add filters. In this case, we add a filter which
+will result in a network graph of pages containing the phrase &quot;apple.&quot; Filters
+can be applied immediately after <code>.keepValidPages()</code>.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.matchbox._
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
+  .keepValidPages()
+  .keepContent(<span class="hljs-type">Set</span>(<span class="hljs-string">"apple"</span>.r))
+  .flatMap(r =&gt; <span class="hljs-type">ExtractLinks</span>(r.getUrl, r.getContentString))
+  .map(r =&gt; (<span class="hljs-type">ExtractDomain</span>(r._1).removePrefixWWW(), <span class="hljs-type">ExtractDomain</span>(r._2).removePrefixWWW()))
+  .filter(r =&gt; r._1 != <span class="hljs-string">""</span> &amp;&amp; r._2 != <span class="hljs-string">""</span>)
+  .countItems()
+  .filter(r =&gt; r._2 &gt; <span class="hljs-number">5</span>)
+  .saveAsTextFile(<span class="hljs-string">"links-all-apple-rdd/"</span>)
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="scala-df"></a><a href="#scala-df" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
+  .webgraph()
+  .groupBy(removePrefixWWW(extractDomain($<span class="hljs-string">"src"</span>)).as(<span class="hljs-string">"src"</span>), removePrefixWWW(extractDomain($<span class="hljs-string">"dest"</span>)).as(<span class="hljs-string">"dest"</span>))
+  .count()
+  .filter($<span class="hljs-string">"count"</span> &gt; <span class="hljs-number">5</span>)
+  .write.csv(<span class="hljs-string">"links-all-df/"</span>)
+</code></pre>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+
+<span class="hljs-keyword">val</span> content = <span class="hljs-type">Array</span>(<span class="hljs-string">"radio"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
+  .webpages()
+  .filter(hasContent($<span class="hljs-string">"content"</span>, lit(content)))
+  .select(explode(extractLinks($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)).as(<span class="hljs-string">"links"</span>))
+  .select(removePrefixWWW(extractDomain(col(<span class="hljs-string">"links._1"</span>))).as(<span class="hljs-string">"src"</span>), removePrefixWWW(extractDomain(col(<span class="hljs-string">"links._2"</span>))).as(<span class="hljs-string">"dest"</span>))
+  .groupBy(<span class="hljs-string">"src"</span>, <span class="hljs-string">"dest"</span>)
+  .count()
+  .filter($<span class="hljs-string">"count"</span> &gt; <span class="hljs-number">5</span>)
+  .write.csv(<span class="hljs-string">"links-all-apple-df/"</span>)
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="python-df"></a><a href="#python-df" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
+<pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> col, explode
+
+content = <span class="hljs-string">"%radio%"</span>
+
+WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
+  .webpages() \
+  .filter(col(<span class="hljs-string">"content"</span>).like(content)) \
+  .select(explode(extract_links(<span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>)).alias(<span class="hljs-string">"links"</span>)) \
+  .select(remove_prefix_www(extract_domain(col(<span class="hljs-string">"links._1"</span>))).alias(<span class="hljs-string">"src"</span>), remove_prefix_www(extract_domain(col(<span class="hljs-string">"links._2"</span>))).alias(<span class="hljs-string">"dest"</span>)) \
+  .groupBy(<span class="hljs-string">"src"</span>, <span class="hljs-string">"dest"</span>) \
+  .count() \
+  .filter(col(<span class="hljs-string">"count"</span>) &gt; <span class="hljs-number">5</span>) \
+  .write.csv(<span class="hljs-string">"links-all-apple-df/"</span>)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="extract-raw-url-link-structure"></a><a href="#extract-raw-url-link-structure" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extract Raw URL Link Structure</h2>
+<h3><a class="anchor" aria-hidden="true" id="scala-rdd-1"></a><a href="#scala-rdd-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
+<p>This following script extracts all of the hyperlink relationships between
+sites, using the full URL pattern.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.matchbox._
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
+  .keepValidPages()
+  .flatMap(r =&gt; <span class="hljs-type">ExtractLinks</span>(r.getUrl, r.getContentString))
+  .filter(r =&gt; r._1 != <span class="hljs-string">""</span> &amp;&amp; r._2 != <span class="hljs-string">""</span>)
+  .countItems()
+  .saveAsTextFile(<span class="hljs-string">"full-links-all-rdd/"</span>)
+</code></pre>
+<p>You can see that the above was achieved by removing the following line:</p>
+<pre><code class="hljs css language-scala">  .map(r =&gt; (<span class="hljs-type">ExtractDomain</span>(r._1).removePrefixWWW(), <span class="hljs-type">ExtractDomain</span>(r._2).removePrefixWWW()))
+</code></pre>
+<p>In a larger collection, you might want to add the following line:</p>
+<pre><code class="hljs css language-scala">.filter(r =&gt; r._2 &gt; <span class="hljs-number">5</span>)
+</code></pre>
+<p>before <code>.countItems()</code> to find just the documents that are linked to more than
+five times. As you can imagine, raw URLs are very numerous!</p>
+<h3><a class="anchor" aria-hidden="true" id="scala-df-1"></a><a href="#scala-df-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
+  .webgraph()
+  .groupBy(extractDomain($<span class="hljs-string">"src"</span>), extractDomain($<span class="hljs-string">"dest"</span>))
+  .count()
+  .filter($<span class="hljs-string">"count"</span> &gt; <span class="hljs-number">5</span>)
+  .write.csv(<span class="hljs-string">"full-links-all-df/"</span>)
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="python-df-1"></a><a href="#python-df-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
+<pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> col
+
+WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
+  .webgraph() \
+  .groupBy(extract_domain(<span class="hljs-string">"src"</span>), extract_domain(<span class="hljs-string">"dest"</span>)) \
+  .count() \
+  .filter(col(<span class="hljs-string">"count"</span>) &gt; <span class="hljs-number">5</span>) \
+  .write.csv(<span class="hljs-string">"full-links-all-df/"</span>)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="organize-links-by-url-pattern"></a><a href="#organize-links-by-url-pattern" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Organize Links by URL Pattern</h2>
+<h3><a class="anchor" aria-hidden="true" id="scala-rdd-2"></a><a href="#scala-rdd-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
+<p>In this following example, we run the same script but only extract links coming
+from URLs matching the pattern <code>http://www.archive.org/details/*</code>. We do so by
+using the <code>keepUrlPatterns</code> command.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.matchbox._
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
+  .keepValidPages()
+  .keepUrlPatterns(<span class="hljs-type">Set</span>(<span class="hljs-string">"(?i)http://www.archive.org/details/.*"</span>.r))
+  .flatMap(r =&gt; <span class="hljs-type">ExtractLinks</span>(r.getUrl, r.getContentString))
+  .map(r =&gt; (<span class="hljs-type">ExtractDomain</span>(r._1).removePrefixWWW(), <span class="hljs-type">ExtractDomain</span>(r._2).removePrefixWWW()))
+  .filter(r =&gt; r._1 != <span class="hljs-string">""</span> &amp;&amp; r._2 != <span class="hljs-string">""</span>)
+  .countItems()
+  .filter(r =&gt; r._2 &gt; <span class="hljs-number">5</span>)
+  .saveAsTextFile(<span class="hljs-string">"details-links-all-rdd/"</span>)
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="scala-df-2"></a><a href="#scala-df-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+
+<span class="hljs-keyword">val</span> urlPattern = <span class="hljs-type">Array</span>(<span class="hljs-string">"(?i)http://www.archive.org/details/.*"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
+  .webpages()
+  .filter(hasUrlPatterns($<span class="hljs-string">"url"</span>, lit(urlPattern)))
+  .select(explode(extractLinks($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)).as(<span class="hljs-string">"links"</span>))
+  .select(removePrefixWWW(extractDomain(col(<span class="hljs-string">"links._1"</span>))).as(<span class="hljs-string">"src"</span>), removePrefixWWW(extractDomain(col(<span class="hljs-string">"links._2"</span>))).as(<span class="hljs-string">"dest"</span>))
+  .groupBy(<span class="hljs-string">"src"</span>, <span class="hljs-string">"dest"</span>)
+  .count()
+  .filter($<span class="hljs-string">"count"</span> &gt; <span class="hljs-number">5</span>)
+  .write.csv(<span class="hljs-string">"details-links-all-df/"</span>)
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="python-df-2"></a><a href="#python-df-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
+<pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> col, explode
+
+url_pattern = <span class="hljs-string">"%http://www.archive.org/details/%"</span>
+
+WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
+  .webpages() \
+  .filter(col(<span class="hljs-string">"url"</span>).like(url_pattern)) \
+  .select(explode(extract_links(<span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>).alias(<span class="hljs-string">"links"</span>))) \
+  .select(remove_prefix_www(extract_domain(col(<span class="hljs-string">"links._1"</span>))).alias(<span class="hljs-string">"src"</span>), remove_prefix_www(extract_domain(<span class="hljs-string">"links._2"</span>)).alias(<span class="hljs-string">"dest"</span>)) \
+  .groupBy(<span class="hljs-string">"src"</span>, <span class="hljs-string">"dest"</span>) \
+  .count() \
+  .filter(col(<span class="hljs-string">"count"</span>) &gt; <span class="hljs-number">5</span>) \
+  .write.csv(<span class="hljs-string">"details-links-all-df/"</span>)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="organize-links-by-crawl-date"></a><a href="#organize-links-by-crawl-date" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Organize Links by Crawl Date</h2>
+<h3><a class="anchor" aria-hidden="true" id="scala-rdd-3"></a><a href="#scala-rdd-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
+<p>The following Spark script generates the aggregated site-level link structure,
+grouped by crawl date (YYYYMMDD). It
+makes use of the <code>ExtractLinks</code> and <code>ExtractToLevelDomain</code> functions.</p>
+<p>If you prefer to group by crawl month (YYYMM), replace <code>getCrawlDate</code> with
+<code>getCrawlMonth</code> below. If you prefer to group by simply crawl year (YYYY),
+replace <code>getCrawlDate</code> with <code>getCrawlYear</code> below.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.matchbox._
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).keepValidPages()
+  .map(r =&gt; (r.getCrawlDate, <span class="hljs-type">ExtractLinks</span>(r.getUrl, r.getContentString)))
+  .flatMap(r =&gt; r._2.map(f =&gt; (r._1, <span class="hljs-type">ExtractDomain</span>(f._1).replaceAll(<span class="hljs-string">"^\\s*www\\."</span>, <span class="hljs-string">""</span>), <span class="hljs-type">ExtractDomain</span>(f._2).replaceAll(<span class="hljs-string">"^\\s*www\\."</span>, <span class="hljs-string">""</span>))))
+  .filter(r =&gt; r._2 != <span class="hljs-string">""</span> &amp;&amp; r._3 != <span class="hljs-string">""</span>)
+  .countItems()
+  .filter(r =&gt; r._2 &gt; <span class="hljs-number">5</span>)
+  .saveAsTextFile(<span class="hljs-string">"sitelinks-by-date-rdd/"</span>)
+</code></pre>
+<p>The format of this output is:</p>
+<ul>
+<li>Field one: Crawldate, <code>yyyyMMdd</code></li>
+<li>Field two: Source domain (i.e. liberal.ca)</li>
+<li>Field three: Target domain of link (i.e. ndp.ca)</li>
+<li>Field four: number of links.</li>
+</ul>
+<pre><code class="hljs css language-scala">((<span class="hljs-number">20080612</span>,liberal.ca,liberal.ca),<span class="hljs-number">1832983</span>)
+((<span class="hljs-number">20060326</span>,ndp.ca,ndp.ca),<span class="hljs-number">1801775</span>)
+((<span class="hljs-number">20060426</span>,ndp.ca,ndp.ca),<span class="hljs-number">1771993</span>)
+((<span class="hljs-number">20060325</span>,policyalternatives.ca,policyalternatives.ca),<span class="hljs-number">1735154</span>)
+</code></pre>
+<p>In the above example, you are seeing links within the same domain.</p>
+<p>Note also that <code>ExtractLinksRDD</code> takes an optional third parameter of a base
+URL. If you set this – typically to the source URL – <code>ExtractLinksRDD</code> will
+resolve a relative path to its absolute location. For example, if <code>val url = &quot;http://mysite.com/some/dirs/here/index.html&quot;</code> and <code>val html = &quot;... &lt;a href='../contact/'&gt;Contact&lt;/a&gt; ...&quot;</code>, and we call <code>ExtractLinks(url, html, url)</code>, the list it returns will include the item
+<code>(http://mysite.com/a/b/c/index.html, http://mysite.com/a/b/contact/, Contact)</code>. It may be useful to have this absolute URL if you intend to call
+<code>ExtractDomainRDD</code> on the link and wish it to be counted.</p>
+<h3><a class="anchor" aria-hidden="true" id="scala-df-3"></a><a href="#scala-df-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
+  .webgraph()
+  .groupBy($<span class="hljs-string">"crawl_date"</span>, removePrefixWWW(extractDomain($<span class="hljs-string">"src"</span>)), removePrefixWWW(extractDomain($<span class="hljs-string">"dest"</span>)))
+  .count()
+  .filter($<span class="hljs-string">"count"</span> &gt; <span class="hljs-number">5</span>)
+  .write.csv(<span class="hljs-string">"sitelinks-by-date-df/"</span>)
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="python-df-3"></a><a href="#python-df-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
+<pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> col
+
+WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
+  .webgraph() \
+  .groupBy(<span class="hljs-string">"crawl_date"</span>, remove_prefix_www(extract_domain(<span class="hljs-string">"src"</span>)).alias(<span class="hljs-string">"src"</span>), remove_prefix_www(extract_domain(<span class="hljs-string">"dest"</span>)).alias(<span class="hljs-string">"dest"</span>)) \
+  .count() \
+  .filter(col(<span class="hljs-string">"count"</span>) &gt; <span class="hljs-number">5</span>) \
+  .write.csv(<span class="hljs-string">"sitelinks-by-date-df/"</span>)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="filter-by-url"></a><a href="#filter-by-url" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Filter by URL</h2>
+<h3><a class="anchor" aria-hidden="true" id="scala-rdd-4"></a><a href="#scala-rdd-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
+<p>In this case, you would only receive links coming from websites in matching the
+URL pattern listed under <code>keepUrlPatterns</code>.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.matchbox._
+
+<span class="hljs-keyword">val</span> links = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
+  .keepValidPages()
+  .keepUrlPatterns(<span class="hljs-type">Set</span>(<span class="hljs-string">"http://www.archive.org/details/.*"</span>.r))
+  .map(r =&gt; (r.getCrawlDate, <span class="hljs-type">ExtractLinks</span>(r.getUrl, r.getContentString)))
+  .flatMap(r =&gt; r._2.map(f =&gt; (r._1, <span class="hljs-type">ExtractDomain</span>(f._1).replaceAll(<span class="hljs-string">"^\\s*www\\."</span>, <span class="hljs-string">""</span>), <span class="hljs-type">ExtractDomain</span>(f._2).replaceAll(<span class="hljs-string">"^\\s*www\\."</span>, <span class="hljs-string">""</span>))))
+  .filter(r =&gt; r._2 != <span class="hljs-string">""</span> &amp;&amp; r._3 != <span class="hljs-string">""</span>)
+  .countItems()
+  .filter(r =&gt; r._2 &gt; <span class="hljs-number">5</span>)
+  .saveAsTextFile(<span class="hljs-string">"sitelinks-details-rdd/"</span>)
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="scala-df-4"></a><a href="#scala-df-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+
+<span class="hljs-keyword">val</span> urlPattern = <span class="hljs-type">Array</span>(<span class="hljs-string">"http://www.archive.org/details/.*"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
+  .webpages()
+  .filter(hasUrlPatterns($<span class="hljs-string">"url"</span>, lit(urlPattern)))
+  .select(explode(extractLinks($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)).as(<span class="hljs-string">"links"</span>))
+  .select(removePrefixWWW(extractDomain(col(<span class="hljs-string">"links._1"</span>))).as(<span class="hljs-string">"src"</span>), removePrefixWWW(extractDomain(col(<span class="hljs-string">"links._2"</span>))).as(<span class="hljs-string">"dest"</span>))
+  .groupBy(<span class="hljs-string">"src"</span>, <span class="hljs-string">"dest"</span>)
+  .count()
+  .filter($<span class="hljs-string">"count"</span> &gt; <span class="hljs-number">5</span>)
+  .write.csv(<span class="hljs-string">"sitelinks-details-df/"</span>)
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="python-df-4"></a><a href="#python-df-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
+<pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> col, explode
+
+url_pattern = <span class="hljs-string">"http://www.archive.org/details/.*"</span>
+
+WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
+  .webpages() \
+  .filter(col(<span class="hljs-string">"url"</span>).rlike(url_pattern)) \
+  .select(explode(extract_links(<span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>)).alias(<span class="hljs-string">"links"</span>)) \
+  .select(remove_prefix_www(extract_domain(col(<span class="hljs-string">"links._1"</span>))).alias(<span class="hljs-string">"src"</span>), remove_prefix_www(extract_domain(col(<span class="hljs-string">"links._2"</span>))).alias(<span class="hljs-string">"dest"</span>)) \
+  .groupBy(<span class="hljs-string">"src"</span>, <span class="hljs-string">"dest"</span>) \
+  .count() \
+  .filter(col(<span class="hljs-string">"count"</span>) &gt; <span class="hljs-number">5</span>) \
+  .write.csv(<span class="hljs-string">"sitelinks-details-df/"</span>)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="export-to-gephi"></a><a href="#export-to-gephi" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Export to Gephi</h2>
+<p>You may want to export your data directly to the <a href="http://gephi.github.io/">Gephi software
+suite</a>, an open-source network analysis project. The
+following code writes to the GEXF format:</p>
+<h3><a class="anchor" aria-hidden="true" id="scala-rdd-5"></a><a href="#scala-rdd-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
+<p><strong>Will not be implemented.</strong></p>
+<h3><a class="anchor" aria-hidden="true" id="scala-df-5"></a><a href="#scala-df-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+<span class="hljs-keyword">import</span> io.archivesunleashed.app._
+
+<span class="hljs-keyword">val</span> graph = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>,sc)
+              .webgraph.groupBy(
+                          $<span class="hljs-string">"crawl_date"</span>,
+                          removePrefixWWW(extractDomain($<span class="hljs-string">"src"</span>)).as(<span class="hljs-string">"src_domain"</span>),
+                          removePrefixWWW(extractDomain($<span class="hljs-string">"dest"</span>)).as(<span class="hljs-string">"dest_domain"</span>))
+              .count()
+              .filter(!($<span class="hljs-string">"dest_domain"</span>===<span class="hljs-string">""</span>))
+              .filter(!($<span class="hljs-string">"src_domain"</span>===<span class="hljs-string">""</span>))
+              .filter($<span class="hljs-string">"count"</span> &gt; <span class="hljs-number">5</span>)
+              .orderBy(desc(<span class="hljs-string">"count"</span>))
+              .collect()
+
+<span class="hljs-type">WriteGEXF</span>(graph, <span class="hljs-string">"links-for-gephi.gexf"</span>)
+</code></pre>
+<p>We also support exporting to the
+<a href="https://en.wikipedia.org/wiki/GraphML">GraphML</a> format. To do so, use
+the <code>WriteGraphml</code> method:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-type">WriteGraphML</span>(graph, <span class="hljs-string">"links-for-gephi.graphml"</span>)
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="python-df-5"></a><a href="#python-df-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
+<pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> col, desc
+
+graph = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/data"</span>) \
+          .webgraph() \
+          .groupBy(<span class="hljs-string">"crawl_date"</span>, remove_prefix_www(extract_domain(<span class="hljs-string">"src"</span>)).alias(<span class="hljs-string">"src_domain"</span>), remove_prefix_www(extract_domain(<span class="hljs-string">"dest"</span>)).alias(<span class="hljs-string">"dest_domain"</span>)) \
+          .count() \
+          .filter((col(<span class="hljs-string">"dest_domain"</span>).isNotNull()) &amp; (col(<span class="hljs-string">"dest_domain"</span>) !=<span class="hljs-string">""</span>)) \
+          .filter((col(<span class="hljs-string">"src_domain"</span>).isNotNull()) &amp; (col(<span class="hljs-string">"src_domain"</span>) !=<span class="hljs-string">""</span>)) \
+          .filter(col(<span class="hljs-string">"count"</span>) &gt; <span class="hljs-number">5</span>) \
+          .orderBy(desc(<span class="hljs-string">"count"</span>)) \
+          .collect()
+
+WriteGEXF(graph, <span class="hljs-string">"links-for-gephi.gexf"</span>)
+</code></pre>
+<p>We also support exporting to the
+<a href="https://en.wikipedia.org/wiki/GraphML">GraphML</a> format. To do so, use
+the <code>WriteGraphml</code> method:</p>
+<pre><code class="hljs css language-python">WriteGraphML(graph, <span class="hljs-string">"links-for-gephi.graphml"</span>)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="finding-hyperlinks-within-collection-on-pages-with-certain-keyword"></a><a href="#finding-hyperlinks-within-collection-on-pages-with-certain-keyword" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Finding Hyperlinks within Collection on Pages with Certain Keyword</h2>
+<p>The following script will extract a DataFrame with the following columns,
+<code>domain</code>, <code>url</code>, <code>crawl date</code>, <code>origin page</code>, and <code>destination page</code>, given a
+search term <code>Keystone</code> of the content (full-text). The example uses the sample
+data in
+<a href="https://github.com/archivesunleashed/aut-resources/tree/master/Sample-Data"><code>aut-resources</code></a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="scala-rdd-6"></a><a href="#scala-rdd-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
+<p><strong>Will not be implemented.</strong></p>
+<h3><a class="anchor" aria-hidden="true" id="scala-df-6"></a><a href="#scala-df-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+
+<span class="hljs-keyword">val</span> result = udf((vs: <span class="hljs-type">Seq</span>[<span class="hljs-type">Any</span>]) =&gt; vs(<span class="hljs-number">0</span>)
+               .toString
+               .split(<span class="hljs-string">","</span>)(<span class="hljs-number">1</span>))
+
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
+          .webpages()
+          .select(removePrefixWWW(extractDomain($<span class="hljs-string">"url"</span>))
+            .as(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>
+            .as(<span class="hljs-string">"url"</span>), $<span class="hljs-string">"crawl_date"</span>, explode_outer(extractLinks($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>))
+            .as(<span class="hljs-string">"link"</span>))
+          .filter($<span class="hljs-string">"content"</span>.contains(<span class="hljs-string">"keystone"</span>))
+
+df.select($<span class="hljs-string">"url"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"crawl_date"</span>, result(array($<span class="hljs-string">"link"</span>))
+    .as(<span class="hljs-string">"destination_page"</span>))
+  .show()
+
+<span class="hljs-comment">// Exiting paste mode, now interpreting.</span>
+
++--------------------+---------------+----------+--------------------+
+|                 url|         domain|crawl_date|    destination_page|
++--------------------+---------------+----------+--------------------+
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
+|http:<span class="hljs-comment">//www.davids...|davidsuzuki.org|  20091219|http://www.davids...|</span>
++--------------------+---------------+----------+--------------------+
+only showing top <span class="hljs-number">20</span> rows
+
+<span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+result: org.apache.spark.sql.expressions.<span class="hljs-type">UserDefinedFunction</span> = <span class="hljs-type">UserDefinedFunction</span>(&lt;function1&gt;,<span class="hljs-type">StringType</span>,<span class="hljs-type">None</span>)
+df: org.apache.spark.sql.<span class="hljs-type">Dataset</span>[org.apache.spark.sql.<span class="hljs-type">Row</span>] = [<span class="hljs-type">Domain</span>: string, url: string ... <span class="hljs-number">2</span> more fields]
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="python-df-6"></a><a href="#python-df-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
+<pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> col, explode_outer
+
+webpages = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
+  .webpages() \
+  .select(remove_prefix_www(extract_domain(<span class="hljs-string">"url"</span>)).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, <span class="hljs-string">"crawl_date"</span>, explode_outer(extract_links(<span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>)).alias(<span class="hljs-string">"link"</span>)) \
+  .filter(col(<span class="hljs-string">"content"</span>).like(<span class="hljs-string">"%food%"</span>)) \
+  .select(<span class="hljs-string">"url"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"crawl_date"</span>, col(<span class="hljs-string">"link._1"</span>).alias(<span class="hljs-string">"destination_page"</span>)) \
+  .show()
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/0.91.0/text-analysis"><span class="arrow-prev">← </span><span>Text Analysis</span></a><a class="docs-next button" href="/docs/0.91.0/image-analysis"><span>Image Analysis</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#extract-simple-site-link-structure">Extract Simple Site Link Structure</a><ul class="toc-headings"><li><a href="#scala-rdd">Scala RDD</a></li><li><a href="#scala-df">Scala DF</a></li><li><a href="#python-df">Python DF</a></li></ul></li><li><a href="#extract-raw-url-link-structure">Extract Raw URL Link Structure</a><ul class="toc-headings"><li><a href="#scala-rdd-1">Scala RDD</a></li><li><a href="#scala-df-1">Scala DF</a></li><li><a href="#python-df-1">Python DF</a></li></ul></li><li><a href="#organize-links-by-url-pattern">Organize Links by URL Pattern</a><ul class="toc-headings"><li><a href="#scala-rdd-2">Scala RDD</a></li><li><a href="#scala-df-2">Scala DF</a></li><li><a href="#python-df-2">Python DF</a></li></ul></li><li><a href="#organize-links-by-crawl-date">Organize Links by Crawl Date</a><ul class="toc-headings"><li><a href="#scala-rdd-3">Scala RDD</a></li><li><a href="#scala-df-3">Scala DF</a></li><li><a href="#python-df-3">Python DF</a></li></ul></li><li><a href="#filter-by-url">Filter by URL</a><ul class="toc-headings"><li><a href="#scala-rdd-4">Scala RDD</a></li><li><a href="#scala-df-4">Scala DF</a></li><li><a href="#python-df-4">Python DF</a></li></ul></li><li><a href="#export-to-gephi">Export to Gephi</a><ul class="toc-headings"><li><a href="#scala-rdd-5">Scala RDD</a></li><li><a href="#scala-df-5">Scala DF</a></li><li><a href="#python-df-5">Python DF</a></li></ul></li><li><a href="#finding-hyperlinks-within-collection-on-pages-with-certain-keyword">Finding Hyperlinks within Collection on Pages with Certain Keyword</a><ul class="toc-headings"><li><a href="#scala-rdd-6">Scala RDD</a></li><li><a href="#scala-df-6">Scala DF</a></li><li><a href="#python-df-6">Python DF</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/dependencies">Getting Started</a><a href="/docs/collection-analysis">Generating Results</a><a href="/docs/filters-rdd">Filtering results</a><a href="/docs/aut-spark-submit-app">Standard Derivatives</a><a href="/docs/df-results">What to do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/img/waterloo.png"/><img alt="York University" class="footer_img" src="/img/york.png"/></section><section class="copyright">CC BY 2.0 2022 Archives Unleashed Project</section></footer></div></body></html>
