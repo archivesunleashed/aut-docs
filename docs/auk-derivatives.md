@@ -1,21 +1,10 @@
 ---
 id: auk-derivatives
-title: AU Cloud Scholarly Derivatives
+title: ARCH Derivatives
 ---
 
-How do I create the [scholarly
-derivatives](https://cloud.archivesunleashed.org/derivatives) that the Archives
-Unleashed Cloud creates on my own web archive collection?
-
-Note, the full-text and domains output needs to be concatenated together into a
-single file respectively to replicate the Cloud output, and the GraphML file
-needs to be run through
-[GraphPass](https://github.com/archivesunleashed/graphpass) with the following
-command:
-
-```bash
-graphpass input.graphml output.gexf -gq
-```
+How do I create the Toolkit generated derivatives that the Archives
+Research Compute Hub creates on my own web archive collection?
 
 ## Scala RDD
 
@@ -26,19 +15,14 @@ graphpass input.graphml output.gexf -gq
 ```scala
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
-import io.archivesunleashed.app._
 
-sc.setLogLevel("INFO")
+val warcs = "/path/to/warcs/*"
+val results = "/path/to/results/"
 
-// Web archive collection; web pages.
-val webpages = RecordLoader.loadArchives("/path/to/data", sc)
-  .webpages()
+val webpages = RecordLoader.loadArchives(warcs, sc).webpages()
+val webgraph = RecordLoader.loadArchives(warcs, sc).webgraph()
 
-// Web archive collection; web graph.
-val webgraph = RecordLoader.loadArchives("/path/to/data", sc)
-  .webgraph()
-
-// Domains frequency file.
+// Domain frequency.
 webpages.groupBy($"domain")
   .count()
   .sort($"count".desc)
@@ -47,28 +31,120 @@ webpages.groupBy($"domain")
   .format("csv")
   .option("escape", "\"")
   .option("encoding", "utf-8")
-  .save("/path/to/derivatives/auk/all-domains/output")
+  .save(results + "domains")
 
-// Full-text.
+// Domain graph.
+webgraph.groupBy(
+    $"crawl_date",
+    removePrefixWWW(extractDomain($"src")).as("src_domain"),
+    removePrefixWWW(extractDomain($"dest")).as("dest_domain")
+  )
+  .count()
+  .filter(!($"dest_domain" === ""))
+  .filter(!($"src_domain" === ""))
+  .filter($"count" > 5)
+  .orderBy(desc("count"))
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "domain-graph")
+
+// Image graph.
+RecordLoader.loadArchives(warcs, sc)
+  .imagegraph()
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "image-graph")
+
+// Web graph.
+webgraph.write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "web-graph")
+
+// Web pages.
 webpages.write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
   .format("csv")
   .option("escape", "\"")
   .option("encoding", "utf-8")
-  .save("/path/to/derivatives/auk/full-text/output")
+  .save(results + "webpages")
 
-// GraphML
-val graph = webgraph.groupBy(
-                       $"crawl_date",
-                       removePrefixWWW(extractDomain($"src")).as("src_domain"),
-                       removePrefixWWW(extractDomain($"dest")).as("dest_domain"))
-              .count()
-              .filter(!($"dest_domain"===""))
-              .filter(!($"src_domain"===""))
-              .filter($"count" > 5)
-              .orderBy(desc("count"))
+// Binary information.
+RecordLoader.loadArchives(warcs, sc)
+  .audio()
+  .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "audio")
 
-WriteGraphML(graph.collect(), "/path/to/derivatives/auk/graph/example.graphml")
+RecordLoader.loadArchives(warcs, sc)
+  .images()
+  .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5", $"sha1")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "image")
+
+RecordLoader.loadArchives(warcs, sc)
+  .pdfs()
+  .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "pdf")
+
+RecordLoader.loadArchives(warcs, sc)
+  .presentationProgramFiles()
+  .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "presentation-program")
+
+RecordLoader.loadArchives(warcs, sc)
+  .spreadsheets()
+  .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1")
+  .write.option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "spreadsheet")
+
+RecordLoader.loadArchives(warcs, sc)
+  .videos()
+  .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1")
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "video")
+
+RecordLoader.loadArchives(warcs, sc)
+  .wordProcessorFiles()
+  .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1")
+  .write.option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "word-processor")
 
 sys.exit
 ```
@@ -79,13 +155,13 @@ sys.exit
 from aut import *
 from pyspark.sql.functions import col, desc
 
-# Web archive collection; web pages.
-webpages = WebArchive(sc, sqlContext, "/path/to/data").webpages()
+warcs = "/path/to/warcs/*"
+results = "/path/to/results/"
 
-# Web archive collection; web graph.
-webgraph = WebArchive(sc, sqlContext, "/path/to/data").webgraph()
+webpages = WebArchive(sc, sqlContext, warcs).webpages()
+webgraph = WebArchive(sc, sqlContext, warcs).webgraph()
 
-# Domains file.
+# Domain frequency.
 webpages.groupBy("domain") \
   .count() \
   .sort(col("count")\
@@ -95,24 +171,108 @@ webpages.groupBy("domain") \
   .format("csv")\
   .option("escape", "\"")\
   .option("encoding", "utf-8")\
-  .save("/path/to/derivatives/auk/all-domains/output")
+  .save(results + "domains")
 
-# Full-text.
-webpages.write
+# Domain graph.
+webgraph.groupBy("crawl_date", remove_prefix_www(extract_domain("src")).alias("src_domain"), remove_prefix_www(extract_domain("dest")).alias("dest_domain"))\
+  .count()\
+  .filter((col("dest_domain").isNotNull()) & (col("dest_domain") !=""))\
+  .filter((col("src_domain").isNotNull()) & (col("src_domain") !=""))\
+  .filter(col("count") > 5)\
+  .orderBy(desc("count"))\
+  .write\
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
   .format("csv")\
   .option("escape", "\"")\
   .option("encoding", "utf-8")\
-  .save("/path/to/derivatives/auk/full-text/output")
+  .save(results + "domain-graph")
 
-# Create DataFrame for GraphML output
-graph = webgraph.groupBy("crawl_date", remove_prefix_www(extract_domain("src")).alias("src_domain"), remove_prefix_www(extract_domain("dest")).alias("dest_domain"))\
-          .count()\
-          .filter((col("dest_domain").isNotNull()) & (col("dest_domain") !=""))\
-          .filter((col("src_domain").isNotNull()) & (col("src_domain") !=""))\
-          .filter(col("count") > 5)\
-          .orderBy(desc("count"))
+# Image graph.
+WebArchive(sc, sqlContext, warcs).imagegraph()\
+  .write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "image-graph")
 
-# Write the GraphML out to a file.
-WriteGraphML(graph.collect(), "/path/to/derivatives/auk/graph/example.graphml")
+# Web graph.
+webgraph.write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "web-graph")
+
+# Web pages.
+webpages.write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "webpages")
+
+# Binary information.
+WebArchive(sc, sqlContext, warcs).audio()\
+  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
+  .write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "audio")
+
+WebArchive(sc, sqlContext, warcs).images()\
+  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
+  .write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "images")
+
+WebArchive(sc, sqlContext, warcs).pdfs()\
+  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
+  .write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "pdfs")
+
+WebArchive(sc, sqlContext, warcs).presentation_program()\
+  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
+  .write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "presentation_program")
+
+WebArchive(sc, sqlContext, warcs).spreadsheets()\
+  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
+  .write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "spreadsheets")
+
+WebArchive(sc, sqlContext, warcs).video()\
+  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
+  .write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "videos")
+
+WebArchive(sc, sqlContext, warcs).word_processor()\
+  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
+  .write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "word_processor")
 ```

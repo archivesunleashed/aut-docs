@@ -34,13 +34,13 @@ spark-shell --help
 Release version:
 
 ```shell
-spark-shell --jars /path/to/aut-0.90.0-fatjar.jar
+spark-shell --jars /path/to/aut-1.0.0-fatjar.jar
 ```
 
 HEAD (built locally):
 
 ```shell
-spark-shell --jars /path/to/aut/target/aut-0.90.1-SNAPSHOT-fatjar.jar
+spark-shell --jars /path/to/aut/target/aut-1.0.1-SNAPSHOT-fatjar.jar
 ```
 
 ## The Toolkit with PySpark
@@ -49,7 +49,7 @@ To run PySpark with the Toolkit loaded, you will need to
 provide PySpark with the Java/Scala artifact, as well as the Python bindings.
 The Java/Scala artifact can be provided with `--jars` as
 described above. The Python bindings can be
-[downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-0.90.0/aut-0.90.0.zip)
+[downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-1.0.0/aut-1.0.0.zip)
 , or [built locally](#building-locally) (the zip file will be found in
 the `target` directory.
 
@@ -61,13 +61,13 @@ where your Python is, it can be found with `which python`.
 Release version:
 
 ```shell
-export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files aut-0.90.0.zip --jars /path/to/aut-0.90.0-fatjar.jar
+export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files aut-1.0.0.zip --jars /path/to/aut-1.0.0-fatjar.jar
 ```
 
 HEAD (built locally):
 
 ```shell
-export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files aut.zip --jars /path/to/aut-0.90.1-SNAPSHOT-fatjar.jar
+export PYSPARK_PYTHON=/path/to/python; export PYSPARK_DRIVER_PYTHON=/path/to/python; /path/to/spark/bin/pyspark --py-files aut.zip --jars /path/to/aut-1.0.1-SNAPSHOT-fatjar.jar
 ```
 
 ## The Toolkit with Jupyter
@@ -76,7 +76,7 @@ To run a [Jupyter Notebook](https://jupyter.org/install) with the Archives
 Unleashed Toolkit loaded, you will need to provide PySpark the Java/Scala
 artifact, and the Python bindings. The Java/Scala artifact can be provided
 with `--jars` as described above. The Python bindings can be
-[downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-0.90.0/aut-0.90.0.zip)
+[downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-1.0.0/aut-1.0.0.zip)
 , or [built locally](#Introduction) (the zip file will be found in
 the `target` directory.
 
@@ -85,13 +85,13 @@ the `target` directory.
 Release version:
 
 ```shell
-export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files aut-0.90.0.zip --jars /path/to/aut-0.90.0-fatjar.jar
+export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files aut-1.0.0.zip --jars /path/to/aut-1.0.0-fatjar.jar
 ```
 
 HEAD (built locally):
 
 ```shell
-export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files aut.zip --jars /path/to/aut-0.90.1-SNAPSHOT-fatjar.jar
+export PYSPARK_DRIVER_PYTHON=jupyter; export PYSPARK_DRIVER_PYTHON_OPTS=notebook; /path/to/spark/bin/pyspark --py-files aut.zip --jars /path/to/aut-1.0.1-SNAPSHOT-fatjar.jar
 ```
 
 A Jupyter Notebook _should_ automatically load in your browser at

@@ -44,8 +44,7 @@ val warcsS3 = RecordLoader.loadArchives("s3a://your-data-bucket/", sc)
 
 // Audio Files.
 warcs.audio()
-  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-  .orderBy(desc("md5"))
+  .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1")
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
   .format("csv")
@@ -55,14 +54,13 @@ warcs.audio()
 
 // Images.
 warcsS3.images()
-  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5")
-  .orderBy(desc("md5"))
-  .write.parquet("/path/to/derivatives/parquet/image")
+  .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5", $"sha1")
+  .write
+  .parquet("/path/to/derivatives/parquet/image")
 
 // PDFs.
 warcs.pdfs()
-  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-  .orderBy(desc("md5"))
+  .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1")
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
   .format("csv")
@@ -72,14 +70,13 @@ warcs.pdfs()
 
 // Presentation Program Files.
 warcs.presentationProgramFiles()
-  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-  .orderBy(desc("md5"))
-  .write.parquet("s3a://your-derivatives-bucket/parquet/presentation-program")
+  .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1")
+  .write
+  .parquet("s3a://your-derivatives-bucket/parquet/presentation-program")
 
 // Spreadsheets.
 warcs.spreadsheets()
-  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-  .orderBy(desc("md5"))
+  .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1")
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
   .format("csv")
@@ -89,8 +86,7 @@ warcs.spreadsheets()
 
 // Videos.
 warcs.videos()
-  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-  .orderBy(desc("md5"))
+  .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1")
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
   .format("csv")
@@ -100,9 +96,9 @@ warcs.videos()
 
 // Word Processor Files.
 warcs.wordProcessorFiles()
-  .select($"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5")
-  .orderBy(desc("md5"))
-  .write.parquet("/path/to/derivatives/parquet/word-processor")
+  .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1")
+  .write
+  .parquet("/path/to/derivatives/parquet/word-processor")
 
 sys.exit
 ```
@@ -125,29 +121,31 @@ warcs = WebArchive(sc, sqlContext, "/path/to/aut-resources-master/Sample-Data/*g
 # .write.parquet("/path/to/derivatives/parquet/pages/")
 
 # Audio Files.
-warcs.audio().write \
- .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+warcs.audio()
+  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
+  .write \
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
   .format("csv") \
   .option("escape", "\"") \
   .option("encoding", "utf-8") \
   .save('/path/to/derivatives/csv/audio')
 
 # Images.
-warcs.images().write.parquet('/path/to/derivatives/parquet/images')
-
-# Image Links.
-warcs.image_links().write \
-  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
-  .format("csv") \
-  .option("escape", "\"") \
-  .option("encoding", "utf-8") \
-  .save('/path/to/derivatives/csv/images-links')
+warcs.images()\
+  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "width", "height", "md5", "sha1")\
+  .write\
+  .parquet('/path/to/derivatives/parquet/images')
 
 # PDFs.
-warcs.pdfs().write.parquet('/path/to/derivatives/csv/pdfs')
+warcs.pdfs()\
+  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
+  .write\
+  .parquet('/path/to/derivatives/csv/pdfs')
 
 # Spreadsheets.
-warcs.spreadsheets().write \
+warcs.spreadsheets()\
+  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
+  .write \
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
   .format("csv") \
   .option("escape", "\"") \
@@ -155,13 +153,21 @@ warcs.spreadsheets().write \
   .save('/path/to/derivatives/csv/spreadsheets')
 
 # Presentation Program Files.
-warcs.presentation_program().write.parquet('/path/to/derivatives/csv/presentation_program')
+warcs.presentation_program()\
+  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
+  .write\
+  .parquet('/path/to/derivatives/csv/presentation_program')
 
 # Videos.
-warcs.video().write.parquet('/path/to/derivatives/csv/video')
+warcs.video()\
+  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
+  .write\
+  .parquet('/path/to/derivatives/csv/video')
 
 # Word Processor Files.
-warcs.word_processor().write \
+warcs.word_processor()\
+  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
+  .write \
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
   .format("csv") \
   .option("escape", "\"") \

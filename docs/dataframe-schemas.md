@@ -29,7 +29,7 @@ hyperlink information.
 **`.webpages()`**
 
 - `crawl_date` (string)
-- `url` (string)
+- `domain` (string)
 - `url` (string)
 - `mime_type_web_server` (string)
 - `mime_type_tika` (string)

@@ -66,50 +66,50 @@ from aut import *
 warcs = WebArchive(sc, sqlContext, "path/to/warcs")
 
 # Audio Files.
-audio = warcs.audio() \
-             .select("extension", "bytes") \
+audio = warcs.audio()\
+             .select("extension", "bytes")\
              .collect()
 
 SaveBytes(audio, "/path/to/extract/binaries/audio")
 
 # Images.
-images = warcs.images()
-              .select("extension", "bytes") \
+images = warcs.images()\
+              .select("extension", "bytes")\
               .collect()
 
 SaveBytes(images, "/path/to/extract/binaries/image")
 
 # PDFs
-pdfs = warcs.pdfs()
-            .select("extension", "bytes") \
+pdfs = warcs.pdfs()\
+            .select("extension", "bytes")\
             .collect()
 
 SaveBytes(pdfs, "/path/to/extract/binaries/pdf")
 
 # Presentation Program Files.
-pp_files = warcs.presentationProgramFiles()
-                .select("extension", "bytes") \
+pp_files = warcs.presentationProgramFiles()\
+                .select("extension", "bytes")\
                 .collect()
 
 SaveBytes(pp_files, "/path/to/extract/binaries/presentation_program")
 
 # Spreadsheets.
-spreadsheets = warcs.spreadsheets()
-                    .select("extension", "bytes") \
+spreadsheets = warcs.spreadsheets()\
+                    .select("extension", "bytes")\
                     .collect()
 
 SaveBytes(spreadsheets, "/path/to/extract/binaries/spreadsheet")
 
 # Videos.
-videos = warcs.videos()
-              .select("extension", "bytes") \
+videos = warcs.videos()\
+              .select("extension", "bytes")\
               .collect()
 
 SaveBytes(videos, "/path/to/extract/binaries/video")
 
 # Word Processor Files.
-wp_files = warcs.wordProcessorFiles()
-                .select("extension", "bytes") \
+wp_files = warcs.wordProcessorFiles()\
+                .select("extension", "bytes")\
                 .collect()
 
 SaveBytes(wp_files, "/path/to/extract/binaries/word_processor")
