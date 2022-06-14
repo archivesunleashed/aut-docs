@@ -14,7 +14,6 @@
       "collection-analysis",
       "text-analysis",
       "link-analysis",
-      "image-analysis",
       "binary-analysis",
       "text-files-analysis"
     ],

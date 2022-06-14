@@ -24,6 +24,7 @@ df.show()
 
 Will extract all following information from audio files in a web collection:
 
+- crawl date
 - css url
 - filename
 - extension
@@ -70,7 +71,8 @@ df.show()
 
 Will extract all following information from audio files in a web collection:
 
-- audio url
+- crawl date
+- css url
 - filename
 - extension
 - MimeType as identified by the hosting web server
@@ -122,6 +124,7 @@ df.show()
 
 Will extract all following information from images in a web collection:
 
+- crawl date
 - html url
 - filename
 - extension
@@ -189,6 +192,7 @@ df.show()
 
 Will extract all following information from images in a web collection:
 
+- crawl date
 - html url
 - filename
 - extension
@@ -262,6 +266,7 @@ df.show()
 
 Will extract all following information from PDF files in a web collection:
 
+- crawl date
 - Javascript url
 - filename
 - extension
@@ -312,6 +317,7 @@ df.show()
 
 Will extract all following information from PDF files in a web collection:
 
+- crawl date
 - Javascript url
 - filename
 - extension
@@ -368,6 +374,7 @@ df.show()
 
 Will extract all following information from presentation program files in a web collection:
 
+- crawl date
 - JSON url
 - filename
 - extension
@@ -402,6 +409,7 @@ df.show()
 
 Will extract all following information from presentation program files in a web collection:
 
+- crawl date
 - JSON url
 - filename
 - extension
@@ -442,6 +450,7 @@ df.show()
 
 Will extract all following information from spreadsheet files in a web collection:
 
+- crawl date
 - Plain text url
 - filename
 - extension
@@ -511,6 +520,7 @@ df.show()
 
 Will extract all following information from spreadsheet files in a web collection:
 
+- crawl date
 - Plain text url
 - filename
 - extension
@@ -586,6 +596,7 @@ df.show()
 
 Will extract all following information from videos in a web collection:
 
+- crawl date
 - XML url
 - filename
 - extension
@@ -631,6 +642,7 @@ df.show()
 
 Will extract all following information from videos in a web collection:
 
+- crawl date
 - XML url
 - filename
 - extension
