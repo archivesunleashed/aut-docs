@@ -146,6 +146,61 @@ RecordLoader.loadArchives(warcs, sc)
   .option("encoding", "utf-8")
   .save(results + "word-processor")
 
+// Text files.
+RecordLoader.loadArchives(warcs, sc)
+  .css()
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "css")
+
+RecordLoader.loadArchives(warcs, sc)
+  .html()
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "html")
+
+RecordLoader.loadArchives(warcs, sc)
+  .js()
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "js")
+
+RecordLoader.loadArchives(warcs, sc)
+  .json()
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "json")
+
+RecordLoader.loadArchives(warcs, sc)
+  .plainText()
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "plain-text")
+
+RecordLoader.loadArchives(warcs, sc)
+  .xml()
+  .write
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+  .format("csv")
+  .option("escape", "\"")
+  .option("encoding", "utf-8")
+  .save(results + "xml")
+
 sys.exit
 ```
 
@@ -275,4 +330,53 @@ WebArchive(sc, sqlContext, warcs).word_processor()\
   .option("escape", "\"")\
   .option("encoding", "utf-8")\
   .save(results + "word_processor")
+
+# Text files.
+WebArchive(sc, sqlContext, warcs).css()\
+  .write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "css")
+
+WebArchive(sc, sqlContext, warcs).html()\
+  .write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "html")
+
+WebArchive(sc, sqlContext, warcs).js()\
+  .write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "js")
+
+WebArchive(sc, sqlContext, warcs).json()\
+  .write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "json")
+
+WebArchive(sc, sqlContext, warcs).plain_text()\
+  .write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "plain-text")
+
+WebArchive(sc, sqlContext, warcs).xml()\
+  .write\
+  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
+  .format("csv")\
+  .option("escape", "\"")\
+  .option("encoding", "utf-8")\
+  .save(results + "xml")
 ```

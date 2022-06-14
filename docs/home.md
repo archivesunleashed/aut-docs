@@ -71,6 +71,14 @@ and working with the results.
   - [Extract Spreadsheet Information](binary-analysis.md#extract-spreadsheet-information)
   - [Extract Video Information](binary-analysis.md#extract-video-information)
   - [Extract Word Processor File Information](binary-analysis.md#extract-word-processor-files-information)
+- **[Text Files (html, text, css, js, json, xml) Analysis](text-files-analysis.md)**:
+  How do I...
+  - [Extract CSS Information](text-files-analysis.md#extract-css-information)
+  - [Extract HTML Information](text-files-analysis.md#extract-html-information)
+  - [Extract Javascript Information](text-files-analysis.md#extract-javascript-information)
+  - [Extract JSON Information](text-files-analysis.md#extract-json-information)
+  - [Extract Plain Text Information](text-files-analysis.md#extract-plain-text-information)
+  - [Extract XML Information](text-files-analysis.md#extract-xml-information)
 
 ### Filtering Results
 
@@ -82,7 +90,7 @@ and working with the results.
 **How do I...**
 
 - [Use the Toolkit with spark-submit](aut-spark-submit-app.md)
-- [Create the Archives Unleashed Cloud Scholarly Derivatives](auk-derivatives.md)
+- [Create the Archives Research Compiute Hub (ARCH) Derivatives](auk-derivatives.md)
 - [Extract Binary Info](extract-binary-info.md)
 - [Extract Binaries to Disk](extract-binary.md)
 
