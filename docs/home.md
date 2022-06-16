@@ -90,7 +90,7 @@ and working with the results.
 **How do I...**
 
 - [Use the Toolkit with spark-submit](aut-spark-submit-app.md)
-- [Create the Archives Research Compiute Hub (ARCH) Derivatives](auk-derivatives.md)
+- [Create the Archives Research Compute Hub (ARCH) Derivatives](auk-derivatives.md)
 - [Extract Binary Info](extract-binary-info.md)
 - [Extract Binaries to Disk](extract-binary.md)
 
