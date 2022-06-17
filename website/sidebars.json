@@ -14,8 +14,8 @@
       "collection-analysis",
       "text-analysis",
       "link-analysis",
-      "image-analysis",
-      "binary-analysis"
+      "binary-analysis",
+      "text-files-analysis"
     ],
     "Filtering Results": [
       "filters-rdd",

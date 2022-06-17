@@ -153,3 +153,87 @@ hyperlink information.
 - `md5` (string)
 - `sha1` (string)
 - `bytes` (binary)
+
+## CSS Information and Content
+
+**`.css()`**
+
+- `crawl_date` (string)
+- `url` (string)
+- `filename` (string)
+- `extension` (string)
+- `mime_type_web_server` (string)
+- `mime_type_tika` (string)
+- `md5` (string)
+- `sha1` (string)
+- `content` (string)
+
+## HTML Information and Content
+
+**`.html()`**
+
+- `crawl_date` (string)
+- `url` (string)
+- `filename` (string)
+- `extension` (string)
+- `mime_type_web_server` (string)
+- `mime_type_tika` (string)
+- `md5` (string)
+- `sha1` (string)
+- `content` (string)
+
+## Javascript Information and Content
+
+**`.js()`**
+
+- `crawl_date` (string)
+- `url` (string)
+- `filename` (string)
+- `extension` (string)
+- `mime_type_web_server` (string)
+- `mime_type_tika` (string)
+- `md5` (string)
+- `sha1` (string)
+- `content` (string)
+
+## JSON Information and Content
+
+**`.json()`**
+
+- `crawl_date` (string)
+- `url` (string)
+- `filename` (string)
+- `extension` (string)
+- `mime_type_web_server` (string)
+- `mime_type_tika` (string)
+- `md5` (string)
+- `sha1` (string)
+- `content` (string)
+
+## Plain text Information and Content
+
+**`.plainText()`**
+
+- `crawl_date` (string)
+- `url` (string)
+- `filename` (string)
+- `extension` (string)
+- `mime_type_web_server` (string)
+- `mime_type_tika` (string)
+- `md5` (string)
+- `sha1` (string)
+- `content` (string)
+
+## XML Information and Content
+
+**`.xml()`**
+
+- `crawl_date` (string)
+- `url` (string)
+- `filename` (string)
+- `extension` (string)
+- `mime_type_web_server` (string)
+- `mime_type_tika` (string)
+- `md5` (string)
+- `sha1` (string)
+- `content` (string)
