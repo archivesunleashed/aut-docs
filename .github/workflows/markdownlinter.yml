@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Install Ruby 2.6
+    - name: Install Ruby 2.7
       uses: actions/setup-ruby@v1
       with:
-        ruby-version: 2.6.x
+        ruby-version: 2.7.x
     - name: Install mdl
       run: gem install mdl
     - name: Check out code
