@@ -1,0 +1,434 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>ARCH Derivatives · Archives Unleashed Toolkit</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="How do I create the Toolkit generated derivatives that the Archives"/><meta name="docsearch:version" content="1.1.0"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="ARCH Derivatives · Archives Unleashed Toolkit"/><meta property="og:type" content="website"/><meta property="og:url" content="https://archivesunleashed.github.io/"/><meta property="og:description" content="How do I create the Toolkit generated derivatives that the Archives"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-2879197-28', 'auto');
+              ga('send', 'pageview');
+            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/favicon.ico" alt="Archives Unleashed Toolkit"/><h2 class="headerTitleWithLogo">Archives Unleashed Toolkit</h2></a><a href="/versions"><h3>1.1.0</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/1.1.0/home" target="_self">Docs</a></li><li class=""><a href="https://archivesunleashed.org" target="_self">Project</a></li><li class=""><a href="https://github.com/archivesunleashed/aut" target="_self">GitHub</a></li><li class=""><a href="https://news.archivesunleashed.org/" target="_self">News</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Standard Derivatives</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Home</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.0/home">The Toolkit</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.0/dependencies">Dependencies</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.0/usage">Usage</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.0/aut-at-scale">The Toolkit at Scale</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.0/dataframe-schemas">DataFrame Schemas</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.0/toolkit-walkthrough">Toolkit Walkthrough</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Generating Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.0/collection-analysis">Collection Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.0/text-analysis">Text Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.0/link-analysis">Link Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.0/binary-analysis">Binary Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.0/text-files-analysis">Text Files (html, text, css, js, json, xml) Analysis</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Filtering Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.0/filters-rdd">RDD Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.0/filters-df">DataFrame Filters</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Standard Derivatives</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.0/aut-spark-submit-app">The Toolkit with spark-submit</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/1.1.0/auk-derivatives">ARCH Derivatives</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.0/extract-binary-info">Extract Binary Info</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.0/extract-binary">Extract Binaries to Disk</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">What to do with Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.0/df-results">DataFrame Results</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.0/rdd-results">RDD Results</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">ARCH Derivatives</h1></header><article><div><span><p>How do I create the Toolkit generated derivatives that the Archives
+Research Compute Hub creates on my own web archive collection?</p>
+<h2><a class="anchor" aria-hidden="true" id="scala-rdd"></a><a href="#scala-rdd" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h2>
+<p><strong>Will not be implemented.</strong></p>
+<h2><a class="anchor" aria-hidden="true" id="scala-df"></a><a href="#scala-df" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h2>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+
+<span class="hljs-keyword">val</span> warcs = <span class="hljs-string">"/path/to/warcs/*"</span>
+<span class="hljs-keyword">val</span> results = <span class="hljs-string">"/path/to/results/"</span>
+
+<span class="hljs-keyword">val</span> webpages = <span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc).webpages()
+<span class="hljs-keyword">val</span> webgraph = <span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc).webgraph()
+
+<span class="hljs-comment">// Domain frequency.</span>
+webpages.groupBy($<span class="hljs-string">"domain"</span>)
+  .count()
+  .sort($<span class="hljs-string">"count"</span>.desc)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"domains"</span>)
+
+<span class="hljs-comment">// Domain graph.</span>
+webgraph.groupBy(
+    $<span class="hljs-string">"crawl_date"</span>,
+    removePrefixWWW(extractDomain($<span class="hljs-string">"src"</span>)).as(<span class="hljs-string">"src_domain"</span>),
+    removePrefixWWW(extractDomain($<span class="hljs-string">"dest"</span>)).as(<span class="hljs-string">"dest_domain"</span>)
+  )
+  .count()
+  .filter(!($<span class="hljs-string">"dest_domain"</span> === <span class="hljs-string">""</span>))
+  .filter(!($<span class="hljs-string">"src_domain"</span> === <span class="hljs-string">""</span>))
+  .filter($<span class="hljs-string">"count"</span> &gt; <span class="hljs-number">5</span>)
+  .orderBy(desc(<span class="hljs-string">"count"</span>))
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"domain-graph"</span>)
+
+<span class="hljs-comment">// Image graph.</span>
+<span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc)
+  .imagegraph()
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"image-graph"</span>)
+
+<span class="hljs-comment">// Web graph.</span>
+webgraph.write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"web-graph"</span>)
+
+<span class="hljs-comment">// Web pages.</span>
+webpages.write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"webpages"</span>)
+
+<span class="hljs-comment">// Binary information.</span>
+<span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc)
+  .audio()
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"filename"</span>, $<span class="hljs-string">"extension"</span>, $<span class="hljs-string">"mime_type_web_server"</span>, $<span class="hljs-string">"mime_type_tika"</span>, $<span class="hljs-string">"md5"</span>, $<span class="hljs-string">"sha1"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"audio"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc)
+  .images()
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"filename"</span>, $<span class="hljs-string">"extension"</span>, $<span class="hljs-string">"mime_type_web_server"</span>, $<span class="hljs-string">"mime_type_tika"</span>, $<span class="hljs-string">"width"</span>, $<span class="hljs-string">"height"</span>, $<span class="hljs-string">"md5"</span>, $<span class="hljs-string">"sha1"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"image"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc)
+  .pdfs()
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"filename"</span>, $<span class="hljs-string">"extension"</span>, $<span class="hljs-string">"mime_type_web_server"</span>, $<span class="hljs-string">"mime_type_tika"</span>, $<span class="hljs-string">"md5"</span>, $<span class="hljs-string">"sha1"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"pdf"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc)
+  .presentationProgramFiles()
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"filename"</span>, $<span class="hljs-string">"extension"</span>, $<span class="hljs-string">"mime_type_web_server"</span>, $<span class="hljs-string">"mime_type_tika"</span>, $<span class="hljs-string">"md5"</span>, $<span class="hljs-string">"sha1"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"presentation-program"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc)
+  .spreadsheets()
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"filename"</span>, $<span class="hljs-string">"extension"</span>, $<span class="hljs-string">"mime_type_web_server"</span>, $<span class="hljs-string">"mime_type_tika"</span>, $<span class="hljs-string">"md5"</span>, $<span class="hljs-string">"sha1"</span>)
+  .write.option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"spreadsheet"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc)
+  .videos()
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"filename"</span>, $<span class="hljs-string">"extension"</span>, $<span class="hljs-string">"mime_type_web_server"</span>, $<span class="hljs-string">"mime_type_tika"</span>, $<span class="hljs-string">"md5"</span>, $<span class="hljs-string">"sha1"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"video"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc)
+  .wordProcessorFiles()
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"filename"</span>, $<span class="hljs-string">"extension"</span>, $<span class="hljs-string">"mime_type_web_server"</span>, $<span class="hljs-string">"mime_type_tika"</span>, $<span class="hljs-string">"md5"</span>, $<span class="hljs-string">"sha1"</span>)
+  .write.option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"word-processor"</span>)
+
+<span class="hljs-comment">// Text files.</span>
+<span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc)
+  .css()
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"css"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc)
+  .html()
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"html"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc)
+  .js()
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"js"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc)
+  .json()
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"json"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc)
+  .plainText()
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"plain-text"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(warcs, sc)
+  .xml()
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(results + <span class="hljs-string">"xml"</span>)
+
+sys.exit
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="python-df"></a><a href="#python-df" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h2>
+<pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> col, desc
+
+warcs = <span class="hljs-string">"/path/to/warcs/*"</span>
+results = <span class="hljs-string">"/path/to/results/"</span>
+
+webpages = WebArchive(sc, sqlContext, warcs).webpages()
+webgraph = WebArchive(sc, sqlContext, warcs).webgraph()
+
+<span class="hljs-comment"># Domain frequency.</span>
+webpages.groupBy(<span class="hljs-string">"domain"</span>) \
+  .count() \
+  .sort(col(<span class="hljs-string">"count"</span>)\
+  .desc()) \
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"domains"</span>)
+
+<span class="hljs-comment"># Domain graph.</span>
+webgraph.groupBy(<span class="hljs-string">"crawl_date"</span>, remove_prefix_www(extract_domain(<span class="hljs-string">"src"</span>)).alias(<span class="hljs-string">"src_domain"</span>), remove_prefix_www(extract_domain(<span class="hljs-string">"dest"</span>)).alias(<span class="hljs-string">"dest_domain"</span>))\
+  .count()\
+  .filter((col(<span class="hljs-string">"dest_domain"</span>).isNotNull()) &amp; (col(<span class="hljs-string">"dest_domain"</span>) !=<span class="hljs-string">""</span>))\
+  .filter((col(<span class="hljs-string">"src_domain"</span>).isNotNull()) &amp; (col(<span class="hljs-string">"src_domain"</span>) !=<span class="hljs-string">""</span>))\
+  .filter(col(<span class="hljs-string">"count"</span>) &gt; <span class="hljs-number">5</span>)\
+  .orderBy(desc(<span class="hljs-string">"count"</span>))\
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"domain-graph"</span>)
+
+<span class="hljs-comment"># Image graph.</span>
+WebArchive(sc, sqlContext, warcs).imagegraph()\
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"image-graph"</span>)
+
+<span class="hljs-comment"># Web graph.</span>
+webgraph.write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"web-graph"</span>)
+
+<span class="hljs-comment"># Web pages.</span>
+webpages.write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"webpages"</span>)
+
+<span class="hljs-comment"># Binary information.</span>
+WebArchive(sc, sqlContext, warcs).audio()\
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"audio"</span>)
+
+WebArchive(sc, sqlContext, warcs).images()\
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"images"</span>)
+
+WebArchive(sc, sqlContext, warcs).pdfs()\
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"pdfs"</span>)
+
+WebArchive(sc, sqlContext, warcs).presentation_program()\
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"presentation_program"</span>)
+
+WebArchive(sc, sqlContext, warcs).spreadsheets()\
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"spreadsheets"</span>)
+
+WebArchive(sc, sqlContext, warcs).video()\
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"videos"</span>)
+
+WebArchive(sc, sqlContext, warcs).word_processor()\
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"word_processor"</span>)
+
+<span class="hljs-comment"># Text files.</span>
+WebArchive(sc, sqlContext, warcs).css()\
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"css"</span>)
+
+WebArchive(sc, sqlContext, warcs).html()\
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"html"</span>)
+
+WebArchive(sc, sqlContext, warcs).js()\
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"js"</span>)
+
+WebArchive(sc, sqlContext, warcs).json()\
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"json"</span>)
+
+WebArchive(sc, sqlContext, warcs).plain_text()\
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"plain-text"</span>)
+
+WebArchive(sc, sqlContext, warcs).xml()\
+  .write\
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
+  .format(<span class="hljs-string">"csv"</span>)\
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
+  .save(results + <span class="hljs-string">"xml"</span>)
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/1.1.0/aut-spark-submit-app"><span class="arrow-prev">← </span><span>The Toolkit with spark-submit</span></a><a class="docs-next button" href="/docs/1.1.0/extract-binary-info"><span>Extract Binary Info</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#scala-rdd">Scala RDD</a></li><li><a href="#scala-df">Scala DF</a></li><li><a href="#python-df">Python DF</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/dependencies">Getting Started</a><a href="/docs/collection-analysis">Generating Results</a><a href="/docs/filters-rdd">Filtering results</a><a href="/docs/aut-spark-submit-app">Standard Derivatives</a><a href="/docs/df-results">What to do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/img/waterloo.png"/><img alt="York University" class="footer_img" src="/img/york.png"/></section><section class="copyright">CC BY 2.0 2022 Archives Unleashed Project</section></footer></div></body></html>
