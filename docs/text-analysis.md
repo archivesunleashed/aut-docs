@@ -235,7 +235,7 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
 
 ## Extract Web Page Text Filtered by Date
 
-This set of examples extracts the text for all the web pages in a collection 
+This set of examples extracts the text for all the web pages in a collection
 filtered by a given crawl date or last modified date. AUT allows filtering
 records by a list of full or partial date strings. It conceives of the date
 string as a `DateComponent`. Use `keepDate` to specify the year (`YYYY`),
