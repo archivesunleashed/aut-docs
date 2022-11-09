@@ -15,6 +15,7 @@ hyperlink information.
 **`.all()`**
 
 - `crawl_date` (string)
+- `last_modified_date` (string)
 - `domain` (string)
 - `url` (string)
 - `mime_type_web_server` (string)
@@ -29,6 +30,7 @@ hyperlink information.
 **`.webpages()`**
 
 - `crawl_date` (string)
+- `last_modified_date` (string)
 - `domain` (string)
 - `url` (string)
 - `mime_type_web_server` (string)
@@ -59,6 +61,7 @@ hyperlink information.
 **`.images()`**
 
 - `crawl_date` (string)
+- `last_modified_date` (string)
 - `url` (string)
 - `filename` (string)
 - `extension` (string)
@@ -75,6 +78,7 @@ hyperlink information.
 **`.pdfs()`**
 
 - `crawl_date` (string)
+- `last_modified_date` (string)
 - `url` (string)
 - `filename` (string)
 - `extension` (string)
@@ -89,6 +93,7 @@ hyperlink information.
 **`.audio()`**
 
 - `crawl_date` (string)
+- `last_modified_date` (string)
 - `url` (string)
 - `filename` (string)
 - `extension` (string)
@@ -103,6 +108,7 @@ hyperlink information.
 **`.videos()`**
 
 - `crawl_date` (string)
+- `last_modified_date` (string)
 - `url` (string)
 - `filename` (string)
 - `extension` (string)
@@ -117,6 +123,7 @@ hyperlink information.
 **`.spreadsheets()`**
 
 - `crawl_date` (string)
+- `last_modified_date` (string)
 - `url` (string)
 - `filename` (string)
 - `extension` (string)
@@ -131,6 +138,7 @@ hyperlink information.
 **`.presentationProgramFiles()`**
 
 - `crawl_date` (string)
+- `last_modified_date` (string)
 - `url` (string)
 - `filename` (string)
 - `extension` (string)
@@ -145,6 +153,7 @@ hyperlink information.
 **`.wordProcessorFiles()`**
 
 - `crawl_date` (string)
+- `last_modified_date` (string)
 - `url` (string)
 - `filename` (string)
 - `extension` (string)
@@ -159,6 +168,7 @@ hyperlink information.
 **`.css()`**
 
 - `crawl_date` (string)
+- `last_modified_date` (string)
 - `url` (string)
 - `filename` (string)
 - `extension` (string)
@@ -173,6 +183,7 @@ hyperlink information.
 **`.html()`**
 
 - `crawl_date` (string)
+- `last_modified_date` (string)
 - `url` (string)
 - `filename` (string)
 - `extension` (string)
@@ -187,6 +198,7 @@ hyperlink information.
 **`.js()`**
 
 - `crawl_date` (string)
+- `last_modified_date` (string)
 - `url` (string)
 - `filename` (string)
 - `extension` (string)
@@ -201,6 +213,7 @@ hyperlink information.
 **`.json()`**
 
 - `crawl_date` (string)
+- `last_modified_date` (string)
 - `url` (string)
 - `filename` (string)
 - `extension` (string)
@@ -215,6 +228,7 @@ hyperlink information.
 **`.plainText()`**
 
 - `crawl_date` (string)
+- `last_modified_date` (string)
 - `url` (string)
 - `filename` (string)
 - `extension` (string)
@@ -229,6 +243,7 @@ hyperlink information.
 **`.xml()`**
 
 - `crawl_date` (string)
+- `last_modified_date` (string)
 - `url` (string)
 - `filename` (string)
 - `extension` (string)
