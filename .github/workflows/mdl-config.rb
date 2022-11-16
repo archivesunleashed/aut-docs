@@ -1,6 +1,6 @@
 all
 
-rule 'MD013', code_blocks: false, links: false, tables: false
+rule 'MD013', ignore_code_blocks: true, links: false, tables: false
 exclude_rule 'MD002'
 exclude_rule 'MD024'
 exclude_rule 'MD033'
