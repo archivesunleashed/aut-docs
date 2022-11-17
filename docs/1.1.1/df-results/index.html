@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>DataFrame Results · Archives Unleashed Toolkit</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This page answers the question of what to do with Scala or Python DF results."/><meta name="docsearch:version" content="1.1.1"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="DataFrame Results · Archives Unleashed Toolkit"/><meta property="og:type" content="website"/><meta property="og:url" content="https://archivesunleashed.github.io/"/><meta property="og:description" content="This page answers the question of what to do with Scala or Python DF results."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-2879197-28', 'auto');
+              ga('send', 'pageview');
+            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/favicon.ico" alt="Archives Unleashed Toolkit"/><h2 class="headerTitleWithLogo">Archives Unleashed Toolkit</h2></a><a href="/versions"><h3>1.1.1</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/1.1.1/home" target="_self">Docs</a></li><li class=""><a href="https://archivesunleashed.org" target="_self">Project</a></li><li class=""><a href="https://github.com/archivesunleashed/aut" target="_self">GitHub</a></li><li class=""><a href="https://news.archivesunleashed.org/" target="_self">News</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>What to do with Results</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Home</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.1/home">The Toolkit</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.1/dependencies">Dependencies</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/usage">Usage</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/aut-at-scale">The Toolkit at Scale</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/dataframe-schemas">DataFrame Schemas</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/toolkit-walkthrough">Toolkit Walkthrough</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Generating Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.1/collection-analysis">Collection Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/text-analysis">Text Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/link-analysis">Link Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/binary-analysis">Binary Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/text-files-analysis">Text Files (html, text, css, js, json, xml) Analysis</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Filtering Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.1/filters-rdd">RDD Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/filters-df">DataFrame Filters</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Standard Derivatives</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.1/aut-spark-submit-app">The Toolkit with spark-submit</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/auk-derivatives">ARCH Derivatives</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/extract-binary-info">Extract Binary Info</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/extract-binary">Extract Binaries to Disk</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">What to do with Results</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/docs/1.1.1/df-results">DataFrame Results</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/rdd-results">RDD Results</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">DataFrame Results</h1></header><article><div><span><p>This page answers the question of what to do with Scala or Python DF results.</p>
+<p>Most script snippets in the documentation end with <code>.show(20, false)</code> (in
+Scala) and <code>.show(20, False)</code> (in Python).
+This prints a table of results with 20 rows and <em>doesn't</em> truncate the columns
+(the <code>false</code> or <code>False</code>).
+You can change the second parameter to <code>true</code> (Scala) or <code>True</code> (Python) if the
+columns get too wide for better display.
+If you want more or fewer results, change the first number.</p>
+<h2><a class="anchor" aria-hidden="true" id="scala"></a><a href="#scala" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala</h2>
+<p>If you want to return a set of results, the counterpart of <code>.take(10)</code> with
+RDDs is <code>.head(10)</code>.
+So, something like (in Scala):</p>
+<pre><code class="hljs css language-scala"><span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).webpages()
+  <span class="hljs-comment">// more transformations here...</span>
+  .head(<span class="hljs-number">10</span>)
+</code></pre>
+<p>In the Scala console, the results are automatically assigned to a variable,
+like the following:</p>
+<pre><code class="hljs css language-scala">res0: <span class="hljs-type">Array</span>[<span class="hljs-type">String</span>] = <span class="hljs-type">Array</span>(...)
+</code></pre>
+<p>Scala automatically numbers the variables, starting at 0, so that the number
+will increment with each statement.
+You can then manipulate the variable, for example <code>res0(0)</code> to access the first
+element in the array.</p>
+<p>Don't like the variable name Scala gives you?
+You can do something like this:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> r = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).keepValidPages()
+  <span class="hljs-comment">// more transformations here...</span>
+  .head(<span class="hljs-number">10</span>)
+</code></pre>
+<p>Scala assigns the results to <code>r</code> is this case, which you can then subsequently
+manipulate, like <code>r(0)</code> to access the first element.</p>
+<p>If you want <em>all</em> results, replace <code>.take(10)</code> with <code>.collect()</code>.
+This will return <em>all</em> results to the console.</p>
+<p><strong>WARNING</strong>: Be careful with <code>.collect()</code>! If your results contain ten million
+records, AUT will try to return <em>all of them</em>  to your console (on your
+physical machine).
+Most likely, your machine won't have enough memory!</p>
+<p>Alternatively, if you want to save the results to disk, replace <code>.show(20, false)</code> with the following:</p>
+<pre><code class="hljs css language-scala">  .write.csv(<span class="hljs-string">"/path/to/export/directory/"</span>)
+</code></pre>
+<p>Replace <code>/path/to/export/directory/</code> with your desired location.
+Note that this is a <em>directory</em>, not a <em>file</em>.</p>
+<p>Depending on your intended use of the output, you may want to include headers
+in the CSV file, in which case:</p>
+<pre><code class="hljs css language-scala">  .write.option(<span class="hljs-string">"header"</span>,<span class="hljs-string">"true"</span>).csv(<span class="hljs-string">"/path/to/export/directory/"</span>)
+</code></pre>
+<p>If you want to store the results with the intention to read the results back
+later for further processing, then use <a href="https://parquet.apache.org/">Parquet</a>
+format (a <a href="http://en.wikipedia.org/wiki/Column-oriented_DBMS">columnar storage
+format</a>):</p>
+<pre><code class="hljs css language-scala">  .write.parquet(<span class="hljs-string">"/path/to/export/directory/"</span>)
+</code></pre>
+<p>Replace <code>/path/to/export/directory/</code> with your desired location.
+Note that this is a <em>directory</em>, not a <em>file</em>.</p>
+<p>Later, as in a completely separate session, you can read the results back in
+and continuing processing, as follows:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> results = spark.read.parquet(<span class="hljs-string">"/path/to/export/directory/"</span>)
+
+results.show(<span class="hljs-number">20</span>, <span class="hljs-literal">false</span>)
+</code></pre>
+<p>Parquet encodes metadata such as the schema and column types, so you can pick
+up exactly where you left off.
+Note that this works even across languages (e.g., export to Parquet from Scala,
+read back in Python) or any system that supports Parquet.</p>
+<h2><a class="anchor" aria-hidden="true" id="python"></a><a href="#python" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python</h2>
+<p>If you want to return a set of results, the counterpart of <code>.take(10)</code> with
+RDDs is <code>.head(10)</code>.
+So, something like (in Python):</p>
+<pre><code class="hljs css language-python">WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>).webpages() \
+  <span class="hljs-comment"># more transformations here...</span>
+  .select(<span class="hljs-string">"http_status_code"</span>)
+  .head(<span class="hljs-number">10</span>)
+</code></pre>
+<p>In the PySpark console, the results are returned as a List of rows, like the following:</p>
+<pre><code class="hljs css language-python">[Row(http_status_code=<span class="hljs-string">'200'</span>), Row(http_status_code=<span class="hljs-string">'200'</span>), Row(http_status_code=<span class="hljs-string">'200'</span>), Row(http_status_code=<span class="hljs-string">'200'</span>), Row(http_status_code=<span class="hljs-string">'200'</span>), Row(http_status_code=<span class="hljs-string">'200'</span>), Row(http_status_code=<span class="hljs-string">'200'</span>), Row(http_status_code=<span class="hljs-string">'200'</span>), Row(http_status_code=<span class="hljs-string">'200'</span>), Row(http_status_code=<span class="hljs-string">'200'</span>)]
+</code></pre>
+<p>You can assign the tranformations to a variable, like this:</p>
+<pre><code class="hljs css language-python">archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>).webpages()
+  <span class="hljs-comment"># more transformations here...</span>
+  .head(<span class="hljs-number">10</span>)
+</code></pre>
+<p>If you want <em>all</em> results, replace <code>.head(10)</code> with <code>.collect()</code>.
+This will return <em>all</em> results to the console.</p>
+<p><strong>WARNING</strong>: Be careful with <code>.collect()</code>! If your results contain ten million
+records, TWUT will try to return <em>all of them</em>  to your console (on your
+physical machine).
+Most likely, your machine won't have enough memory!</p>
+<p>Alternatively, if you want to save the results to disk, replace <code>.show(20, false)</code> with the following:</p>
+<pre><code class="hljs css language-python">archive.write.csv(<span class="hljs-string">"/path/to/export/directory/"</span>)
+</code></pre>
+<p>Replace <code>/path/to/export/directory/</code> with your desired location.
+Note that this is a <em>directory</em>, not a <em>file</em>.</p>
+<p>Depending on your intended use of the output, you may want to include headers
+in the CSV file, in which case:</p>
+<pre><code class="hljs css language-python">archive.write.csv(<span class="hljs-string">"/path/to/export/directory/"</span>, header=<span class="hljs-string">'true'</span>)
+</code></pre>
+<p>If you want to store the results with the intention to read the results back
+later for further processing, then use Parquet format:</p>
+<pre><code class="hljs css language-python">archive.write.parquet(<span class="hljs-string">"/path/to/export/directory/"</span>)
+</code></pre>
+<p>Replace <code>/path/to/export/directory/</code> with your desired location.
+Note that this is a <em>directory</em>, not a <em>file</em>.</p>
+<p>Later, as in a completely separate session, you can read the results back in
+and continuing processing, as follows:</p>
+<pre><code class="hljs css language-python">archive = spark.read.parquet(<span class="hljs-string">"/path/to/export/directory/"</span>)
+
+archive.show(<span class="hljs-number">20</span>, false)
+</code></pre>
+<p>Parquet encodes metadata such as the schema and column types, so you can pick
+up exactly where you left off.
+Note that this works even across languages (e.g., export to Parquet from Scala,
+read back in Python) or any system that supports Parquet.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/1.1.1/extract-binary"><span class="arrow-prev">← </span><span>Extract Binaries to Disk</span></a><a class="docs-next button" href="/docs/1.1.1/rdd-results"><span>RDD Results</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#scala">Scala</a></li><li><a href="#python">Python</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/dependencies">Getting Started</a><a href="/docs/collection-analysis">Generating Results</a><a href="/docs/filters-rdd">Filtering results</a><a href="/docs/aut-spark-submit-app">Standard Derivatives</a><a href="/docs/df-results">What to do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/img/waterloo.png"/><img alt="York University" class="footer_img" src="/img/york.png"/></section><section class="copyright">CC BY 2.0 2022 Archives Unleashed Project</section></footer></div></body></html>

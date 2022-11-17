@@ -1,0 +1,405 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Toolkit Walkthrough · Archives Unleashed Toolkit</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Welcome to the Archives Unleashed Toolkit hands-on walkthrough!"/><meta name="docsearch:version" content="1.1.1"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Toolkit Walkthrough · Archives Unleashed Toolkit"/><meta property="og:type" content="website"/><meta property="og:url" content="https://archivesunleashed.github.io/"/><meta property="og:description" content="Welcome to the Archives Unleashed Toolkit hands-on walkthrough!"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-2879197-28', 'auto');
+              ga('send', 'pageview');
+            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/favicon.ico" alt="Archives Unleashed Toolkit"/><h2 class="headerTitleWithLogo">Archives Unleashed Toolkit</h2></a><a href="/versions"><h3>1.1.1</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/1.1.1/home" target="_self">Docs</a></li><li class=""><a href="https://archivesunleashed.org" target="_self">Project</a></li><li class=""><a href="https://github.com/archivesunleashed/aut" target="_self">GitHub</a></li><li class=""><a href="https://news.archivesunleashed.org/" target="_self">News</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Getting Started</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Home</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.1/home">The Toolkit</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.1/dependencies">Dependencies</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/usage">Usage</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/aut-at-scale">The Toolkit at Scale</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/dataframe-schemas">DataFrame Schemas</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/1.1.1/toolkit-walkthrough">Toolkit Walkthrough</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Generating Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.1/collection-analysis">Collection Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/text-analysis">Text Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/link-analysis">Link Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/binary-analysis">Binary Analysis</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/text-files-analysis">Text Files (html, text, css, js, json, xml) Analysis</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Filtering Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.1/filters-rdd">RDD Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/filters-df">DataFrame Filters</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Standard Derivatives</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.1/aut-spark-submit-app">The Toolkit with spark-submit</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/auk-derivatives">ARCH Derivatives</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/extract-binary-info">Extract Binary Info</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/extract-binary">Extract Binaries to Disk</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">What to do with Results</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/1.1.1/df-results">DataFrame Results</a></li><li class="navListItem"><a class="navItem" href="/docs/1.1.1/rdd-results">RDD Results</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Toolkit Walkthrough</h1></header><article><div><span><p>Welcome to the Archives Unleashed Toolkit hands-on walkthrough!</p>
+<p><img src="https://user-images.githubusercontent.com/218561/73990154-4d1bd800-4916-11ea-9b6e-10e4503dfa38.png" alt="Spark Terminal"></p>
+<p>The reality of any hands-on workshop is that things will break. We've tried our
+best to provide a robust environment that can let you walk through the basics
+of the Archives Unleashed Toolkit alongside us.</p>
+<p>If you have any questions, let us know in <a href="http://slack.archivesunleashed.org/">Slack</a>!</p>
+<h2><a class="anchor" aria-hidden="true" id="table-of-contents"></a><a href="#table-of-contents" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Table of Contents</h2>
+<ul>
+<li><a href="#installation-and-use">Installation and Use</a>
+<ul>
+<li><a href="#hello-world-our-first-script">Hello World: Our First Script</a></li>
+</ul></li>
+<li><a href="#extracting-some-text">Extracting some Text</a>
+<ul>
+<li><a href="#ouch-our-first-error">Ouch: Our First Error</a></li>
+<li><a href="#other-text-analysis-filters">Other Text Analysis Filters</a></li>
+</ul></li>
+<li><a href="#web-of-links-network-analysis">Web of Links: Network Analysis</a></li>
+<li><a href="#working-with-the-data">Working with the Data</a></li>
+<li><a href="#acknowledgements-and-final-notes">Acknowledgements and Final Notes</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="installation-and-use"></a><a href="#installation-and-use" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Installation and Use</h2>
+<p><strong>Got Docker?</strong>
+This lesson requires that you install
+<a href="https://www.docker.com/get-docker">Docker</a>, and use <code>docker-aut</code>. We have
+instructions on how to install Docker
+<a href="https://github.com/archivesunleashed/docker-aut/wiki/Docker-Install-Instructions">here</a>
+, as well as instructions on how to build and use <code>docker-aut</code>
+<a href="https://github.com/archivesunleashed/docker-aut#build-and-run">here</a>.</p>
+<p>Later in this lesson, we use the networking tool <a href="https://gephi.org/">Gephi</a>.</p>
+<p>Make sure that Docker is running! If it isn't, you might see an error like
+<code>docker: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?</code> – make sure to run it (on Mac, for example, you
+need to run the Docker application itself).</p>
+<p>Make a directory in your userspace, somewhere where you can find it, on your desktop
+perhaps. Call it <code>data</code>. In my case, I will create it on my desktop
+and it will have a path like <code>/Users/ianmilligan1/desktop/data</code>.</p>
+<p>Use the following command, replacing <code>/path/to/your/data</code> with the directory.
+<strong>If you want to use your own ARC or WARC files, please put them in this
+directory</strong>.</p>
+<p><code>docker run --rm -it -v &quot;/path/to/your/data:/data&quot; aut</code></p>
+<p>For example, if your files are in <code>/Users/ianmilligan1/desktop/data</code> you would
+run the above command like:</p>
+<p><code>docker run --rm -it -v &quot;/Users/ianmilligan1/desktop/data:/data&quot; aut</code></p>
+<hr />
+<p><strong>Troubleshooting Tips</strong></p>
+<p>The above commands are important, as they make the rest of the lesson possible!</p>
+<p>Remember that you need to have the second <code>:/data</code> in the above example. This
+is making a connection between the directory called &quot;data&quot; on my desktop with a
+directory in the Docker virtual machine called &quot;docker.&quot;</p>
+<p>Also, if you are using Windows, you will need to provide the path as it appears
+in your file system. For example: <code>C:\Users\ianmilligan1\data</code>.</p>
+<hr />
+<p>Once you run this command, you will have to wait a few minutes while data is
+downloaded and AUT builds. Once it is all working, you should see:</p>
+<pre><code class="hljs css language-shell">Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 2.4.4
+      /_/
+
+Using Scala version 2.11.12 (OpenJDK 64-Bit Server VM, Java 1.8.0_212)
+Type in expressions to have them evaluated.
+Type :help for more information.
+<span class="hljs-meta">
+scala&gt;</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="hello-world-our-first-script"></a><a href="#hello-world-our-first-script" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hello World: Our First Script</h2>
+<p>Now that we are at the prompt, let's get used to running commands. The easiest
+way to use the Spark Shell is to <em>copy and paste</em> scripts that you've written
+somewhere else in.</p>
+<p>Fortunately, the Spark Shell supports this functionality!</p>
+<p>At the <code>scala&gt;</code> prompt, type the following command and press enter.</p>
+<pre><code class="hljs css language-shell">:paste
+</code></pre>
+<p>Now cut and paste the following script:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
+  .all()
+  .keepValidPagesDF()
+  .groupBy($<span class="hljs-string">"domain"</span>))
+  .count()
+  .sort($<span class="hljs-string">"count"</span>.desc)
+  .show(<span class="hljs-number">10</span>, <span class="hljs-literal">false</span>)
+</code></pre>
+<p>Let's take a moment to look at this script. It:</p>
+<ul>
+<li>begins by importing the AUT libraries;</li>
+<li>tells the program where it can find the data (in this case, the sample data
+that we have included in this Docker image);</li>
+<li>tells it only to keep the
+&quot;<a href="https://aut.docs.archivesunleashed.org/docs/filters-rdd#scala-df">valid</a>&quot;
+pages, in this case HTML data</li>
+<li>tells it to <code>ExtractDomain</code>, or find the base domain of each URL - i.e.
+<code>www.google.com/cats</code> we are interested just in the domain, or
+<code>google.com</code>;</li>
+<li>counts them - how many times does <code>google.com</code> appear in this collection,
+for example;</li>
+<li>and displays a DataFrame of the top ten!</li>
+</ul>
+<p>Once it is pasted in, let's run it.</p>
+<p>You run pasted scripts by pressing <code>ctrl</code> + <code>d</code>. Try that now.</p>
+<p>You should see:</p>
+<pre><code class="hljs css language-dataframe">// Exiting paste mode, now interpreting.
+
++-------------------------+-----+
+|<span class="hljs-string">domain                   </span>|<span class="hljs-string">count</span>|
++-------------------------+-----+
+|<span class="hljs-string">equalvoice.ca            </span>|<span class="hljs-string">4274 </span>|
+|<span class="hljs-string">liberal.ca               </span>|<span class="hljs-string">1968 </span>|
+|<span class="hljs-string">policyalternatives.ca    </span>|<span class="hljs-string">588  </span>|
+|<span class="hljs-string">greenparty.ca            </span>|<span class="hljs-string">535  </span>|
+|<span class="hljs-string">fairvote.ca              </span>|<span class="hljs-string">442  </span>|
+|<span class="hljs-string">ndp.ca                   </span>|<span class="hljs-string">416  </span>|
+|<span class="hljs-string">davidsuzuki.org          </span>|<span class="hljs-string">348  </span>|
+|<span class="hljs-string">canadiancrc.com          </span>|<span class="hljs-string">88   </span>|
+|<span class="hljs-string">communist-party.ca       </span>|<span class="hljs-string">39   </span>|
+|<span class="hljs-string">ccsd.ca                  </span>|<span class="hljs-string">22   </span>|
++-------------------------+-----+
+only showing top 10 rows
+
+import io.archivesunleashed._
+import io.archivesunleashed.udfs._
+</code></pre>
+<p>We like to use this example for two reasons:</p>
+<ul>
+<li>It is fairly simple and lets us know that AUT is working;</li>
+<li>and it tells us what we can expect to find in the web archives! In this case,
+we have a lot of the Liberal Party of Canada, Equal Voice Canada, and the
+Green Party of Canada.</li>
+</ul>
+<p><strong>If you loaded your own data above</strong>, you can access that directory by
+substituting the directory in the <code>loadArchives</code> command. Try it again!
+Remember to type <code>:paste</code>, paste the following command in, and then <code>ctrl</code> +
+<code>D</code> to execute.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/data/*.gz"</span>, sc)
+  .all()
+  .keepValidPagesDF()
+  .groupBy($<span class="hljs-string">"domain"</span>)
+  .count()
+  .sort($<span class="hljs-string">"count"</span>.desc)
+  .show(<span class="hljs-number">10</span>, <span class="hljs-literal">false</span>)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="extracting-some-text"></a><a href="#extracting-some-text" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extracting some Text</h2>
+<p>Now that we know what we might find in a web archive, let us try extracting
+some text. You might want to get just the text of a given website or domain,
+for example.</p>
+<p>Above we learned that the Liberal Party of Canada's website has 1,968 captures
+in the sample files we provided. Let's try to just extract that text.</p>
+<p>To load this script, remember to type <code>:paste</code>, copy-and-paste it into the shell,
+and then press <code>ctrl</code> + <code>d</code>.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+
+<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Array</span>(<span class="hljs-string">"liberal.ca"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
+  .webpages()
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
+  .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(<span class="hljs-string">"/data/liberal-party-text"</span>)
+</code></pre>
+<p><strong>If you're using your own data, that's why the domain count was key!</strong> Swap
+out the &quot;liberal.ca&quot; command above with the domain that you want to look at
+from your own data.</p>
+<p>Now let's look at the ensuing data. Go to the folder you provided in the very
+first startup – remember, in my case it was <code>/users/ianmilligan1/desktop/data</code>,
+and you will now have a folder called <code>liberal-party-text</code>. Open up the files
+with your text editor and check it out!</p>
+<h2><a class="anchor" aria-hidden="true" id="ouch-our-first-error"></a><a href="#ouch-our-first-error" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ouch: Our First Error</h2>
+<p>One of the vexing parts of this interface is that it creates output directories
+and if the directory already exists, it comes tumbling down.</p>
+<p>As this is one of the most common errors, let's see it and then learn how to
+get around it.</p>
+<p>Try running the <strong>exact same script</strong> that you did above.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+
+<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Array</span>(<span class="hljs-string">"liberal.ca"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
+  .webpages()
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
+  .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(<span class="hljs-string">"/data/liberal-party-text"</span>)
+</code></pre>
+<p>Instead of a nice crisp feeling of success, you will see a long dump of text
+beginning with:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-number">20</span>/<span class="hljs-number">02</span>/<span class="hljs-number">06</span> <span class="hljs-number">23</span>:<span class="hljs-number">43</span>:<span class="hljs-number">05</span> <span class="hljs-type">WARN</span> <span class="hljs-type">SparkSession</span>$<span class="hljs-type">Builder</span>: <span class="hljs-type">Using</span> an existing <span class="hljs-type">SparkSession</span>; some configuration may not take effect.
+org.apache.spark.sql.<span class="hljs-type">AnalysisException</span>: path file:/data/liberal-party-text already exists.;
+</code></pre>
+<p>To get around this, you can do two things:</p>
+<ul>
+<li>Delete the existing directory that you created;</li>
+<li>Change the name of the output file - to <code>/data/liberal-party-text-2</code> for example.</li>
+</ul>
+<p>Good luck!</p>
+<h2><a class="anchor" aria-hidden="true" id="other-text-analysis-filters"></a><a href="#other-text-analysis-filters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Other Text Analysis Filters</h2>
+<p>Take some time to explore the various filters that you can use. Check out the
+<a href="https://aut.docs.archivesunleashed.org/docs/filters-df">documentation</a>
+for some ideas.</p>
+<p>Some options:</p>
+<ul>
+<li><strong>Keep URL Patterns</strong>: Instead of domains, what if you wanted to have text
+relating to just a certain pattern? Substitute <code>hasDomains</code> for a command
+like:
+<code>.filter($&quot;domain&quot;), Array(&quot;liberal.ca&quot;, &quot;ndp.ca&quot;))</code></li>
+<li><strong>Filter by Date</strong>: What if we just wanted data from 2006? You could add the
+following command after <code>.webpages()</code>: <code>.filter(hasDates($&quot;crawl_date&quot;, Array(&quot;2006&quot;)))</code></li>
+<li><strong>Filter by Language</strong>: What if you just want French-language pages? Add
+another filter: <code>.filter($&quot;languages&quot;, Array(&quot;fr&quot;)))</code>.</li>
+</ul>
+<p>For example, if we just wanted the French-language Liberal pages, we would run:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+
+<span class="hljs-keyword">val</span> domains = <span class="hljs-type">Array</span>(<span class="hljs-string">"liberal.ca"</span>)
+<span class="hljs-keyword">val</span> languages = <span class="hljs-type">Array</span>(<span class="hljs-string">"fr"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
+  .webpages()
+  .filter(hasDomains($<span class="hljs-string">"domain"</span>), lit(domains)))
+  .filter(hasLanguages($<span class="hljs-string">"language"</span>, lit(languages)))
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(<span class="hljs-string">"/data/liberal-party-french-text"</span>)
+</code></pre>
+<p>Or if we wanted to just have pages from 2006, we would run:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+
+<span class="hljs-keyword">val</span> dates = <span class="hljs-type">Array</span>(<span class="hljs-string">"2006"</span>)
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
+  .webpages()
+  .filter(hasDate($<span class="hljs-string">"crawl_date"</span>, lit(dates)))
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(<span class="hljs-string">"/data/2006-text"</span>)
+</code></pre>
+<p>Finally, if we want to remove the HTTP headers – let's say if we want to create
+some nice word clouds – we can add a final command: <code>RemoveHttpHeader</code>.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
+  .webpages()
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
+  .write
+  .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+  .format(<span class="hljs-string">"csv"</span>)
+  .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+  .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+  .save(<span class="hljs-string">"/data/text-no-headers"</span>)
+</code></pre>
+<p>You could now try uploading one of the plain text files using a website like
+<a href="https://voyant-tools.org">Voyant Tools</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="web-of-links-network-analysis"></a><a href="#web-of-links-network-analysis" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Web of Links: Network Analysis</h2>
+<p>One other thing we can do is a network analysis. By now you are probably
+getting good at running code.</p>
+<p>Let's extract all of the links from the sample data and export them to a file
+format that the popular network analysis program Gephi can use.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
+<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+<span class="hljs-keyword">import</span> io.archivesunleashed.app._
+
+<span class="hljs-keyword">val</span> webgraph = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc).webgraph()
+
+<span class="hljs-keyword">val</span> graph = webgraph.groupBy(
+                            $<span class="hljs-string">"crawl_date"</span>,
+                            removePrefixWWW(extractDomain($<span class="hljs-string">"src"</span>)).as(<span class="hljs-string">"src_domain"</span>),
+                            removePrefixWWW(extractDomain($<span class="hljs-string">"dest"</span>)).as(<span class="hljs-string">"dest_domain"</span>))
+                    .count()
+                    .filter(!($<span class="hljs-string">"dest_domain"</span>===<span class="hljs-string">""</span>))
+                    .filter(!($<span class="hljs-string">"src_domain"</span>===<span class="hljs-string">""</span>))
+                    .filter($<span class="hljs-string">"count"</span> &gt; <span class="hljs-number">5</span>)
+                    .orderBy(desc(<span class="hljs-string">"count"</span>))
+
+<span class="hljs-type">WriteGEXF</span>(graph.collect(), <span class="hljs-string">"/data/links-for-gephi.gexf"</span>)
+</code></pre>
+<p>By now this should be seeming pretty straightforward! (remember to keep using
+<code>:paste</code> to enter this code).</p>
+<h2><a class="anchor" aria-hidden="true" id="working-with-the-data"></a><a href="#working-with-the-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Working with the Data</h2>
+<p>The first step should be to work with this network diagram so you can make a
+beautiful visualization yourself.</p>
+<p><img src="https://archivesunleashed.org/images/gephi.png" alt="Gephi visualization"></p>
+<p>First, let's use these instructions to <a href="https://cloud.archivesunleashed.org/derivatives/gephi">work with Gephi</a>.</p>
+<p>Secondly, we can begin to think about how” to work with the plain text file.
+See the following documents from our &quot;learning guides&quot;:</p>
+<ul>
+<li><a href="https://cloud.archivesunleashed.org/derivatives/text-filtering"><strong>Filtering the Full-Text Derivative
+File</strong></a>: This
+tutorial explores the use of the &quot;grep&quot; command line tool to filter out
+dates, domains, and keywords from plain text.</li>
+<li><a href="https://cloud.archivesunleashed.org/derivatives/text-antconc"><strong>Text Analysis Part One: Beyond the Keyword Search: Using
+AntConc</strong></a>:
+This tutorial explores how you can explore text within a web archive using
+the AntConc tool.</li>
+<li><a href="https://cloud.archivesunleashed.org/derivatives/text-sentiment"><strong>Text Analysis Part Two: Sentiment Analysis With the Natural Language
+Toolkit</strong></a>:
+This tutorial explores how you can calculate the positivity or negativity (in
+an emotional sense) of web archive text.</li>
+</ul>
+<p>Good luck and thanks for joining us on this lesson plan.</p>
+<h2><a class="anchor" aria-hidden="true" id="acknowledgements-and-final-notes"></a><a href="#acknowledgements-and-final-notes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Acknowledgements and Final Notes</h2>
+<p>The ARC and WARC file are drawn from the <a href="https://archive-it.org/collections/227">Canadian Political Parties &amp;
+Political Interest Groups Archive-It
+Collection</a>, collected by the
+University of Toronto. We are grateful that they've provided this material to
+us.</p>
+<p>If you use their material, please cite it along the following lines:</p>
+<ul>
+<li>University of Toronto Libraries, Canadian Political Parties and Interest
+Groups, Archive-It Collection 227, Canadian Action Party,
+<a href="http://wayback.archive-it.org/227/20051004191340/http://canadianactionparty.ca/Default2.asp">http://wayback.archive-it.org/227/20051004191340/http://canadianactionparty.ca/Default2.asp</a></li>
+</ul>
+<p>You can find more information about this collection at <a href="http://webarchives.ca/">WebArchives.ca</a>.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/1.1.1/dataframe-schemas"><span class="arrow-prev">← </span><span class="function-name-prevnext">DataFrame Schemas</span></a><a class="docs-next button" href="/docs/1.1.1/collection-analysis"><span>Collection Analysis</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#table-of-contents">Table of Contents</a></li><li><a href="#installation-and-use">Installation and Use</a></li><li><a href="#hello-world-our-first-script">Hello World: Our First Script</a></li><li><a href="#extracting-some-text">Extracting some Text</a></li><li><a href="#ouch-our-first-error">Ouch: Our First Error</a></li><li><a href="#other-text-analysis-filters">Other Text Analysis Filters</a></li><li><a href="#web-of-links-network-analysis">Web of Links: Network Analysis</a></li><li><a href="#working-with-the-data">Working with the Data</a></li><li><a href="#acknowledgements-and-final-notes">Acknowledgements and Final Notes</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/dependencies">Getting Started</a><a href="/docs/collection-analysis">Generating Results</a><a href="/docs/filters-rdd">Filtering results</a><a href="/docs/aut-spark-submit-app">Standard Derivatives</a><a href="/docs/df-results">What to do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/img/waterloo.png"/><img alt="York University" class="footer_img" src="/img/york.png"/></section><section class="copyright">CC BY 2.0 2022 Archives Unleashed Project</section></footer></div></body></html>
