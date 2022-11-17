@@ -1,6 +1,7 @@
 ---
-id: usage
+id: version-1.2.0-usage
 title: Usage
+original_id: usage
 ---
 
 ## The Toolkit with Spark Submit
