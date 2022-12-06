@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: Install Ruby 2.7
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@0a29871fe2b0200a17a4497bae54fe5df0d973aa 
       with:
         ruby-version: 2.7.x
     - name: Install mdl
