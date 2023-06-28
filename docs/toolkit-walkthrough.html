@@ -144,7 +144,7 @@ somewhere else in.</p>
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/aut-resources/Sample-Data/*.gz"</span>, sc)
   .all()
   .keepValidPagesDF()
-  .groupBy($<span class="hljs-string">"domain"</span>))
+  .groupBy($<span class="hljs-string">"domain"</span>)
   .count()
   .sort($<span class="hljs-string">"count"</span>.desc)
   .show(<span class="hljs-number">10</span>, <span class="hljs-literal">false</span>)
