@@ -112,7 +112,7 @@ import io.archivesunleashed.udfs._
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .all()
   .keepValidPagesDF()
-  .groupBy($"domain"))
+  .groupBy($"domain")
   .count()
   .sort($"count".desc)
   .show(10, false)
