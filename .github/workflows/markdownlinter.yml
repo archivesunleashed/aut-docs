@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Install Ruby 2.7
+    - name: Install Ruby 3.1
       uses: ruby/setup-ruby@0a29871fe2b0200a17a4497bae54fe5df0d973aa
       with:
-        ruby-version: 2.7
+        ruby-version: 3.1
     - name: Install mdl
       run: gem install mdl
     - name: Check out code
