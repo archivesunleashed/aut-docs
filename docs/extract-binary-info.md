@@ -23,24 +23,16 @@ import io.archivesunleashed.udfs._
 
 sc.setLogLevel("INFO")
 
-sc.hadoopConfiguration.set("fs.s3a.access.key", "YOUR ACCESS KEY")
-sc.hadoopConfiguration.set("fs.s3a.secret.key", "YOUR SECRET KEY ")
-
 // Local web archive collection.
 val warcs = RecordLoader.loadArchives("/local/path/to/warcs", sc)
-
-// S3 hosted web archive collection.
-val warcsS3 = RecordLoader.loadArchives("s3a://your-data-bucket/", sc)
 
 // Choose your format: CSV or Parquet.
 
 // For CSV:
 //  .write.csv("/path/to/derivatives/csv/audio")
-//  .write.csv("s3a://your-derivatives-bucket/parquet/pages")
 
 // For Parquet:
 // .write.parquet("/path/to/derivatives/parquet/pages/")
-// .write.parquet("s3a://your-derivatives-bucket/parquet/pages")
 
 // Audio Files.
 warcs.audio()
@@ -66,13 +58,13 @@ warcs.pdfs()
   .format("csv")
   .option("escape", "\"")
   .option("encoding", "utf-8")
-  .save("s3a://your-derivatives-bucket/csv/pdf")
+  .save("/path/to/derivatives/csv/pdf")
 
 // Presentation Program Files.
 warcs.presentationProgramFiles()
   .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"md5", $"sha1")
   .write
-  .parquet("s3a://your-derivatives-bucket/parquet/presentation-program")
+  .parquet("/path/to/derivatives/parquet/presentation-program")
 
 // Spreadsheets.
 warcs.spreadsheets()
