@@ -66,8 +66,6 @@
 processor files, spreadsheet files, and presentation program files to a CSV
 file, or into the <a href="https://parquet.apache.org/">Apache Parquet</a> format
 to <a href="/docs/1.1.1/df-results#what-to-do-with-dataframe-results">work with later</a>?</p>
-<p>You can also read and write to Amazon S3 by supplying your AWS credentials, and
-using <code>s3a</code>.</p>
 <h2><a class="anchor" aria-hidden="true" id="scala-rdd"></a><a href="#scala-rdd" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h2>
 <p><strong>Will not be implemented.</strong></p>
 <h2><a class="anchor" aria-hidden="true" id="scala-df"></a><a href="#scala-df" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h2>
@@ -76,25 +74,16 @@ using <code>s3a</code>.</p>
 
 sc.setLogLevel(<span class="hljs-string">"INFO"</span>)
 
-sc.hadoopConfiguration.set(<span class="hljs-string">"fs.s3a.access.key"</span>, <span class="hljs-string">"YOUR ACCESS KEY"</span>)
-sc.hadoopConfiguration.set(<span class="hljs-string">"fs.s3a.secret.key"</span>, <span class="hljs-string">"YOUR SECRET KEY "</span>)
-
 <span class="hljs-comment">// Local web archive collection.</span>
 <span class="hljs-keyword">val</span> warcs = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/local/path/to/warcs"</span>, sc)
-
-<span class="hljs-comment">// S3 hosted web archive collection.</span>
-<span class="hljs-keyword">val</span> warcsS3 = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"s3a://your-data-bucket/"</span>, sc)
 
 <span class="hljs-comment">// Choose your format: CSV or Parquet.</span>
 
 <span class="hljs-comment">// For CSV:</span>
 <span class="hljs-comment">//  .write.csv("/path/to/derivatives/csv/audio")</span>
-<span class="hljs-comment">//  .write.csv("s3a://your-derivatives-bucket/parquet/pages")</span>
 
 <span class="hljs-comment">// For Parquet:</span>
 <span class="hljs-comment">// .write.parquet("/path/to/derivatives/parquet/pages/")</span>
-<span class="hljs-comment">// .write.parquet("s3a://your-derivatives-bucket/parquet/pages")</span>
-
 <span class="hljs-comment">// Audio Files.</span>
 warcs.audio()
   .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"filename"</span>, $<span class="hljs-string">"extension"</span>, $<span class="hljs-string">"mime_type_web_server"</span>, $<span class="hljs-string">"mime_type_tika"</span>, $<span class="hljs-string">"md5"</span>, $<span class="hljs-string">"sha1"</span>)
@@ -119,13 +108,13 @@ warcs.pdfs()
   .format(<span class="hljs-string">"csv"</span>)
   .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
   .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
-  .save(<span class="hljs-string">"s3a://your-derivatives-bucket/csv/pdf"</span>)
+  .save(<span class="hljs-string">"/path/to/derivatives/csv/pdf"</span>)
 
 <span class="hljs-comment">// Presentation Program Files.</span>
 warcs.presentationProgramFiles()
   .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"filename"</span>, $<span class="hljs-string">"extension"</span>, $<span class="hljs-string">"mime_type_web_server"</span>, $<span class="hljs-string">"mime_type_tika"</span>, $<span class="hljs-string">"md5"</span>, $<span class="hljs-string">"sha1"</span>)
   .write
-  .parquet(<span class="hljs-string">"s3a://your-derivatives-bucket/parquet/presentation-program"</span>)
+  .parquet(<span class="hljs-string">"/path/to/derivatives/parquet/presentation-program"</span>)
 
 <span class="hljs-comment">// Spreadsheets.</span>
 warcs.spreadsheets()
@@ -224,4 +213,4 @@ warcs.word_processor()\
   .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>) \
   .save(<span class="hljs-string">'/path/to/derivatives/csv/word_processor'</span>)
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/1.1.1/auk-derivatives"><span class="arrow-prev">← </span><span>ARCH Derivatives</span></a><a class="docs-next button" href="/docs/1.1.1/extract-binary"><span>Extract Binaries to Disk</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#scala-rdd">Scala RDD</a></li><li><a href="#scala-df">Scala DF</a></li><li><a href="#python-df">Python DF</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/dependencies">Getting Started</a><a href="/docs/collection-analysis">Generating Results</a><a href="/docs/filters-rdd">Filtering results</a><a href="/docs/aut-spark-submit-app">Standard Derivatives</a><a href="/docs/df-results">What to do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/img/waterloo.png"/><img alt="York University" class="footer_img" src="/img/york.png"/></section><section class="copyright">CC BY 2.0 2023 Archives Unleashed Project</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/1.1.1/auk-derivatives"><span class="arrow-prev">← </span><span>ARCH Derivatives</span></a><a class="docs-next button" href="/docs/1.1.1/extract-binary"><span>Extract Binaries to Disk</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#scala-rdd">Scala RDD</a></li><li><a href="#scala-df">Scala DF</a></li><li><a href="#python-df">Python DF</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/dependencies">Getting Started</a><a href="/docs/collection-analysis">Generating Results</a><a href="/docs/filters-rdd">Filtering results</a><a href="/docs/aut-spark-submit-app">Standard Derivatives</a><a href="/docs/df-results">What to do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/img/waterloo.png"/><img alt="York University" class="footer_img" src="/img/york.png"/></section><section class="copyright">CC BY 2.0 2024 Archives Unleashed Project</section></footer></div></body></html>
