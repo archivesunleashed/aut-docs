@@ -15,10 +15,10 @@ files, spreadsheet files, and presentation program files to disk?
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.udfs._
+import io.archivesunleashed.df._
 
 // Web archive collection.
-warcs = RecordLoader.loadArchives("/path/to/warcs", sc)
+val warcs = RecordLoader.loadArchives("/path/to/warcs", sc)
 
 // Audio Files.
 warcs.audio()
