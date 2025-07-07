@@ -292,7 +292,7 @@ a collection of W/ARCs and extract the text of web pages matching with a
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .filter(hasDate($<span class="hljs-string">"crawl_date"</span>, lit(dates)))
   .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
@@ -309,7 +309,7 @@ dates = <span class="hljs-string">"2009[10][09]\d\d"</span>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>))) \
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>) \
   .filter(col(<span class="hljs-string">"crawl_date"</span>).rlike(dates)) \
   .write \
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>) \
@@ -364,7 +364,7 @@ the domain <code>archive.org</code></p>
   .webpages()
   .filter(hasDomains($<span class="hljs-string">"domain"</span>, lit(domains)))
   .filter(hasLanguages($<span class="hljs-string">"language"</span>, lit(languages)))
-  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"language"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"language"</span>, $<span class="hljs-string">"content"</span>)
   .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
   .format(<span class="hljs-string">"csv"</span>)
@@ -381,7 +381,7 @@ languages = [<span class="hljs-string">"fr"</span>]
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>))) \
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>) \
   .filter(col(<span class="hljs-string">"domain"</span>).isin(domains)) \
   .filter(col(<span class="hljs-string">"language"</span>).isin(languages)) \
   .write \
@@ -417,7 +417,7 @@ in.</p>
 
 <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .webpages()
-  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, removeHTML(removeHTTPHeader($<span class="hljs-string">"content"</span>)))
+  .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"domain"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"content"</span>)
   .filter(hasContent($<span class="hljs-string">"content"</span>, lit(content)))
   .write
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
@@ -434,7 +434,7 @@ content = <span class="hljs-string">"%radio%"</span>
 
 WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .webpages() \
-  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"url"</span>, remove_html(remove_http_header(<span class="hljs-string">"content"</span>))) \
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"domain"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"content"</span>) \
   .filter(col(<span class="hljs-string">"content"</span>).like(content)) \
   .write \
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>) \
