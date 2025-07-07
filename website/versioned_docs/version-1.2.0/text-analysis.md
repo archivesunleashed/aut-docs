@@ -290,7 +290,7 @@ val dates = Array("2008", "2015")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", $"domain", $"url", removeHTML(removeHTTPHeader($"content")))
+  .select($"crawl_date", $"domain", $"url", $"content")
   .filter(hasDate($"crawl_date", lit(dates)))
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
@@ -310,7 +310,7 @@ dates = "2009[10][09]\d\d"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", "domain", "url", remove_html(remove_http_header("content"))) \
+  .select("crawl_date", "domain", "url", "content") \
   .filter(col("crawl_date").rlike(dates)) \
   .write \
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
@@ -375,7 +375,7 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
   .filter(hasDomains($"domain", lit(domains)))
   .filter(hasLanguages($"language", lit(languages)))
-  .select($"crawl_date", $"domain", $"url", $"language", removeHTML(removeHTTPHeader($"content")))
+  .select($"crawl_date", $"domain", $"url", $"language", $"content")
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
   .format("csv")
@@ -395,7 +395,7 @@ languages = ["fr"]
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", "domain", "url", remove_html(remove_http_header("content"))) \
+  .select("crawl_date", "domain", "url", "content") \
   .filter(col("domain").isin(domains)) \
   .filter(col("language").isin(languages)) \
   .write \
@@ -440,7 +440,7 @@ val content = Array("radio")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"crawl_date", $"domain", $"url", removeHTML(removeHTTPHeader($"content")))
+  .select($"crawl_date", $"domain", $"url", $"content")
   .filter(hasContent($"content", lit(content)))
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
@@ -460,7 +460,7 @@ content = "%radio%"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", "domain", "url", remove_html(remove_http_header("content"))) \
+  .select("crawl_date", "domain", "url", "content") \
   .filter(col("content").like(content)) \
   .write \
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
