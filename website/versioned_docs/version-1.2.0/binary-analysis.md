@@ -18,22 +18,22 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).audio();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).audio()
 
 df.show()
 ```
 
-Will extract all following information from audio files in a web collection:
+will extract the following information from audio files in a web collection:
 
 - crawl date
 - last modified date
-- audio url
+- audio URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - bytes
 
 ```dataframe
@@ -68,12 +68,12 @@ extract them with the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.udfs._
+import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).audio();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).audio()
 
-df.select($"bytes", $"extension")
-  .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
+df.select($"bytes", "extension")
+  .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", "extension")
 ```
 
 ### Python DF
@@ -89,17 +89,17 @@ df = archive.audio()
 df.show()
 ```
 
-Will extract all following information from audio files in a web collection:
+will extract the following information from audio files in a web collection:
 
 - crawl date
 - last modified date
-- audio url
+- audio URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - bytes
 
 ```dataframe
@@ -143,24 +143,24 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).images();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).images()
 
 df.show()
 ```
 
-Will extract all following information from images in a web collection:
+will extract the following information from images in a web collection:
 
 - crawl date
 - last modified date
-- image url
+- image URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- Width
-- Height
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- width
+- height
+- MD5 hash
+- SHA-1 hash
 - bytes
 
 ```dataframe
@@ -195,12 +195,12 @@ them with the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.matchbox._
+import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).images();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).images()
 
-df.select($"bytes", $"extension")
-  .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
+df.select($"bytes", "extension")
+  .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", "extension")
 ```
 
 ### Python DF
@@ -216,19 +216,19 @@ df = archive.images()
 df.show()
 ```
 
-Will extract all following information from images in a web collection:
+will extract the following information from images in a web collection:
 
 - crawl date
 - last modified date
-- image url
+- image URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- Width
-- Height
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- width
+- height
+- MD5 hash
+- SHA-1 hash
 - bytes
 
 ```dataframe
@@ -275,30 +275,30 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .take(10)
 ```
 
-Will extract the top ten URLs of images found within a collection, in an array
+will extract the top ten URLs of images found within a collection, in an array
 like so:
 
-```bash
-links: Array[(String, Int)] = Array((http://www.archive.org/images/star.png,408), (http://www.archive.org/images/no_star.png,122), (http://www.archive.org/images/logo.jpg,118), (http://www.archive.org/images/main-header.jpg,84), (http://www.archive.org/images/rss.png,20), (http://www.archive.org/images/mail.gif,13), (http://www.archive.org/images/half_star.png,10), (http://www.archive.org/images/arrow.gif,7), (http://ia300142.us.archive.org/3/items/americana/am_libraries.gif?cnt=0,3), (http://ia310121.us.archive.org/2/items/GratefulDead/gratefuldead.gif?cnt=0,3), (http://www.archive.org/images/wayback.gif,2), (http://www.archive.org/images/wayback-election2000.gif,2), (http://www.archive.org/images/wayback-wt...
+```text
+res0: Array[(String, Int)] = Array((http://www.archive.org/images/star.png,408), (http://www.archive.org/images/no_star.png,122), (http://www.archive.org/images/logo.jpg,118), (http://www.archive.org/images/main-header.jpg,84), (http://www.archive.org/images/rss.png,20), (http://www.archive.org/images/mail.gif,13), (http://www.archive.org/images/half_star.png,10), (http://www.archive.org/images/arrow.gif,7), (http://ia300142.us.archive.org/3/items/americana/am_libraries.gif?cnt=0,3), (http://ia310121.us.archive.org/2/items/GratefulDead/gratefuldead.gif?cnt=0,3), (http://www.archive.org/images/wayback.gif,2), (http://www.archive.org/images/wayback-election2000.gif,2), (http://www.archive.org/images/wayback-wt...
 ```
 
 If you wanted to work with the images, you could download them from the
 Internet Archive.
 
 Let's use the top-ranked example. [This
-link](http://web.archive.org/web/*/http://archive.org/images/star.png), for
+link](https://web.archive.org/web/*/http://archive.org/images/star.png), for
 example, will show you the temporal distribution of the image. For a snapshot
 from September 2007, this URL would work:
 
-<http://web.archive.org/web/20070913051458/http://www.archive.org/images/star.png>
+<https://web.archive.org/web/20070913051458/http://www.archive.org/images/star.png>
 
 To do analysis on all images, you could thus prepend
-`http://web.archive.org/web/20070913051458/` to each URL and `wget` them en
+`https://web.archive.org/web/20070913051458/` to each URL and `wget` them en
 masse.
 
 For more information on `wget`, please consult [this lesson available on the
 Programming Historian
-website](http://programminghistorian.org/lessons/automated-downloading-with-wget).
+website](https://programminghistorian.org/en/lessons/automated-downloading-with-wget).
 
 ### Scala DF
 
@@ -308,7 +308,7 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).imagegraph();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).imagegraph()
 
 df.groupBy($"image_url")
   .count()
@@ -316,7 +316,7 @@ df.groupBy($"image_url")
   .show(10)
 ```
 
-Will extract the top ten URLs of images found within a collection, in a
+will extract the top ten URLs of images found within a collection, in a
 DataFrame like so:
 
 ```dataframe
@@ -353,7 +353,7 @@ df.groupBy("image_url")\
   .show(10)
 ```
 
-Will extract the top ten URLs of images found within a collection, in a
+will extract the top ten URLs of images found within a collection, in a
 DataFrame like so:
 
 ```dataframe
@@ -373,32 +373,41 @@ DataFrame like so:
 +--------------------+-----+
 ```
 
-## Extract Most Frequent Images MD5 Hash
+## Extract Most Frequent Images by MD5 Hash
 
-Some images may be the same, but have different URLs. This UDF finds the
+Some images may be the same, but have different URLs. This app finds the
 popular images by calculating the MD5 hash of each and presents the most
-frequent images based on that metric. This script:
+frequent images based on that metric.
+
+### Scala RDD
+
+This script:
 
 ```scala
 import io.archivesunleashed._
 import io.archivesunleashed.app._
 import io.archivesunleashed.matchbox._
 
-val r = RecordLoader.loadArchives("/path/to/warcs",sc).persist()
+val r = RecordLoader.loadArchives("/path/to/warcs", sc).persist()
 ExtractPopularImages(r, 500, sc).saveAsTextFile("500-Popular-Images")
 ```
 
-Will save the 500 most popular URLs to an output directory.
+will save the 500 most popular images to an output directory.
 
 ### Scala DF
+
+`ExtractPopularImagesDF` takes a DataFrame of images, the number of images to
+return, and, optionally, the minimum width and minimum height (in pixels) of
+the images to consider. This example returns the 10 most popular images that
+are at least 30 by 30 pixels:
 
 ```scala
 import io.archivesunleashed._
 import io.archivesunleashed.app._
 
-val df = RecordLoader.loadArchives("/path/to/warcs",sc).images()
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).images()
 
-ExtractPopularImagesDF(df,10,30,30).show()
+ExtractPopularImagesDF(df, 10, 30, 30).show()
 ```
 
 ### Python DF
@@ -408,15 +417,14 @@ from aut import *
 
 images = WebArchive(sc, sqlContext, "/path/to/warcs").images()
 
-popular_images = ExtractPopularImages(images, 20, 10, 10)
+popular_images = ExtractPopularImages(images, 10, 30, 30)
 
 popular_images.show()
 ```
 
 ## Find Images Shared Between Domains
 
-How to find images shared between domains that appear more than once _in more
-than one domain_.
+How do I find images that appear in _more than one domain_?
 
 ### Scala DF
 
@@ -428,44 +436,46 @@ val images = RecordLoader.loadArchives("/path/to/warcs", sc)
                         .images()
                         .select(removePrefixWWW(extractDomain($"url")).as("domain"), $"url", $"md5")
 
-val links = images.groupBy("md5").count().where(countDistinct("domain")>=2)
+val links = images.groupBy("md5")
+                  .agg(countDistinct("domain").as("domain_count"))
+                  .where($"domain_count" >= 2)
 
-val result = images.join(links, "md5")
-                   .groupBy("domain", "md5")
-                   .agg(first("url").as("image_url"))
-                   .orderBy(asc("md5"))
-                   .write
-                   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
-                   .format("csv")
-                   .option("escape", "\"")
-                   .option("encoding", "utf-8")
-                   .save("/path/to/output")
+images.join(links, "md5")
+      .groupBy("domain", "md5")
+      .agg(first("url").as("image_url"))
+      .orderBy(asc("md5"))
+      .write
+      .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+      .format("csv")
+      .option("escape", "\"")
+      .option("encoding", "utf-8")
+      .save("/path/to/output")
 ```
 
-### PythonDF
+### Python DF
 
 ```python
 from aut import *
-from pyspark.sql.functions import asc, countDistinct, first
+from pyspark.sql.functions import asc, col, countDistinct, first
 
 images = WebArchive(sc, sqlContext, "/path/to/warcs") \
   .images() \
   .select(remove_prefix_www(extract_domain("url")).alias("domain"), "url", "md5")
 
 links = images.groupBy("md5") \
-              .count() \
-              .where(countDistinct("domain")>=2)
+              .agg(countDistinct("domain").alias("domain_count")) \
+              .where(col("domain_count") >= 2)
 
-result = images.join(links, "md5") \
-               .groupBy("domain", "md5") \
-               .agg(first("url").alias("image_url")) \
-               .orderBy(asc("md5")) \
-               .write
-               .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
-               .format("csv")
-               .option("escape", "\"")
-               .option("encoding", "utf-8")
-               .save("/path/to/output")
+images.join(links, "md5") \
+      .groupBy("domain", "md5") \
+      .agg(first("url").alias("image_url")) \
+      .orderBy(asc("md5")) \
+      .write \
+      .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
+      .format("csv") \
+      .option("escape", "\"") \
+      .option("encoding", "utf-8") \
+      .save("/path/to/output")
 ```
 
 ## Extract PDF Information
@@ -482,22 +492,22 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).pdfs();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).pdfs()
 
 df.show()
 ```
 
-Will extract all following information from PDF files in a web collection:
+will extract the following information from PDF files in a web collection:
 
 - crawl date
 - last modified date
-- file url
+- file URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - bytes
 
 ```dataframe
@@ -532,12 +542,12 @@ them with the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.udfs._
+import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).pdfs();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).pdfs()
 
-df.select($"bytes", $"extension")
-  .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
+df.select($"bytes", "extension")
+  .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", "extension")
 ```
 
 ### Python DF
@@ -553,17 +563,17 @@ df = archive.pdfs()
 df.show()
 ```
 
-Will extract all following information from PDF files in a web collection:
+will extract the following information from PDF files in a web collection:
 
 - crawl date
 - last modified date
-- file url
+- file URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - bytes
 
 ```dataframe
@@ -607,22 +617,22 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).presentationProgramFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).presentationProgramFiles()
 
 df.show()
 ```
 
-Will extract all following information from presentation program files in a web collection:
+will extract the following information from presentation program files in a web collection:
 
 - crawl date
 - last modified date
-- file url
+- file URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - bytes
 
 ```dataframe
@@ -657,12 +667,12 @@ you could extract them with the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.udfs._
+import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).presentationProgramFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).presentationProgramFiles()
 
-df.select($"bytes", $"extension")
-  .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
+df.select($"bytes", "extension")
+  .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", "extension")
 ```
 
 ### Python DF
@@ -678,17 +688,17 @@ df = archive.presentation_program()
 df.show()
 ```
 
-Will extract all following information from presentation program files in a web collection:
+will extract the following information from presentation program files in a web collection:
 
 - crawl date
 - last modified date
-- file url
+- file URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - bytes
 
 ```dataframe
@@ -732,22 +742,22 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).spreadsheets();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).spreadsheets()
 
 df.show()
 ```
 
-Will extract all following information from spreadsheet files in a web collection:
+will extract the following information from spreadsheet files in a web collection:
 
 - crawl date
 - last modified date
-- file url
+- file URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - bytes
 
 ```dataframe
@@ -782,12 +792,12 @@ them with the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.udfs._
+import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).spreadsheets();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).spreadsheets()
 
-df.select($"bytes", $"extension")
-  .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
+df.select($"bytes", "extension")
+  .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", "extension")
 ```
 
 ### Python DF
@@ -803,17 +813,17 @@ df = archive.spreadsheets()
 df.show()
 ```
 
-Will extract all following information from spreadsheet files in a web collection:
+will extract the following information from spreadsheet files in a web collection:
 
 - crawl date
 - last modified date
-- file url
+- file URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - bytes
 
 ```dataframe
@@ -857,22 +867,22 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).videos();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).videos()
 
 df.show()
 ```
 
-Will extract all following information from videos in a web collection:
+will extract the following information from videos in a web collection:
 
 - crawl date
 - last modified date
-- file url
+- file URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - bytes
 
 ```dataframe
@@ -907,12 +917,12 @@ them with the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.udfs._
+import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).videos();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).videos()
 
-df.select($"bytes", $"extension")
-  .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
+df.select($"bytes", "extension")
+  .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", "extension")
 ```
 
 ### Python DF
@@ -928,17 +938,17 @@ df = archive.video()
 df.show()
 ```
 
-Will extract all following information from videos in a web collection:
+will extract the following information from videos in a web collection:
 
 - crawl date
 - last modified date
-- file url
+- file URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - bytes
 
 ```dataframe
@@ -982,22 +992,22 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).wordProcessorFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).wordProcessorFiles()
 
 df.show()
 ```
 
-Will extract all following information from word processor files in a web collection:
+will extract the following information from word processor files in a web collection:
 
 - crawl date
 - last modified date
-- file url
+- file URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - bytes
 
 ```dataframe
@@ -1032,12 +1042,12 @@ you could extract them with the following script:
 
 ```scala
 import io.archivesunleashed._
-import io.archivesunleashed.udfs._
+import io.archivesunleashed.df._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).wordProcessorFiles();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).wordProcessorFiles()
 
-df.select($"bytes", $"extension")
-  .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", $"extension")
+df.select($"bytes", "extension")
+  .saveToDisk("bytes", "/path/to/export/directory/your-preferred-filename-prefix", "extension")
 ```
 
 ### Python DF
@@ -1053,17 +1063,17 @@ df = archive.word_processor()
 df.show()
 ```
 
-Will extract all following information from word processor files in a web collection:
+will extract the following information from word processor files in a web collection:
 
 - crawl date
 - last modified date
-- file url
+- file URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - bytes
 
 ```dataframe

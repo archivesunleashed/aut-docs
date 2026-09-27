@@ -1,0 +1,256 @@
+---
+id: version-1.2.0-collection-analysis
+title: Collection Analysis
+original_id: collection-analysis
+---
+
+## Extract All URLs
+
+How do I get a list of all URLs in the collection?
+
+### Scala RDD
+
+```scala
+import io.archivesunleashed._
+
+RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
+  .map(r => r.getUrl)
+  .take(10)
+```
+
+What do I do with the results? See [this guide](rdd-results.md)!
+
+### Scala DF
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.udfs._
+
+RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
+  .select($"url")
+  .show(20, false)
+```
+
+What do I do with the results? See [this guide](df-results.md)!
+
+### Python DF
+
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .select("url") \
+  .show(20, False)
+```
+
+What do I do with the results? See [this guide](df-results.md)!
+
+## Extract Top-Level Domains
+
+How do I extract a list of the top-level domains (and count how many pages
+belong in each top-level domain)?
+
+### Scala RDD
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.matchbox._
+
+RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
+  .map(r => ExtractDomain(r.getUrl))
+  .countItems()
+  .take(10)
+```
+
+What do I do with the results? See [this guide](rdd-results.md)!
+
+### Scala DF
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.udfs._
+
+RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
+  .select(extractDomain($"url").as("domain"))
+  .groupBy("domain").count().orderBy(desc("count"))
+  .show(20, false)
+```
+
+What do I do with the results? See [this guide](df-results.md)!
+
+### Python DF
+
+```python
+from aut import *
+from pyspark.sql.functions import desc
+
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .select(extract_domain("url").alias("domain")) \
+  .groupBy("domain") \
+  .count() \
+  .sort(desc("count")) \
+  .show(20, False)
+```
+
+What do I do with the results? See [this guide](df-results.md)!
+
+## Extract First-Level Directories
+
+How do I use regular expressions to extract fine-grained URL information?
+For example, suppose I wanted to extract the first-level directories.
+
+### Scala RDD
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.matchbox._
+
+RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
+  .flatMap(r => """http://[^/]+/[^/]+/""".r.findAllIn(r.getUrl).toList)
+  .take(10)
+```
+
+In the above example, `"""..."""` declares a raw string (so backslashes
+don't need to be escaped), `.r` turns it into a regular expression, and
+`.findAllIn` looks for all matches in the URL. Because the pattern is anchored
+to the start of the URL, there will be at most one match per URL. Finally,
+`.toList` turns the matches into a list so you can `flatMap`.
+
+What do I do with the results? See [this guide](rdd-results.md)!
+
+### Scala DF
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.udfs._
+
+RecordLoader.loadArchives("/path/to/warcs", sc)
+  .webpages()
+  .select(regexp_extract($"url", """^(http://[^/]+/[^/]+/)""", 1).as("directory"))
+  .filter($"directory" =!= "")
+  .show(10, false)
+```
+
+What do I do with the results? See [this guide](df-results.md)!
+
+### Python DF
+
+```python
+from aut import *
+from pyspark.sql.functions import col, regexp_extract
+
+url_pattern = r"^(http://[^/]+/[^/]+/)"
+
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .webpages() \
+  .select(regexp_extract("url", url_pattern, 1).alias("directory")) \
+  .filter(col("directory") != "") \
+  .show(10, False)
+```
+
+What do I do with the results? See [this guide](df-results.md)!
+
+## Extract HTTP Status Codes
+
+How do I get the [HTTP Status
+Code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) associated with
+each resource in the collection?
+
+### Scala RDD
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.matchbox._
+
+RecordLoader.loadArchives("/path/to/warcs", sc)
+  .map(r => (r.getUrl, r.getHttpStatus))
+  .take(10)
+```
+
+What do I do with the results? See [this guide](rdd-results.md)!
+
+### Scala DF
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.udfs._
+
+RecordLoader.loadArchives("/path/to/warcs", sc)
+  .all()
+  .select($"url", $"http_status_code")
+  .show(10, false)
+```
+
+What do I do with the results? See [this guide](df-results.md)!
+
+### Python DF
+
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .all() \
+  .select("url", "http_status_code") \
+  .show(10, False)
+```
+
+What do I do with the results? See [this guide](df-results.md)!
+
+## Extract the Location of the Resource in ARCs and WARCs
+
+How do I find out the WARC or ARC that each page is contained in?
+
+### Scala RDD
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.matchbox._
+
+RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
+  .map(r => (r.getUrl, r.getArchiveFilename))
+  .take(10)
+```
+
+Or, if you just want to know the filename, without the full path,
+the following script will do that.
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.matchbox._
+import org.apache.commons.io.FilenameUtils
+
+RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
+  .map(r => (r.getUrl, FilenameUtils.getName(r.getArchiveFilename)))
+  .take(10)
+```
+
+What do I do with the results? See [this guide](rdd-results.md)!
+
+### Scala DF
+
+```scala
+import io.archivesunleashed._
+import io.archivesunleashed.udfs._
+
+RecordLoader.loadArchives("/path/to/warcs", sc)
+  .all()
+  .select($"url", $"archive_filename")
+  .show(10, false)
+```
+
+What do I do with the results? See [this guide](df-results.md)!
+
+### Python DF
+
+```python
+from aut import *
+
+WebArchive(sc, sqlContext, "/path/to/warcs") \
+  .all() \
+  .select("url", "archive_filename") \
+  .show(10, False)
+```
+
+What do I do with the results? See [this guide](df-results.md)!

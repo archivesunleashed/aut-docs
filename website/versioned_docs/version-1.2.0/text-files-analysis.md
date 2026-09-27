@@ -18,22 +18,22 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).css();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).css()
 
 df.show()
 ```
 
-Will extract all following information from css files in a web collection:
+will extract the following information from CSS files in a web collection:
 
 - crawl date
 - last modified date
-- css url
+- CSS URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - content
 
 ```dataframe
@@ -76,17 +76,17 @@ df = archive.css()
 df.show()
 ```
 
-Will extract all following information from css files in a web collection:
+will extract the following information from CSS files in a web collection:
 
 - crawl date
 - last modified date
-- css url
+- CSS URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - content
 
 ```dataframe
@@ -130,22 +130,22 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).html();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).html()
 
 df.show()
 ```
 
-Will extract all following information from HTML files in a web collection:
+will extract the following information from HTML files in a web collection:
 
 - crawl date
 - last modified date
-- html url
+- HTML URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - content
 
 ```dataframe
@@ -188,17 +188,17 @@ df = archive.html()
 df.show()
 ```
 
-Will extract all following information from HTML files in a web collection:
+will extract the following information from HTML files in a web collection:
 
 - crawl date
 - last modified date
-- html url
+- HTML URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - content
 
 ```dataframe
@@ -228,7 +228,7 @@ Will extract all following information from HTML files in a web collection:
 +--------------+------------------+--------------------+------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
 ```
 
-## Extract Javascript Information
+## Extract JavaScript Information
 
 ### Scala RDD
 
@@ -242,22 +242,22 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).js();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).js()
 
 df.show()
 ```
 
-Will extract all following information from Javascript files in a web collection:
+will extract the following information from JavaScript files in a web collection:
 
 - crawl date
 - last modified date
-- Javascript url
+- JavaScript URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - content
 
 ```dataframe
@@ -300,17 +300,17 @@ df = archive.js()
 df.show()
 ```
 
-Will extract all following information from Javascript files in a web collection:
+will extract the following information from JavaScript files in a web collection:
 
 - crawl date
 - last modified date
-- Javascript url
+- JavaScript URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - content
 
 ```dataframe
@@ -354,22 +354,22 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).json();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).json()
 
 df.show()
 ```
 
-Will extract all following information from JSON files in a web collection:
+will extract the following information from JSON files in a web collection:
 
 - crawl date
 - last modified date
-- JSON url
+- JSON URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - content
 
 ```dataframe
@@ -412,17 +412,17 @@ df = archive.json()
 df.show()
 ```
 
-Will extract all following information from JSON files in a web collection:
+will extract the following information from JSON files in a web collection:
 
 - crawl date
 - last modified date
-- JSON url
+- JSON URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - content
 
 ```dataframe
@@ -466,22 +466,22 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).plainText();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).plainText()
 
 df.show()
 ```
 
-Will extract all following information from plain text files in a web collection:
+will extract the following information from plain text files in a web collection:
 
 - crawl date
 - last modified date
-- Plain text url
+- plain text URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - content
 
 ```dataframe
@@ -524,17 +524,17 @@ df = archive.plain_text()
 df.show()
 ```
 
-Will extract all following information from plain text files in a web collection:
+will extract the following information from plain text files in a web collection:
 
 - crawl date
 - last modified date
-- Plain text url
+- plain text URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - content
 
 ```dataframe
@@ -578,22 +578,22 @@ The following script:
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val df = RecordLoader.loadArchives("/path/to/warcs", sc).xml();
+val df = RecordLoader.loadArchives("/path/to/warcs", sc).xml()
 
 df.show()
 ```
 
-Will extract all following information from XML files in a web collection:
+will extract the following information from XML files in a web collection:
 
 - crawl date
 - last modified date
-- XML url
+- XML URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - content
 
 ```dataframe
@@ -636,17 +636,17 @@ df = archive.xml()
 df.show()
 ```
 
-Will extract all following information from XML files in a web collection:
+will extract the following information from XML files in a web collection:
 
 - crawl date
 - last modified date
-- XML url
+- XML URL
 - filename
 - extension
-- MimeType as identified by the hosting web server
-- MimeType as identified by [Apache Tika](https://tika.apache.org)
-- md5 hash
-- sha1 hash
+- MIME type as identified by the hosting web server
+- MIME type as identified by [Apache Tika](https://tika.apache.org)
+- MD5 hash
+- SHA-1 hash
 - content
 
 ```dataframe
