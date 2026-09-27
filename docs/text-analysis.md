@@ -17,7 +17,7 @@ import io.archivesunleashed.matchbox._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
-  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeader((r.getContentString))))
+  .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeader(r.getContentString))))
   .saveAsTextFile("plain-text-rdd/")
 ```
 
@@ -54,10 +54,10 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .save("plain-text-df/")
 ```
 
-## Extract Web Page Text By Domain
+## Extract Web Page Text by Domain
 
 This set of examples extracts the text for all the web pages in a collection
-matching a list of domains. Specifically in this example, it will go through
+matching a list of domains. Specifically, in this example, it will go through
 a collection of W/ARCs and extract the text of web pages matching the domain
 `archive.org`.
 
@@ -80,7 +80,7 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val domains = Array("archive.org", "geocities.org")
+val domains = Array("archive.org")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
@@ -117,11 +117,11 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
 ## Extract Web Page Text by URL Pattern
 
 This set of examples extracts the text for all the web pages in a collection
-with a URL matching a regular expression pattern. Specifically in this example
-, it will go through a collection of W/ARCs and extract the text of web pages
-matching the URLs beginning with `http://archive.org/details/`.
+with a URL matching a regular expression pattern. Specifically, in this
+example, it will go through a collection of W/ARCs and extract the text of web
+pages matching the URLs beginning with `http://www.archive.org/details/`.
 
-`(?i)` makes the query case insensitive.
+`(?i)` makes the query case-insensitive.
 
 ### Scala RDD
 
@@ -162,12 +162,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 from aut import *
 from pyspark.sql.functions import col
 
-url_pattern = "%http://www.archive.org/details/%"
+url_pattern = "(?i)^http://www.archive.org/details/.*"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
   .select("crawl_date", "domain", "url", "content") \
-  .filter(col("url").like(url_pattern)) \
+  .filter(col("url").rlike(url_pattern)) \
   .write \
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
   .format("csv") \
@@ -180,9 +180,9 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
 
 This set of examples extracts the text for all the web pages in a collection
 minus "boilerplate" content: advertisements, navigational elements, and
-elements of the website template. Boilerplate requires HTML, so it needs to
-used with `.all()`, not `.webpages()`.  For more information on the boilerplate
-removal library we are using, [please see this website and paper](http://www.l3s.de/~kohlschuetter/boilerplate/).
+elements of the website template. Boilerplate removal requires HTML, so it
+needs to be used with `.all()`, not `.webpages()`. For more information on the boilerplate
+removal library we are using, [please see the boilerpipe project](https://github.com/kohlschutter/boilerpipe).
 
 ### Scala RDD
 
@@ -207,7 +207,8 @@ val domains = Array("archive.org")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .all()
-  .select($"crawl_date", $"domain", $"url", extractBoilerpipeText(removeHTTPHeader($"content")))
+  .keepValidPagesDF()
+  .select($"crawl_date", $"domain", $"url", extractBoilerpipeText(removeHTTPHeader($"raw_content")).as("content"))
   .filter(hasDomains($"domain", lit(domains)))
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
@@ -223,8 +224,8 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 from aut import *
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
-  .webpages() \
-  .select("crawl_date", "domain", "url", extract_boilerplate(remove_http_header("content")).alias("content")) \
+  .all() \
+  .select("crawl_date", "domain", "url", extract_boilerplate(remove_http_header("raw_content")).alias("content")) \
   .write \
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
   .format("csv") \
@@ -240,9 +241,10 @@ filtered by a given crawl date or last modified date. AUT allows filtering
 records by a list of full or partial date strings. It conceives of the date
 string as a `DateComponent`. Use `keepDate` to specify the year (`YYYY`),
 month (`MM`), day (`DD`), year and month (`YYYYMM`), or a particular
-year-month-day (`YYYYMMDD`). Specifically in this example, it will go through
-a collection of W/ARCs and extract the text of web pages matching with a
-`crawl_date` of April 2008, or from the year 2008 or 2015.
+year-month-day (`YYYYMMDD`). Specifically, in this example, it will go through
+a collection of W/ARCs and extract the text of web pages with a
+`crawl_date` of April 2008, from the year 2008, or from the years 2008 and 2015. Note
+that `keepDate` is an RDD filter; with DataFrames, use `hasDate`.
 
 ### Scala RDD
 
@@ -305,7 +307,7 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 from aut import *
 from pyspark.sql.functions import col
 
-dates = "2009[10][09]\d\d"
+dates = r"^(2008|2015)"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
@@ -316,16 +318,16 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .format("csv") \
   .option("escape", "\"") \
   .option("encoding", "utf-8") \
-  .save("plain-text-date-filtered-df/")
+  .save("plain-text-date-filtered-2008-2015-df/")
 ```
 
 ## Extract Web Page Text Filtered by Language
 
 This set of examples extracts the text for all the web pages in a collection
-with a given [ISO 639.2 language code](https://www.loc.gov/standards/iso639-2/php/code_list.php)
-. Specifically in this example, it will go through a collection of W/ARCs and
+with a given [ISO 639-1 language code](https://www.loc.gov/standards/iso639-2/php/code_list.php).
+Specifically, in this example, it will go through a collection of W/ARCs and
 extract the text of web pages identified as being French, as well as matching
-the domain `archive.org`
+the domain `archive.org`.
 
 ### Scala RDD
 
@@ -363,38 +365,18 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .save("plain-text-fr-df/")
 ```
 
-```scala
-import io.archivesunleashed._
-import io.archivesunleashed.udfs._
-
-val domains = Array("archive.org")
-val languages = Array("fr")
-
-RecordLoader.loadArchives("/path/to/warcs", sc)
-  .webpages()
-  .filter(hasDomains($"domain", lit(domains)))
-  .filter(hasLanguages($"language", lit(languages)))
-  .select($"crawl_date", $"domain", $"url", $"language", $"content")
-  .write
-  .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
-  .format("csv")
-  .option("escape", "\"")
-  .option("encoding", "utf-8")
-  .save("plain-text-fr-df/")
-```
-
 ### Python DF
 
 ```python
 from aut import *
 from pyspark.sql.functions import col
 
-domains = ["geocities.com"]
+domains = ["archive.org"]
 languages = ["fr"]
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("crawl_date", "domain", "url", "content") \
+  .select("crawl_date", "domain", "url", "language", "content") \
   .filter(col("domain").isin(domains)) \
   .filter(col("language").isin(languages)) \
   .write \
@@ -408,13 +390,13 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
 ## Extract Web Page Text Filtered by Keyword
 
 This set of examples extracts the text for all the web pages in a collection
-with `content` matching a given string or list of string. Specifically in this
+with `content` matching a given string or list of strings. Specifically, in this
 example, it will go through a collection of W/ARCs and extract the text of web
 pages containing the string `radio`.
 
-There is also `discardContent` which does the opposite, and can be used in
-cases where, for example, you have a frequent keyword you are not interested
-in.
+There is also `discardContent` (RDD) or `!hasContent` (DataFrame), which does
+the opposite, and can be used in cases where, for example, you have a frequent
+keyword you are not interested in.
 
 ### Scala RDD
 
@@ -422,7 +404,7 @@ in.
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-RecordLoader.loadArchives("/path/to/warcs",sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepContent(Set("radio".r))
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTML(RemoveHTTPHeader(r.getContentString))))
@@ -492,9 +474,9 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-RecordLoader.loadArchives("example.warc.gz", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .all()
-  .select($"crawl_date", extractDomain($"url"), $"url", removeHTTPHeader($"content"))
+  .select($"crawl_date", extractDomain($"url").as("domain"), $"url", removeHTTPHeader($"raw_content").as("content"))
   .write
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
   .format("csv")
@@ -510,7 +492,7 @@ from aut import *
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .all() \
-  .select("crawl_date", "domain", "url", remove_http_header("content")) \
+  .select("crawl_date", "domain", "url", remove_http_header("raw_content").alias("content")) \
   .write \
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
   .format("csv") \

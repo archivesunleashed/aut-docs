@@ -6,13 +6,13 @@ title: Usage
 ## The Toolkit with Spark Submit
 
 The Toolkit offers a variety of extraction jobs with
-[`spark-submit`](https://spark.apache.org/docs/latest/submitting-applications.html)
-. These extraction jobs have a few configuration options.
+[`spark-submit`](https://spark.apache.org/docs/latest/submitting-applications.html).
+These extraction jobs have a few configuration options.
 
 The extraction jobs have a basic outline of:
 
 ```shell
-spark-submit --class io.archivesunleashed.app.CommandLineAppRunner PATH_TO_AUT_JAR --extractor EXTRACTOR --input INPUT DIRECTORY --output OUTPUT DIRECTORY
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner PATH_TO_AUT_JAR --extractor EXTRACTOR --input INPUT_DIRECTORY --output OUTPUT_DIRECTORY
 ```
 
 More information on using the Toolkit with `spark-submit` can be found in
@@ -20,7 +20,7 @@ More information on using the Toolkit with `spark-submit` can be found in
 
 ## The Toolkit with Spark Shell
 
-The Toolkit only supports the `--jar` option.
+The Toolkit only supports the `--jars` option.
 
 ```shell
 spark-shell --help
@@ -49,9 +49,9 @@ To run PySpark with the Toolkit loaded, you will need to
 provide PySpark with the Java/Scala artifact, as well as the Python bindings.
 The Java/Scala artifact can be provided with `--jars` as
 described above. The Python bindings can be
-[downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-1.2.0/aut-1.2.0.zip)
-, or [built locally](#building-locally) (the zip file will be found in
-the `target` directory.
+[downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-1.2.0/aut-1.2.0.zip),
+or [built locally](https://github.com/archivesunleashed/aut#building)
+(the zip file will be found in the `target` directory).
 
 In each of the examples below, `/path/to/python` is listed. If you are unsure
 where your Python is, it can be found with `which python`.
@@ -76,9 +76,9 @@ To run a [Jupyter Notebook](https://jupyter.org/install) with the Archives
 Unleashed Toolkit loaded, you will need to provide PySpark the Java/Scala
 artifact, and the Python bindings. The Java/Scala artifact can be provided
 with `--jars` as described above. The Python bindings can be
-[downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-1.2.0/aut-1.2.0.zip)
-, or [built locally](#Introduction) (the zip file will be found in
-the `target` directory.
+[downloaded](https://github.com/archivesunleashed/aut/releases/download/aut-1.2.0/aut-1.2.0.zip),
+or [built locally](https://github.com/archivesunleashed/aut#building)
+(the zip file will be found in the `target` directory).
 
 ### With an UberJar
 
@@ -116,7 +116,7 @@ will look something like this:
 ```
 
 Create a new notebook by clicking "New" (near the top right of the Jupyter
-homepage) and select "Python 3" from the drop-down list.
+homepage) and selecting "Python 3" from the drop-down list.
 
 The notebook will open in a new window. In the first cell enter:
 
@@ -134,7 +134,7 @@ Then hit <kbd>Shift</kbd>+<kbd>Enter</kbd>, or press the play button.
 If you receive no errors, and see the following, you are ready to begin working
 with your web archives!
 
-![](https://user-images.githubusercontent.com/218561/63203995-42684080-c061-11e9-9361-f5e6177705ff.png)
+![PySpark printSchema output in a Jupyter Notebook](https://user-images.githubusercontent.com/218561/63203995-42684080-c061-11e9-9361-f5e6177705ff.png)
 
 ## The Toolkit with Docker
 
@@ -144,5 +144,5 @@ Containers are available for [each
 release](https://github.com/archivesunleashed/docker-aut/branches), as well as
 the `main` branch.
 
-More information on using the `docker-aut` can be found
+More information on using `docker-aut` can be found
 [here](https://github.com/archivesunleashed/docker-aut).

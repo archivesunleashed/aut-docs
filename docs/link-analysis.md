@@ -8,10 +8,10 @@ Site link structures can be very useful, allowing you to learn such things as:
 - what websites were the most linked to;
 - what websites had the most outbound links;
 - what paths could be taken through the network to connect pages;
-- what communities existed within the link structure?
+- what communities existed within the link structure.
 
 Most of the following examples show the **domain** to **domain** links. For
-example, you discover how many times that `liberal.ca` linked to `twitter.com`,
+example, you discover how many times `liberal.ca` linked to `twitter.com`,
 rather than learning that `http://liberal.ca/contact` linked to
 `http://twitter.com/liberal_party`. The reason we do that is that in general,
 if you are working with any data at scale, the sheer number of raw URLs can
@@ -81,7 +81,7 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val content = Array("radio")
+val content = Array("apple")
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .all()
@@ -106,13 +106,13 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
 from aut import *
 from pyspark.sql.functions import col, explode
 
-content = "%radio%"
+content = "%apple%"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .all() \
-  .filter("crawl_date is not NULL")\
-  .filter(~(col("url").rlike(".*robots\\.txt$")) & (col("mime_type_web_server").rlike("text/html") | col("mime_type_web_server").rlike("application/xhtml+xml") | col("url").rlike("(?i).*htm$") | col("url").rlike("(?i).*html$")))\
-  .filter(col("http_status_code") == 200)
+  .filter("crawl_date is not NULL") \
+  .filter(~(col("url").rlike(".*robots\\.txt$")) & (col("mime_type_web_server").rlike("text/html") | col("mime_type_web_server").rlike("application/xhtml\\+xml") | col("url").rlike("(?i).*htm$") | col("url").rlike("(?i).*html$"))) \
+  .filter(col("http_status_code") == 200) \
   .filter(col("raw_content").like(content)) \
   .select(explode(extract_links("url", "raw_content")).alias("links")) \
   .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain(col("links._2"))).alias("dest")) \
@@ -158,7 +158,7 @@ In a larger collection, you might want to add the following line:
 .filter(r => r._2 > 5)
 ```
 
-before `.countItems()` to find just the documents that are linked to more than
+after `.countItems()` to find just the documents that are linked to more than
 five times. As you can imagine, raw URLs are very numerous!
 
 ### Scala DF
@@ -169,7 +169,7 @@ import io.archivesunleashed.udfs._
 
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webgraph()
-  .groupBy(extractDomain($"src"), extractDomain($"dest"))
+  .groupBy($"src", $"dest")
   .count()
   .filter($"count" > 5)
   .write
@@ -188,7 +188,7 @@ from pyspark.sql.functions import col
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webgraph() \
-  .groupBy(extract_domain("src"), extract_domain("dest")) \
+  .groupBy("src", "dest") \
   .count() \
   .filter(col("count") > 5) \
   .write \
@@ -257,12 +257,12 @@ url_pattern = "%http://www.archive.org/details/%"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .all() \
-  .filter("crawl_date is not NULL")\
-  .filter(~(col("url").rlike(".*robots\\.txt$")) & (col("mime_type_web_server").rlike("text/html") | col("mime_type_web_server").rlike("application/xhtml+xml") | col("url").rlike("(?i).*htm$") | col("url").rlike("(?i).*html$")))\
-  .filter(col("http_status_code") == 200)
+  .filter("crawl_date is not NULL") \
+  .filter(~(col("url").rlike(".*robots\\.txt$")) & (col("mime_type_web_server").rlike("text/html") | col("mime_type_web_server").rlike("application/xhtml\\+xml") | col("url").rlike("(?i).*htm$") | col("url").rlike("(?i).*html$"))) \
+  .filter(col("http_status_code") == 200) \
   .filter(col("url").like(url_pattern)) \
-  .select(explode(extract_links("url", "raw_content").alias("links"))) \
-  .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain("links._2")).alias("dest")) \
+  .select(explode(extract_links("url", "raw_content")).alias("links")) \
+  .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain(col("links._2"))).alias("dest")) \
   .groupBy("src", "dest") \
   .count() \
   .filter(col("count") > 5) \
@@ -280,10 +280,10 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
 
 The following Spark script generates the aggregated site-level link structure,
 grouped by crawl date (YYYYMMDD). It
-makes use of the `ExtractLinks` and `ExtractToLevelDomain` functions.
+makes use of the `ExtractLinks` and `ExtractDomain` functions.
 
-If you prefer to group by crawl month (YYYMM), replace `getCrawlDate` with
-`getCrawlMonth` below. If you prefer to group by simply crawl year (YYYY),
+If you prefer to group by crawl month (YYYYMM), replace `getCrawlDate` with
+`getCrawlMonth` below. If you prefer to group simply by crawl year (YYYY),
 replace `getCrawlDate` with `getCrawlYear` below.
 
 ```scala
@@ -301,12 +301,12 @@ RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
 
 The format of this output is:
 
-- Field one: Crawldate, `yyyyMMdd`
-- Field two: Source domain (i.e. liberal.ca)
-- Field three: Target domain of link (i.e. ndp.ca)
-- Field four: number of links.
+- Field one: Crawl date, `yyyyMMdd`
+- Field two: Source domain (e.g., liberal.ca)
+- Field three: Target domain of link (e.g., ndp.ca)
+- Field four: Number of links
 
-```scala
+```text
 ((20080612,liberal.ca,liberal.ca),1832983)
 ((20060326,ndp.ca,ndp.ca),1801775)
 ((20060426,ndp.ca,ndp.ca),1771993)
@@ -315,15 +315,16 @@ The format of this output is:
 
 In the above example, you are seeing links within the same domain.
 
-Note also that `ExtractLinksRDD` takes an optional third parameter of a base
-URL. If you set this – typically to the source URL – `ExtractLinksRDD` will
+Note also that `ExtractLinks` takes an optional third parameter of a base
+URL. If you set this – typically to the source URL – `ExtractLinks` will
 resolve a relative path to its absolute location. For example, if `val url =
 "http://mysite.com/some/dirs/here/index.html"` and `val html = "... <a
 href='../contact/'>Contact</a> ..."`, and we call `ExtractLinks(url, html,
 url)`, the list it returns will include the item
-`(http://mysite.com/a/b/c/index.html, http://mysite.com/a/b/contact/,
-Contact)`. It may be useful to have this absolute URL if you intend to call
-`ExtractDomainRDD` on the link and wish it to be counted.
+`(http://mysite.com/some/dirs/here/index.html,
+http://mysite.com/some/dirs/contact/, Contact)`. It may be useful to have this
+absolute URL if you intend to call `ExtractDomain` on the link and wish it to
+be counted.
 
 ### Scala DF
 
@@ -367,14 +368,14 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
 
 ### Scala RDD
 
-In this case, you would only receive links coming from websites in matching the
+In this case, you would only receive links coming from websites matching the
 URL pattern listed under `keepUrlPatterns`.
 
 ```scala
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 
-val links = RecordLoader.loadArchives("/path/to/warcs", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .keepUrlPatterns(Set("http://www.archive.org/details/.*".r))
   .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
@@ -420,9 +421,9 @@ url_pattern = "http://www.archive.org/details/.*"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .all() \
-  .filter("crawl_date is not NULL")\
-  .filter(~(col("url").rlike(".*robots\\.txt$")) & (col("mime_type_web_server").rlike("text/html") | col("mime_type_web_server").rlike("application/xhtml+xml") | col("url").rlike("(?i).*htm$") | col("url").rlike("(?i).*html$")))\
-  .filter(col("http_status_code") == 200)
+  .filter("crawl_date is not NULL") \
+  .filter(~(col("url").rlike(".*robots\\.txt$")) & (col("mime_type_web_server").rlike("text/html") | col("mime_type_web_server").rlike("application/xhtml\\+xml") | col("url").rlike("(?i).*htm$") | col("url").rlike("(?i).*html$"))) \
+  .filter(col("http_status_code") == 200) \
   .filter(col("url").rlike(url_pattern)) \
   .select(explode(extract_links("url", "raw_content")).alias("links")) \
   .select(remove_prefix_www(extract_domain(col("links._1"))).alias("src"), remove_prefix_www(extract_domain(col("links._2"))).alias("dest")) \
@@ -440,7 +441,7 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
 ## Export to Gephi
 
 You may want to export your data directly to the [Gephi software
-suite](http://gephi.github.io/), an open-source network analysis project. The
+suite](https://gephi.org/), an open-source network analysis project. The
 following code writes to the GEXF format:
 
 ### Scala RDD
@@ -454,7 +455,7 @@ import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 import io.archivesunleashed.app._
 
-val graph = RecordLoader.loadArchives("/path/to/warcs",sc)
+val graph = RecordLoader.loadArchives("/path/to/warcs", sc)
               .webgraph.groupBy(
                           $"crawl_date",
                           removePrefixWWW(extractDomain($"src")).as("src_domain"),
@@ -471,7 +472,7 @@ WriteGEXF(graph, "links-for-gephi.gexf")
 
 We also support exporting to the
 [GraphML](https://en.wikipedia.org/wiki/GraphML) format. To do so, use
-the `WriteGraphml` method:
+the `WriteGraphML` method:
 
 ```scala
 WriteGraphML(graph, "links-for-gephi.graphml")
@@ -483,7 +484,7 @@ WriteGraphML(graph, "links-for-gephi.graphml")
 from aut import *
 from pyspark.sql.functions import col, desc
 
-graph = WebArchive(sc, sqlContext, "/path/to/data") \
+graph = WebArchive(sc, sqlContext, "/path/to/warcs") \
           .webgraph() \
           .groupBy("crawl_date", remove_prefix_www(extract_domain("src")).alias("src_domain"), remove_prefix_www(extract_domain("dest")).alias("dest_domain")) \
           .count() \
@@ -498,17 +499,18 @@ WriteGEXF(graph, "links-for-gephi.gexf")
 
 We also support exporting to the
 [GraphML](https://en.wikipedia.org/wiki/GraphML) format. To do so, use
-the `WriteGraphml` method:
+the `WriteGraphML` method:
 
 ```python
 WriteGraphML(graph, "links-for-gephi.graphml")
 ```
 
-## Finding Hyperlinks within Collection on Pages with Certain Keyword
+## Find Hyperlinks within a Collection on Pages with a Certain Keyword
 
-The following script will extract a DataFrame with the following columns,
-`domain`, `url`, `crawl date`, `origin page`, and `destination page`, given a
-search term `Keystone` of the content (full-text). The example uses the sample
+The following script will extract a DataFrame with the following columns:
+`url` (the origin page), `domain`, `crawl_date`, and `destination_page`, given
+a search term `keystone` in the content (full-text). Note that the search is
+case-sensitive. The example uses the sample
 data in
 [`aut-resources`](https://github.com/archivesunleashed/aut-resources/tree/master/Sample-Data).
 
@@ -522,26 +524,21 @@ data in
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val result = udf((vs: Seq[Any]) => vs(0)
-               .toString
-               .split(",")(1))
-
-val df = RecordLoader.loadArchives("/path/to/warcs", sc)
-          .all()
-          .keepValidPagesDF()
-          .select($"domain",
-                  $"url",
-                  $"crawl_date",
-                  explode_outer(extractLinks($"url", $"raw_content"))
-                    .as("link"))
-          .filter($"raw_content".contains("keystone"))
-
-df.select($"url", $"domain", $"crawl_date", result(array($"link"))
-    .as("destination_page"))
+RecordLoader.loadArchives("/path/to/warcs", sc)
+  .all()
+  .keepValidPagesDF()
+  .filter($"raw_content".contains("keystone"))
+  .select($"url",
+          $"domain",
+          $"crawl_date",
+          explode_outer(extractLinks($"url", $"raw_content")).as("link"))
+  .select($"url", $"domain", $"crawl_date", $"link._2".as("destination_page"))
   .show()
+```
 
-// Exiting paste mode, now interpreting.
+Output:
 
+```dataframe
 +--------------------+---------------+----------+--------------------+
 |                 url|         domain|crawl_date|    destination_page|
 +--------------------+---------------+----------+--------------------+
@@ -567,11 +564,6 @@ df.select($"url", $"domain", $"crawl_date", result(array($"link"))
 |http://www.davids...|davidsuzuki.org|  20091219|http://www.davids...|
 +--------------------+---------------+----------+--------------------+
 only showing top 20 rows
-
-import io.archivesunleashed._
-import io.archivesunleashed.udfs._
-result: org.apache.spark.sql.expressions.UserDefinedFunction = UserDefinedFunction(<function1>,StringType,None)
-df: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [Domain: string, url: string ... 2 more fields]
 ```
 
 ### Python DF
@@ -580,13 +572,13 @@ df: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [Domain: string, ur
 from aut import *
 from pyspark.sql.functions import col, explode_outer
 
-webpages = WebArchive(sc, sqlContext, "/path/to/warcs") \
+WebArchive(sc, sqlContext, "/path/to/warcs") \
   .all() \
-  .filter("crawl_date is not NULL")\
-  .filter(~(col("url").rlike(".*robots\\.txt$")) & (col("mime_type_web_server").rlike("text/html") | col("mime_type_web_server").rlike("application/xhtml+xml") | col("url").rlike("(?i).*htm$") | col("url").rlike("(?i).*html$")))\
-  .filter(col("http_status_code") == 200)
-  .select("domain", "url", "crawl_date", explode_outer(extract_links("url", "raw_content")).alias("link")) \
-  .filter(col("raw_content").like("%food%")) \
-  .select("url", "domain", "crawl_date", col("link._1").alias("destination_page")) \
+  .filter("crawl_date is not NULL") \
+  .filter(~(col("url").rlike(".*robots\\.txt$")) & (col("mime_type_web_server").rlike("text/html") | col("mime_type_web_server").rlike("application/xhtml\\+xml") | col("url").rlike("(?i).*htm$") | col("url").rlike("(?i).*html$"))) \
+  .filter(col("http_status_code") == 200) \
+  .filter(col("raw_content").like("%keystone%")) \
+  .select("url", "domain", "crawl_date", explode_outer(extract_links("url", "raw_content")).alias("link")) \
+  .select("url", "domain", "crawl_date", col("link._2").alias("destination_page")) \
   .show()
 ```

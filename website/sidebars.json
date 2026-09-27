@@ -27,7 +27,7 @@
       "extract-binary-info",
       "extract-binary"
     ],
-    "What to do with Results": [
+    "What to Do with Results": [
       "df-results",
       "rdd-results"
     ]

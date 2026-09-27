@@ -29,7 +29,7 @@ In the Scala console, the results are automatically assigned to a variable,
 like the following:
 
 ```scala
-res0: Array[String] = Array(...)
+res0: Array[org.apache.spark.sql.Row] = Array(...)
 ```
 
 Scala automatically numbers the variables, starting at 0, so that the number
@@ -41,19 +41,19 @@ Don't like the variable name Scala gives you?
 You can do something like this:
 
 ```scala
-val r = RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
+val r = RecordLoader.loadArchives("/path/to/warcs", sc).webpages()
   // more transformations here...
   .head(10)
 ```
 
-Scala assigns the results to `r` is this case, which you can then subsequently
+Scala assigns the results to `r` in this case, which you can then subsequently
 manipulate, like `r(0)` to access the first element.
 
-If you want _all_ results, replace `.take(10)` with `.collect()`.
+If you want _all_ results, replace `.head(10)` with `.collect()`.
 This will return _all_ results to the console.
 
 **WARNING**: Be careful with `.collect()`! If your results contain ten million
-records, AUT will try to return _all of them_  to your console (on your
+records, AUT will try to return _all of them_ to your console (on your
 physical machine).
 Most likely, your machine won't have enough memory!
 
@@ -77,7 +77,7 @@ in the CSV file, in which case:
 If you want to store the results with the intention to read the results back
 later for further processing, then use [Parquet](https://parquet.apache.org/)
 format (a [columnar storage
-format](http://en.wikipedia.org/wiki/Column-oriented_DBMS)):
+format](https://en.wikipedia.org/wiki/Column-oriented_DBMS)):
 
 ```scala
   .write.parquet("/path/to/export/directory/")
@@ -87,7 +87,7 @@ Replace `/path/to/export/directory/` with your desired location.
 Note that this is a _directory_, not a _file_.
 
 Later, as in a completely separate session, you can read the results back in
-and continuing processing, as follows:
+and continue processing, as follows:
 
 ```scala
 val results = spark.read.parquet("/path/to/export/directory/")
@@ -107,36 +107,38 @@ RDDs is `.head(10)`.
 So, something like (in Python):
 
 ```python
-WebArchive(sc, sqlContext, "/path/to/warcs").webpages() \
+(WebArchive(sc, sqlContext, "/path/to/warcs").webpages()
   # more transformations here...
-  .select("http_status_code")
-  .head(10)
+  .select("url")
+  .head(10))
 ```
 
-In the PySpark console, the results are returned as a List of rows, like the following:
+In the PySpark console, the results are returned as a list of `Row` objects, like the following:
 
 ```python
-[Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200'), Row(http_status_code='200')]
+[Row(url='http://...'), Row(url='http://...'), Row(url='http://...'), ...]
 ```
 
-You can assign the tranformations to a variable, like this:
+You can assign the transformations to a variable, like this:
 
 ```python
-archive = WebArchive(sc, sqlContext, "/path/to/warcs").webpages()
+archive = (WebArchive(sc, sqlContext, "/path/to/warcs").webpages()
   # more transformations here...
-  .head(10)
+  .select("url"))
+
+archive.head(10)
 ```
 
 If you want _all_ results, replace `.head(10)` with `.collect()`.
 This will return _all_ results to the console.
 
 **WARNING**: Be careful with `.collect()`! If your results contain ten million
-records, TWUT will try to return _all of them_  to your console (on your
+records, AUT will try to return _all of them_ to your console (on your
 physical machine).
 Most likely, your machine won't have enough memory!
 
 Alternatively, if you want to save the results to disk, replace `.show(20,
-false)` with the following:
+False)` with the following:
 
 ```python
 archive.write.csv("/path/to/export/directory/")
@@ -163,12 +165,12 @@ Replace `/path/to/export/directory/` with your desired location.
 Note that this is a _directory_, not a _file_.
 
 Later, as in a completely separate session, you can read the results back in
-and continuing processing, as follows:
+and continue processing, as follows:
 
 ```python
 archive = spark.read.parquet("/path/to/export/directory/")
 
-archive.show(20, false)
+archive.show(20, False)
 ```
 
 Parquet encodes metadata such as the schema and column types, so you can pick

@@ -47,7 +47,7 @@ class Footer extends React.Component {
             </a>
             <a
               href={`${this.props.config.baseUrl}docs/filters-rdd`}>
-              Filtering results
+              Filtering Results
             </a>
             <a
               href={`${this.props.config.baseUrl}docs/aut-spark-submit-app`}>
@@ -55,7 +55,7 @@ class Footer extends React.Component {
             </a>
             <a
               href={`${this.props.config.baseUrl}docs/df-results`}>
-              What to do with Results
+              What to Do with Results
             </a>
           </div>
           <div>
@@ -72,7 +72,7 @@ class Footer extends React.Component {
           <div>
             <h5>More</h5>
             <a href="https://news.archivesunleashed.org/">Project News</a>
-            <a href="https://github.com/">GitHub</a>
+            <a href="https://github.com/archivesunleashed/aut">GitHub</a>
             <a
               href="https://twitter.com/unleasharchives"
               target="_blank">
@@ -86,9 +86,9 @@ class Footer extends React.Component {
           </div>
         </section>
         <section className="sitemap">
-          <img alt="Andrew W. Mellon Foundation" className="footer_img" alt="Andrew W. Mellon Foundation" src={`${this.props.config.baseUrl}img/mellon.svg`} />
-          <img alt="University of Waterloo" className="footer_img" alt="University of Waterloo" src={`${this.props.config.baseUrl}img/waterloo.png`} />
-          <img alt="York University" className="footer_img" alt="York University" src={`${this.props.config.baseUrl}img/york.png`} />
+          <img alt="Andrew W. Mellon Foundation" className="footer_img" src={`${this.props.config.baseUrl}img/mellon.svg`} />
+          <img alt="University of Waterloo" className="footer_img" src={`${this.props.config.baseUrl}img/waterloo.png`} />
+          <img alt="York University" className="footer_img" src={`${this.props.config.baseUrl}img/york.png`} />
         </section>
         <section className="copyright">{this.props.config.copyright}</section>
       </footer>

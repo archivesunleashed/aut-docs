@@ -144,9 +144,9 @@ class Index extends React.Component {
             content:
             'That\'s not all! You can use the Toolkit for ' +
             '[collection analysis](docs/collection-analysis) to understand ' +
-            'top level domain, domain, and subdomain frequency, or understand the ' +
+            'top-level domain, domain, and subdomain frequency, or understand the ' +
             'distribution of [binary content](docs/binary-analysis) like audio, ' +
-            '[images](docs/image-analysis), videos, and documents. You can even extract all those ' +
+            '[images](docs/binary-analysis#extract-image-information), videos, and documents. You can even extract all those ' +
             'PowerPoint presentations, spreadsheets, and PDFs in your web archive collections!',
             image: `${baseUrl}img/undraw_instat_analysis_ajld.svg`,
             imageAlign: 'right',

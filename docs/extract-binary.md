@@ -63,7 +63,7 @@ sys.exit
 from aut import *
 
 # Web archive collection.
-warcs = WebArchive(sc, sqlContext, "path/to/warcs")
+warcs = WebArchive(sc, sqlContext, "/path/to/warcs")
 
 # Audio Files.
 audio = warcs.audio()\
@@ -87,7 +87,7 @@ pdfs = warcs.pdfs()\
 SaveBytes(pdfs, "/path/to/extract/binaries/pdf")
 
 # Presentation Program Files.
-pp_files = warcs.presentationProgramFiles()\
+pp_files = warcs.presentation_program()\
                 .select("extension", "bytes")\
                 .collect()
 
@@ -101,14 +101,14 @@ spreadsheets = warcs.spreadsheets()\
 SaveBytes(spreadsheets, "/path/to/extract/binaries/spreadsheet")
 
 # Videos.
-videos = warcs.videos()\
+videos = warcs.video()\
               .select("extension", "bytes")\
               .collect()
 
 SaveBytes(videos, "/path/to/extract/binaries/video")
 
 # Word Processor Files.
-wp_files = warcs.wordProcessorFiles()\
+wp_files = warcs.word_processor()\
                 .select("extension", "bytes")\
                 .collect()
 

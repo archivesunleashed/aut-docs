@@ -4,25 +4,25 @@ title: The Toolkit with spark-submit
 ---
 
 The Toolkit offers a variety of extraction jobs with
-[`spark-submit`](https://spark.apache.org/docs/latest/submitting-applications.html)
-. These extraction jobs have a few configuration options.
+[`spark-submit`](https://spark.apache.org/docs/latest/submitting-applications.html).
+These extraction jobs have a few configuration options.
 
 The extraction jobs have a basic outline of:
 
 ```shell
-spark-submit --class io.archivesunleashed.app.CommandLineAppRunner PATH_TO_AUT_JAR --extractor EXTRACTOR --input INPUT DIRECTORY --output OUTPUT DIRECTORY
+spark-submit --class io.archivesunleashed.app.CommandLineAppRunner PATH_TO_AUT_JAR --extractor EXTRACTOR --input INPUT_DIRECTORY --output OUTPUT_DIRECTORY
 ```
 
 Additional flags include:
 
-* `--output-format FORMAT` (`csv` (default) or `parquet`.
-  `DomainGraphExtractor` has two additional output options
-  `graphml` or `gexf`.)
-* `--split` (The extractor will put results for each input file in its own
-  directory. Each directory name will be the name of the ARC/WARC file parsed.)
-* `--partition N` (The extractor will partition the DataFrame according to N
-  before writing results. The is useful to combine all the results to a single
-  file.)
+- `--output-format FORMAT`: `csv` (default) or `parquet`.
+  `DomainGraphExtractor` has two additional output options: `graphml` and
+  `gexf`.
+- `--split`: The extractor will put results for each input file in its own
+  directory. Each directory name will be the name of the ARC/WARC file parsed.
+- `--partition N`: The extractor will partition the DataFrame into N partitions
+  before writing results. This is useful to combine all the results into a
+  single file.
 
 ## Audio Information
 
@@ -57,7 +57,7 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 ## Domain Frequency
 
 This extractor outputs a directory of files, or a single file with the
-following columns: `domain`, and `count`.
+following columns: `domain` and `count`.
 
 Directory of CSV files:
 
@@ -87,7 +87,7 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 
 This extractor outputs a directory of files, or a single file with the
 following columns: `crawl_date`, `src_domain`, `dest_domain`, and `count`. In
-addition to the standard text output, an additional flag `--output-format` can
+addition to CSV and Parquet, the `--output-format` flag can
 output [GraphML](https://en.wikipedia.org/wiki/GraphML), or
 [GEXF](https://gephi.org/gexf/format/).
 
@@ -128,7 +128,7 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 
 A single CSV file:
 
-``` shell
+```shell
 spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --partition 1
 ```
 
@@ -140,7 +140,7 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 
 A single Parquet file:
 
-``` shell
+```shell
 spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor ImageGraphExtractor --input /path/to/warcs/* --output output/path --output-format parquet --partition 1
 ```
 
@@ -198,7 +198,7 @@ Directory of Parquet files:
 spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor PDFInformationExtractor --input /path/to/warcs/* --output output/path --output-format parquet
 ```
 
-A single CSV file:
+A single Parquet file:
 
 ```shell
 spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-fatjar.jar --extractor PDFInformationExtractor --input /path/to/warcs/* --output output/path --output-format parquet --partition 1
@@ -207,7 +207,7 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 ## Plain Text
 
 This extractor outputs a directory of files, or a single file with the
-following columns: `content` (Boilerplate, HTTP headers, and HTML removed).
+following columns: `content` (boilerplate, HTTP headers, and HTML removed).
 
 Directory of CSV files:
 
@@ -357,7 +357,7 @@ spark-submit --class io.archivesunleashed.app.CommandLineAppRunner path/to/aut-f
 This extractor outputs a directory of files, or a single file with the
 following columns: `crawl_date`, `domain`, `url`,
 `mime_type_web_server`, `mime_type_tika`, and `content`
-(HTTP headers, and HTML removed).
+(HTTP headers and HTML removed).
 
 Directory of CSV files:
 

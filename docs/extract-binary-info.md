@@ -6,7 +6,7 @@ title: Extract Binary Info
 How do I extract the binary information of PDFs, audio files, video files, word
 processor files, spreadsheet files, and presentation program files to a CSV
 file, or into the [Apache Parquet](https://parquet.apache.org/) format
-to [work with later](df-results.md#what-to-do-with-dataframe-results)?
+to [work with later](df-results.md)?
 
 You can also read and write to Amazon S3 by supplying your AWS credentials, and
 using `s3a`.
@@ -45,7 +45,7 @@ warcs.audio()
   .save("/path/to/derivatives/csv/audio")
 
 // Images.
-warcsS3.images()
+warcs.images()
   .select($"crawl_date", $"url", $"filename", $"extension", $"mime_type_web_server", $"mime_type_tika", $"width", $"height", $"md5", $"sha1")
   .write
   .parquet("/path/to/derivatives/parquet/image")
@@ -113,7 +113,7 @@ warcs = WebArchive(sc, sqlContext, "/path/to/aut-resources-master/Sample-Data/*g
 # .write.parquet("/path/to/derivatives/parquet/pages/")
 
 # Audio Files.
-warcs.audio()
+warcs.audio() \
   .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
   .write \
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ") \
@@ -132,7 +132,7 @@ warcs.images()\
 warcs.pdfs()\
   .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
   .write\
-  .parquet('/path/to/derivatives/csv/pdfs')
+  .parquet('/path/to/derivatives/parquet/pdfs')
 
 # Spreadsheets.
 warcs.spreadsheets()\
@@ -148,13 +148,13 @@ warcs.spreadsheets()\
 warcs.presentation_program()\
   .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
   .write\
-  .parquet('/path/to/derivatives/csv/presentation_program')
+  .parquet('/path/to/derivatives/parquet/presentation_program')
 
 # Videos.
 warcs.video()\
   .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
   .write\
-  .parquet('/path/to/derivatives/csv/video')
+  .parquet('/path/to/derivatives/parquet/video')
 
 # Word Processor Files.
 warcs.word_processor()\

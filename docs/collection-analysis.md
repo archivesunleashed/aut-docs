@@ -90,15 +90,15 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .groupBy("domain") \
   .count() \
   .sort(desc("count")) \
-  .show(10, False)
+  .show(20, False)
 ```
 
 What do I do with the results? See [this guide](df-results.md)!
 
-## Extract Different Subdomains
+## Extract First-Level Directories
 
-How do I use regular expressions to extract for fine-grained URL information?
-For example, supposed I wanted to extract the first-level directories?
+How do I use regular expressions to extract fine-grained URL information?
+For example, suppose I wanted to extract the first-level directories.
 
 ### Scala RDD
 
@@ -111,44 +111,45 @@ RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
   .take(10)
 ```
 
-In the above example, `"""...."""` declares that we are working with a regular
-expression, `.r` says turn it into a regular expression, `.findAllIn` says look
-for all matches in the URL. This will only return the first but that is
-generally good for our use cases. Finally, `.toList` turns it into a list so
-you can `flatMap`.
+In the above example, `"""..."""` declares a raw string (so backslashes
+don't need to be escaped), `.r` turns it into a regular expression, and
+`.findAllIn` looks for all matches in the URL. Because the pattern is anchored
+to the start of the URL, there will be at most one match per URL. Finally,
+`.toList` turns the matches into a list so you can `flatMap`.
 
 What do I do with the results? See [this guide](rdd-results.md)!
 
 ### Scala DF
 
 ```scala
-
 import io.archivesunleashed._
 import io.archivesunleashed.udfs._
 
-val urlPattern = Array("""http://[^/]+/[^/]+/""")
-
 RecordLoader.loadArchives("/path/to/warcs", sc)
   .webpages()
-  .select($"url")
-  .filter(hasUrlPatterns($"url", lit(urlPattern)))
+  .select(regexp_extract($"url", """^(http://[^/]+/[^/]+/)""", 1).as("directory"))
+  .filter($"directory" =!= "")
   .show(10, false)
 ```
+
+What do I do with the results? See [this guide](df-results.md)!
 
 ### Python DF
 
 ```python
 from aut import *
-from pyspark.sql.functions import col
+from pyspark.sql.functions import col, regexp_extract
 
-url_pattern = "http://[^/]+/[^/]+/"
+url_pattern = r"^(http://[^/]+/[^/]+/)"
 
 WebArchive(sc, sqlContext, "/path/to/warcs") \
   .webpages() \
-  .select("url") \
-  .filter(col("url").rlike(url_pattern)) \
+  .select(regexp_extract("url", url_pattern, 1).alias("directory")) \
+  .filter(col("directory") != "") \
   .show(10, False)
 ```
+
+What do I do with the results? See [this guide](df-results.md)!
 
 ## Extract HTTP Status Codes
 
@@ -181,6 +182,8 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .show(10, false)
 ```
 
+What do I do with the results? See [this guide](df-results.md)!
+
 ### Python DF
 
 ```python
@@ -191,6 +194,8 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .select("url", "http_status_code") \
   .show(10, False)
 ```
+
+What do I do with the results? See [this guide](df-results.md)!
 
 ## Extract the Location of the Resource in ARCs and WARCs
 
@@ -207,7 +212,7 @@ RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
   .take(10)
 ```
 
-Or, if you just want to know the filename, without the full path and filename,
+Or, if you just want to know the filename, without the full path,
 the following script will do that.
 
 ```scala
@@ -234,6 +239,8 @@ RecordLoader.loadArchives("/path/to/warcs", sc)
   .show(10, false)
 ```
 
+What do I do with the results? See [this guide](df-results.md)!
+
 ### Python DF
 
 ```python
@@ -244,3 +251,5 @@ WebArchive(sc, sqlContext, "/path/to/warcs") \
   .select("url", "archive_filename") \
   .show(10, False)
 ```
+
+What do I do with the results? See [this guide](df-results.md)!

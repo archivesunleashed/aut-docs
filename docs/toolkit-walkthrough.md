@@ -17,12 +17,12 @@ If you have any questions, let us know in [Slack](http://slack.archivesunleashed
 
 - [Installation and Use](#installation-and-use)
   - [Hello World: Our First Script](#hello-world-our-first-script)
-- [Extracting some Text](#extracting-some-text)
+- [Extracting Some Text](#extracting-some-text)
   - [Ouch: Our First Error](#ouch-our-first-error)
   - [Other Text Analysis Filters](#other-text-analysis-filters)
 - [Web of Links: Network Analysis](#web-of-links-network-analysis)
 - [Working with the Data](#working-with-the-data)
-- [Acknowledgements and Final Notes](#acknowledgements-and-final-notes)
+- [Acknowledgments and Final Notes](#acknowledgments-and-final-notes)
 
 ## Installation and Use
 
@@ -38,7 +38,7 @@ Later in this lesson, we use the networking tool [Gephi](https://gephi.org/).
 
 Make sure that Docker is running! If it isn't, you might see an error like
 `docker: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is
-the docker daemon running?` – make sure to run it (on Mac, for example, you
+the docker daemon running?` – make sure to run it (on macOS, for example, you
 need to run the Docker application itself).
 
 Make a directory in your userspace, somewhere where you can find it, on your desktop
@@ -64,7 +64,7 @@ The above commands are important, as they make the rest of the lesson possible!
 
 Remember that you need to have the second `:/data` in the above example. This
 is making a connection between the directory called "data" on my desktop with a
-directory in the Docker virtual machine called "docker."
+directory in the Docker container called `/data`.
 
 Also, if you are using Windows, you will need to provide the path as it appears
 in your file system. For example: `C:\Users\ianmilligan1\data`.
@@ -78,21 +78,23 @@ Welcome to
       ____              __
      / __/__  ___ _____/ /__
     _\ \/ _ \/ _ `/ __/  '_/
-   /___/ .__/\_,_/_/ /_/\_\   version 2.4.4
+   /___/ .__/\_,_/_/ /_/\_\   version 3.0.0
       /_/
 
-Using Scala version 2.11.12 (OpenJDK 64-Bit Server VM, Java 1.8.0_212)
+Using Scala version 2.12.10 (OpenJDK 64-Bit Server VM, Java 11)
 Type in expressions to have them evaluated.
 Type :help for more information.
 
 scala>
 ```
 
+Your version numbers may differ slightly.
+
 ## Hello World: Our First Script
 
 Now that we are at the prompt, let's get used to running commands. The easiest
-way to use the Spark Shell is to _copy and paste_ scripts that you've written
-somewhere else in.
+way to use the Spark Shell is to _paste in_ scripts that you've written
+elsewhere.
 
 Fortunately, the Spark Shell supports this functionality!
 
@@ -102,7 +104,7 @@ At the `scala>` prompt, type the following command and press enter.
 :paste
 ```
 
-Now cut and paste the following script:
+Now copy and paste the following script:
 
 ```scala
 import io.archivesunleashed._
@@ -124,8 +126,8 @@ Let's take a moment to look at this script. It:
   that we have included in this Docker image);
 - tells it only to keep the
   "[valid](https://aut.docs.archivesunleashed.org/docs/filters-rdd#scala-df)"
-  pages, in this case HTML data
-- tells it to `ExtractDomain`, or find the base domain of each URL - i.e.
+  pages, in this case HTML data;
+- groups the pages by `domain`, the base domain of each URL - e.g., for
   `www.google.com/cats` we are interested just in the domain, or
   `google.com`;
 - counts them - how many times does `google.com` appear in this collection,
@@ -134,7 +136,7 @@ Let's take a moment to look at this script. It:
 
 Once it is pasted in, let's run it.
 
-You run pasted scripts by pressing `ctrl` + `d`. Try that now.
+You run pasted scripts by pressing `Ctrl` + `D`. Try that now.
 
 You should see:
 
@@ -170,7 +172,7 @@ We like to use this example for two reasons:
 
 **If you loaded your own data above**, you can access that directory by
 substituting the directory in the `loadArchives` command. Try it again!
-Remember to type `:paste`, paste the following command in, and then `ctrl` +
+Remember to type `:paste`, paste the following command in, and then `Ctrl` +
 `D` to execute.
 
 ```scala
@@ -186,7 +188,7 @@ RecordLoader.loadArchives("/data/*.gz", sc)
   .show(10, false)
 ```
 
-## Extracting some Text
+## Extracting Some Text
 
 Now that we know what we might find in a web archive, let us try extracting
 some text. You might want to get just the text of a given website or domain,
@@ -196,7 +198,7 @@ Above we learned that the Liberal Party of Canada's website has 1,968 captures
 in the sample files we provided. Let's try to just extract that text.
 
 To load this script, remember to type `:paste`, copy-and-paste it into the shell,
-and then press `ctrl` + `d`.
+and then press `Ctrl` + `D`.
 
 ```scala
 import io.archivesunleashed._
@@ -221,7 +223,7 @@ out the "liberal.ca" command above with the domain that you want to look at
 from your own data.
 
 Now let's look at the ensuing data. Go to the folder you provided in the very
-first startup – remember, in my case it was `/users/ianmilligan1/desktop/data`,
+first startup – remember, in my case it was `/Users/ianmilligan1/desktop/data`,
 and you will now have a folder called `liberal-party-text`. Open up the files
 with your text editor and check it out!
 
@@ -256,7 +258,7 @@ RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
 Instead of a nice crisp feeling of success, you will see a long dump of text
 beginning with:
 
-```scala
+```text
 20/02/06 23:43:05 WARN SparkSession$Builder: Using an existing SparkSession; some configuration may not take effect.
 org.apache.spark.sql.AnalysisException: path file:/data/liberal-party-text already exists.;
 ```
@@ -264,7 +266,7 @@ org.apache.spark.sql.AnalysisException: path file:/data/liberal-party-text alrea
 To get around this, you can do two things:
 
 - Delete the existing directory that you created;
-- Change the name of the output file - to `/data/liberal-party-text-2` for example.
+- Change the name of the output directory - to `/data/liberal-party-text-2` for example.
 
 Good luck!
 
@@ -277,13 +279,13 @@ for some ideas.
 Some options:
 
 - **Keep URL Patterns**: Instead of domains, what if you wanted to have text
-  relating to just a certain pattern? Substitute `hasDomains` for a command
+  relating to just a certain pattern? Replace `hasDomains` with a command
   like:
-  `.filter($"domain"), Array("liberal.ca", "ndp.ca"))`
+  `.filter(hasUrlPatterns($"url", lit(Array(".*liberal.ca.*", ".*ndp.ca.*"))))`
 - **Filter by Date**: What if we just wanted data from 2006? You could add the
-  following command after `.webpages()`: `.filter(hasDates($"crawl_date", Array("2006")))`
+  following command after `.webpages()`: `.filter(hasDate($"crawl_date", lit(Array("2006"))))`
 - **Filter by Language**: What if you just want French-language pages? Add
-  another filter: `.filter($"languages", Array("fr")))`.
+  another filter: `.filter(hasLanguages($"language", lit(Array("fr"))))`.
 
 For example, if we just wanted the French-language Liberal pages, we would run:
 
@@ -296,7 +298,7 @@ val languages = Array("fr")
 
 RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .webpages()
-  .filter(hasDomains($"domain"), lit(domains)))
+  .filter(hasDomains($"domain", lit(domains)))
   .filter(hasLanguages($"language", lit(languages)))
   .select($"crawl_date", $"domain", $"url", $"content")
   .write
@@ -327,8 +329,10 @@ RecordLoader.loadArchives("/aut-resources/Sample-Data/*.gz", sc)
   .save("/data/2006-text")
 ```
 
-Finally, if we want to remove the HTTP headers – let's say if we want to create
-some nice word clouds – we can add a final command: `RemoveHttpHeader`.
+Finally, what if we want text without HTTP headers or HTML – let's say if we
+want to create some nice word clouds? The `content` column produced by
+`.webpages()` already has the HTTP headers and HTML removed, so we can export
+it directly:
 
 ```scala
 import io.archivesunleashed._
@@ -376,8 +380,8 @@ val graph = webgraph.groupBy(
 WriteGEXF(graph.collect(), "/data/links-for-gephi.gexf")
 ```
 
-By now this should be seeming pretty straightforward! (remember to keep using
-`:paste` to enter this code).
+By now this should seem pretty straightforward (remember to keep using
+`:paste` to enter this code)!
 
 ## Working with the Data
 
@@ -388,7 +392,7 @@ beautiful visualization yourself.
 
 First, let's use these instructions to [work with Gephi](https://cloud.archivesunleashed.org/derivatives/gephi).
 
-Secondly, we can begin to think about how” to work with the plain text file.
+Secondly, we can begin to think about how to work with the plain text file.
 See the following documents from our "learning guides":
 
 - [**Filtering the Full-Text Derivative
@@ -397,7 +401,7 @@ See the following documents from our "learning guides":
   dates, domains, and keywords from plain text.
 - [**Text Analysis Part One: Beyond the Keyword Search: Using
   AntConc**](https://cloud.archivesunleashed.org/derivatives/text-antconc):
-  This tutorial explores how you can explore text within a web archive using
+  This tutorial shows how you can explore text within a web archive using
   the AntConc tool.
 - [**Text Analysis Part Two: Sentiment Analysis With the Natural Language
   Toolkit**](https://cloud.archivesunleashed.org/derivatives/text-sentiment):
@@ -406,9 +410,9 @@ See the following documents from our "learning guides":
 
 Good luck and thanks for joining us on this lesson plan.
 
-## Acknowledgements and Final Notes
+## Acknowledgments and Final Notes
 
-The ARC and WARC file are drawn from the [Canadian Political Parties &
+The ARC and WARC files are drawn from the [Canadian Political Parties &
 Political Interest Groups Archive-It
 Collection](https://archive-it.org/collections/227), collected by the
 University of Toronto. We are grateful that they've provided this material to
@@ -416,8 +420,8 @@ us.
 
 If you use their material, please cite it along the following lines:
 
-- University of Toronto Libraries, Canadian Political Parties and Interest
-  Groups, Archive-It Collection 227, Canadian Action Party,
-  <http://wayback.archive-it.org/227/20051004191340/http://canadianactionparty.ca/Default2.asp>
+- University of Toronto Libraries, Canadian Political Parties and Political
+  Interest Groups, Archive-It Collection 227, Canadian Action Party,
+  <https://wayback.archive-it.org/227/20051004191340/http://canadianactionparty.ca/Default2.asp>
 
 You can find more information about this collection at [WebArchives.ca](http://webarchives.ca/).

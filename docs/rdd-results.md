@@ -3,9 +3,9 @@ id: rdd-results
 title: RDD Results
 ---
 
-This page answers to question of what to do with Scala RDD results.
+This page answers the question of what to do with Scala RDD results.
 
-Most script snippets in the documentation begin start with `RecordLoader` and
+Most script snippets in the documentation start with `RecordLoader` and
 end with `take`, as in:
 
 ```scala
@@ -14,7 +14,7 @@ RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
   .take(10)
 ```
 
-This "takes" the first 10 results and results it as an array (in the console).
+This "takes" the first 10 results and returns them as an array (in the console).
 In the console, you'll see the array contents printed out.
 If you want more or fewer results, just change the number.
 
@@ -39,14 +39,14 @@ val r = RecordLoader.loadArchives("/path/to/warcs", sc).keepValidPages()
   .take(10)
 ```
 
-Scala assigns the results to `r` is this case, which you can then subsequently
+Scala assigns the results to `r` in this case, which you can then subsequently
 manipulate, like `r(0)` to access the first element.
 
 If you want _all_ results, replace `.take(10)` with `.collect()`.
 This will return _all_ results to the console.
 
 **WARNING**: Be careful with `.collect()`! If your results contain ten million
-records, AUT will try to return _all of them_  to your console (on your
+records, AUT will try to return _all of them_ to your console (on your
 physical machine).
 Most likely, your machine won't have enough memory!
 
@@ -69,16 +69,16 @@ of results produced by most of the scripts presented here (e.g., see above). It
 may be useful, however, to have this data in TSV (tab-separated value) format,
 for further processing outside AUT. The following script uses `tabDelimit`
 (from `TupleFormatter`) to transform tuples to tab-delimited strings; it also
-flattens any nested tuples. (This is the same script as at the top of the page,
-with the addition of the
-third and the second-last lines.)
+flattens any nested tuples. (This is the "Organize Links by Crawl Date" script
+from [Link Analysis](link-analysis.md), with the addition of the third and the
+second-last lines.)
 
 ```scala
 import io.archivesunleashed._
 import io.archivesunleashed.matchbox._
 import io.archivesunleashed.matchbox.TupleFormatter._
 
-RecordLoader.loadArchives("/path/to/arc", sc)
+RecordLoader.loadArchives("/path/to/warcs", sc)
   .keepValidPages()
   .map(r => (r.getCrawlDate, ExtractLinks(r.getUrl, r.getContentString)))
   .flatMap(r => r._2.map(f => (r._1,

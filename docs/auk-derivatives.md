@@ -3,8 +3,8 @@ id: auk-derivatives
 title: ARCH Derivatives
 ---
 
-How do I create the Toolkit generated derivatives that the Archives
-Research Compute Hub creates on my own web archive collection?
+How do I create, on my own web archive collection, the Toolkit-generated
+derivatives that the Archives Research Compute Hub (ARCH) creates?
 
 ## Scala RDD
 
@@ -219,8 +219,7 @@ webgraph = WebArchive(sc, sqlContext, warcs).webgraph()
 # Domain frequency.
 webpages.groupBy("domain") \
   .count() \
-  .sort(col("count")\
-  .desc()) \
+  .sort(col("count").desc()) \
   .write\
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
   .format("csv")\
@@ -278,13 +277,13 @@ WebArchive(sc, sqlContext, warcs).audio()\
   .save(results + "audio")
 
 WebArchive(sc, sqlContext, warcs).images()\
-  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
+  .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "width", "height", "md5", "sha1")\
   .write\
   .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")\
   .format("csv")\
   .option("escape", "\"")\
   .option("encoding", "utf-8")\
-  .save(results + "images")
+  .save(results + "image")
 
 WebArchive(sc, sqlContext, warcs).pdfs()\
   .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
@@ -293,7 +292,7 @@ WebArchive(sc, sqlContext, warcs).pdfs()\
   .format("csv")\
   .option("escape", "\"")\
   .option("encoding", "utf-8")\
-  .save(results + "pdfs")
+  .save(results + "pdf")
 
 WebArchive(sc, sqlContext, warcs).presentation_program()\
   .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
@@ -302,7 +301,7 @@ WebArchive(sc, sqlContext, warcs).presentation_program()\
   .format("csv")\
   .option("escape", "\"")\
   .option("encoding", "utf-8")\
-  .save(results + "presentation_program")
+  .save(results + "presentation-program")
 
 WebArchive(sc, sqlContext, warcs).spreadsheets()\
   .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
@@ -311,7 +310,7 @@ WebArchive(sc, sqlContext, warcs).spreadsheets()\
   .format("csv")\
   .option("escape", "\"")\
   .option("encoding", "utf-8")\
-  .save(results + "spreadsheets")
+  .save(results + "spreadsheet")
 
 WebArchive(sc, sqlContext, warcs).video()\
   .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
@@ -320,7 +319,7 @@ WebArchive(sc, sqlContext, warcs).video()\
   .format("csv")\
   .option("escape", "\"")\
   .option("encoding", "utf-8")\
-  .save(results + "videos")
+  .save(results + "video")
 
 WebArchive(sc, sqlContext, warcs).word_processor()\
   .select("crawl_date", "url", "filename", "extension", "mime_type_web_server", "mime_type_tika", "md5", "sha1")\
@@ -329,7 +328,7 @@ WebArchive(sc, sqlContext, warcs).word_processor()\
   .format("csv")\
   .option("escape", "\"")\
   .option("encoding", "utf-8")\
-  .save(results + "word_processor")
+  .save(results + "word-processor")
 
 # Text files.
 WebArchive(sc, sqlContext, warcs).css()\
