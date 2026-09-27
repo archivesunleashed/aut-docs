@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>ARCH Derivatives · Archives Unleashed Toolkit</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="How do I create the Toolkit generated derivatives that the Archives"/><meta name="docsearch:version" content="1.2.0"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="ARCH Derivatives · Archives Unleashed Toolkit"/><meta property="og:type" content="website"/><meta property="og:url" content="https://archivesunleashed.github.io/"/><meta property="og:description" content="How do I create the Toolkit generated derivatives that the Archives"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>ARCH Derivatives · Archives Unleashed Toolkit</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="How do I create, on my own web archive collection, the Toolkit-generated"/><meta name="docsearch:version" content="1.2.0"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="ARCH Derivatives · Archives Unleashed Toolkit"/><meta property="og:type" content="website"/><meta property="og:url" content="https://archivesunleashed.github.io/"/><meta property="og:description" content="How do I create, on my own web archive collection, the Toolkit-generated"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><script>
               (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
               (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -62,8 +62,8 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">ARCH Derivatives</h1></header><article><div><span><p>How do I create the Toolkit generated derivatives that the Archives
-Research Compute Hub creates on my own web archive collection?</p>
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">ARCH Derivatives</h1></header><article><div><span><p>How do I create, on my own web archive collection, the Toolkit-generated
+derivatives that the Archives Research Compute Hub (ARCH) creates?</p>
 <h2><a class="anchor" aria-hidden="true" id="scala-rdd"></a><a href="#scala-rdd" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h2>
 <p><strong>Will not be implemented.</strong></p>
 <h2><a class="anchor" aria-hidden="true" id="scala-df"></a><a href="#scala-df" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h2>
@@ -270,8 +270,7 @@ webgraph = WebArchive(sc, sqlContext, warcs).webgraph()
 <span class="hljs-comment"># Domain frequency.</span>
 webpages.groupBy(<span class="hljs-string">"domain"</span>) \
   .count() \
-  .sort(col(<span class="hljs-string">"count"</span>)\
-  .desc()) \
+  .sort(col(<span class="hljs-string">"count"</span>).desc()) \
   .write\
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
   .format(<span class="hljs-string">"csv"</span>)\
@@ -329,13 +328,13 @@ WebArchive(sc, sqlContext, warcs).audio()\
   .save(results + <span class="hljs-string">"audio"</span>)
 
 WebArchive(sc, sqlContext, warcs).images()\
-  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
+  .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"width"</span>, <span class="hljs-string">"height"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
   .write\
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)\
   .format(<span class="hljs-string">"csv"</span>)\
   .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
   .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
-  .save(results + <span class="hljs-string">"images"</span>)
+  .save(results + <span class="hljs-string">"image"</span>)
 
 WebArchive(sc, sqlContext, warcs).pdfs()\
   .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
@@ -344,7 +343,7 @@ WebArchive(sc, sqlContext, warcs).pdfs()\
   .format(<span class="hljs-string">"csv"</span>)\
   .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
   .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
-  .save(results + <span class="hljs-string">"pdfs"</span>)
+  .save(results + <span class="hljs-string">"pdf"</span>)
 
 WebArchive(sc, sqlContext, warcs).presentation_program()\
   .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
@@ -353,7 +352,7 @@ WebArchive(sc, sqlContext, warcs).presentation_program()\
   .format(<span class="hljs-string">"csv"</span>)\
   .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
   .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
-  .save(results + <span class="hljs-string">"presentation_program"</span>)
+  .save(results + <span class="hljs-string">"presentation-program"</span>)
 
 WebArchive(sc, sqlContext, warcs).spreadsheets()\
   .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
@@ -362,7 +361,7 @@ WebArchive(sc, sqlContext, warcs).spreadsheets()\
   .format(<span class="hljs-string">"csv"</span>)\
   .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
   .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
-  .save(results + <span class="hljs-string">"spreadsheets"</span>)
+  .save(results + <span class="hljs-string">"spreadsheet"</span>)
 
 WebArchive(sc, sqlContext, warcs).video()\
   .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
@@ -371,7 +370,7 @@ WebArchive(sc, sqlContext, warcs).video()\
   .format(<span class="hljs-string">"csv"</span>)\
   .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
   .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
-  .save(results + <span class="hljs-string">"videos"</span>)
+  .save(results + <span class="hljs-string">"video"</span>)
 
 WebArchive(sc, sqlContext, warcs).word_processor()\
   .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
@@ -380,7 +379,7 @@ WebArchive(sc, sqlContext, warcs).word_processor()\
   .format(<span class="hljs-string">"csv"</span>)\
   .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)\
   .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)\
-  .save(results + <span class="hljs-string">"word_processor"</span>)
+  .save(results + <span class="hljs-string">"word-processor"</span>)
 
 <span class="hljs-comment"># Text files.</span>
 WebArchive(sc, sqlContext, warcs).css()\

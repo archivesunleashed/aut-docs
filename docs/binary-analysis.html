@@ -70,21 +70,21 @@
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).audio();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).audio()
 
 df.show()
 </code></pre>
-<p>Will extract all following information from audio files in a web collection:</p>
+<p>will extract the following information from audio files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>audio url</li>
+<li>audio URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>bytes</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
@@ -115,12 +115,12 @@ df.show()
 <p>If you wanted to work with all the audio files in a collection, you could
 extract them with the following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
-<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+<span class="hljs-keyword">import</span> io.archivesunleashed.df._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).audio();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).audio()
 
-df.select($<span class="hljs-string">"bytes"</span>, $<span class="hljs-string">"extension"</span>)
-  .saveToDisk(<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"/path/to/export/directory/your-preferred-filename-prefix"</span>, $<span class="hljs-string">"extension"</span>)
+df.select($<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"extension"</span>)
+  .saveToDisk(<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"/path/to/export/directory/your-preferred-filename-prefix"</span>, <span class="hljs-string">"extension"</span>)
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="python-df"></a><a href="#python-df" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
 <p>The following script:</p>
@@ -131,17 +131,17 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.audio()
 df.show()
 </code></pre>
-<p>Will extract all following information from audio files in a web collection:</p>
+<p>will extract the following information from audio files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>audio url</li>
+<li>audio URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>bytes</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
@@ -177,23 +177,23 @@ df.show()
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).images();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).images()
 
 df.show()
 </code></pre>
-<p>Will extract all following information from images in a web collection:</p>
+<p>will extract the following information from images in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>image url</li>
+<li>image URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>Width</li>
-<li>Height</li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>width</li>
+<li>height</li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>bytes</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+--------------------+
@@ -224,12 +224,12 @@ df.show()
 <p>If you wanted to work with all the images in a collection, you could extract
 them with the following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
-<span class="hljs-keyword">import</span> io.archivesunleashed.matchbox._
+<span class="hljs-keyword">import</span> io.archivesunleashed.df._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).images();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).images()
 
-df.select($<span class="hljs-string">"bytes"</span>, $<span class="hljs-string">"extension"</span>)
-  .saveToDisk(<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"/path/to/export/directory/your-preferred-filename-prefix"</span>, $<span class="hljs-string">"extension"</span>)
+df.select($<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"extension"</span>)
+  .saveToDisk(<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"/path/to/export/directory/your-preferred-filename-prefix"</span>, <span class="hljs-string">"extension"</span>)
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="python-df-1"></a><a href="#python-df-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
 <p>The following script:</p>
@@ -240,19 +240,19 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.images()
 df.show()
 </code></pre>
-<p>Will extract all following information from images in a web collection:</p>
+<p>will extract the following information from images in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>image url</li>
+<li>image URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>Width</li>
-<li>Height</li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>width</li>
+<li>height</li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>bytes</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+--------------+-----+------+--------------------+--------------------+--------------------+
@@ -292,21 +292,21 @@ df.show()
   .countItems()
   .take(<span class="hljs-number">10</span>)
 </code></pre>
-<p>Will extract the top ten URLs of images found within a collection, in an array
+<p>will extract the top ten URLs of images found within a collection, in an array
 like so:</p>
-<pre><code class="hljs css language-bash">links: Array[(String, Int)] = Array((http://www.archive.org/images/star.png,408), (http://www.archive.org/images/no_star.png,122), (http://www.archive.org/images/logo.jpg,118), (http://www.archive.org/images/main-header.jpg,84), (http://www.archive.org/images/rss.png,20), (http://www.archive.org/images/mail.gif,13), (http://www.archive.org/images/half_star.png,10), (http://www.archive.org/images/arrow.gif,7), (http://ia300142.us.archive.org/3/items/americana/am_libraries.gif?cnt=0,3), (http://ia310121.us.archive.org/2/items/GratefulDead/gratefuldead.gif?cnt=0,3), (http://www.archive.org/images/wayback.gif,2), (http://www.archive.org/images/wayback-election2000.gif,2), (http://www.archive.org/images/wayback-wt...
+<pre><code class="hljs css language-text">res0: Array[(String, Int)] = Array((http://www.archive.org/images/star.png,408), (http://www.archive.org/images/no_star.png,122), (http://www.archive.org/images/logo.jpg,118), (http://www.archive.org/images/main-header.jpg,84), (http://www.archive.org/images/rss.png,20), (http://www.archive.org/images/mail.gif,13), (http://www.archive.org/images/half_star.png,10), (http://www.archive.org/images/arrow.gif,7), (http://ia300142.us.archive.org/3/items/americana/am_libraries.gif?cnt=0,3), (http://ia310121.us.archive.org/2/items/GratefulDead/gratefuldead.gif?cnt=0,3), (http://www.archive.org/images/wayback.gif,2), (http://www.archive.org/images/wayback-election2000.gif,2), (http://www.archive.org/images/wayback-wt...
 </code></pre>
 <p>If you wanted to work with the images, you could download them from the
 Internet Archive.</p>
-<p>Let's use the top-ranked example. <a href="http://web.archive.org/web/*/http://archive.org/images/star.png">This
+<p>Let's use the top-ranked example. <a href="https://web.archive.org/web/*/http://archive.org/images/star.png">This
 link</a>, for
 example, will show you the temporal distribution of the image. For a snapshot
 from September 2007, this URL would work:</p>
-<p><a href="http://web.archive.org/web/20070913051458/http://www.archive.org/images/star.png">http://web.archive.org/web/20070913051458/http://www.archive.org/images/star.png</a></p>
+<p><a href="https://web.archive.org/web/20070913051458/http://www.archive.org/images/star.png">https://web.archive.org/web/20070913051458/http://www.archive.org/images/star.png</a></p>
 <p>To do analysis on all images, you could thus prepend
-<code>http://web.archive.org/web/20070913051458/</code> to each URL and <code>wget</code> them en
+<code>https://web.archive.org/web/20070913051458/</code> to each URL and <code>wget</code> them en
 masse.</p>
-<p>For more information on <code>wget</code>, please consult <a href="http://programminghistorian.org/lessons/automated-downloading-with-wget">this lesson available on the
+<p>For more information on <code>wget</code>, please consult <a href="https://programminghistorian.org/en/lessons/automated-downloading-with-wget">this lesson available on the
 Programming Historian
 website</a>.</p>
 <h3><a class="anchor" aria-hidden="true" id="scala-df-2"></a><a href="#scala-df-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
@@ -314,14 +314,14 @@ website</a>.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).imagegraph();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).imagegraph()
 
 df.groupBy($<span class="hljs-string">"image_url"</span>)
   .count()
   .orderBy($<span class="hljs-string">"count"</span>.desc)
   .show(<span class="hljs-number">10</span>)
 </code></pre>
-<p>Will extract the top ten URLs of images found within a collection, in a
+<p>will extract the top ten URLs of images found within a collection, in a
 DataFrame like so:</p>
 <pre><code class="hljs css language-dataframe">+--------------------+-----+
 |<span class="hljs-string">           image_url</span>|<span class="hljs-string">count</span>|
@@ -351,7 +351,7 @@ df.groupBy(<span class="hljs-string">"image_url"</span>)\
   .orderBy(<span class="hljs-string">"count"</span>, ascending=<span class="hljs-literal">False</span>)\
   .show(<span class="hljs-number">10</span>)
 </code></pre>
-<p>Will extract the top ten URLs of images found within a collection, in a
+<p>will extract the top ten URLs of images found within a collection, in a
 DataFrame like so:</p>
 <pre><code class="hljs css language-dataframe">+--------------------+-----+
 |<span class="hljs-string">           image_url</span>|<span class="hljs-string">count</span>|
@@ -368,38 +368,43 @@ DataFrame like so:</p>
 |<span class="hljs-string">http://www.geocit...</span>|<span class="hljs-string">  549</span>|
 +--------------------+-----+
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="extract-most-frequent-images-md5-hash"></a><a href="#extract-most-frequent-images-md5-hash" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extract Most Frequent Images MD5 Hash</h2>
-<p>Some images may be the same, but have different URLs. This UDF finds the
+<h2><a class="anchor" aria-hidden="true" id="extract-most-frequent-images-by-md5-hash"></a><a href="#extract-most-frequent-images-by-md5-hash" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extract Most Frequent Images by MD5 Hash</h2>
+<p>Some images may be the same, but have different URLs. This app finds the
 popular images by calculating the MD5 hash of each and presents the most
-frequent images based on that metric. This script:</p>
+frequent images based on that metric.</p>
+<h3><a class="anchor" aria-hidden="true" id="scala-rdd-3"></a><a href="#scala-rdd-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
+<p>This script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.app._
 <span class="hljs-keyword">import</span> io.archivesunleashed.matchbox._
 
-<span class="hljs-keyword">val</span> r = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>,sc).persist()
+<span class="hljs-keyword">val</span> r = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).persist()
 <span class="hljs-type">ExtractPopularImages</span>(r, <span class="hljs-number">500</span>, sc).saveAsTextFile(<span class="hljs-string">"500-Popular-Images"</span>)
 </code></pre>
-<p>Will save the 500 most popular URLs to an output directory.</p>
+<p>will save the 500 most popular images to an output directory.</p>
 <h3><a class="anchor" aria-hidden="true" id="scala-df-3"></a><a href="#scala-df-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
+<p><code>ExtractPopularImagesDF</code> takes a DataFrame of images, the number of images to
+return, and, optionally, the minimum width and minimum height (in pixels) of
+the images to consider. This example returns the 10 most popular images that
+are at least 30 by 30 pixels:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.app._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>,sc).images()
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).images()
 
-<span class="hljs-type">ExtractPopularImagesDF</span>(df,<span class="hljs-number">10</span>,<span class="hljs-number">30</span>,<span class="hljs-number">30</span>).show()
+<span class="hljs-type">ExtractPopularImagesDF</span>(df, <span class="hljs-number">10</span>, <span class="hljs-number">30</span>, <span class="hljs-number">30</span>).show()
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="python-df-3"></a><a href="#python-df-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
 <pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
 
 images = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>).images()
 
-popular_images = ExtractPopularImages(images, <span class="hljs-number">20</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>)
+popular_images = ExtractPopularImages(images, <span class="hljs-number">10</span>, <span class="hljs-number">30</span>, <span class="hljs-number">30</span>)
 
 popular_images.show()
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="find-images-shared-between-domains"></a><a href="#find-images-shared-between-domains" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Find Images Shared Between Domains</h2>
-<p>How to find images shared between domains that appear more than once <em>in more
-than one domain</em>.</p>
+<p>How do I find images that appear in <em>more than one domain</em>?</p>
 <h3><a class="anchor" aria-hidden="true" id="scala-df-4"></a><a href="#scala-df-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
@@ -408,65 +413,67 @@ than one domain</em>.</p>
                         .images()
                         .select(removePrefixWWW(extractDomain($<span class="hljs-string">"url"</span>)).as(<span class="hljs-string">"domain"</span>), $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"md5"</span>)
 
-<span class="hljs-keyword">val</span> links = images.groupBy(<span class="hljs-string">"md5"</span>).count().where(countDistinct(<span class="hljs-string">"domain"</span>)&gt;=<span class="hljs-number">2</span>)
+<span class="hljs-keyword">val</span> links = images.groupBy(<span class="hljs-string">"md5"</span>)
+                  .agg(countDistinct(<span class="hljs-string">"domain"</span>).as(<span class="hljs-string">"domain_count"</span>))
+                  .where($<span class="hljs-string">"domain_count"</span> &gt;= <span class="hljs-number">2</span>)
 
-<span class="hljs-keyword">val</span> result = images.join(links, <span class="hljs-string">"md5"</span>)
-                   .groupBy(<span class="hljs-string">"domain"</span>, <span class="hljs-string">"md5"</span>)
-                   .agg(first(<span class="hljs-string">"url"</span>).as(<span class="hljs-string">"image_url"</span>))
-                   .orderBy(asc(<span class="hljs-string">"md5"</span>))
-                   .write
-                   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
-                   .format(<span class="hljs-string">"csv"</span>)
-                   .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
-                   .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
-                   .save(<span class="hljs-string">"/path/to/output"</span>)
+images.join(links, <span class="hljs-string">"md5"</span>)
+      .groupBy(<span class="hljs-string">"domain"</span>, <span class="hljs-string">"md5"</span>)
+      .agg(first(<span class="hljs-string">"url"</span>).as(<span class="hljs-string">"image_url"</span>))
+      .orderBy(asc(<span class="hljs-string">"md5"</span>))
+      .write
+      .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
+      .format(<span class="hljs-string">"csv"</span>)
+      .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
+      .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
+      .save(<span class="hljs-string">"/path/to/output"</span>)
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="pythondf"></a><a href="#pythondf" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PythonDF</h3>
+<h3><a class="anchor" aria-hidden="true" id="python-df-4"></a><a href="#python-df-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
 <pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
-<span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> asc, countDistinct, first
+<span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> asc, col, countDistinct, first
 
 images = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"</span>) \
   .images() \
   .select(remove_prefix_www(extract_domain(<span class="hljs-string">"url"</span>)).alias(<span class="hljs-string">"domain"</span>), <span class="hljs-string">"url"</span>, <span class="hljs-string">"md5"</span>)
 
 links = images.groupBy(<span class="hljs-string">"md5"</span>) \
-              .count() \
-              .where(countDistinct(<span class="hljs-string">"domain"</span>)&gt;=<span class="hljs-number">2</span>)
+              .agg(countDistinct(<span class="hljs-string">"domain"</span>).alias(<span class="hljs-string">"domain_count"</span>)) \
+              .where(col(<span class="hljs-string">"domain_count"</span>) &gt;= <span class="hljs-number">2</span>)
 
-result = images.join(links, <span class="hljs-string">"md5"</span>) \
-               .groupBy(<span class="hljs-string">"domain"</span>, <span class="hljs-string">"md5"</span>) \
-               .agg(first(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"image_url"</span>)) \
-               .orderBy(asc(<span class="hljs-string">"md5"</span>)) \
-               .write
-               .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>)
-               .format(<span class="hljs-string">"csv"</span>)
-               .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>)
-               .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>)
-               .save(<span class="hljs-string">"/path/to/output"</span>)
+images.join(links, <span class="hljs-string">"md5"</span>) \
+      .groupBy(<span class="hljs-string">"domain"</span>, <span class="hljs-string">"md5"</span>) \
+      .agg(first(<span class="hljs-string">"url"</span>).alias(<span class="hljs-string">"image_url"</span>)) \
+      .orderBy(asc(<span class="hljs-string">"md5"</span>)) \
+      .write \
+      .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>) \
+      .format(<span class="hljs-string">"csv"</span>) \
+      .option(<span class="hljs-string">"escape"</span>, <span class="hljs-string">"\""</span>) \
+      .option(<span class="hljs-string">"encoding"</span>, <span class="hljs-string">"utf-8"</span>) \
+      .save(<span class="hljs-string">"/path/to/output"</span>)
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="extract-pdf-information"></a><a href="#extract-pdf-information" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extract PDF Information</h2>
-<h3><a class="anchor" aria-hidden="true" id="scala-rdd-3"></a><a href="#scala-rdd-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
+<h3><a class="anchor" aria-hidden="true" id="scala-rdd-4"></a><a href="#scala-rdd-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
 <p><strong>Will not be implemented.</strong></p>
 <h3><a class="anchor" aria-hidden="true" id="scala-df-5"></a><a href="#scala-df-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
 <p>The following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).pdfs();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).pdfs()
 
 df.show()
 </code></pre>
-<p>Will extract all following information from PDF files in a web collection:</p>
+<p>will extract the following information from PDF files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>file url</li>
+<li>file URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>bytes</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
@@ -497,14 +504,14 @@ df.show()
 <p>If you wanted to work with all the PDF files in a collection, you could extract
 them with the following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
-<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+<span class="hljs-keyword">import</span> io.archivesunleashed.df._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).pdfs();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).pdfs()
 
-df.select($<span class="hljs-string">"bytes"</span>, $<span class="hljs-string">"extension"</span>)
-  .saveToDisk(<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"/path/to/export/directory/your-preferred-filename-prefix"</span>, $<span class="hljs-string">"extension"</span>)
+df.select($<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"extension"</span>)
+  .saveToDisk(<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"/path/to/export/directory/your-preferred-filename-prefix"</span>, <span class="hljs-string">"extension"</span>)
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="python-df-4"></a><a href="#python-df-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
+<h3><a class="anchor" aria-hidden="true" id="python-df-5"></a><a href="#python-df-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
 <p>The following script:</p>
 <pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
 
@@ -513,17 +520,17 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.pdfs()
 df.show()
 </code></pre>
-<p>Will extract all following information from PDF files in a web collection:</p>
+<p>will extract the following information from PDF files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>file url</li>
+<li>file URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>bytes</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
@@ -552,28 +559,28 @@ df.show()
 +--------------+------------------+--------------------+--------------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="extract-presentation-program-files-information"></a><a href="#extract-presentation-program-files-information" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extract Presentation Program Files Information</h2>
-<h3><a class="anchor" aria-hidden="true" id="scala-rdd-4"></a><a href="#scala-rdd-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
+<h3><a class="anchor" aria-hidden="true" id="scala-rdd-5"></a><a href="#scala-rdd-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
 <p><strong>Will not be implemented.</strong></p>
 <h3><a class="anchor" aria-hidden="true" id="scala-df-6"></a><a href="#scala-df-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
 <p>The following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).presentationProgramFiles();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).presentationProgramFiles()
 
 df.show()
 </code></pre>
-<p>Will extract all following information from presentation program files in a web collection:</p>
+<p>will extract the following information from presentation program files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>file url</li>
+<li>file URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>bytes</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
@@ -604,14 +611,14 @@ df.show()
 <p>If you wanted to work with all the presentation program files in a collection,
 you could extract them with the following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
-<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+<span class="hljs-keyword">import</span> io.archivesunleashed.df._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).presentationProgramFiles();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).presentationProgramFiles()
 
-df.select($<span class="hljs-string">"bytes"</span>, $<span class="hljs-string">"extension"</span>)
-  .saveToDisk(<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"/path/to/export/directory/your-preferred-filename-prefix"</span>, $<span class="hljs-string">"extension"</span>)
+df.select($<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"extension"</span>)
+  .saveToDisk(<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"/path/to/export/directory/your-preferred-filename-prefix"</span>, <span class="hljs-string">"extension"</span>)
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="python-df-5"></a><a href="#python-df-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
+<h3><a class="anchor" aria-hidden="true" id="python-df-6"></a><a href="#python-df-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
 <p>The following script:</p>
 <pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
 
@@ -620,17 +627,17 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.presentation_program()
 df.show()
 </code></pre>
-<p>Will extract all following information from presentation program files in a web collection:</p>
+<p>will extract the following information from presentation program files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>file url</li>
+<li>file URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>bytes</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
@@ -659,28 +666,28 @@ df.show()
 +--------------+------------------+--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="extract-spreadsheet-information"></a><a href="#extract-spreadsheet-information" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extract Spreadsheet Information</h2>
-<h3><a class="anchor" aria-hidden="true" id="scala-rdd-5"></a><a href="#scala-rdd-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
+<h3><a class="anchor" aria-hidden="true" id="scala-rdd-6"></a><a href="#scala-rdd-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
 <p><strong>Will not be implemented.</strong></p>
 <h3><a class="anchor" aria-hidden="true" id="scala-df-7"></a><a href="#scala-df-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
 <p>The following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).spreadsheets();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).spreadsheets()
 
 df.show()
 </code></pre>
-<p>Will extract all following information from spreadsheet files in a web collection:</p>
+<p>will extract the following information from spreadsheet files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>file url</li>
+<li>file URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>bytes</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
@@ -711,14 +718,14 @@ df.show()
 <p>If you wanted to work with all the spreadsheet files in a collection, you could extract
 them with the following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
-<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+<span class="hljs-keyword">import</span> io.archivesunleashed.df._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).spreadsheets();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).spreadsheets()
 
-df.select($<span class="hljs-string">"bytes"</span>, $<span class="hljs-string">"extension"</span>)
-  .saveToDisk(<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"/path/to/export/directory/your-preferred-filename-prefix"</span>, $<span class="hljs-string">"extension"</span>)
+df.select($<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"extension"</span>)
+  .saveToDisk(<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"/path/to/export/directory/your-preferred-filename-prefix"</span>, <span class="hljs-string">"extension"</span>)
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="python-df-6"></a><a href="#python-df-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
+<h3><a class="anchor" aria-hidden="true" id="python-df-7"></a><a href="#python-df-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
 <p>The following script:</p>
 <pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
 
@@ -727,17 +734,17 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.spreadsheets()
 df.show()
 </code></pre>
-<p>Will extract all following information from spreadsheet files in a web collection:</p>
+<p>will extract the following information from spreadsheet files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>file url</li>
+<li>file URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>bytes</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
@@ -766,28 +773,28 @@ df.show()
 +--------------+------------------+--------------------+--------------------+---------+--------------------+--------------------+--------------------+--------------------+--------------------+
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="extract-video-information"></a><a href="#extract-video-information" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extract Video Information</h2>
-<h3><a class="anchor" aria-hidden="true" id="scala-rdd-6"></a><a href="#scala-rdd-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
+<h3><a class="anchor" aria-hidden="true" id="scala-rdd-7"></a><a href="#scala-rdd-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
 <p><strong>Will not be implemented.</strong></p>
 <h3><a class="anchor" aria-hidden="true" id="scala-df-8"></a><a href="#scala-df-8" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
 <p>The following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).videos();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).videos()
 
 df.show()
 </code></pre>
-<p>Will extract all following information from videos in a web collection:</p>
+<p>will extract the following information from videos in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>file url</li>
+<li>file URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>bytes</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
@@ -818,14 +825,14 @@ df.show()
 <p>If you wanted to work with all the video files in a collection, you could extract
 them with the following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
-<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+<span class="hljs-keyword">import</span> io.archivesunleashed.df._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).videos();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).videos()
 
-df.select($<span class="hljs-string">"bytes"</span>, $<span class="hljs-string">"extension"</span>)
-  .saveToDisk(<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"/path/to/export/directory/your-preferred-filename-prefix"</span>, $<span class="hljs-string">"extension"</span>)
+df.select($<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"extension"</span>)
+  .saveToDisk(<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"/path/to/export/directory/your-preferred-filename-prefix"</span>, <span class="hljs-string">"extension"</span>)
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="python-df-7"></a><a href="#python-df-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
+<h3><a class="anchor" aria-hidden="true" id="python-df-8"></a><a href="#python-df-8" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
 <p>The following script:</p>
 <pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
 
@@ -834,17 +841,17 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.video()
 df.show()
 </code></pre>
-<p>Will extract all following information from videos in a web collection:</p>
+<p>will extract the following information from videos in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>file url</li>
+<li>file URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>bytes</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
@@ -873,28 +880,28 @@ df.show()
 +--------------+------------------+--------------------+--------------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="extract-word-processor-files-information"></a><a href="#extract-word-processor-files-information" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extract Word Processor Files Information</h2>
-<h3><a class="anchor" aria-hidden="true" id="scala-rdd-7"></a><a href="#scala-rdd-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
+<h3><a class="anchor" aria-hidden="true" id="scala-rdd-8"></a><a href="#scala-rdd-8" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
 <p><strong>Will not be implemented.</strong></p>
 <h3><a class="anchor" aria-hidden="true" id="scala-df-9"></a><a href="#scala-df-9" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
 <p>The following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).wordProcessorFiles();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).wordProcessorFiles()
 
 df.show()
 </code></pre>
-<p>Will extract all following information from word processor files in a web collection:</p>
+<p>will extract the following information from word processor files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>file url</li>
+<li>file URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>bytes</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+------------------+--------------------+--------------------+--------------------+
@@ -925,14 +932,14 @@ df.show()
 <p>If you wanted to work with all the word processor files in a collection,
 you could extract them with the following script:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
-<span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
+<span class="hljs-keyword">import</span> io.archivesunleashed.df._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).wordProcessorFiles();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).wordProcessorFiles()
 
-df.select($<span class="hljs-string">"bytes"</span>, $<span class="hljs-string">"extension"</span>)
-  .saveToDisk(<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"/path/to/export/directory/your-preferred-filename-prefix"</span>, $<span class="hljs-string">"extension"</span>)
+df.select($<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"extension"</span>)
+  .saveToDisk(<span class="hljs-string">"bytes"</span>, <span class="hljs-string">"/path/to/export/directory/your-preferred-filename-prefix"</span>, <span class="hljs-string">"extension"</span>)
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="python-df-8"></a><a href="#python-df-8" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
+<h3><a class="anchor" aria-hidden="true" id="python-df-9"></a><a href="#python-df-9" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Python DF</h3>
 <p>The following script:</p>
 <pre><code class="hljs css language-python"><span class="hljs-keyword">from</span> aut <span class="hljs-keyword">import</span> *
 
@@ -941,17 +948,17 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.word_processor()
 df.show()
 </code></pre>
-<p>Will extract all following information from word processor files in a web collection:</p>
+<p>will extract the following information from word processor files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>file url</li>
+<li>file URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>bytes</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+------------------+--------------------+--------------------+--------------------+
@@ -979,4 +986,4 @@ df.show()
 |<span class="hljs-string">20091027144252</span>|<span class="hljs-string">    20090926162546</span>|<span class="hljs-string">http://geocities....</span>|<span class="hljs-string">20092010Membershi...</span>|<span class="hljs-string">      doc</span>|<span class="hljs-string">  application/msword</span>|<span class="hljs-string">application/msword</span>|<span class="hljs-string">ae9a8987d5303de42...</span>|<span class="hljs-string">dfe67865650e1d9c0...</span>|<span class="hljs-string">0M8R4KGxGuEAAAAAA...</span>|
 +--------------+------------------+--------------------+--------------------+---------+--------------------+------------------+--------------------+--------------------+--------------------+
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/link-analysis"><span class="arrow-prev">← </span><span>Link Analysis</span></a><a class="docs-next button" href="/docs/text-files-analysis"><span>Text Files (html, text, css, js, json, xml) Analysis</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#extract-audio-information">Extract Audio Information</a><ul class="toc-headings"><li><a href="#scala-rdd">Scala RDD</a></li><li><a href="#scala-df">Scala DF</a></li><li><a href="#python-df">Python DF</a></li></ul></li><li><a href="#extract-image-information">Extract Image Information</a><ul class="toc-headings"><li><a href="#scala-rdd-1">Scala RDD</a></li><li><a href="#scala-df-1">Scala DF</a></li><li><a href="#python-df-1">Python DF</a></li></ul></li><li><a href="#extract-most-frequent-image-urls">Extract Most Frequent Image URLs</a><ul class="toc-headings"><li><a href="#scala-rdd-2">Scala RDD</a></li><li><a href="#scala-df-2">Scala DF</a></li><li><a href="#python-df-2">Python DF</a></li></ul></li><li><a href="#extract-most-frequent-images-md5-hash">Extract Most Frequent Images MD5 Hash</a><ul class="toc-headings"><li><a href="#scala-df-3">Scala DF</a></li><li><a href="#python-df-3">Python DF</a></li></ul></li><li><a href="#find-images-shared-between-domains">Find Images Shared Between Domains</a><ul class="toc-headings"><li><a href="#scala-df-4">Scala DF</a></li><li><a href="#pythondf">PythonDF</a></li></ul></li><li><a href="#extract-pdf-information">Extract PDF Information</a><ul class="toc-headings"><li><a href="#scala-rdd-3">Scala RDD</a></li><li><a href="#scala-df-5">Scala DF</a></li><li><a href="#python-df-4">Python DF</a></li></ul></li><li><a href="#extract-presentation-program-files-information">Extract Presentation Program Files Information</a><ul class="toc-headings"><li><a href="#scala-rdd-4">Scala RDD</a></li><li><a href="#scala-df-6">Scala DF</a></li><li><a href="#python-df-5">Python DF</a></li></ul></li><li><a href="#extract-spreadsheet-information">Extract Spreadsheet Information</a><ul class="toc-headings"><li><a href="#scala-rdd-5">Scala RDD</a></li><li><a href="#scala-df-7">Scala DF</a></li><li><a href="#python-df-6">Python DF</a></li></ul></li><li><a href="#extract-video-information">Extract Video Information</a><ul class="toc-headings"><li><a href="#scala-rdd-6">Scala RDD</a></li><li><a href="#scala-df-8">Scala DF</a></li><li><a href="#python-df-7">Python DF</a></li></ul></li><li><a href="#extract-word-processor-files-information">Extract Word Processor Files Information</a><ul class="toc-headings"><li><a href="#scala-rdd-7">Scala RDD</a></li><li><a href="#scala-df-9">Scala DF</a></li><li><a href="#python-df-8">Python DF</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/dependencies">Getting Started</a><a href="/docs/collection-analysis">Generating Results</a><a href="/docs/filters-rdd">Filtering Results</a><a href="/docs/aut-spark-submit-app">Standard Derivatives</a><a href="/docs/df-results">What to Do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/archivesunleashed/aut">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/img/waterloo.png"/><img alt="York University" class="footer_img" src="/img/york.png"/></section><section class="copyright">CC BY 2.0 2026 Archives Unleashed Project</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/link-analysis"><span class="arrow-prev">← </span><span>Link Analysis</span></a><a class="docs-next button" href="/docs/text-files-analysis"><span>Text Files (html, text, css, js, json, xml) Analysis</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#extract-audio-information">Extract Audio Information</a><ul class="toc-headings"><li><a href="#scala-rdd">Scala RDD</a></li><li><a href="#scala-df">Scala DF</a></li><li><a href="#python-df">Python DF</a></li></ul></li><li><a href="#extract-image-information">Extract Image Information</a><ul class="toc-headings"><li><a href="#scala-rdd-1">Scala RDD</a></li><li><a href="#scala-df-1">Scala DF</a></li><li><a href="#python-df-1">Python DF</a></li></ul></li><li><a href="#extract-most-frequent-image-urls">Extract Most Frequent Image URLs</a><ul class="toc-headings"><li><a href="#scala-rdd-2">Scala RDD</a></li><li><a href="#scala-df-2">Scala DF</a></li><li><a href="#python-df-2">Python DF</a></li></ul></li><li><a href="#extract-most-frequent-images-by-md5-hash">Extract Most Frequent Images by MD5 Hash</a><ul class="toc-headings"><li><a href="#scala-rdd-3">Scala RDD</a></li><li><a href="#scala-df-3">Scala DF</a></li><li><a href="#python-df-3">Python DF</a></li></ul></li><li><a href="#find-images-shared-between-domains">Find Images Shared Between Domains</a><ul class="toc-headings"><li><a href="#scala-df-4">Scala DF</a></li><li><a href="#python-df-4">Python DF</a></li></ul></li><li><a href="#extract-pdf-information">Extract PDF Information</a><ul class="toc-headings"><li><a href="#scala-rdd-4">Scala RDD</a></li><li><a href="#scala-df-5">Scala DF</a></li><li><a href="#python-df-5">Python DF</a></li></ul></li><li><a href="#extract-presentation-program-files-information">Extract Presentation Program Files Information</a><ul class="toc-headings"><li><a href="#scala-rdd-5">Scala RDD</a></li><li><a href="#scala-df-6">Scala DF</a></li><li><a href="#python-df-6">Python DF</a></li></ul></li><li><a href="#extract-spreadsheet-information">Extract Spreadsheet Information</a><ul class="toc-headings"><li><a href="#scala-rdd-6">Scala RDD</a></li><li><a href="#scala-df-7">Scala DF</a></li><li><a href="#python-df-7">Python DF</a></li></ul></li><li><a href="#extract-video-information">Extract Video Information</a><ul class="toc-headings"><li><a href="#scala-rdd-7">Scala RDD</a></li><li><a href="#scala-df-8">Scala DF</a></li><li><a href="#python-df-8">Python DF</a></li></ul></li><li><a href="#extract-word-processor-files-information">Extract Word Processor Files Information</a><ul class="toc-headings"><li><a href="#scala-rdd-8">Scala RDD</a></li><li><a href="#scala-df-9">Scala DF</a></li><li><a href="#python-df-9">Python DF</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/dependencies">Getting Started</a><a href="/docs/collection-analysis">Generating Results</a><a href="/docs/filters-rdd">Filtering Results</a><a href="/docs/aut-spark-submit-app">Standard Derivatives</a><a href="/docs/df-results">What to Do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/archivesunleashed/aut">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/img/waterloo.png"/><img alt="York University" class="footer_img" src="/img/york.png"/></section><section class="copyright">CC BY 2.0 2026 Archives Unleashed Project</section></footer></div></body></html>

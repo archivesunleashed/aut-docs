@@ -70,21 +70,21 @@
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).css();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).css()
 
 df.show()
 </code></pre>
-<p>Will extract all following information from css files in a web collection:</p>
+<p>will extract the following information from CSS files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>css url</li>
+<li>CSS URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>content</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+-----------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
@@ -121,17 +121,17 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.css()
 df.show()
 </code></pre>
-<p>Will extract all following information from css files in a web collection:</p>
+<p>will extract the following information from CSS files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>css url</li>
+<li>CSS URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>content</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+-----------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
@@ -167,21 +167,21 @@ df.show()
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).html();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).html()
 
 df.show()
 </code></pre>
-<p>Will extract all following information from HTML files in a web collection:</p>
+<p>will extract the following information from HTML files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>html url</li>
+<li>HTML URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>content</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
@@ -218,17 +218,17 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.html()
 df.show()
 </code></pre>
-<p>Will extract all following information from HTML files in a web collection:</p>
+<p>will extract the following information from HTML files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>html url</li>
+<li>HTML URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>content</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
@@ -256,7 +256,7 @@ df.show()
 |<span class="hljs-string">20091027143356</span>|<span class="hljs-string">    20040119230348</span>|<span class="hljs-string">http://geocities....</span>|<span class="hljs-string">    3368class.html</span>|<span class="hljs-string">     html</span>|<span class="hljs-string">           text/html</span>|<span class="hljs-string">     text/html</span>|<span class="hljs-string">0ed6f056e7996ee62...</span>|<span class="hljs-string">caaf8a4f17dab8932...</span>|<span class="hljs-string">&lt;!DOCTYPE HTML PU...</span>|
 +--------------+------------------+--------------------+------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="extract-javascript-information"></a><a href="#extract-javascript-information" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extract Javascript Information</h2>
+<h2><a class="anchor" aria-hidden="true" id="extract-javascript-information"></a><a href="#extract-javascript-information" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extract JavaScript Information</h2>
 <h3><a class="anchor" aria-hidden="true" id="scala-rdd-2"></a><a href="#scala-rdd-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h3>
 <p><strong>Will not be implemented.</strong></p>
 <h3><a class="anchor" aria-hidden="true" id="scala-df-2"></a><a href="#scala-df-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h3>
@@ -264,21 +264,21 @@ df.show()
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).js();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).js()
 
 df.show()
 </code></pre>
-<p>Will extract all following information from Javascript files in a web collection:</p>
+<p>will extract the following information from JavaScript files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>Javascript url</li>
+<li>JavaScript URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>content</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
@@ -315,17 +315,17 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.js()
 df.show()
 </code></pre>
-<p>Will extract all following information from Javascript files in a web collection:</p>
+<p>will extract the following information from JavaScript files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>Javascript url</li>
+<li>JavaScript URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>content</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
@@ -361,21 +361,21 @@ df.show()
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).json();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).json()
 
 df.show()
 </code></pre>
-<p>Will extract all following information from JSON files in a web collection:</p>
+<p>will extract the following information from JSON files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>JSON url</li>
+<li>JSON URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>content</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
@@ -412,17 +412,17 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.json()
 df.show()
 </code></pre>
-<p>Will extract all following information from JSON files in a web collection:</p>
+<p>will extract the following information from JSON files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>JSON url</li>
+<li>JSON URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>content</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+--------------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
@@ -458,21 +458,21 @@ df.show()
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).plainText();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).plainText()
 
 df.show()
 </code></pre>
-<p>Will extract all following information from plain text files in a web collection:</p>
+<p>will extract the following information from plain text files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>Plain text url</li>
+<li>plain text URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>content</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+-------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
@@ -509,17 +509,17 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.plain_text()
 df.show()
 </code></pre>
-<p>Will extract all following information from plain text files in a web collection:</p>
+<p>will extract the following information from plain text files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>Plain text url</li>
+<li>plain text URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>content</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+-------------+---------+--------------------+--------------+--------------------+--------------------+--------------------+
@@ -555,21 +555,21 @@ df.show()
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.udfs._
 
-<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).xml();
+<span class="hljs-keyword">val</span> df = <span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).xml()
 
 df.show()
 </code></pre>
-<p>Will extract all following information from XML files in a web collection:</p>
+<p>will extract the following information from XML files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>XML url</li>
+<li>XML URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>content</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
@@ -606,17 +606,17 @@ archive = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/warcs"<
 df = archive.xml()
 df.show()
 </code></pre>
-<p>Will extract all following information from XML files in a web collection:</p>
+<p>will extract the following information from XML files in a web collection:</p>
 <ul>
 <li>crawl date</li>
 <li>last modified date</li>
-<li>XML url</li>
+<li>XML URL</li>
 <li>filename</li>
 <li>extension</li>
-<li>MimeType as identified by the hosting web server</li>
-<li>MimeType as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
-<li>md5 hash</li>
-<li>sha1 hash</li>
+<li>MIME type as identified by the hosting web server</li>
+<li>MIME type as identified by <a href="https://tika.apache.org">Apache Tika</a></li>
+<li>MD5 hash</li>
+<li>SHA-1 hash</li>
 <li>content</li>
 </ul>
 <pre><code class="hljs css language-dataframe">+--------------+------------------+--------------------+------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
@@ -644,4 +644,4 @@ df.show()
 |<span class="hljs-string">20091027145221</span>|<span class="hljs-string">    20011015183425</span>|<span class="hljs-string">http://geocities....</span>|<span class="hljs-string">filelist.xml</span>|<span class="hljs-string">      xml</span>|<span class="hljs-string">     application/xml</span>|<span class="hljs-string">     text/plain</span>|<span class="hljs-string">d62f8146726b13a9d...</span>|<span class="hljs-string">efbd2bb87b72e56ea...</span>|<span class="hljs-string">&lt;xml xmlns:o="urn...</span>|
 +--------------+------------------+--------------------+------------+---------+--------------------+---------------+--------------------+--------------------+--------------------+
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/binary-analysis"><span class="arrow-prev">← </span><span>Binary Analysis</span></a><a class="docs-next button" href="/docs/filters-rdd"><span>RDD Filters</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#extract-css-information">Extract CSS Information</a><ul class="toc-headings"><li><a href="#scala-rdd">Scala RDD</a></li><li><a href="#scala-df">Scala DF</a></li><li><a href="#python-df">Python DF</a></li></ul></li><li><a href="#extract-html-information">Extract HTML Information</a><ul class="toc-headings"><li><a href="#scala-rdd-1">Scala RDD</a></li><li><a href="#scala-df-1">Scala DF</a></li><li><a href="#python-df-1">Python DF</a></li></ul></li><li><a href="#extract-javascript-information">Extract Javascript Information</a><ul class="toc-headings"><li><a href="#scala-rdd-2">Scala RDD</a></li><li><a href="#scala-df-2">Scala DF</a></li><li><a href="#python-df-2">Python DF</a></li></ul></li><li><a href="#extract-json-information">Extract JSON Information</a><ul class="toc-headings"><li><a href="#scala-rdd-3">Scala RDD</a></li><li><a href="#scala-df-3">Scala DF</a></li><li><a href="#python-df-3">Python DF</a></li></ul></li><li><a href="#extract-plain-text-information">Extract Plain Text Information</a><ul class="toc-headings"><li><a href="#scala-rdd-4">Scala RDD</a></li><li><a href="#scala-df-4">Scala DF</a></li><li><a href="#python-df-4">Python DF</a></li></ul></li><li><a href="#extract-xml-information">Extract XML Information</a><ul class="toc-headings"><li><a href="#scala-rdd-5">Scala RDD</a></li><li><a href="#scala-df-5">Scala DF</a></li><li><a href="#python-df-5">Python DF</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/dependencies">Getting Started</a><a href="/docs/collection-analysis">Generating Results</a><a href="/docs/filters-rdd">Filtering Results</a><a href="/docs/aut-spark-submit-app">Standard Derivatives</a><a href="/docs/df-results">What to Do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/archivesunleashed/aut">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/img/waterloo.png"/><img alt="York University" class="footer_img" src="/img/york.png"/></section><section class="copyright">CC BY 2.0 2026 Archives Unleashed Project</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/binary-analysis"><span class="arrow-prev">← </span><span>Binary Analysis</span></a><a class="docs-next button" href="/docs/filters-rdd"><span>RDD Filters</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#extract-css-information">Extract CSS Information</a><ul class="toc-headings"><li><a href="#scala-rdd">Scala RDD</a></li><li><a href="#scala-df">Scala DF</a></li><li><a href="#python-df">Python DF</a></li></ul></li><li><a href="#extract-html-information">Extract HTML Information</a><ul class="toc-headings"><li><a href="#scala-rdd-1">Scala RDD</a></li><li><a href="#scala-df-1">Scala DF</a></li><li><a href="#python-df-1">Python DF</a></li></ul></li><li><a href="#extract-javascript-information">Extract JavaScript Information</a><ul class="toc-headings"><li><a href="#scala-rdd-2">Scala RDD</a></li><li><a href="#scala-df-2">Scala DF</a></li><li><a href="#python-df-2">Python DF</a></li></ul></li><li><a href="#extract-json-information">Extract JSON Information</a><ul class="toc-headings"><li><a href="#scala-rdd-3">Scala RDD</a></li><li><a href="#scala-df-3">Scala DF</a></li><li><a href="#python-df-3">Python DF</a></li></ul></li><li><a href="#extract-plain-text-information">Extract Plain Text Information</a><ul class="toc-headings"><li><a href="#scala-rdd-4">Scala RDD</a></li><li><a href="#scala-df-4">Scala DF</a></li><li><a href="#python-df-4">Python DF</a></li></ul></li><li><a href="#extract-xml-information">Extract XML Information</a><ul class="toc-headings"><li><a href="#scala-rdd-5">Scala RDD</a></li><li><a href="#scala-df-5">Scala DF</a></li><li><a href="#python-df-5">Python DF</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/favicon.ico" alt="Archives Unleashed Toolkit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/dependencies">Getting Started</a><a href="/docs/collection-analysis">Generating Results</a><a href="/docs/filters-rdd">Filtering Results</a><a href="/docs/aut-spark-submit-app">Standard Derivatives</a><a href="/docs/df-results">What to Do with Results</a></div><div><h5>Community</h5><a href="https://archivesunleashed.org/get-involved/#newsletter-subscription" target="_blank">Newsletter</a><a href="http://slack.archivesunleashed.org/">Slack</a><a href="https://archivesunleashed.org/events/">Events</a><a href="https://zenodo.org/communities/wahr/">Datasets</a></div><div><h5>More</h5><a href="https://news.archivesunleashed.org/">Project News</a><a href="https://github.com/archivesunleashed/aut">GitHub</a><a href="https://twitter.com/unleasharchives" target="_blank">Twitter</a><a href="https://www.youtube.com/channel/UC4Sq0Xi6UWhYK2VbmAzFhAw" target="_blank">YouTube</a></div></section><section class="sitemap"><img alt="Andrew W. Mellon Foundation" class="footer_img" src="/img/mellon.svg"/><img alt="University of Waterloo" class="footer_img" src="/img/waterloo.png"/><img alt="York University" class="footer_img" src="/img/york.png"/></section><section class="copyright">CC BY 2.0 2026 Archives Unleashed Project</section></footer></div></body></html>

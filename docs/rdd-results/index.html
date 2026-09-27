@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>RDD Results · Archives Unleashed Toolkit</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This page answers to question of what to do with Scala RDD results."/><meta name="docsearch:version" content="1.2.0"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="RDD Results · Archives Unleashed Toolkit"/><meta property="og:type" content="website"/><meta property="og:url" content="https://archivesunleashed.github.io/"/><meta property="og:description" content="This page answers to question of what to do with Scala RDD results."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>RDD Results · Archives Unleashed Toolkit</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This page answers the question of what to do with Scala RDD results."/><meta name="docsearch:version" content="1.2.0"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="RDD Results · Archives Unleashed Toolkit"/><meta property="og:type" content="website"/><meta property="og:url" content="https://archivesunleashed.github.io/"/><meta property="og:description" content="This page answers the question of what to do with Scala RDD results."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><script>
               (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
               (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -62,14 +62,14 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">RDD Results</h1></header><article><div><span><p>This page answers to question of what to do with Scala RDD results.</p>
-<p>Most script snippets in the documentation begin start with <code>RecordLoader</code> and
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">RDD Results</h1></header><article><div><span><p>This page answers the question of what to do with Scala RDD results.</p>
+<p>Most script snippets in the documentation start with <code>RecordLoader</code> and
 end with <code>take</code>, as in:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc).keepValidPages()
   <span class="hljs-comment">// more transformations here...</span>
   .take(<span class="hljs-number">10</span>)
 </code></pre>
-<p>This &quot;takes&quot; the first 10 results and results it as an array (in the console).
+<p>This &quot;takes&quot; the first 10 results and returns them as an array (in the console).
 In the console, you'll see the array contents printed out.
 If you want more or fewer results, just change the number.</p>
 <p>In the Scala console, the results are automatically assigned to a variable,
@@ -86,12 +86,12 @@ You can do something like this:</p>
   <span class="hljs-comment">// more transformations here...</span>
   .take(<span class="hljs-number">10</span>)
 </code></pre>
-<p>Scala assigns the results to <code>r</code> is this case, which you can then subsequently
+<p>Scala assigns the results to <code>r</code> in this case, which you can then subsequently
 manipulate, like <code>r(0)</code> to access the first element.</p>
 <p>If you want <em>all</em> results, replace <code>.take(10)</code> with <code>.collect()</code>.
 This will return <em>all</em> results to the console.</p>
 <p><strong>WARNING</strong>: Be careful with <code>.collect()</code>! If your results contain ten million
-records, AUT will try to return <em>all of them</em>  to your console (on your
+records, AUT will try to return <em>all of them</em> to your console (on your
 physical machine).
 Most likely, your machine won't have enough memory!</p>
 <p>Alternatively, if you want to save the results to disk, replace the <code>.take(10)</code>
@@ -108,14 +108,14 @@ of results produced by most of the scripts presented here (e.g., see above). It
 may be useful, however, to have this data in TSV (tab-separated value) format,
 for further processing outside AUT. The following script uses <code>tabDelimit</code>
 (from <code>TupleFormatter</code>) to transform tuples to tab-delimited strings; it also
-flattens any nested tuples. (This is the same script as at the top of the page,
-with the addition of the
-third and the second-last lines.)</p>
+flattens any nested tuples. (This is the &quot;Organize Links by Crawl Date&quot; script
+from <a href="/docs/link-analysis">Link Analysis</a>, with the addition of the third and the
+second-last lines.)</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> io.archivesunleashed._
 <span class="hljs-keyword">import</span> io.archivesunleashed.matchbox._
 <span class="hljs-keyword">import</span> io.archivesunleashed.matchbox.<span class="hljs-type">TupleFormatter</span>._
 
-<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/arc"</span>, sc)
+<span class="hljs-type">RecordLoader</span>.loadArchives(<span class="hljs-string">"/path/to/warcs"</span>, sc)
   .keepValidPages()
   .map(r =&gt; (r.getCrawlDate, <span class="hljs-type">ExtractLinks</span>(r.getUrl, r.getContentString)))
   .flatMap(r =&gt; r._2.map(f =&gt; (r._1,

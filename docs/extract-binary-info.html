@@ -65,7 +65,9 @@
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Extract Binary Info</h1></header><article><div><span><p>How do I extract the binary information of PDFs, audio files, video files, word
 processor files, spreadsheet files, and presentation program files to a CSV
 file, or into the <a href="https://parquet.apache.org/">Apache Parquet</a> format
-to <a href="/docs/df-results#what-to-do-with-dataframe-results">work with later</a>?</p>
+to <a href="/docs/df-results">work with later</a>?</p>
+<p>You can also read and write to Amazon S3 by supplying your AWS credentials, and
+using <code>s3a</code>.</p>
 <h2><a class="anchor" aria-hidden="true" id="scala-rdd"></a><a href="#scala-rdd" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala RDD</h2>
 <p><strong>Will not be implemented.</strong></p>
 <h2><a class="anchor" aria-hidden="true" id="scala-df"></a><a href="#scala-df" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala DF</h2>
@@ -84,6 +86,7 @@ sc.setLogLevel(<span class="hljs-string">"INFO"</span>)
 
 <span class="hljs-comment">// For Parquet:</span>
 <span class="hljs-comment">// .write.parquet("/path/to/derivatives/parquet/pages/")</span>
+
 <span class="hljs-comment">// Audio Files.</span>
 warcs.audio()
   .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"filename"</span>, $<span class="hljs-string">"extension"</span>, $<span class="hljs-string">"mime_type_web_server"</span>, $<span class="hljs-string">"mime_type_tika"</span>, $<span class="hljs-string">"md5"</span>, $<span class="hljs-string">"sha1"</span>)
@@ -95,7 +98,7 @@ warcs.audio()
   .save(<span class="hljs-string">"/path/to/derivatives/csv/audio"</span>)
 
 <span class="hljs-comment">// Images.</span>
-warcsS3.images()
+warcs.images()
   .select($<span class="hljs-string">"crawl_date"</span>, $<span class="hljs-string">"url"</span>, $<span class="hljs-string">"filename"</span>, $<span class="hljs-string">"extension"</span>, $<span class="hljs-string">"mime_type_web_server"</span>, $<span class="hljs-string">"mime_type_tika"</span>, $<span class="hljs-string">"width"</span>, $<span class="hljs-string">"height"</span>, $<span class="hljs-string">"md5"</span>, $<span class="hljs-string">"sha1"</span>)
   .write
   .parquet(<span class="hljs-string">"/path/to/derivatives/parquet/image"</span>)
@@ -160,7 +163,7 @@ warcs = WebArchive(sc, sqlContext, <span class="hljs-string">"/path/to/aut-resou
 <span class="hljs-comment"># .write.parquet("/path/to/derivatives/parquet/pages/")</span>
 
 <span class="hljs-comment"># Audio Files.</span>
-warcs.audio()
+warcs.audio() \
   .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
   .write \
   .option(<span class="hljs-string">"timestampFormat"</span>, <span class="hljs-string">"yyyy/MM/dd HH:mm:ss ZZ"</span>) \
@@ -179,7 +182,7 @@ warcs.images()\
 warcs.pdfs()\
   .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
   .write\
-  .parquet(<span class="hljs-string">'/path/to/derivatives/csv/pdfs'</span>)
+  .parquet(<span class="hljs-string">'/path/to/derivatives/parquet/pdfs'</span>)
 
 <span class="hljs-comment"># Spreadsheets.</span>
 warcs.spreadsheets()\
@@ -195,13 +198,13 @@ warcs.spreadsheets()\
 warcs.presentation_program()\
   .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
   .write\
-  .parquet(<span class="hljs-string">'/path/to/derivatives/csv/presentation_program'</span>)
+  .parquet(<span class="hljs-string">'/path/to/derivatives/parquet/presentation_program'</span>)
 
 <span class="hljs-comment"># Videos.</span>
 warcs.video()\
   .select(<span class="hljs-string">"crawl_date"</span>, <span class="hljs-string">"url"</span>, <span class="hljs-string">"filename"</span>, <span class="hljs-string">"extension"</span>, <span class="hljs-string">"mime_type_web_server"</span>, <span class="hljs-string">"mime_type_tika"</span>, <span class="hljs-string">"md5"</span>, <span class="hljs-string">"sha1"</span>)\
   .write\
-  .parquet(<span class="hljs-string">'/path/to/derivatives/csv/video'</span>)
+  .parquet(<span class="hljs-string">'/path/to/derivatives/parquet/video'</span>)
 
 <span class="hljs-comment"># Word Processor Files.</span>
 warcs.word_processor()\
