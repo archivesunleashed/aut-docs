@@ -113,7 +113,8 @@ So, something like (in Python):
   .head(10))
 ```
 
-In the PySpark console, the results are returned as a list of `Row` objects, like the following:
+In the PySpark console, the results are returned as a list of `Row` objects,
+like the following:
 
 ```python
 [Row(url='http://...'), Row(url='http://...'), Row(url='http://...'), ...]

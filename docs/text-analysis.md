@@ -242,9 +242,9 @@ records by a list of full or partial date strings. It conceives of the date
 string as a `DateComponent`. Use `keepDate` to specify the year (`YYYY`),
 month (`MM`), day (`DD`), year and month (`YYYYMM`), or a particular
 year-month-day (`YYYYMMDD`). Specifically, in this example, it will go through
-a collection of W/ARCs and extract the text of web pages with a
-`crawl_date` of April 2008, from the year 2008, or from the years 2008 and 2015. Note
-that `keepDate` is an RDD filter; with DataFrames, use `hasDate`.
+a collection of W/ARCs and extract the text of web pages with a `crawl_date`
+of April 2008, from the year 2008, or from the years 2008 and 2015. Note that
+`keepDate` is an RDD filter; with DataFrames, use `hasDate`.
 
 ### Scala RDD
 

@@ -8,8 +8,8 @@ Apache Spark configuration options. Apache Spark has great
 [Configuration](https://spark.apache.org/docs/latest/configuration.html) and
 [Tuning](https://spark.apache.org/docs/latest/tuning.html) guides that are
 worth checking out. If you're not sure where to start with scaling, join us in
-[Slack](http://slack.archivesunleashed.org/) in the `#aut` channel, and we might be
-able to provide some guidance.
+[Slack](http://slack.archivesunleashed.org/) in the `#aut` channel, and we
+might be able to provide some guidance.
 
 ## A Note on Memory and Cores
 
